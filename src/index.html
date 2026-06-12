@@ -1,0 +1,515 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Iain McMullan | Senior Marketing &amp; Brand Strategist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#c5c6cd",
+                        "on-secondary-container": "#b2b5bf",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "primary-container": "#0a1628",
+                        "on-tertiary": "#432b17",
+                        "background": "#131315",
+                        "on-primary-fixed-variant": "#3c475b",
+                        "outline-variant": "#45474c",
+                        "tertiary-fixed": "#ffdcc2",
+                        "on-secondary-fixed-variant": "#434750",
+                        "surface-bright": "#39393b",
+                        "on-surface": "#e4e2e3",
+                        "surface-container-highest": "#353536",
+                        "secondary-fixed": "#dfe2ed",
+                        "on-primary-fixed": "#101c2e",
+                        "on-background": "#e4e2e3",
+                        "on-tertiary-fixed-variant": "#5c412b",
+                        "error-container": "#93000a",
+                        "inverse-primary": "#535f74",
+                        "secondary-fixed-dim": "#c3c6d1",
+                        "surface-container": "#1f1f21",
+                        "on-error-container": "#ffdad6",
+                        "surface-tint": "#bbc7df",
+                        "surface": "#131315",
+                        "on-secondary-fixed": "#181c23",
+                        "on-tertiary-container": "#9a7960",
+                        "surface-container-low": "#1b1b1d",
+                        "primary-fixed": "#d7e3fc",
+                        "tertiary": "#e5bfa2",
+                        "primary-fixed-dim": "#bbc7df",
+                        "surface-dim": "#131315",
+                        "on-primary": "#253144",
+                        "outline": "#8f9097",
+                        "tertiary-fixed-dim": "#e5bfa2",
+                        "on-tertiary-fixed": "#2b1705",
+                        "surface-container-lowest": "#0e0e10",
+                        "inverse-on-surface": "#303032",
+                        "on-primary-container": "#758096",
+                        "inverse-surface": "#e4e2e3",
+                        "on-secondary": "#2c3039",
+                        "secondary-container": "#434750",
+                        "primary": "#bbc7df",
+                        "secondary": "#c3c6d1",
+                        "surface-container-high": "#2a2a2b",
+                        "tertiary-container": "#241102",
+                        "surface-variant": "#353536"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "stack-lg": "80px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "stack-sm": "16px",
+                        "stack-md": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0a1628;
+            color: #e4e2e3;
+            font-family: 'Hanken Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(21, 34, 56, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hilton-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 150px);
+            gap: 8px;
+        }
+        .hilton-gallery > :first-child {
+            grid-row: span 2;
+            grid-column: span 1;
+        }
+        .hilton-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md shadow-sm border-b border-white/5 h-20">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-full">
+<span class="font-headline-md text-headline-md font-bold text-on-background tracking-tight">Iain McMullan</span>
+<div class="hidden md:flex items-center gap-stack-md">
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#work">Work</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#about">About</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors duration-300" href="#experience">Experience</a>
+<a class="px-stack-md py-2 bg-primary text-on-primary rounded-full font-label-lg text-label-lg hover:opacity-90 transition-all cursor-pointer active:scale-95" href="#contact">Hire Me</a>
+</div>
+</div>
+</nav>
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden" id="hero">
+<div class="absolute inset-0 z-0">
+<img alt="Strategy Background" class="w-full h-full object-cover opacity-30 grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO-CKhDrf2zaiEPIF8gSqKzvsO2GmIcASDiJxF61OBNp_bn-GGI2rfoHsGpSfCe63GQjEsNPZJv54opasWmdcY2g7GZOnFUd-sQ1K-lChRw0b6Q28mCe9UuoQzuxU0CiweiGmZHBxCYjF3wEMtMYd9clxZ0wwws69cRV6Cf-2raBCk36o4DysVbIW11-QCYQot97pmqdZB84oSUvak6YimtsAK--phpAbkHZZI4ryKSGHGVvjV4_NUxLWJs14dSLCAFIQMXKSE7RLH">
+<div class="absolute inset-0 bg-gradient-to-b from-[#0a1628]/60 via-[#0a1628] to-[#0a1628]"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-center">
+<div class="lg:col-span-7 reveal active">
+<span class="font-label-lg text-label-lg text-primary uppercase tracking-[0.2em] mb-4 block">Strategy. Storytelling. Impact.</span>
+<h1 class="font-display-lg text-display-lg lg:text-display-lg text-display-lg-mobile leading-tight mb-stack-sm text-on-background">
+                Shaping Brands for the <span class="text-primary italic">Global Stage.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-stack-md">
+                Senior Marketing &amp; Brand Strategist with 20+ years of cross-industry expertise. From transforming Emirates' loyalty programs to leading digital operations for Fortune 500s across APAC.
+            </p>
+<div class="flex flex-wrap gap-stack-sm">
+<a class="px-stack-lg py-4 bg-primary text-on-primary font-label-lg text-label-lg rounded-full hover:shadow-lg hover:shadow-primary/20 transition-all" href="#contact">Get in Touch</a>
+<a class="px-stack-lg py-4 border border-outline-variant text-on-surface font-label-lg text-label-lg rounded-full hover:bg-white/5 transition-all" href="#work">View Case Studies</a>
+</div>
+</div>
+<div class="lg:col-span-5 relative reveal active delay-200">
+<div class="aspect-square rounded-full overflow-hidden border-8 border-surface-container shadow-2xl relative z-10">
+<img alt="Iain McMullan" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9nvQ4jLD7vGrTk5LUCdT4uh8bqmJ_NwDM2QFOXozqpcVvYVDXdY7lzbG8qkCbXxv9lPMX7Ddads0DiI51YTX8RrzEXDR0ShPH9tlmw5vIVtHsaI_R_fqBfHvtRxAfEd0zTRLLljjecSxfZr7qz3Ue1vNpXF40SDzNPXX1NY7__A7rh9bbpLbTR0Vz-RO4jUqZcyJtXH4XtW9DsG9smRi96kUCwv77VcmV5Cmaue81EURqkGe-b1dMNLzw3rpMR_SWKGS3Ouhs9Js0">
+</div>
+<div class="absolute -top-10 -right-10 w-48 h-48 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-10 -left-10 w-64 h-64 bg-tertiary/5 rounded-full blur-3xl"></div>
+</div>
+</div>
+</section><section class="py-stack-lg bg-surface">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-background text-center mb-stack-md reveal active">Brands I've worked with</h2>
+</div>
+<div class="w-full bg-white py-stack-md overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-wrap items-center justify-center gap-stack-md"><img alt="AHC" class="h-5 md:h-6 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVL4LzrrVIVnKHEkR9JTSY4vg9CVAVqyVfIdbeW1_vaC4ja17ycXucMZRQZ-5MTGosn42M9i23l9ocJeET0IZbc0sPr2YPJC3Y-h_ZH-AtMiTlI5nPsOAe_5Wcl2XG4rizktOG8-fgnRyDbeXxH6As0EsQgkcdjrtTS_-_ZFCBjD_IEY0IMHmCXfMlFSzfKPUL89_UEb17dWEpVuTcYEdnba1ydw1JD-QKJNj5n_4DZV7wmZZxvj67g11K9IB7xiQnrtlnM8kKDs54"><img alt="Air Selangor" class="h-24 md:h-32 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Yj1z2imqUTI5AhIe3IdGZ-zUzsZ3y0GKz57DGqTZqBpHoc54ahXffeDKn6EvdspPkICLV-fwLk-HWswYxkANSzUgKpnzzreMlHbI4ywhQ5THxljsTSUyA9it5UbfMv8dZqgLU81naAgrSbGSnIfxHHDGjBsmyhRw0N7Ek8K1FmwA-PQkLacmoSeXWMW3lFtJ0dsUNQZ8UR-AqpHjy9MvJ_Lh4fUbeZJ7Dcnp9fyZThRPXq7xdilyKbMPpgMCW_2IWqDRKJ5pIpsW"><img alt="British Airways" class="h-12 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVzwZlvOfABTMaiSd8XdvppytkoSSpDRt4gL9RQrgvLae0hqAUxscsW75EV6hPrjUtM5MoUEjE8kJCxBnNdSvBdMbsKVaplkipU0FRN9Uzl7Ld6uJOtbvffHUVHe3Ij1mPjnFawOHO1n4Uw3mRU9Y3Zj3O0rHHJy4Lau37oW4BBmBV1GWNxU3aC7P7RUXSXw5XWqLwvlJfOU325olPHXX6NWmaoZ9SCdizPDUlJRxxkszuatQkWRsb1q6HUpqNrQkJe20tUkSvP5Zf"><img alt="Cetaphil" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbau7hpskjZePUSpUzkp_MP5RTI_mf3uj43c81o_oKUhltDC_TjYjSxYvFZjnSwpJRUZO0NcoupxD_RH-EGVHu_G5BXG-O-Xqt81bl9vyxZbbusni-nVBImvJCUk5Bq9mG-h3NLjfTMsT3S7c-YmYm4NaXHwNJpE0yRsOy2SfO9MagXA2CA_pwdpW10P-AzbY9C3L6aGKy9HHvW-w0QH8klnoDu_XrUrjzbMLzFupwtfZxJVvesmacOgK24i3hV-4BEKqRtyzwjWPy"><img alt="Dole" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyft-dHRf64611AyrgDIynjsmahmR0t85GevY6apXHR-lJ59fXybOXQ_T0J9VaIg0WQ2se-XCBFq4xZo7r_0Y9BD-8Pe-BSmuIhiOpqAiwkcZvBeeY-3a_vkkqnCuWbhOluSviAghR5OCm2NXohMtA0lLL_wQd0o0MHa5UJhJFvEAIdhF01_2on8sac7rB0JIGUnZhWI745qMClEp3mOu_XjRanu0I1HUDZcSAOirGUA5jmiQ90405qz1VY1yimbmiXyDbIYqbF3tr"><img alt="Dubai Mall" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHVozTpjQS1KkmWPQzqQjlX0tlilRN2ohGeufdGNz9pz3ysHnIils5Y9tlzElqIDWcZzYHWPLiAjeAqY7-hawMvjsIiEAKMnlPgCAy8FwApOGhRn-peWf2Aq9ouYYrID7vAe4bafzsmeS4Nb7B_Z6TGLKvAsx_jo9cUO-hBzJf0WRZEKFq3PQZbX-BMD-hsVYCljfDmaBnY4yhPHWYXF9LaxOAUX_S_EQQKcydljbvWNA99OjHf_Jh6y2sgNlUyLrXNaQlSpAWIGcN"><img alt="IHG" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf_q4mkGwKKxgNaprsKwg__yGeFHHMRGJ17j6stgzRimvNuudyN1bn0hR8zK1zVIozyXniY7R3xYKFMHO8CfZa5al0ysWEr_l-lPGOL00sKJ3_NtwAu9fP5Qv4e5OmMN2O2VU4doN0RL1dfO4Uo3jhVO8EpXRchYCEX9u8TM1ke6weqeMlkvin7bhBwUkJvxXfD2jxglKxDXHcFUgtbCqfF7frMvO_GP1BkEngofzRvRT5uewnGds7f0c-V7qZdJa6YPLsK5BHZkI1"><img alt="Microsoft" class="h-5 md:h-6 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-l5ownhl4jqg1D7cmphyz6p_vNRCdm1B9BEPOdJ1MIqlwGPezjf5p3nYFMg9lggVxTVXGNRmMXZ_nKDRQqXzc5Lkeofh9gHsSvCieX5fWDKHdts9wb4fdZLsvQqQGpwvHJAaToFkOytvNzMkgDOYT749DrV1z-ZG6cCTPfQdNhPorcTN6udECNVLbeidfxz-SDaQ8Vb8CVW_yyuQ7i-BAc06n0evPeQ9F8XrWw26hqAMghFagVLPnwtAokLuhbm3gZkiwWUuc8jzX"><img alt="Pan Pacific Hotels Group" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU5A7AnQ_wIMVmvH6wEeOuAF_Q3cLRGaqys0XPzMyNqVUgxWjXPyhuaJcssuo0MIPy4-5jwspmgwvZSRh9sAtSGKzYr37H0Lxp1W4YZ9K5Q_UVZ2WS82lpGnQ61uOmdqBOMuDy9X6Jpr2VoWKR4sn3jTRue4u1ZEqIhNfhbmMw2vuvvKnPqYrYZz1bIkvJTmVbU30ObsJx51POYtDVpcIKFkmkL9V8_zT-Zx5ubGJ5N_RUw-yCvVFP4xyUbJDzOFNbD14C1seG6oXL"><img alt="Qantas" class="h-12 md:h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7C0pJ5e0TfaKCffgaPMXwHXMXNTDV2YshXmDXx0yEU8CmFHkI9RTvwOBh89gzEHmx4gl5W0C9lo34aYDO9OV60EzcWHc8hZoHEhRhONSI1I3qCMh2vY8XPnWx4435uQm0wh0L1IygETHPin_XTT2Ihq0yvdyrJC8K1QnKua5gANB3NYn78OCNNoPlE-PAT7W59dCXxQrcG8N55AVGtOFkuK2MuOZoa13BWqpqR9R-cI1CDpXKX98Eqjv4KCASBTNZh9S2rUOBAAm6"></div>
+</div>
+</section>
+
+<section class="py-stack-lg bg-surface" id="about">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-stack-lg items-center">
+<div class="reveal active">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-stack-md">Strategic Focus &amp; Global Leadership</h2>
+<div class="space-y-stack-sm font-body-md text-body-md text-on-surface-variant">
+<p class="">I am a seasoned brand and marketing leader with a deep commitment to strategic excellence. My career is defined by driving high-impact initiatives for global giants like Emirates and regional powerhouses like Malaysia Airlines.</p>
+<p class="">My work spans across critical sectors including aviation, finance, and hospitality, where I've led massive digital transformations and global brand repositioning efforts. At Emirates, I scaled Emirates Skywards to over 20M members, while at Malaysia Airlines, I redefined a national icon for a global audience.</p>
+<p class="">My approach combines analytical rigor with creative vision, ensuring that brand stories deliver measurable business growth and lasting impact in complex, multi-market environments.</p>
+</div>
+</div>
+<div class="reveal delay-200 active">
+<div class="glass-card p-stack-md rounded-xl space-y-stack-md">
+<div class="flex items-start gap-stack-sm">
+<span class="material-symbols-outlined text-primary text-3xl">flight_takeoff</span>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-background mb-1">Aviation Excellence</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Leading high-stakes campaigns and operational growth for the world's most prestigious airlines.</p>
+</div>
+</div>
+<div class="flex items-start gap-stack-sm">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-background mb-1">AI &amp; Innovation</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Leveraging emerging technologies and machine learning to future-proof marketing ecosystems.</p>
+</div>
+</div>
+<div class="flex items-start gap-stack-sm">
+<span class="material-symbols-outlined text-primary text-3xl">public</span>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-background mb-1">Global Scale</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Building and mentoring high-performance teams across 8+ regional offices and 25+ languages.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-stack-lg bg-surface-container-low" id="work">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex justify-between items-end mb-stack-lg">
+<div class="reveal active">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Selected Case Studies</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">A world-class portfolio of aviation, finance, and regional leadership.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<div class="group relative overflow-hidden rounded-xl glass-card reveal active">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Malaysia Airlines" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAq2uQpdjRZOAAnRp7AJG7qB-xET735FrPAWjOdr7KBS4RgmcfL6stOsqoC-tFa-5g7ZrnF82soKbYaaJqqqfqL77YP4rwGGx5tHX3NW4BuMv-5fIzyqqYN4RJXZcjthtq-NiLzpfLsq-g5WvTbs5ul9Ma6vADI1zyFeBtA7hlQH2MeqBr2y5OcFp6Q5Hs-Re0CzXK7ohmB_DFmgeUaxtDqi-HzTQAW-gCJp1e8FtvZ79ula7Y1okgVx0pOWLrQa10pqDBoz0nT3JE">
+</div>
+<div class="p-stack-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Brand Transformation</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Malaysia Airlines - Always a Traveller</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">A global brand repositioning that shifted the narrative from service to soul, capturing the essence of Malaysian hospitality.</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl glass-card reveal delay-75 active">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Emirates Academy" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALN9aIyEL9iPRh7aF7AaM1kNlIV3cOmpZIysRwLFv_u34Iq_doC5ycay3Og6KEJz12qMbnZbLGpjReYhNvcYi8kyi2cotiFeyXltTKxUt5h7aegO1LV0HA7rg8KM7hCGTpBH4Ow6wI86RyiUCAELvFeI2Q1VUccGMgGTMauUfNX0G33i4NRPGs6l1Ka_pVMqzwJKjjAyCzt1UvlAYwBHNMPav77-3FFTESNESH66513bxIki0_TEW97w_SgJIAYFN0mMbwWr_Z6wfv">
+</div>
+<div class="p-stack-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Integrated Campaign</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Emirates Flight Training Academy</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Launching the world's most advanced pilot training facility with an integrated global campaign and world-class digital presence.</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl glass-card reveal delay-150 active">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Pilot Recruitment" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida/AP1WRLvHEgMIlBjHiihMuOPBw0gNYC0y6WVLzSj-Csu81gKM8fmU2bAQGZw7IEVeN9GvMsfVIWwMP0yos9_aVvZdqt_Brwzbtnw_4QAPsnuz7Y_6JNy5I-6EJ58RGMrR4UCKm647j5-GquyfNtnxqo1sMBDsIi2xYYlnrgeBC5avUx3sWz--X7J6V-vnmbnp1HWzBHZK-AsXGi8MmpeOFtObDtx7Sz3VZwGjVVvMxMjYMjiAKS0MNyifUlccW_SU">
+</div>
+<div class="p-stack-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Employer Branding</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Emirates Pilot Recruitment</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Defining the 'Adventure Awaits' campaign to attract the next generation of aviators through emotional storytelling and cinematic visuals.</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl glass-card reveal delay-225 active">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="UOB Gallery" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC28vXZbNOq6oSpxuzj1wNfbpFrlgW9LgRqrBf_svF4f9LrEK1JL6LJjQjwat87trsWn9w9R1RCYluJtmWDwAJwI7Q08TXiGhdA6nlToCF0HF63mI55V0bryT1btJoAlhF_qbkz-1EdnLIa7tff_ipzCNmHIGOusNHDlrXfq2eMCdaccysUee7VBvNJ-egbwc2CsRAUUm44GMQiLnshQjGghIn0yr8NXjzz8LcyjPVujhQVmtpw1G63Ht2uv4hl6Xii4vSvfWlf1iAO">
+</div>
+<div class="p-stack-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">UOB90</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">The UOB Gallery</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">A commemorative brand experience celebrating nine decades of heritage and future-forward banking.</p>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-xl glass-card lg:col-span-2 reveal delay-300 active">
+<div class="aspect-[21/9] overflow-hidden hilton-gallery">
+<img alt="Hilton Plenary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9QuNY9EYrTl14ZXM7DBaJs4o40RQNRz9UacZ837RvBBpBoTjcKkXZsVQGgxgUrJ9_BKlx6d0i0hBXtKs36PkIj56-XIGRfrst4_iNaNh3ZTGTbDAw8YWR8vZ8f4kbshsxpEdfXT3vVexZl60cWQOvMgWeg7LQXyAT-jrqZHppvEsdHtMLFi6MOyoJnNOMJOsDEFxua18lQXBCK7o9WFEr7RIcaInUVY2LNzaOvxLNTmYv9RS8sgSjzh9vFVHSKQOj8IwWHq48ncGt" class="border">
+<img alt="Hilton Activity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuKyANg6JY16EQnRxK8devXxQM2YsguV9xmyIT8UsUIXVwEm09uy_V2WvAe4yI5jha5qKKq_BihoIyhdgjqtcGifkLBziZ4rar0rqszrw22g39SqQf4fyzrJSIJy2oYhi81Q9ghiAIP-_8Rr1LhlY-M1eLCReR-Mg7Hu5gzK-mrOf2l5N7H2sroYcx3g5giOh8HE44F5RG6WdDjCas9vX5ZFrkbNyPWDtkMtY33GWlbHti3SL1LYDJkW9xX27f4QBjfooFkUsXnqUu" class="border">
+<img alt="Hilton Tradeshow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC245faoRemb6b5ClXtHuOGGOypMJYGDwYMSR-6KQWWCnbmeOL9YGbQj2G4ciOGj69CrMzFmPQ4PIrp1shBQcU45zomOxJtIol21zsXAsCH5jXpfSsV6OjMcHioTuJmaf71UH0Vtpp2257RlSmgEPzeArCr19zhl2gY033XyFTpIFLW_pYDIKOexcP77SgPIiIMfAwXNLEj0G23JsKpvi54FD8ihntVVtXQAeU87yN4aQ64SK46U0-W1FWfm6cVTthwWvnlptp4yVMM" class="border">
+<img alt="Hilton App" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW3y4v3bky_aIyDpMIzx_HlNzsYJpC69DSxywaPiwkTJQcJbm2GHSTFwMINwmwU42qGVpNfjDXVorQVXhNoPGqYTHw6kOkdnrOZ0G0roG-5bFC5uIzfS7JDCRUTmnf1r3ngwDZGG03BKXCburEplHj48vD0_f-dtLVYg0hO3EGYKYjkzajfv9lCpu5szCXsJFQ5TTbrVBV9EfPK2EInFdndoXQenREsepjnjMqYnKNjU0WW0rYFf4BsF_LkiGYpAPIqqz4Zi9mfzXs" class="border">
+<img alt="Hilton Branding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-6z6sGrtqIWRKGMJxsXiITGgB-idi1aMVozTxBPDmav5AeBF75VohNGLgE4v3PwDZWjypvP9SCBD0xqKtwzU9CR2MSt3QbzCGm7lrm6bg7V78OynGEZNfy7uHuKE0abChIDZHlMIFF434ApsqZFGOIV5IdTd1A4VOMlgaV-OAgcZ9Oc276cRyeIGKqwk2x6rvP5t2VVf7sK2pa0rcGz1-1tGFFUYtMWAc22eIbxAm14XGDd1eEF1K-XjujV3kp9JyZmzngX-0CTeE" class="border">
+</div>
+<div class="p-stack-md">
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest mb-2 block">Hilton APAC</span>
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Asia GM &amp; Commercial Conference</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Strategic execution of Hilton's largest regional leadership forum under 'Our Team. Our Time'.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-stack-lg bg-surface">
+<div class="max-w-container-max mx-auto px-margin-desktop text-center mb-stack-lg reveal active">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Skills &amp; Specialisms</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">The strategic toolkit of a global marketing leader.</p>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="flex flex-wrap justify-center gap-stack-sm">
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Brand Strategy</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Integrated Marketing</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Employer Brand</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">AI Strategy</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Digital Transformation</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Operational Leadership</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Account Management</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">CRM &amp; Loyalty</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Global Advertising</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Internal Communications</span>
+<span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Content strategy</span><span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Copywriting and editing</span><span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">UX / UI design</span><span class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-lg text-label-lg reveal active">Web &amp; Digital Marketing</span></div>
+</div>
+</section>
+<section class="py-stack-lg bg-surface-container-low" id="experience">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-stack-lg reveal active">Professional Journey</h2>
+<div class="relative border-l-2 border-outline-variant ml-4 md:ml-0 md:left-1/2">
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-primary rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:-ml-[50%] md:pr-10 md:text-right flex flex-col md:items-end">
+<img alt="Motion Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMowybIWSKPWJVhtB08PqFj5f4soWJ_xQZkQhOPiTRw0kyOjvm0FaxlRuocZAOoFTVoVLR7DFITj0BdGt3mBNSZUOFSGgXFkG8749x3CiYHbFR8WNwdvN-hm5wbhGosQccN_aHSYp6CcYOnyyiFTvec3gbcvJu2RDyC9Vewbcjq7zKXmkLEI051B1EYhzjyCeFgegTCoVcLwLTuQ6YuGh9ca4yWo2QmxyaWeTVuKw1xu7iCbQrmVL_IkKL1PR3qmuC6spBEwCW6CE0">
+<span class="font-label-sm text-label-sm text-primary uppercase">Aug 2023 – Present</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Head of Strategy &amp; Communications</h3>
+<p class="text-on-surface-variant font-label-lg">Motion: For Impact</p>
+</div>
+</div>
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-outline rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:pl-10">
+<img alt="BJ Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgoZg7BSARpFSv2_wEE0GeZNJyNwAAwyo7P0CAhiVg7pJb1OvPsFidSd5RNo72Q49Fksf4HJ-AXFD29CLB1DwbXN04hRO3spn0b0_TK9K6DZhVE4_mLj00UUS7Sf2acbCcWRYwymaAXSaTvrle3wix1uTA1kwFQqIE2G9i6sJU7i9h6SRz2xpoVGNjaL4h0FR2HaKfqIjGk8BIHs-iZC27COIzFcjPUdktqiz4Mc4f_lka85uNoTwAw7y3R8myqnRHze9S65ool3Pq">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Jan 2022 – May 2023</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Group Head of Operations</h3>
+<p class="text-on-surface-variant font-label-lg">Bonsey Jaden</p>
+</div>
+</div>
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-outline rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:-ml-[50%] md:pr-10 md:text-right flex flex-col md:items-end">
+<img alt="BJ Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgoZg7BSARpFSv2_wEE0GeZNJyNwAAwyo7P0CAhiVg7pJb1OvPsFidSd5RNo72Q49Fksf4HJ-AXFD29CLB1DwbXN04hRO3spn0b0_TK9K6DZhVE4_mLj00UUS7Sf2acbCcWRYwymaAXSaTvrle3wix1uTA1kwFQqIE2G9i6sJU7i9h6SRz2xpoVGNjaL4h0FR2HaKfqIjGk8BIHs-iZC27COIzFcjPUdktqiz4Mc4f_lka85uNoTwAw7y3R8myqnRHze9S65ool3Pq">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Jun 2019 – Dec 2021</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Group Head of Business</h3>
+<p class="text-on-surface-variant font-label-lg">Bonsey Jaden</p>
+</div>
+</div>
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-primary/40 rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:pl-10">
+<img alt="Emirates Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0XwlNHXq5qr7HUAy38-QqrzZncc3YfCws4fGV1K9CB4kPmOK0vVGIFCqZrmn42TK47IWmxiDM2x4CqYzABE-FZEqvxiglTabyueu7UwYeHK3oJs9szzPd2C6hGtH1_uxeZM-KAyUxe2_G0MKSH3K_3VUE15CRq9CHUptp8Hh4YIuKibhjvXjxc-d0GftUBTd0N6mr9Iaeu8BP0QZnInh_83nJB7A4ncwN1JILXp_OrLb8aXxxwAXPXepaE6uAS-X2ZqpS9qRhL-hf">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">2011 – 2019</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Advertising Manager</h3>
+<p class="text-on-surface-variant font-label-lg">The Emirates Group</p>
+</div>
+</div>
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-outline rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:-ml-[50%] md:pr-10 md:text-right flex flex-col md:items-end">
+<img alt="AIA Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQsZ_5PnX9K3c_WPTPzOEyzCFQX_KhjwF67AWWElhaD87dudFh_VXgcEQycTnqGfFUDS4xgdJltKvXn280aKVMx8k6ukKfMN8BJ1JG8DNQNsrdOU38aHOCdJxROtkv7-RVKN4OVAMpVkofgmUewPHhxStIJOMAlkUpph5MSHLbBADxTxi1bvNvR-DOJz2CXb86jFIc6C4CPuvnmMwmfTrqyclAcUsWXvr2Wqefu9aMdKF5_XfnVQ-6hUgx4PhW2uauybXT7CWNJsQy">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">2009 – 2011</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Communications Manager</h3>
+<p class="text-on-surface-variant font-label-lg">AIA Singapore</p>
+</div>
+</div>
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-outline rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:pl-10">
+<img alt="M&amp;C Saatchi Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXv5wgxjSzEgfcIDL8QqK0ADqbD2FcLD3q_7ReEiplBNk0PnCYihzhxel_uLyu7ljkXOM-F58IkdKU5GxIG4zgYfYQhcQ6nks7yxWt-AMnv5PNM7htWjprCs9Kn72Zs3_YNTMXOOmBEIUQM15S8EMcS9UGFZdoh9Lyo_boeRu3AtFTrokDBiUT5pnQy5EVaVhLErulS4VKqLF21VjgZhd3-m6mhMTtooq6BVdOsXEJUPNkB6AxSv8rS4PKrxuC04QUTBP4X4vTGsDk">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">2005 – 2008</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Account Manager</h3>
+<p class="text-on-surface-variant font-label-lg">M&amp;C Saatchi</p>
+</div>
+</div>
+<div class="mb-stack-md relative reveal active">
+<div class="absolute -left-2.5 top-0 w-5 h-5 bg-outline rounded-full"></div>
+<div class="ml-10 md:w-1/2 md:-ml-[50%] md:pr-10 md:text-right flex flex-col md:items-end">
+<img alt="Go/React Logo" class="h-10 w-10 rounded-full mb-2 bg-white object-contain p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs3zYKE-frHSjRZoLRUk9gwK9tRaA2BFV8phnP9dAvjPcen47J_nqt7WJVn40zvKkr3MH63kOFgHYA2hrfcDNN9QE0e-yZmIb3NPstLc_cycS0GTAaEis6-yNWBny0WVHVq_tEeHt6-mBC7dIg2gfUC8_mFsXBqzEl_50SXAUwLW2Dm_bseXJZnKsvspTzQl2zNfqUEjX5B5cpVwDHkAkyeREwWqFlcODMaoJnYA6BEEV2a-b41G6Erp2WQxAZAKI8d3XyZUA3N3D9">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">2003 - 2005</span>
+<h3 class="font-headline-md text-headline-md text-on-background mt-1">Marketing Specialist</h3>
+<p class="text-on-surface-variant font-label-lg">Go/React</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-stack-lg bg-surface">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-stack-lg text-center reveal active">Credentials</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-stack-md">
+<div class="glass-card p-stack-sm rounded-lg reveal flex flex-col items-center text-center active"><img alt="Ulster Logo" class="h-16 w-16 mb-4 object-contain rounded bg-white p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2qwF0rFFWrqWq4F2XqOpOKbpedy9OWhcGqFHuRFUnzeKEWokyIRzbpSTX7PgCuZcoilEpfwp2WRBuLXOKvIXV6hLuEQrnTnLg96VxEfCaDAWMhtBRrDOj4h-RXkXL0oH58TpvYbWsBmP2XZDoAOckOVA5DPegvE9HDsnjoq6tJYYsgLPvyEYxsrwM0jOkLtznFTgOr4OuQyJ3uToix0S1bt4OSaKgDkphi_5Ku3nYEK1E50GDjMddrHS0ePIiqfzDeAnho86DhL1G"><div class="font-headline-md text-headline-md text-primary mb-1">MA</div><p class="font-label-lg text-label-lg text-on-background">Marketing</p><p class="font-label-sm text-label-sm text-on-surface-variant mt-2">Ulster University</p></div>
+<div class="glass-card p-stack-sm rounded-lg reveal delay-75 flex flex-col items-center text-center active"><img alt="IDM Logo" class="h-16 w-16 mb-4 object-contain rounded bg-white p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV0miSQ9HpweINhSUm3934hFk8b7pA0OKrTKPV1NaK5tM3G9RXWQNFrDRmum5vd5WSf-cFyj6yzR96190CX-C0_y-utP9GaA2G-g5dcnIbbSt7rgz5JBgnhFTu4h9Uebp47v2GL2I1IS7Gt8jgOyfp9za7uAfVl4ThflfIWty78-ptXGc-8Yk_TvVwDHau5KTtTKcBdC4piiPPpQe9T1bW6Xe6_hUiQdRjyp5bGMy9nE-kjR3Y4afeaaRrA68FdgQ2A9nMUZkY84No"><div class="font-headline-md text-headline-md text-primary mb-1">PG Dip</div><p class="font-label-lg text-label-lg text-on-background">Digital Marketing</p><p class="font-label-sm text-label-sm text-on-surface-variant mt-2">IDM</p></div>
+<div class="glass-card p-stack-sm rounded-lg reveal delay-150 flex flex-col items-center text-center active"><img alt="Warwick Logo" class="h-16 w-16 mb-4 object-contain rounded bg-white p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAySZDaZLDMIW5hody1AeOHBfMCxrR_32Zipw0qHukVjrWnK2NHswtvENZtoXqKL6wtwTaxr1feTWJ4U3Qne-OpebT09lWyR5qyE-gtGAUNOq8yhBpYc5UgEiCi_at6_HIU9gExEsZ2Cir4vzfS3J5zQVv7IqZJl5hBhr_Zoy8Mz0yDBFKH2icH8rWlrmXsCdwbnHs9eHfFUApemY-nnnUa1M5n6ixotUetxlWLLuXabKfLRtEi5uWN44orojOBj3IC2gLtqEviccxU"><div class="font-headline-md text-headline-md text-primary mb-1">ELDP</div><p class="font-label-lg text-label-lg text-on-background">Leadership Development</p><p class="font-label-sm text-label-sm text-on-surface-variant mt-2">Warwick University</p></div>
+<div class="glass-card p-stack-sm rounded-lg reveal delay-225 flex flex-col items-center text-center active"><img alt="CIM Logo" class="h-16 w-16 mb-4 object-contain rounded bg-white p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2i4ZdtW5BzcpGkKQgjO12GwigSVH3VEaEhKAUygfiMybWTMclqBt0DjeC5RJWR60_WDBNuS0DDsx2LiYRquk_24zdcvIoryJmDRAs5aB8gO2_uVdle54Ycib9sQ-lVWwucqp46cHMawCHj8DmUGTQbYOsNJQj8j0XB_FY5DO54z9Vf5yu9rJoypKkSKgLERdplcYGP5fWDc-4gbqjIFlHBGItMb7Ayb373SSddlhvEnzeF6qFQHXDr6Qa-_mXyUvsR0hHw0Q9N8pU"><div class="font-headline-md text-headline-md text-primary mb-1">CIM</div><p class="font-label-lg text-label-lg text-on-background">Chartered Marketer</p><p class="font-label-sm text-label-sm text-on-surface-variant mt-2">CIM</p></div>
+<div class="glass-card p-stack-sm rounded-lg reveal flex flex-col items-center text-center active"><img alt="UWTSD Logo" class="h-16 w-16 mb-4 object-contain rounded bg-white p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlaskDXYVLU9jaVlY4sC0RUUZSyEcr4HnipL9_JQO9RODdqHdTy3BKITTSHNM6HvySKi05cDUOQyTc0V1JRtSTG7zD3v_PzwmpbS-pjzLF5XOiB6sutIgiYPOXL97QPMDWCGZ2uGTQWYtURFEIY0B3bs-1ki5WvLg4_vVwsvma3jXp2o-k0TPwt9jsrvXccsOWHGQupPvZaCeWqZ6QHtJutKV6Ge5pJckGp-8_3T50O-mA--I7H7y5MgVpAcQ-STBrQqaM7L7r-gEu"><div class="font-headline-md text-headline-md text-primary mb-1">MA</div><p class="font-label-lg text-label-lg text-on-background">Ancient History</p><p class="font-label-sm text-label-sm text-on-surface-variant mt-2">UWTSD</p></div>
+<div class="glass-card p-stack-sm rounded-lg reveal flex flex-col items-center text-center active"><img alt="Loughborough Logo" class="h-16 w-16 mb-4 object-contain rounded bg-white p-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp2Y-KfPzdN0irWGlx0OCZw60JsrIX42GrLwKEbJx0W72w7sOC1mviQIkviFyVugL5doV0OOSN6H2VvVZkDDRTBfNX97MF5-KNnK9gtUfbTJE3knN-Nn87TvvSW8NydcKMCVYwTxxMjbTs6naG-iUgFLzZDDYmYb5SvQidqkCLnMo6d1GcjH71QCuDMTa-T8OLDW1O65k4HYVn0iiWwTdPcJfYiT-u2XoSZ0NLGfj7y5wD4k-2bs_ckgykK_Qn3V9PdRW6P8GZ1vhU"><div class="font-headline-md text-headline-md text-primary mb-1">BSc</div><p class="font-label-lg text-label-lg text-on-background">English with Sports Science</p><p class="font-label-sm text-label-sm text-on-surface-variant mt-2">Loughborough University</p></div>
+</div>
+</div>
+</section>
+<section class="py-stack-lg bg-surface-container-highest/30">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-stack-lg text-center reveal active">What Leaders Say</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-stack-md">
+<div class="glass-card p-stack-md rounded-xl reveal active">
+<div class="text-primary mb-4 italic font-body-lg">"Iain's strategic foresight at Emirates was instrumental in transforming our loyalty approach. A true visionary."</div>
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 bg-outline rounded-full"></div>
+<div>
+<p class="font-label-lg text-label-lg text-on-background">Richard Johnson</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Exec Director, Aviation</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl reveal delay-100 active">
+<div class="text-primary mb-4 italic font-body-lg">"The perfect balance of operational grit and creative brilliance. He rebuilt our regional workflow effortlessly."</div>
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 bg-outline rounded-full"></div>
+<div>
+<p class="font-label-lg text-label-lg text-on-background">Kimberley Mendonca</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Regional Lead, APAC</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-stack-md rounded-xl reveal delay-200 active">
+<div class="text-primary mb-4 italic font-body-lg">"A rare mentor who leads by example. Iain's impact on team culture and results is unparalleled."</div>
+<div class="flex items-center gap-stack-sm">
+<div class="w-10 h-10 bg-outline rounded-full"></div>
+<div>
+<p class="font-label-lg text-label-lg text-on-background">Annalize van Deijl</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Strategy Consultant</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="py-stack-lg bg-surface relative overflow-hidden" id="contact">
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10">
+<div class="glass-card p-stack-lg rounded-2xl max-w-3xl mx-auto reveal active">
+<h2 class="font-headline-lg text-headline-lg text-on-background text-center mb-stack-md">Let's Define Your Impact</h2>
+<div class="space-y-stack-sm">
+<div class="flex items-center gap-stack-md p-stack-sm border-b border-white/5">
+<span class="material-symbols-outlined text-primary">mail</span>
+<a class="font-headline-md text-headline-md text-on-background hover:text-primary transition-colors" href="mailto:iainmcm@gmail.com">iainmcm@gmail.com</a>
+</div>
+<div class="flex items-center gap-stack-md p-stack-sm border-b border-white/5">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="font-headline-md text-headline-md text-on-background">+65 9684 2979</span>
+</div>
+<div class="flex items-center gap-stack-md p-stack-sm border-b border-white/5">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<span class="font-headline-md text-headline-md text-on-background">Singapore</span>
+</div>
+<div class="flex items-center gap-stack-md p-stack-sm">
+<span class="material-symbols-outlined text-primary">share</span>
+<a class="font-headline-md text-headline-md text-on-background hover:text-primary transition-colors" href="https://linkedin.com" target="_blank">LinkedIn Profile</a>
+</div>
+</div>
+</div>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-full opacity-5 pointer-events-none">
+<svg class="w-full h-full fill-primary" viewBox="0 0 100 100">
+<path d="M0,50 Q25,0 50,50 T100,50 T100,100 T0,100 Z"></path>
+</svg>
+</div>
+</section>
+<footer class="bg-surface-container-lowest border-t border-outline-variant w-full py-stack-md">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto px-margin-desktop font-body-md text-body-md text-on-surface-variant">
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold mb-stack-sm md:mb-0">Iain McMullan</div>
+<div class="flex gap-stack-md mb-stack-sm md:mb-0">
+<a class="hover:text-primary transition-opacity duration-200" href="#">LinkedIn</a>
+<a class="hover:text-primary transition-opacity duration-200" href="#work">Case Studies</a>
+<a class="hover:text-primary transition-opacity duration-200" href="#">Privacy</a>
+<a class="hover:text-primary transition-opacity duration-200" href="#">Terms</a>
+</div>
+<p class="">© 2024 Iain McMullan. Strategic Excellence.</p>
+</div>
+</footer>
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+    const revealHandler = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+        reveals.forEach(reveal => {
+            const revealTop = reveal.getBoundingClientRect().top;
+            if (revealTop < triggerBottom) {
+                reveal.classList.add('active');
+            }
+        });
+    };
+    window.addEventListener('scroll', revealHandler);
+    revealHandler();
+
+    const navLinks = document.querySelectorAll('nav a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.pageYOffset >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('text-primary', 'font-bold', 'border-b-2', 'border-primary', 'pb-1');
+            if (link.getAttribute('href')?.substring(1) === current) {
+                link.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary', 'pb-1');
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+</body></html>

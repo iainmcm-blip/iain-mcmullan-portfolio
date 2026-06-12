@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Case Study: The UOB Gallery | Iain McMullan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#241102",
+                        "on-tertiary-fixed-variant": "#5c412b",
+                        "on-background": "#e4e2e3",
+                        "secondary-fixed": "#dfe2ed",
+                        "surface-tint": "#bbc7df",
+                        "background": "#131315",
+                        "primary": "#bbc7df",
+                        "on-tertiary-fixed": "#2b1705",
+                        "on-secondary-fixed-variant": "#434750",
+                        "secondary-container": "#434750",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#2a2a2b",
+                        "on-primary-fixed-variant": "#3c475b",
+                        "surface-container-lowest": "#0e0e10",
+                        "tertiary-fixed-dim": "#e5bfa2",
+                        "primary-fixed-dim": "#bbc7df",
+                        "inverse-on-surface": "#303032",
+                        "surface": "#131315",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#45474c",
+                        "on-secondary-fixed": "#181c23",
+                        "tertiary-fixed": "#ffdcc2",
+                        "on-secondary-container": "#b2b5bf",
+                        "secondary-fixed-dim": "#c3c6d1",
+                        "secondary": "#c3c6d1",
+                        "primary-fixed": "#d7e3fc",
+                        "on-tertiary": "#432b17",
+                        "inverse-surface": "#e4e2e3",
+                        "surface-bright": "#39393b",
+                        "surface-container-low": "#1b1b1d",
+                        "on-surface-variant": "#c5c6cd",
+                        "error-container": "#93000a",
+                        "primary-container": "#0a1628",
+                        "on-primary-container": "#758096",
+                        "surface-container-highest": "#353536",
+                        "on-primary-fixed": "#101c2e",
+                        "inverse-primary": "#535f74",
+                        "tertiary": "#e5bfa2",
+                        "outline": "#8f9097",
+                        "on-tertiary-container": "#9a7960",
+                        "on-primary": "#253144",
+                        "on-error": "#690005",
+                        "surface-variant": "#353536",
+                        "surface-dim": "#131315",
+                        "surface-container": "#1f1f21",
+                        "on-secondary": "#2c3039",
+                        "on-surface": "#e4e2e3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "32px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "stack-lg": "80px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "stack-sm": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "display-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #131315;
+            color: #e4e2e3;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(21, 34, 56, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gallery-mask {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+        .hero-zoom {
+            animation: slowZoom 30s infinite alternate linear;
+        }
+        @keyframes slowZoom {
+            from { transform: scale(1.0); }
+            to { transform: scale(1.15); }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full bg-background/80 backdrop-blur-xl border-b border-white/5 shadow-sm z-50">
+<div class="flex justify-between items-center h-20 px-margin-desktop max-w-container-max mx-auto">
+<span class="font-headline-md text-headline-md font-bold text-on-background tracking-tight">Iain McMullan</span>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-label-lg text-label-lg text-primary border-b-2 border-primary pb-1 transition-all duration-300" href="#">Work</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95" href="#">About</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95" href="#">Experience</a>
+<a class="font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer active:scale-95" href="#">Contact</a>
+<button class="bg-primary text-on-primary px-6 py-2 font-label-lg text-label-lg hover:opacity-90 transition-all active:scale-95">Get in Touch</button>
+</div>
+<!-- Mobile Menu Trigger -->
+<div class="md:hidden">
+<span class="material-symbols-outlined text-on-surface">menu</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[90vh] w-full overflow-hidden flex items-end pb-stack-lg">
+<div class="absolute inset-0 z-0">
+<img alt="The UOB Gallery Main Entrance" class="w-full h-full object-cover hero-zoom opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5bB4qKO4HD1CFmi6tDC5aO00pBc7S4QvlVBGsIhLoI1sMbBumu43UaIYtzb6LwnyY15Q2R0Kavijza3YtwYankCSgz293kxkPOVRUMyrCtEq8kr9vNLjsCi1fa6i60MNQKmhQ1bG-E5FuE_ngJ8QPvGpipW1Mp7kLjKlF4HYi48SX6GfpCrAVT6EYr6FDTKDqCVlDF4IsHyiYF1PqSHX4XYotTJzobRuTbqsPYs3qgl5pVRg5eAZrGJvvH9z1gFVbDG6cpesnFVO5"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-desktop w-full">
+<div class="max-w-3xl">
+<div class="flex items-center gap-4 mb-stack-sm">
+<span class="bg-primary-container text-on-primary-container px-3 py-1 font-label-sm text-label-sm uppercase tracking-widest">Case Study</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Heritage &amp; Innovation</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-display-lg mb-stack-sm leading-[1.05]">The UOB Gallery: <br/>Nine Decades of Vision</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        A commemorative brand experience celebrating heritage through immersive digital storytelling and physical engagement.
+                    </p>
+</div>
+</div>
+</section>
+<!-- Project Overview / Bento Grid -->
+<section class="py-stack-lg max-w-container-max mx-auto px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Strategic Progress Bar -->
+<div class="md:col-span-12 mb-stack-md">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mb-2">
+<span>DISCOVERY</span>
+<span>STRATEGY</span>
+<span class="text-primary font-bold">EXECUTION</span>
+<span>ENGAGEMENT</span>
+</div>
+<div class="h-[2px] w-full bg-outline-variant relative">
+<div class="absolute left-0 top-0 h-full bg-primary w-3/4"></div>
+</div>
+</div>
+<!-- Bento: Experience Design -->
+<div class="md:col-span-8 bg-surface-container rounded-lg overflow-hidden group border border-white/5">
+<div class="aspect-[16/9] overflow-hidden">
+<img alt="UOB Gallery Immersive Interaction" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJZ6hS0aj1R5g4M7jB9NUk3r5wsdvb3fyNVZ1Ivkt1sB-u86N4k0g5keixsA0AsE01EaCHAwsmOU2A9cPWUxd8sV_gqp3PFpQVJUx9h8oi1wL6RJvLMGth539m9nvvTusx3hQSuDlatun9AZSc88JrfTscvwPZnIqUZM889tCnGAhhZz3e150LKu-peap-cZ4wF3bF47oS5SzUFetTVG_K-Q-iDmAITS_mp8ERxBszepytjeKVdGN8xHRXOZDDRgq7bUGNNQjT6ox4"/>
+</div>
+<div class="p-stack-md">
+<h3 class="font-headline-lg text-headline-lg mb-4">Experience Design</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                            The exhibition was conceived as an immersive journey. We transformed static historical archives into a living, breathing narrative using reactive projection mapping and spatial audio.
+                        </p>
+</div>
+</div>
+<!-- Bento: Stats/Quick Info -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<div class="bg-primary-container p-stack-md rounded-lg border border-primary/10 h-full flex flex-col justify-center">
+<span class="font-label-sm text-label-sm text-primary mb-2 uppercase tracking-widest">Timeline</span>
+<div class="font-display-lg text-headline-lg text-on-background">1935 — 2025</div>
+<p class="mt-4 font-body-md text-on-primary-container">Ninety years of banking excellence brought to life in a singular architectural space.</p>
+</div>
+<div class="bg-surface-container-high p-stack-md rounded-lg border border-white/5 h-full">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">groups</span>
+<span class="font-label-lg text-label-lg">Engagement</span>
+</div>
+<div class="text-4xl font-bold mb-2">50k+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase">Interactive Touches Weekly</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Narrative Section -->
+<section class="py-stack-lg bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-stack-md">Heritage Integration</h2>
+<div class="space-y-stack-sm text-on-surface-variant font-body-lg">
+<p>
+                            To celebrate UOB's journey, we bridged the gap between 1935 and the future. This required a meticulous balance: honoring the traditional values of trust and stability while signaling a tech-forward trajectory.
+                        </p>
+<p>
+                            Physical artifacts were paired with digital "echoes"—holographic overlays that revealed the story behind every ledger and historical photograph.
+                        </p>
+</div>
+<div class="mt-stack-md flex gap-4">
+<span class="bg-surface-container border border-white/5 px-4 py-2 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Heritage Mapping</span>
+<span class="bg-surface-container border border-white/5 px-4 py-2 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Digital Archives</span>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -inset-4 bg-primary/10 blur-3xl rounded-full"></div>
+<div class="relative rounded-lg overflow-hidden border border-white/10">
+<img alt="UOB Heritage Detail" class="w-full aspect-square object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGoQiZyfSRrZQ6v-rq4xhSsuAoEA8JcFj0sgnkcuOodXQJMMVwAsShYN13UrX4gBG4R0nNval_-9O54z8D0Q30UWutDLlcApFLjXqWQ1xqHh7jkuDCZRMHV4IdRF35tDIzx_EUcEKl68A1QCUUzUa9sCBpuNdZuGs9GGRz5Z3rYJ46wRe9YTRm4sdvSUBtWG_jSTkiwLBd2rwJB3E3QgBIXA_oFgyVudfdZM1X6_9IC2OqcyzV9loxRQW-O8ADTo66Gk3JNOBnpAkK"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Process / Methodology -->
+<section class="py-stack-lg max-w-container-max mx-auto px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-center mb-stack-lg">The Strategic Approach</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<div class="group">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-stack-sm group-hover:bg-primary transition-colors duration-500">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary">history_edu</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Narrative Curation</h4>
+<p class="text-on-surface-variant font-body-md">Filtering nine decades of complex financial history into three distinct, emotional storytelling pillars.</p>
+</div>
+<div class="group">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-stack-sm group-hover:bg-primary transition-colors duration-500">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary">sensor_occupied</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Sensory Interaction</h4>
+<p class="text-on-surface-variant font-body-md">Designing touch-less interfaces that respond to visitor movement, creating a seamless gallery flow.</p>
+</div>
+<div class="group">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-stack-sm group-hover:bg-primary transition-colors duration-500">
+<span class="material-symbols-outlined text-primary group-hover:text-on-primary">insights</span>
+</div>
+<h4 class="font-headline-md text-headline-md mb-2">Future Visioning</h4>
+<p class="text-on-surface-variant font-body-md">Ending the experience with a data-driven projection of the next decade of digital banking.</p>
+</div>
+</div>
+</section>
+<!-- Full Width Quote -->
+<section class="py-stack-lg border-y border-white/5">
+<div class="max-w-3xl mx-auto px-margin-desktop text-center">
+<span class="material-symbols-outlined text-primary text-5xl mb-stack-sm" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<blockquote class="font-display-lg-mobile md:text-headline-lg italic font-light leading-relaxed mb-stack-md">
+                    "The UOB Gallery isn't just an exhibition; it's a testament to how banking brands can bridge their history with a high-fidelity digital future."
+                </blockquote>
+<cite class="font-label-lg text-label-lg uppercase tracking-[0.2em] text-on-surface-variant not-italic">— Lead Brand Strategist</cite>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="py-stack-lg max-w-container-max mx-auto px-margin-desktop text-center">
+<div class="bg-surface-container rounded-2xl p-stack-lg border border-white/5 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] rounded-full"></div>
+<div class="relative z-10">
+<h2 class="font-headline-lg text-headline-lg mb-stack-sm">Ready to Elevate Your Brand's Narrative?</h2>
+<p class="font-body-lg text-on-surface-variant mb-stack-md max-w-xl mx-auto">
+                        Whether it's heritage integration or future-forward digital experiences, let's create something extraordinary.
+                    </p>
+<div class="flex flex-col md:flex-row gap-gutter justify-center">
+<button class="bg-primary text-on-primary px-10 py-4 font-label-lg text-label-lg hover:opacity-90 transition-all active:scale-95">Download Full Case Study</button>
+<button class="border border-white/20 text-on-surface px-10 py-4 font-label-lg text-label-lg hover:bg-white/5 transition-all active:scale-95">Next Project: Digital Frontier</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest border-t border-white/5 w-full py-stack-md">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop max-w-container-max mx-auto gap-stack-sm">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-headline-md text-headline-md text-on-background font-bold tracking-tight mb-2">Iain McMullan</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Iain McMullan. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors transition-opacity hover:opacity-80" href="#">LinkedIn</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors transition-opacity hover:opacity-80" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-on-surface transition-colors transition-opacity hover:opacity-80" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+
+        // Ensure Hero is visible immediately
+        const hero = document.querySelector('section');
+        hero.classList.remove('opacity-0', 'translate-y-10');
+        hero.classList.add('opacity-100', 'translate-y-0');
+    </script>
+</body></html>
