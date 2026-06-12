@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #0a1628;
+  color: #e4e2e3;
+  font-family: 'Hanken Grotesk', sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.glass-card {
+  background: rgba(21, 34, 56, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.nav-active {
+  color: #bbc7df;
+  font-weight: 700;
+}
+.hilton-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 150px);
+  gap: 8px;
+}
+.hilton-gallery > :first-child {
+  grid-row: span 2;
+  grid-column: span 1;
+}
+.hilton-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.text-gradient {
+  background: linear-gradient(to right, #bbc7df, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.case-study-gradient {
+  background: linear-gradient(180deg, rgba(19, 19, 21, 0) 0%, rgba(19, 19, 21, 1) 100%);
+}
+.blur-nav {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.hero-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.08) 0%, rgba(19, 19, 21, 0) 70%);
+}
+@keyframes subtle-drift {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+.floating {
+  animation: subtle-drift 6s ease-in-out infinite;
+}
+.glass-panel {
+  background: rgba(21, 34, 56, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.gallery-mask {
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+@keyframes slowZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+.hero-zoom {
+  animation: slowZoom 30s infinite alternate linear;
+}
+#mobile-menu {
+  display: none;
+}
+#mobile-menu.open {
+  display: flex;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .floating,
+  .hero-zoom {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
