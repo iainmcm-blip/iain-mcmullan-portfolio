@@ -23,6 +23,9 @@ Pages are plain HTML using Tailwind utility classes. After changing markup, reco
 https://github.com/tailwindlabs/tailwindcss/releases/tag/v3.4.17 if missing)
 
 ## Notes
+- ⚠️ **Unverified metrics:** the five Stitch-imported case studies ship with AI-generated
+  numbers (e.g. "94% NPS", "42% growth"). These are placeholders, not verified results.
+  See `CASE-STUDY-METRICS.md` for the full list and replace/verify before sharing widely.
 - The Malaysia Airlines case study was rebuilt from a full-page screenshot after the
   original Stitch HTML export 404'd. Hero + Strategy sections are transcribed verbatim;
   the Execution and Impact sections are reconstructions (no invented metrics) — review
