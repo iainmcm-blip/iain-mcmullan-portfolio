@@ -52,3 +52,16 @@ if (sections.length && navLinks.length) {
   );
   sections.forEach((s) => spy.observe(s));
 }
+
+// Magnetic buttons — subtle pull toward cursor (respects prefers-reduced-motion)
+if (!reduce) {
+  document.querySelectorAll('.magnetic').forEach((el) => {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const mx = e.clientX - (r.left + r.width / 2);
+      const my = e.clientY - (r.top + r.height / 2);
+      el.style.transform = `translate(${mx * 0.16}px, ${my * 0.26}px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+}

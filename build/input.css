@@ -109,3 +109,46 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* --- Hero gradient mesh (replaces text-bearing stock image) --- */
+.hero-bg {
+  background:
+    radial-gradient(55% 45% at 18% 12%, rgba(190, 198, 224, 0.10), transparent 70%),
+    radial-gradient(45% 45% at 88% 22%, rgba(93, 230, 255, 0.06), transparent 70%),
+    radial-gradient(60% 50% at 60% 90%, rgba(190, 198, 224, 0.05), transparent 75%),
+    #0a1628;
+}
+
+/* --- Motion & craft: tasteful micro-interactions --- */
+#work a {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+#work a:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+nav a[href^="#"]:not(.bg-primary) {
+  position: relative;
+}
+nav a[href^="#"]:not(.bg-primary)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 0;
+  background: #bbc7df;
+  transition: width 0.28s ease;
+}
+nav a[href^="#"]:not(.bg-primary):hover::after {
+  width: 100%;
+}
+.magnetic {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  #work a, #work a:hover { transform: none; transition: none; }
+  .magnetic { transform: none !important; }
+  nav a[href^="#"]::after { transition: none; }
+}
