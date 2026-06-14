@@ -1,38 +1,22 @@
-# ⚠️ Case-study metrics — VERIFY OR REPLACE before sharing widely
+# Case-study metrics — resolved (2026-06-14)
 
-The five case studies imported from Google Stitch came with **AI-generated metrics baked
-in**. These numbers are **placeholders, not your verified results.** A sharp recruiter or
-hiring manager may ask you to substantiate them in interview — so every figure below should
-be either (a) replaced with a real number you can defend, or (b) softened to a qualitative
-statement. Search each file for the "currently shows" value to find and edit it.
+All AI-generated placeholder numbers from the original Stitch import have been replaced
+with Iain's real figures or converted to qualitative statements. Current state:
 
-The Malaysia Airlines page was rebuilt by hand and contains **no invented numbers** — its
-Impact section is qualitative and safe as-is.
+| Page | Metrics shown | Source |
+|------|---------------|--------|
+| **Hilton Asia GM & Commercial Conference** | 1,300 senior leaders · 98% app engagement · on time & on budget · 8 plenary sessions · 15+ breakout sessions · 99% satisfaction · 0 production incidents | Real (Iain) |
+| **Emirates Flight Training Academy** | 12:1 applicants per confirmed place · 100% cohort filled in under 2 months | Real (Iain) |
+| **Emirates Pilot Recruitment — "Adventure Awaits"** | 1,200+ applications · qualitative descriptors (Global reach / Cinematic / Emotion-led) | Real number + qualitative |
+| **Malaysia Airlines** | Qualitative only (no numbers) | Qualitative |
+| **UOB Gallery** | Qualitative only (quantitative metric removed) | Qualitative |
+| **Motion: For Impact** | Qualitative only (all quant metrics removed) | Qualitative |
 
-| Page | Currently shows | Label | Your real number (fill in) |
-|------|-----------------|-------|----------------------------|
-| `hilton-asia-conference.html` | `500+` | GMs engaged | |
-| | `94%` | NPS | |
-| | `14` | Markets | |
-| | `20+` | Workshops | |
-| | `12k` | App sessions | |
-| | `100%` | Venue capacity | |
-| `emirates-flight-training-academy.html` | `42%` | Growth in applications | |
-| | `120+` | Nationalities represented | |
-| | `15M+` | Campaign views | |
-| | `89%` | Positive sentiment | |
-| `emirates-pilot-recruitment.html` | `98%` | Uptime reliability | |
-| | `400+` | Annual enrolments (and "+25% vs projection") | |
-| `uob-gallery.html` | `50k+` | Interactive touches weekly | |
-| | _scan page_ | other figures (visitor counts etc.) | |
-| `motion-for-impact.html` | `24%` | Revenue growth | |
-| | _scan page_ | other figures (45% / 30% / 40+ appear in copy) | |
+Fabricated testimonials removed: the anonymous "CEO, Global Retail Partner" quote (Motion)
+and the named "Capt. Abdulla Al Hammadi, VP EFTA" quote (EFTA).
 
-## How to fix quickly
-1. Open the file, Find the "currently shows" value, replace with your real number.
-2. If you don't have a hard number, rewrite the stat as a qualitative outcome
-   (e.g. `42% Growth in Applications` → `Record applications` / `Oversubscribed intake`).
-3. Re-run the build verification (see README) and re-deploy.
+**Note on the two Emirates pages:** the original Stitch export had their bodies mis-filed
+(swapped). They've been corrected — `emirates-flight-training-academy.html` is the academy,
+`emirates-pilot-recruitment.html` is the "Adventure Awaits" recruitment campaign.
 
-**Recommendation (HR lens):** one or two *real* numbers you can stand behind beat six
-impressive-looking invented ones. Authenticity is the asset.
+`98% app engagement` (Hilton) — keep only if it comes from the event app's analytics.
