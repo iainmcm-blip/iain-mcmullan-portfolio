@@ -4,53 +4,53 @@ module.exports = {
   theme: {
     extend: {
       "colors": {
-            "tertiary-container": "#241102",
-            "on-tertiary-fixed-variant": "#5c412b",
-            "on-background": "#e4e2e3",
-            "secondary-fixed": "#dfe2ed",
-            "surface-tint": "#bbc7df",
-            "background": "#131315",
-            "primary": "#bbc7df",
-            "on-tertiary-fixed": "#2b1705",
-            "on-secondary-fixed-variant": "#434750",
-            "secondary-container": "#434750",
-            "on-error-container": "#ffdad6",
-            "surface-container-high": "#2a2a2b",
-            "on-primary-fixed-variant": "#3c475b",
-            "surface-container-lowest": "#0e0e10",
-            "tertiary-fixed-dim": "#e5bfa2",
-            "primary-fixed-dim": "#bbc7df",
-            "inverse-on-surface": "#303032",
-            "surface": "#131315",
-            "error": "#ffb4ab",
-            "outline-variant": "#45474c",
-            "on-secondary-fixed": "#181c23",
-            "tertiary-fixed": "#ffdcc2",
-            "on-secondary-container": "#b2b5bf",
-            "secondary-fixed-dim": "#c3c6d1",
-            "secondary": "#c3c6d1",
-            "primary-fixed": "#d7e3fc",
-            "on-tertiary": "#432b17",
-            "inverse-surface": "#e4e2e3",
-            "surface-bright": "#39393b",
-            "surface-container-low": "#1b1b1d",
-            "on-surface-variant": "#c5c6cd",
-            "error-container": "#93000a",
-            "primary-container": "#0a1628",
-            "on-primary-container": "#758096",
-            "surface-container-highest": "#353536",
-            "on-primary-fixed": "#101c2e",
-            "inverse-primary": "#535f74",
-            "tertiary": "#e5bfa2",
-            "outline": "#8f9097",
-            "on-tertiary-container": "#9a7960",
-            "on-primary": "#253144",
-            "on-error": "#690005",
-            "surface-variant": "#353536",
-            "surface-dim": "#131315",
-            "surface-container": "#1f1f21",
-            "on-secondary": "#2c3039",
-            "on-surface": "#e4e2e3"
+                  "background": "#F7F5EF",
+                  "on-background": "#1B1B20",
+                  "surface": "#F7F5EF",
+                  "surface-dim": "#EFEADF",
+                  "surface-bright": "#FFFFFF",
+                  "surface-container-lowest": "#EFEADF",
+                  "surface-container-low": "#F2EEE5",
+                  "surface-container": "#FFFFFF",
+                  "surface-container-high": "#FFFFFF",
+                  "surface-container-highest": "#FBFAF6",
+                  "surface-variant": "#ECE7DB",
+                  "on-surface": "#1B1B20",
+                  "on-surface-variant": "#55535C",
+                  "inverse-surface": "#1B1B20",
+                  "inverse-on-surface": "#F7F5EF",
+                  "inverse-primary": "#BBC0E8",
+                  "outline": "#8C887E",
+                  "outline-variant": "#DED8CC",
+                  "primary": "#3F4380",
+                  "on-primary": "#FAF8F2",
+                  "primary-container": "#E6E5F2",
+                  "on-primary-container": "#2A2D5E",
+                  "primary-fixed": "#E6E5F2",
+                  "primary-fixed-dim": "#BBC0E8",
+                  "on-primary-fixed": "#13163A",
+                  "on-primary-fixed-variant": "#3F4380",
+                  "surface-tint": "#3F4380",
+                  "secondary": "#5A5866",
+                  "secondary-container": "#ECEAE0",
+                  "on-secondary": "#FFFFFF",
+                  "on-secondary-container": "#3A3942",
+                  "secondary-fixed": "#E6E4EE",
+                  "secondary-fixed-dim": "#C9C7D4",
+                  "on-secondary-fixed": "#191A24",
+                  "on-secondary-fixed-variant": "#46454F",
+                  "tertiary": "#7A6E5E",
+                  "tertiary-container": "#F0E9DC",
+                  "on-tertiary": "#FFFFFF",
+                  "on-tertiary-container": "#564B3D",
+                  "tertiary-fixed": "#F0E9DC",
+                  "tertiary-fixed-dim": "#D7C9B4",
+                  "on-tertiary-fixed": "#271B0C",
+                  "on-tertiary-fixed-variant": "#5C5141",
+                  "error": "#B3261E",
+                  "on-error": "#FFFFFF",
+                  "error-container": "#F9DEDC",
+                  "on-error-container": "#410E0B"
       },
       "borderRadius": {
             "DEFAULT": "0.125rem",
@@ -69,30 +69,38 @@ module.exports = {
             "stack-sm": "16px"
       },
       "fontFamily": {
-            "headline-md": [
-                  "Hanken Grotesk"
-            ],
-            "headline-lg": [
-                  "Hanken Grotesk"
-            ],
-            "display-lg": [
-                  "Hanken Grotesk"
-            ],
-            "label-sm": [
-                  "Hanken Grotesk"
-            ],
-            "display-lg-mobile": [
-                  "Hanken Grotesk"
-            ],
-            "body-lg": [
-                  "Hanken Grotesk"
-            ],
-            "label-lg": [
-                  "Hanken Grotesk"
-            ],
-            "body-md": [
-                  "Hanken Grotesk"
-            ]
+                  "headline-md": [
+                              "Fraunces",
+                              "Georgia",
+                              "serif"
+                  ],
+                  "headline-lg": [
+                              "Fraunces",
+                              "Georgia",
+                              "serif"
+                  ],
+                  "display-lg": [
+                              "Fraunces",
+                              "Georgia",
+                              "serif"
+                  ],
+                  "display-lg-mobile": [
+                              "Fraunces",
+                              "Georgia",
+                              "serif"
+                  ],
+                  "label-sm": [
+                              "Hanken Grotesk"
+                  ],
+                  "body-lg": [
+                              "Hanken Grotesk"
+                  ],
+                  "label-lg": [
+                              "Hanken Grotesk"
+                  ],
+                  "body-md": [
+                              "Hanken Grotesk"
+                  ]
       },
       "fontSize": {
             "headline-md": [
