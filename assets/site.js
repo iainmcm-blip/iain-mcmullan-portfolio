@@ -1,3 +1,6 @@
+// Enable JS-only progressive enhancements (reveals stay visible if this never runs)
+document.documentElement.classList.add('js');
+
 // Mobile menu
 const menuBtn = document.getElementById('menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -14,24 +17,63 @@ if (menuBtn && mobileMenu) {
   );
 }
 
-// Scroll reveal (respects prefers-reduced-motion)
+// Scroll reveal — staggered, triggers as elements enter the viewport (respects prefers-reduced-motion).
+// Uses a scroll/rAF check rather than IntersectionObserver for maximum reliability across renderers.
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const reveals = document.querySelectorAll('.reveal');
+const reveals = [...document.querySelectorAll('.reveal')];
 if (reduce) {
   reveals.forEach((el) => el.classList.add('active'));
-} else {
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('active');
-          io.unobserve(e.target);
-        }
-      });
-    },
-    { threshold: 0.15 }
-  );
-  reveals.forEach((el) => io.observe(el));
+} else if (reveals.length) {
+  const revealCheck = () => {
+    const vh = window.innerHeight;
+    for (const el of reveals) {
+      if (el.classList.contains('active')) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) {
+        // Stagger siblings sharing a parent so rows/grids cascade in
+        const sibs = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
+        const idx = Math.max(0, sibs.indexOf(el));
+        el.style.transitionDelay = Math.min(idx, 6) * 75 + 'ms';
+        el.classList.add('active');
+      }
+    }
+  };
+  let revTick = false;
+  const onReveal = () => { if (!revTick) { requestAnimationFrame(() => { revealCheck(); revTick = false; }); revTick = true; } };
+  addEventListener('scroll', onReveal, { passive: true });
+  addEventListener('resize', onReveal, { passive: true });
+  addEventListener('load', revealCheck);
+  revealCheck();
+}
+
+// Parallax — subtle depth on [data-parallax] layers, rAF-throttled (motion-allowed only)
+if (!reduce) {
+  const layers = [...document.querySelectorAll('[data-parallax]')];
+  if (layers.length) {
+    let ticking = false;
+    const apply = () => {
+      const vh = window.innerHeight;
+      for (const el of layers) {
+        const r = el.getBoundingClientRect();
+        const speed = parseFloat(el.dataset.parallax) || 0.12;
+        const offset = (r.top + r.height / 2) - vh / 2; // px from viewport centre
+        el.style.transform = `translate3d(0, ${(-offset * speed).toFixed(1)}px, 0)`;
+      }
+      ticking = false;
+    };
+    const onScroll = () => { if (!ticking) { requestAnimationFrame(apply); ticking = true; } };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    apply();
+  }
+}
+
+// Nav elevation on scroll
+const nav = document.querySelector('nav');
+if (nav) {
+  const onNav = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+  addEventListener('scroll', onNav, { passive: true });
+  onNav();
 }
 
 // Active-section nav highlight (index page only — needs section[id])

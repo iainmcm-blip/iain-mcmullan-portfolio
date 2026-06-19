@@ -26,14 +26,21 @@ body {
   border-color: #D6CFC0;
 }
 .reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.9s cubic-bezier(0.2, 0.6, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.6, 0.2, 1);
-}
-.reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.85s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+html.js .reveal.active {
+  opacity: 1;
+  transform: none;
+}
+[data-parallax] { will-change: transform; }
+nav.scrolled { box-shadow: 0 10px 34px rgba(20, 20, 30, 0.08); transition: box-shadow 0.3s ease; }
 .nav-active {
   color: #3F4380;
   font-weight: 700;
@@ -140,7 +147,8 @@ nav a[href^="#"]:not(.bg-primary):hover::after {
   transition: transform 0.2s cubic-bezier(0.2, 0.6, 0.2, 1);
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal, html.js .reveal, html.js .reveal.active { opacity: 1 !important; transform: none !important; transition: none !important; }
+  [data-parallax] { transform: none !important; }
   .floating, .hero-zoom { animation: none; }
   #work a, #work a:hover { transform: none; transition: none; }
   .magnetic { transform: none !important; }
