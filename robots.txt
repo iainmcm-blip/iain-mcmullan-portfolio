@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iainmcm-blip.github.io/iain-mcmullan-portfolio/sitemap.xml
+Sitemap: https://iainmcmullan.com/sitemap.xml
