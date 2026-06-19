@@ -147,3 +147,15 @@ nav a[href^="#"]:not(.bg-primary):hover::after {
   nav a[href^="#"]::after { transition: none; }
   html { scroll-behavior: auto; }
 }
+
+/* --- Animated graphical art panels (classy abstract motion) --- */
+.art-panel { position: relative; overflow: hidden; background: #F1EDE3; isolation: isolate; }
+.art-panel::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 70px rgba(27,27,32,0.05); pointer-events: none; }
+.art-panel .blob { position: absolute; border-radius: 50%; filter: blur(42px); opacity: 0.55; will-change: transform; }
+@keyframes artA { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(14%,16%) scale(1.1); } }
+@keyframes artB { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(-13%,-12%) scale(1.07); } }
+@keyframes artC { 0%,100% { transform: translate(0,0) scale(1); } 50% { transform: translate(10%,-16%) scale(1.12); } }
+.art-panel .blob.drift-a { animation: artA 17s ease-in-out infinite; }
+.art-panel .blob.drift-b { animation: artB 21s ease-in-out infinite; }
+.art-panel .blob.drift-c { animation: artC 25s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .art-panel .blob { animation: none !important; } }
