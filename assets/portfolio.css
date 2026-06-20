@@ -848,6 +848,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 }
 .timeline-item {
   position: relative;
+  z-index: 1;              /* lift the whole entry (and its logo dot) above the spine */
   padding-bottom: 2.75rem;
 }
 .timeline-item:last-child { padding-bottom: 0; }
@@ -1263,7 +1264,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   width: 2px;
   transform-origin: top center;
   background: linear-gradient(to bottom, var(--gold), var(--gold) 70%, var(--gold-mid));
-  z-index: 1;
+  z-index: 0;            /* stays behind the entries / logo dots */
 }
 
 /* Perspectives — pull-quote character reveal */
