@@ -384,8 +384,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   transform: translate(-50%, -50%) rotate(-90deg) scale(1.18);
   transform-origin: center;
   /* deepen the blue to a rich navy. Contrast keeps the white background light while
-     a modest brightness drop sinks the ink to a darker navy (cleaner letter-flip). */
-  filter: saturate(1.4) contrast(1.5) brightness(0.82);
+     a brightness drop sinks the ink darker so the difference-blend flips brighter. */
+  filter: saturate(1.4) contrast(1.55) brightness(0.72);
 }
 .hero-video-overlay {
   position: absolute;
@@ -393,10 +393,10 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   /* Light over the headline (so it gets dark ink behind it for the dramatic flip),
      denser toward the lower-left so the bio and stats stay legible over the ink. */
   background: linear-gradient(to bottom,
-    rgba(250, 248, 244, 0.25) 0%,
-    rgba(250, 248, 244, 0.30) 30%,
-    rgba(250, 248, 244, 0.52) 44%,
-    rgba(250, 248, 244, 0.66) 58%,
+    rgba(250, 248, 244, 0.22) 0%,
+    rgba(250, 248, 244, 0.22) 42%,
+    rgba(250, 248, 244, 0.34) 50%,
+    rgba(250, 248, 244, 0.62) 58%,
     rgba(250, 248, 244, 0.72) 82%,
     rgba(250, 248, 244, 0.74) 100%);
 }
