@@ -375,22 +375,29 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 .hero-video {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 55%;            /* bias the plume toward the right / empty side */
   /* JS sizes this to (wrapHeight x wrapWidth); after the -90deg rotation the ink
      flows right -> left and fills the hero. Viewport units are the no-JS fallback. */
   width: 100vh;
   height: 100vw;
   object-fit: cover;
-  transform: translate(-50%, -50%) rotate(-90deg) scale(1.06);
+  transform: translate(-50%, -50%) rotate(-90deg) scale(1.18);
   transform-origin: center;
-  /* keep the original blue, just a touch richer */
-  filter: saturate(1.06) contrast(1.03);
+  /* deepen the blue to a rich navy. Contrast keeps the white background light while
+     a modest brightness drop sinks the ink to a darker navy (cleaner letter-flip). */
+  filter: saturate(1.4) contrast(1.5) brightness(0.82);
 }
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  /* lighter veil so the blue reads through; the headline stays legible via mix-blend */
-  background: rgba(250, 248, 244, 0.55);
+  /* Light over the headline (so it gets dark ink behind it for the dramatic flip),
+     denser toward the lower-left so the bio and stats stay legible over the ink. */
+  background: linear-gradient(to bottom,
+    rgba(250, 248, 244, 0.25) 0%,
+    rgba(250, 248, 244, 0.30) 32%,
+    rgba(250, 248, 244, 0.55) 54%,
+    rgba(250, 248, 244, 0.66) 80%,
+    rgba(250, 248, 244, 0.70) 100%);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-video-wrap { display: none; }
