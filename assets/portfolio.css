@@ -503,20 +503,24 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   gap: 2.5rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
+  /* adaptive like the rest of the hero text: near-black over the light ground, light over the ink */
+  color: #ffffff;
+  mix-blend-mode: difference;
 }
+.hero-stats .stat-number > span { color: inherit !important; } /* override the inline gold "+" so it adapts too */
 .stat-item { }
 .stat-number {
   font-family: var(--ff-display);
   font-weight: 700;
   font-size: clamp(30px, 3.5vw, 42px);
-  color: var(--ink);
+  color: inherit;
   line-height: 1;
   letter-spacing: -0.02em;
 }
 .stat-number span { color: var(--gold); }
 .stat-label {
   font-size: 0.8125rem;
-  color: var(--ink-mid);
+  color: inherit;
   margin-top: 0.25rem;
   font-weight: 400;
 }
@@ -1162,7 +1166,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .js .hero-h1 .h1-word { transform: translateY(40px); }
 }
 /* legibility insurance for hero body text over the now-visible ink */
-.hero-name, .hero-stats, .hero-scroll-hint {
+.hero-name, .hero-scroll-hint {
   text-shadow: 0 1px 12px rgba(250, 248, 244, 0.85), 0 0 2px rgba(250, 248, 244, 0.6);
 }
 
