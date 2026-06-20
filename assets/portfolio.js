@@ -284,4 +284,48 @@
     }
   }
 
+  /* ── ADAPTIVE "GET IN TOUCH" BORDER ─────────────────────── */
+  // Periwinkle border on light; flips to white when dark ink is behind it.
+  // Samples the hero video, inverse-maps the button's position through the video's
+  // CSS transform, and reads the pixel underneath. Degrades to periwinkle on error.
+  (function adaptiveCta() {
+    const btn = document.getElementById('hero-cta-outline');
+    const video = document.querySelector('.hero-video');
+    const wrap = document.querySelector('.hero-video-wrap');
+    if (!btn || !video || !wrap || reduce) return;          // reduced-motion hides the video → periwinkle default
+    if (typeof DOMMatrix === 'undefined') return;
+    const cvs = document.createElement('canvas');
+    const ctx = cvs.getContext('2d', { willReadFrequently: true });
+    let last = 0;
+    function step(t) {
+      requestAnimationFrame(step);
+      if (t - last < 140) return;                            // ~7fps is plenty
+      last = t;
+      const vw = video.videoWidth, vh = video.videoHeight;
+      if (!vw || video.readyState < 2) return;
+      try {
+        if (cvs.width !== vw) { cvs.width = vw; cvs.height = vh; }
+        ctx.drawImage(video, 0, 0, vw, vh);
+        const b = btn.getBoundingClientRect();
+        const wr = wrap.getBoundingClientRect();
+        const bw = video.offsetWidth, bh = video.offsetHeight;       // layout box (pre-transform)
+        const ox = 0.55 * wr.width + bw / 2;                          // transform-origin (centre), wrap coords
+        const oy = 0.50 * wr.height + bh / 2;
+        const inv = new DOMMatrix(getComputedStyle(video).transform).inverse();
+        const rel = inv.transformPoint(new DOMPoint(b.left + b.width / 2 - wr.left - ox, b.top + b.height / 2 - wr.top - oy));
+        const lx = rel.x + bw / 2, ly = rel.y + bh / 2;              // local box coords
+        const scale = Math.max(bw / vw, bh / vh);                     // object-fit: cover
+        let sx = (lx - (bw - vw * scale) / 2) / scale;
+        let sy = (ly - (bh - vh * scale) / 2) / scale;
+        sx = Math.max(0, Math.min(vw - 1, sx)); sy = Math.max(0, Math.min(vh - 1, sy));
+        const d = ctx.getImageData(sx | 0, sy | 0, 1, 1).data;
+        let L = (0.299 * d[0] + 0.587 * d[1] + 0.114 * d[2]) / 255;
+        L = ((L - 0.5) * 1.55 + 0.5) * 0.72;                          // approx the CSS contrast+brightness
+        const vis = L * 0.45 + 0.55;                                  // approx composite over the warm veil
+        btn.classList.toggle('over-ink', vis < 0.6);
+      } catch (e) { btn.classList.remove('over-ink'); }
+    }
+    requestAnimationFrame(step);
+  })();
+
 })();

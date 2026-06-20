@@ -48,11 +48,11 @@
 <!-- ── NAVIGATION ─────────────────────────────────────────── -->
 <nav class="nav" id="nav" role="navigation" aria-label="Primary navigation">
   <div class="nav-inner">
-    <a href="#hero" class="nav-brand" aria-label="Iain McMullan — back to top">Iain McMullan</a>
+    <a href="#hero" class="nav-brand" aria-label="Home — back to top">Home</a>
 
     <ul class="nav-links" role="list">
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#work">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="experience.html">Experience</a></li>
       <li><a href="#perspectives">Perspectives</a></li>
       <li><a href="#contact">Let's talk</a></li>
@@ -74,7 +74,7 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <a href="#skills">Skills</a>
-  <a href="#work">Work</a>
+  <a href="portfolio.html">Portfolio</a>
   <a href="experience.html">Experience</a>
   <a href="#perspectives">Perspectives</a>
   <a href="#contact">Let's talk</a>
@@ -139,7 +139,7 @@
 
         <div class="hero-ctas hero-el hero-el-6">
           <a href="#work" class="btn btn-gold">View My Work</a>
-          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+          <a href="#contact" class="btn btn-outline btn-adaptive" id="hero-cta-outline">Get in Touch</a>
         </div>
 
         <p class="hero-scroll-hint hero-el hero-el-7" aria-hidden="true">
@@ -164,9 +164,9 @@
       <h2 class="display-heading display-lg">The full toolkit.</h2>
     </div>
 
-    <div class="skills-grid">
+    <div class="skills-grid reveal">
 
-      <div class="skill-col reveal">
+      <div class="skill-col">
         <span class="skill-col-num">01</span>
         <p class="skills-group-title">Leadership &amp; Strategy</p>
         <ul class="skill-list">
@@ -182,7 +182,7 @@
         </ul>
       </div>
 
-      <div class="skill-col reveal">
+      <div class="skill-col">
         <span class="skill-col-num">02</span>
         <p class="skills-group-title">Brand &amp; Marketing</p>
         <ul class="skill-list">
@@ -197,7 +197,7 @@
         </ul>
       </div>
 
-      <div class="skill-col reveal">
+      <div class="skill-col">
         <span class="skill-col-num">03</span>
         <p class="skills-group-title">Digital, AI &amp; Craft</p>
         <ul class="skill-list">
@@ -271,99 +271,47 @@
       <p class="section-intro">For over 20 years in Asia and the Middle East, I've been working with and for some of the world's largest brands on integrated campaigns. These span full global campaigns, product launches, brand development, innovative activations and large-scale events. Here is a sample of some of the projects I have played a key role in:</p>
     </div>
 
-    <div class="case-grid">
+    <div class="case-strip reveal">
 
-      <a href="case-studies/malaysia-airlines.html" class="case-card reveal" aria-label="Malaysia Airlines case study">
-        <div class="case-img-wrap">
-          <img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines This is Malaysian hospitality brand campaign" loading="lazy">
-          <div class="case-img-overlay">
-            <span class="case-overlay-text">Read case study &rarr;</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Brand Campaign</span>
-          <h3 class="case-title">Malaysia Airlines — This is Malaysian hospitality</h3>
-          <p class="case-desc">A global brand repositioning that shifted the narrative from service to soul, capturing the essence of Malaysian hospitality.</p>
-          <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
-        </div>
+      <a href="case-studies/malaysia-airlines.html" class="case-mini" aria-label="Malaysia Airlines case study">
+        <div class="case-mini-img"><img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines brand campaign" loading="lazy"></div>
+        <span class="case-mini-tag">Brand Campaign</span>
+        <h3 class="case-mini-title">Malaysia Airlines</h3>
       </a>
 
-      <a href="case-studies/emirates-flight-training-academy.html" class="case-card reveal" aria-label="Emirates Flight Training Academy case study">
-        <div class="case-img-wrap">
-          <img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy exterior" loading="lazy">
-          <div class="case-img-overlay">
-            <span class="case-overlay-text">Read case study &rarr;</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Integrated Campaign</span>
-          <h3 class="case-title">Emirates Flight Training Academy</h3>
-          <p class="case-desc">Launching the world's most advanced pilot training facility with an integrated global campaign and world-class digital presence.</p>
-          <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
-        </div>
+      <a href="case-studies/emirates-flight-training-academy.html" class="case-mini" aria-label="Emirates Flight Training Academy case study">
+        <div class="case-mini-img"><img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy" loading="lazy"></div>
+        <span class="case-mini-tag">Integrated Campaign</span>
+        <h3 class="case-mini-title">Emirates Flight Training Academy</h3>
       </a>
 
-      <a href="case-studies/emirates-pilot-recruitment.html" class="case-card reveal" aria-label="Emirates Pilot Recruitment case study">
-        <div class="case-img-wrap">
-          <img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates Adventure Awaits pilot recruitment campaign" loading="lazy">
-          <div class="case-img-overlay">
-            <span class="case-overlay-text">Read case study &rarr;</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Employer Branding</span>
-          <h3 class="case-title">Emirates Pilot Recruitment</h3>
-          <p class="case-desc">Defining the 'Adventure Awaits' campaign to attract the next generation of aviators through emotional storytelling and cinematic visuals.</p>
-          <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
-        </div>
+      <a href="case-studies/emirates-pilot-recruitment.html" class="case-mini" aria-label="Emirates Pilot Recruitment case study">
+        <div class="case-mini-img"><img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates Adventure Awaits campaign" loading="lazy"></div>
+        <span class="case-mini-tag">Employer Branding</span>
+        <h3 class="case-mini-title">Emirates Pilot Recruitment</h3>
       </a>
 
-      <a href="case-studies/emirates-skywards-my-family.html" class="case-card reveal" aria-label="Emirates Skywards My Family case study">
-        <div class="case-img-wrap">
-          <img src="assets/img/skywards-my-family.jpg" alt="Emirates Skywards My Family loyalty feature" loading="lazy">
-          <div class="case-img-overlay">
-            <span class="case-overlay-text">Read case study &rarr;</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Loyalty</span>
-          <h3 class="case-title">Emirates Skywards: My Family</h3>
-          <p class="case-desc">Launching a Skywards feature that lets members pool and share Miles across their family.</p>
-          <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
-        </div>
+      <a href="case-studies/emirates-skywards-my-family.html" class="case-mini" aria-label="Emirates Skywards My Family case study">
+        <div class="case-mini-img"><img src="assets/img/skywards-my-family.jpg" alt="Emirates Skywards My Family" loading="lazy"></div>
+        <span class="case-mini-tag">Loyalty</span>
+        <h3 class="case-mini-title">Skywards: My Family</h3>
       </a>
 
-      <a href="case-studies/uob-gallery.html" class="case-card reveal" aria-label="UOB Gallery case study">
-        <div class="case-img-wrap">
-          <img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery commemorative brand experience" loading="lazy">
-          <div class="case-img-overlay">
-            <span class="case-overlay-text">Read case study &rarr;</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Finance</span>
-          <h3 class="case-title">The UOB Gallery</h3>
-          <p class="case-desc">A commemorative brand experience celebrating nine decades of heritage and future-forward banking.</p>
-          <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
-        </div>
+      <a href="case-studies/uob-gallery.html" class="case-mini" aria-label="UOB Gallery case study">
+        <div class="case-mini-img"><img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery" loading="lazy"></div>
+        <span class="case-mini-tag">Finance</span>
+        <h3 class="case-mini-title">The UOB Gallery</h3>
       </a>
 
-      <a href="case-studies/hilton-asia-conference.html" class="case-card reveal" aria-label="Hilton APAC Conference case study">
-        <div class="case-img-wrap">
-          <img src="assets/img/hilton-plenary.jpg" alt="Hilton Asia GM Commercial Conference plenary" loading="lazy">
-          <div class="case-img-overlay">
-            <span class="case-overlay-text">Read case study &rarr;</span>
-          </div>
-        </div>
-        <div class="case-body">
-          <span class="case-tag">Hospitality</span>
-          <h3 class="case-title">Hilton APAC — Asia GM &amp; Commercial Conference</h3>
-          <p class="case-desc">Strategic execution of Hilton's largest regional leadership forum under 'Our Team. Our Time'.</p>
-          <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
-        </div>
+      <a href="case-studies/hilton-asia-conference.html" class="case-mini" aria-label="Hilton APAC Conference case study">
+        <div class="case-mini-img"><img src="assets/img/hilton-plenary.jpg" alt="Hilton APAC conference" loading="lazy"></div>
+        <span class="case-mini-tag">Hospitality</span>
+        <h3 class="case-mini-title">Hilton APAC Conference</h3>
       </a>
 
     </div>
+
+    <a href="portfolio.html" class="case-viewall reveal">See the full portfolio <span aria-hidden="true">&rarr;</span></a>
 
   </div>
 </section>
@@ -407,6 +355,60 @@
 
     </div>
 
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CAREER STRIP — links into the Experience page
+     ═══════════════════════════════════════════════════════ -->
+<section class="career-row reveal" aria-label="Career history">
+  <div class="container">
+    <p class="career-row-label">Two decades, seven roles &mdash; <a href="experience.html">see the full journey &rarr;</a></p>
+    <ol class="career-strip">
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=0" aria-label="Head of Strategy & Communications at Motion, Aug 2023 to Present">
+          <span class="career-node-logo"><img src="assets/img/motion-logo.jpg" alt="Motion: For Impact" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Head of Strategy &amp; Communications</span><span class="career-node-years">Aug 2023 &ndash; Present</span></span>
+        </a>
+      </li>
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=1" aria-label="Group Head of Operations at Bonsey Jaden, Jan 2022 to May 2023">
+          <span class="career-node-logo"><img src="assets/img/bj-logo.jpg" alt="Bonsey Jaden" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Group Head of Operations</span><span class="career-node-years">Jan 2022 &ndash; May 2023</span></span>
+        </a>
+      </li>
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=2" aria-label="Group Head of Business at Bonsey Jaden, Jun 2019 to Dec 2021">
+          <span class="career-node-logo"><img src="assets/img/bj-logo.jpg" alt="Bonsey Jaden" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Group Head of Business</span><span class="career-node-years">Jun 2019 &ndash; Dec 2021</span></span>
+        </a>
+      </li>
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=3" aria-label="Advertising Manager at The Emirates Group, Aug 2011 to May 2019">
+          <span class="career-node-logo"><img src="assets/img/emirates-logo.jpg" alt="The Emirates Group" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Advertising Manager &ndash; Emirates Skywards</span><span class="career-node-years">Aug 2011 &ndash; May 2019</span></span>
+        </a>
+      </li>
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=4" aria-label="Communications Manager at AIA Singapore, Dec 2009 to Aug 2011">
+          <span class="career-node-logo"><img src="assets/img/aia-logo.jpg" alt="AIA Singapore" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Communications Manager</span><span class="career-node-years">Dec 2009 &ndash; Aug 2011</span></span>
+        </a>
+      </li>
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=5" aria-label="Relationship Manager at Go/React, Jun 2008 to Dec 2009">
+          <span class="career-node-logo"><img src="assets/img/go-react-logo.jpg" alt="Go/React" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Relationship Manager</span><span class="career-node-years">Jun 2008 &ndash; Dec 2009</span></span>
+        </a>
+      </li>
+      <li class="career-node">
+        <a class="career-node-link" href="experience.html?role=6" aria-label="Account Manager at M&C Saatchi, Apr 2005 to Jun 2008">
+          <span class="career-node-logo"><img src="assets/img/m-amp-c-saatchi-logo.jpg" alt="M&C Saatchi" loading="lazy"></span>
+          <span class="career-node-pop"><span class="career-node-role">Account Manager</span><span class="career-node-years">Apr 2005 &ndash; Jun 2008</span></span>
+        </a>
+      </li>
+    </ol>
   </div>
 </section>
 

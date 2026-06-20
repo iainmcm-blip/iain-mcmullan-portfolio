@@ -37,9 +37,9 @@
 
 /* LEFT — sticky vertical timeline rail */
 .exp-rail { position: sticky; top: calc(var(--nav-h) + 1.5rem); align-self: start; }
-.exp-timeline { list-style: none; position: relative; margin: 0; padding: 0 0 0 4.5rem; }
+.exp-timeline { list-style: none; position: relative; margin: 0; padding: 0 0 0 6rem; }
 .exp-spine {
-  position: absolute; left: 27px; top: 8px; bottom: 8px; width: 2px;
+  position: absolute; left: 34px; top: 8px; bottom: 8px; width: 2px;
   background: linear-gradient(to bottom, var(--gold), var(--gold-mid) 85%, transparent);
   z-index: 0;
 }
@@ -50,10 +50,10 @@
 .exp-tl-item:last-child { padding-bottom: 0; }
 .exp-tl-item.active { opacity: 1; }
 .exp-tl-dot {
-  position: absolute; left: -4.5rem; top: -2px; width: 54px; height: 54px;
-  border-radius: 50%; background: var(--surface); border: 2px solid var(--divider);
+  position: absolute; left: -6rem; top: -2px; width: 70px; height: 70px;
+  border-radius: 14px; background: var(--surface); border: 2px solid var(--divider);
   box-shadow: var(--shadow-card); display: flex; align-items: center; justify-content: center;
-  overflow: hidden; padding: 6px; transition: border-color 0.3s ease, transform 0.3s ease;
+  overflow: hidden; padding: 4px; transition: border-color 0.3s ease, transform 0.3s ease;
 }
 .exp-tl-dot img { width: 100%; height: 100%; object-fit: contain; }
 .exp-tl-item.active .exp-tl-dot { border-color: var(--gold); transform: scale(1.06); }
@@ -142,11 +142,11 @@
 <!-- ── NAVIGATION ─────────────────────────────────────────── -->
 <nav class="nav scrolled" id="nav" role="navigation" aria-label="Primary navigation">
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand" aria-label="Iain McMullan — home">Iain McMullan</a>
+    <a href="index.html" class="nav-brand" aria-label="Home">Home</a>
 
     <ul class="nav-links" role="list">
       <li><a href="index.html#skills">Skills</a></li>
-      <li><a href="index.html#work">Work</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="experience.html" class="active">Experience</a></li>
       <li><a href="index.html#perspectives">Perspectives</a></li>
       <li><a href="index.html#contact">Let's talk</a></li>
@@ -166,7 +166,7 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <a href="index.html#skills">Skills</a>
-  <a href="index.html#work">Work</a>
+  <a href="portfolio.html">Portfolio</a>
   <a href="experience.html">Experience</a>
   <a href="index.html#perspectives">Perspectives</a>
   <a href="index.html#contact">Let's talk</a>
@@ -469,8 +469,15 @@
     });
   });
 
-  // default: first role open
-  setActive(0);
+  // default: first role open — or a deep-linked role via ?role=N (from the homepage strip)
+  var deep = parseInt(new URLSearchParams(window.location.search).get('role'), 10);
+  var startIndex = (!isNaN(deep) && deep >= 0 && deep < rows.length) ? deep : 0;
+  setActive(startIndex);
+  if (startIndex !== 0) {
+    requestAnimationFrame(function () {
+      if (rows[startIndex]) rows[startIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
 })();
 </script>
 </body>
