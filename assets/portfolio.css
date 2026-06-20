@@ -1122,8 +1122,16 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .hero-grid {
     grid-template-columns: 1fr;
   }
-  /* Single-column: text spans full width, so veil the ink a touch more */
-  .hero-video-overlay { background: rgba(250, 248, 244, 0.85); }
+  /* Single-column: keep the vertical gradient but veil a little more than desktop,
+     since the text spans full width (avoids busy two-tone over the long bio). */
+  .hero-video-overlay {
+    background: linear-gradient(to bottom,
+      rgba(250, 248, 244, 0.82) 0%,
+      rgba(250, 248, 244, 0.42) 19%,
+      rgba(250, 248, 244, 0.60) 40%,
+      rgba(250, 248, 244, 0.64) 66%,
+      rgba(250, 248, 244, 0.82) 100%);
+  }
   .principle-grid { grid-template-columns: repeat(2, 1fr); }
   .persp-grid { grid-template-columns: 1fr; }
   .persp-pull { grid-column: 1; }
@@ -1139,6 +1147,18 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-stats { gap: 1.5rem; }
   .floating-cta { bottom: 1.25rem; right: 1.25rem; }
+
+  /* tighten the generous vertical rhythm so the page isn't an endless scroll on phones */
+  .skills, .case-studies, .impact, .leadership, .timeline,
+  .perspectives, .credentials { padding: 3.5rem 0; }
+  .contact { padding: 4rem 0; }
+  .brands { padding: 2.5rem 0; }
+  .skills-heading-area { margin-bottom: 2rem; }
+  .case-grid, .skills-grid { margin-top: 2rem; }
+  /* shorter decorative art panels on the Perspectives cards */
+  .persp-art { aspect-ratio: 16 / 6; }
+  /* roomier tap targets, full-width primary CTA */
+  .hero-ctas { gap: 0.75rem; }
 }
 
 @media (max-width: 480px) {
