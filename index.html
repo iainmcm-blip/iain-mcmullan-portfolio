@@ -92,7 +92,16 @@
      SECTION 1 — HERO
      ═══════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
-  <div class="container" style="width:100%">
+
+  <!-- Ambient ink background (recoloured to gold, multiply-blended onto paper) -->
+  <div class="hero-video-wrap" aria-hidden="true">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/img/ink-poster.jpg">
+      <source src="assets/video/ink-abstract.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-scrim"></div>
+  </div>
+
+  <div class="container" style="width:100%; position:relative; z-index:1;">
     <div class="hero-grid">
 
       <!-- Left: text column -->

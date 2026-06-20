@@ -42,6 +42,13 @@
     });
   }
 
+  /* ── HERO AMBIENT VIDEO ─────────────────────────────────── */
+  const heroVideo = document.querySelector('.hero-video');
+  if (heroVideo && reduce) {
+    heroVideo.removeAttribute('autoplay');
+    heroVideo.pause();
+  }
+
   /* ── FLOATING CTA ───────────────────────────────────────── */
   const floatingCta = document.querySelector('.floating-cta');
   if (floatingCta) {
