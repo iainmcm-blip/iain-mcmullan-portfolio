@@ -48,6 +48,20 @@
     heroVideo.removeAttribute('autoplay');
     heroVideo.pause();
   }
+  // The video is rotated -90deg; size it to (wrapHeight x wrapWidth) so after
+  // rotation it exactly covers the hero, regardless of viewport.
+  const heroVideoWrap = document.querySelector('.hero-video-wrap');
+  if (heroVideo && heroVideoWrap) {
+    const sizeHeroVideo = () => {
+      const w = heroVideoWrap.clientWidth, h = heroVideoWrap.clientHeight;
+      if (w && h) { heroVideo.style.width = h + 'px'; heroVideo.style.height = w + 'px'; }
+    };
+    sizeHeroVideo();
+    window.addEventListener('resize', sizeHeroVideo, { passive: true });
+    // Re-measure once metadata/poster has laid out
+    heroVideo.addEventListener('loadedmetadata', sizeHeroVideo);
+    window.addEventListener('load', sizeHeroVideo);
+  }
 
   /* ── FLOATING CTA ───────────────────────────────────────── */
   const floatingCta = document.querySelector('.floating-cta');
@@ -224,8 +238,8 @@
       if (hasST) gsap.registerPlugin(ScrollTrigger);
 
       // 1) Hero headline — each word rises from below, 0.08s stagger, after 300ms
-      gsap.to('.h1-word', {
-        y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.08, delay: 0.3,
+      gsap.fromTo('.h1-word', { y: 40 }, {
+        y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.08, delay: 0.3,
         onComplete: () => document.querySelectorAll('.h1-word').forEach(w => { w.style.willChange = 'auto'; })
       });
       // Failsafe: never let the headline stay hidden if the ticker stalls

@@ -362,6 +362,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   padding-bottom: 5rem;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 /* Ambient ink video background */
 .hero-video-wrap {
@@ -373,19 +374,23 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 }
 .hero-video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  /* JS sizes this to (wrapHeight x wrapWidth); after the -90deg rotation the ink
+     flows right -> left and fills the hero. Viewport units are the no-JS fallback. */
+  width: 100vh;
+  height: 100vw;
   object-fit: cover;
-  /* Recolour the blue ink to warm gold + drop the white background via multiply */
-  mix-blend-mode: multiply;
-  filter: grayscale(1) sepia(0.92) saturate(1.5) brightness(1.12) contrast(1.02);
+  transform: translate(-50%, -50%) rotate(-90deg) scale(1.06);
+  transform-origin: center;
+  /* keep the original blue, just a touch richer */
+  filter: saturate(1.06) contrast(1.03);
 }
 .hero-video-overlay {
   position: absolute;
   inset: 0;
-  /* Warm legibility veil — video flows beneath, all text stays crisp */
-  background: rgba(250, 248, 244, 0.78);
+  /* lighter veil so the blue reads through; the headline stays legible via mix-blend */
+  background: rgba(250, 248, 244, 0.55);
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-video-wrap { display: none; }
@@ -396,9 +401,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   gap: 4rem;
   align-items: center;
   position: relative;
-  z-index: 2;
 }
-.hero-left { position: relative; z-index: 2; max-width: 760px; }
+.hero-left { position: relative; max-width: 760px; }
 
 /* Staggered entrance */
 @media (prefers-reduced-motion: no-preference) {
@@ -439,8 +443,11 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   font-family: var(--ff-display);
   font-weight: 700;
   font-size: clamp(48px, 6.5vw, 86px);
-  line-height: 0.98;
-  color: var(--ink);
+  line-height: 1.04;
+  /* White + difference: letters auto-invert against whatever ink passes behind —
+     near-black over pale paper, light over the dark blue plume. Always legible. */
+  color: #ffffff;
+  mix-blend-mode: difference;
   margin-bottom: 1rem;
   letter-spacing: -0.01em;
 }
@@ -1135,11 +1142,15 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
    ═══════════════════════════════════════════════════════════════ */
 
 /* Hero headline word-rise (GSAP animates; CSS only pre-hides for JS-capable, motion-OK browsers) */
-.hero-h1 { line-height: 1.02; }
 .hero-h1 .h1-line { display: block; }
 .hero-h1 .h1-word { display: inline-block; will-change: transform; }
+/* word-rise uses transform only (no opacity) so the difference-blend never strands the headline */
 @media (prefers-reduced-motion: no-preference) {
-  .js .hero-h1 .h1-word { opacity: 0; transform: translateY(40px); }
+  .js .hero-h1 .h1-word { transform: translateY(40px); }
+}
+/* legibility insurance for hero body text over the now-visible ink */
+.hero-name, .hero-bio, .hero-stats, .hero-word-row, .hero-scroll-hint {
+  text-shadow: 0 1px 12px rgba(250, 248, 244, 0.85), 0 0 2px rgba(250, 248, 244, 0.6);
 }
 
 /* Ambient film grain — felt, not seen */
