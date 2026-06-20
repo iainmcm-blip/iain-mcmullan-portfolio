@@ -445,10 +445,13 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 .hero-name {
   font-family: var(--ff-body);
   font-weight: 500;
-  font-size: 12px;
+  font-size: clamp(18px, 2.2vw, 24px);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--gold);
+  /* Same adaptive treatment as the headline: near-black over the pale paper,
+     light over the dark ink plume. */
+  color: #ffffff;
+  mix-blend-mode: difference;
   margin-bottom: 1rem;
 }
 .hero-h1 {
@@ -1131,8 +1134,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
      blended headline can fail to a stuck white (layer promotion / blocked autoplay /
      reduced-motion). So on small screens drop the adaptive blend entirely: solid text
      on a more heavily veiled, subtle ink. */
-  .hero-h1, .hero-word-row, .hero-bio, .hero-stats { mix-blend-mode: normal; }
+  .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-stats { mix-blend-mode: normal; }
   .hero-h1  { color: var(--ink); }
+  .hero-name { color: var(--gold); }
   .hero-word-row { color: var(--gold); }
   .hero-bio { color: var(--ink); }
   .hero-stats { color: var(--ink); }
@@ -1207,7 +1211,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .js .hero-h1 .h1-word { transform: translateY(40px); }
 }
 /* legibility insurance for hero body text over the now-visible ink */
-.hero-name, .hero-scroll-hint {
+.hero-scroll-hint {
   text-shadow: 0 1px 12px rgba(250, 248, 244, 0.85), 0 0 2px rgba(250, 248, 244, 0.6);
 }
 
