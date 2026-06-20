@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience | Iain McMullan</title>
+<meta name="description" content="Iain McMullan's professional journey — 20+ years across Motion, Bonsey Jaden, The Emirates Group, AIA, Go/React and M&C Saatchi.">
+<link rel="canonical" href="https://www.iainmcmullan.com/experience.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Experience | Iain McMullan">
+<meta property="og:description" content="20+ years of brand, marketing and loyalty leadership across aviation, finance and hospitality.">
+<meta property="og:url" content="https://www.iainmcmullan.com/experience.html">
+<meta property="og:image" content="https://www.iainmcmullan.com/assets/img/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#FAFAF8">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C4922A'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23FAFAF8' text-anchor='middle'%3EIM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/portfolio.css">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* ── EXPERIENCE PAGE ─────────────────────────────────────── */
+.exp-page { padding-top: var(--nav-h); }
+.exp-header { padding-top: 4rem; padding-bottom: 2.5rem; max-width: var(--maxw); }
+.exp-header .section-label { display: block; margin-bottom: 0.75rem; }
+.exp-intro { margin-top: 1rem; max-width: 620px; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-mid); }
+
+.exp-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) 1fr;
+  gap: 3.5rem;
+  align-items: start;
+  padding-bottom: 6rem;
+}
+
+/* LEFT — sticky vertical timeline rail */
+.exp-rail { position: sticky; top: calc(var(--nav-h) + 1.5rem); align-self: start; }
+.exp-timeline { list-style: none; position: relative; margin: 0; padding: 0 0 0 4.5rem; }
+.exp-spine {
+  position: absolute; left: 27px; top: 8px; bottom: 8px; width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-mid) 85%, transparent);
+  z-index: 0;
+}
+.exp-tl-item {
+  position: relative; z-index: 1; padding-bottom: 1.75rem; cursor: pointer;
+  opacity: 0.5; transition: opacity 0.3s ease;
+}
+.exp-tl-item:last-child { padding-bottom: 0; }
+.exp-tl-item.active { opacity: 1; }
+.exp-tl-dot {
+  position: absolute; left: -4.5rem; top: -2px; width: 54px; height: 54px;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--divider);
+  box-shadow: var(--shadow-card); display: flex; align-items: center; justify-content: center;
+  overflow: hidden; padding: 6px; transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.exp-tl-dot img { width: 100%; height: 100%; object-fit: contain; }
+.exp-tl-item.active .exp-tl-dot { border-color: var(--gold); transform: scale(1.06); }
+.exp-tl-date { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); margin: 0 0 0.15rem; }
+.exp-tl-role { font-family: var(--ff-body); font-weight: 500; font-size: 0.95rem; color: var(--ink); margin: 0; line-height: 1.3; }
+.exp-tl-co { font-size: 0.85rem; color: var(--ink-mid); margin: 0.1rem 0 0; }
+
+/* RIGHT — role rows with collapsible bullets */
+.exp-panels { display: flex; flex-direction: column; gap: 0.875rem; }
+.exp-row {
+  background: var(--surface); border: 1px solid var(--divider); border-radius: 14px;
+  box-shadow: var(--shadow-card); overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.exp-row.active { border-color: var(--gold-mid); box-shadow: var(--shadow-hover); }
+.exp-row-head {
+  width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+  display: grid; grid-template-columns: 32px 1fr auto; align-items: center; gap: 0.875rem 1rem;
+  padding: 1.4rem 1.6rem; font-family: var(--ff-body);
+}
+.exp-row-logo { width: 32px; height: 32px; object-fit: contain; border-radius: 6px; }
+.exp-row-titles { grid-column: 2; min-width: 0; }
+.exp-row-role { display: block; font-weight: 500; font-size: 1.05rem; color: var(--ink); line-height: 1.25; }
+.exp-row-co { display: block; font-size: 0.85rem; color: var(--gold-dark); margin-top: 0.15rem; font-weight: 500; }
+.exp-row-date { grid-column: 3; font-size: 0.78rem; color: var(--ink-mid); white-space: nowrap; letter-spacing: 0.03em; }
+.exp-row-chevron {
+  grid-column: 3; grid-row: 2; justify-self: end; width: 22px; height: 22px; position: relative;
+  display: none;
+}
+.exp-row-chevron::before, .exp-row-chevron::after {
+  content: ''; position: absolute; top: 50%; left: 50%; width: 11px; height: 2px; background: var(--gold);
+  transform: translate(-50%, -50%); transition: transform 0.35s ease;
+}
+.exp-row-chevron::after { transform: translate(-50%, -50%) rotate(90deg); }
+.exp-row.active .exp-row-chevron::after { transform: translate(-50%, -50%) rotate(0deg); }
+
+/* collapse / expand via grid-rows trick */
+.exp-row-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s cubic-bezier(0.22,1,0.36,1); }
+.exp-row.active .exp-row-body { grid-template-rows: 1fr; }
+.exp-row-body-inner { overflow: hidden; min-height: 0; }
+.exp-row-content { padding: 0 1.6rem 1.6rem 1.6rem; }
+.exp-row-intro { margin: 0 0 1rem; font-size: 0.95rem; line-height: 1.6; color: var(--ink-mid); border-top: 1px solid var(--divider); padding-top: 1.1rem; }
+.exp-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.exp-bullets li {
+  position: relative; padding-left: 1.5rem; font-size: 0.95rem; line-height: 1.55; color: var(--ink);
+}
+.exp-bullets li::before {
+  content: ''; position: absolute; left: 0; top: 0.55rem; width: 6px; height: 6px;
+  border-radius: 50%; background: var(--gold);
+}
+/* bullets cascade top -> bottom when the row is active */
+@media (prefers-reduced-motion: no-preference) {
+  .exp-bullets li { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .exp-row.active .exp-bullets li { opacity: 1; transform: none; }
+  .exp-row.active .exp-bullets li:nth-child(1) { transition-delay: 0.10s; }
+  .exp-row.active .exp-bullets li:nth-child(2) { transition-delay: 0.18s; }
+  .exp-row.active .exp-bullets li:nth-child(3) { transition-delay: 0.26s; }
+  .exp-row.active .exp-bullets li:nth-child(4) { transition-delay: 0.34s; }
+  .exp-row.active .exp-bullets li:nth-child(5) { transition-delay: 0.42s; }
+  .exp-row.active .exp-bullets li:nth-child(6) { transition-delay: 0.50s; }
+  .exp-row.active .exp-bullets li:nth-child(7) { transition-delay: 0.58s; }
+}
+
+.exp-back { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 2.5rem; font-size: 0.9rem; color: var(--ink-mid); transition: color 0.2s; }
+.exp-back:hover { color: var(--gold); }
+
+@media (max-width: 900px) {
+  .exp-layout { grid-template-columns: 1fr; gap: 0; }
+  .exp-rail { display: none; }            /* logos live in each row header on mobile */
+  .exp-row-chevron { display: block; }
+  .exp-header { padding-top: 2.5rem; }
+  .exp-layout { padding-bottom: 4rem; }
+}
+@media (min-width: 901px) {
+  .exp-row-logo { display: none; }        /* logos are shown in the left rail on desktop */
+  .exp-row-head { grid-template-columns: 1fr auto; padding: 1.5rem 1.75rem; }
+  .exp-row-titles { grid-column: 1; }
+  .exp-row-date { grid-column: 2; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ── NAVIGATION ─────────────────────────────────────────── -->
+<nav class="nav scrolled" id="nav" role="navigation" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand" aria-label="Iain McMullan — home">Iain McMullan</a>
+
+    <ul class="nav-links" role="list">
+      <li><a href="index.html#skills">Skills</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="experience.html" class="active">Experience</a></li>
+      <li><a href="index.html#perspectives">Perspectives</a></li>
+      <li><a href="index.html#contact">Let's talk</a></li>
+    </ul>
+
+    <div class="nav-avail">
+      <span class="avail-dot" aria-hidden="true"><span></span><span></span></span>
+      Open to opportunities
+    </div>
+
+    <button class="nav-hamburger" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <a href="index.html#skills">Skills</a>
+  <a href="index.html#work">Work</a>
+  <a href="experience.html">Experience</a>
+  <a href="index.html#perspectives">Perspectives</a>
+  <a href="index.html#contact">Let's talk</a>
+</div>
+
+<main id="main" class="exp-page">
+
+  <header class="exp-header container">
+    <span class="section-label">Career</span>
+    <h1 class="display-heading display-lg">Professional journey.</h1>
+    <p class="exp-intro">Twenty years of brand, marketing and loyalty leadership across aviation, finance and hospitality. Hover a role to see what I delivered there.</p>
+  </header>
+
+  <div class="exp-layout container">
+
+    <!-- LEFT: sticky timeline rail -->
+    <aside class="exp-rail" aria-label="Career timeline">
+      <ol class="exp-timeline">
+        <span class="exp-spine" aria-hidden="true"></span>
+
+        <li class="exp-tl-item active" data-role="0" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/motion-logo.jpg" alt="Motion: For Impact"></span>
+          <p class="exp-tl-date">Aug 2023 &ndash; Present</p>
+          <p class="exp-tl-role">Head of Strategy &amp; Communications</p>
+          <p class="exp-tl-co">Motion: For Impact</p>
+        </li>
+
+        <li class="exp-tl-item" data-role="1" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/bj-logo.jpg" alt="Bonsey Jaden"></span>
+          <p class="exp-tl-date">Jan 2022 &ndash; May 2023</p>
+          <p class="exp-tl-role">Group Head of Operations</p>
+          <p class="exp-tl-co">Bonsey Jaden</p>
+        </li>
+
+        <li class="exp-tl-item" data-role="2" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/bj-logo.jpg" alt="Bonsey Jaden"></span>
+          <p class="exp-tl-date">Jun 2019 &ndash; Dec 2021</p>
+          <p class="exp-tl-role">Group Head of Business</p>
+          <p class="exp-tl-co">Bonsey Jaden</p>
+        </li>
+
+        <li class="exp-tl-item" data-role="3" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/emirates-logo.jpg" alt="The Emirates Group"></span>
+          <p class="exp-tl-date">Aug 2011 &ndash; May 2019</p>
+          <p class="exp-tl-role">Advertising Manager &ndash; Emirates Skywards, Group Marketing, Employer Brand &amp; Recruitment</p>
+          <p class="exp-tl-co">The Emirates Group</p>
+        </li>
+
+        <li class="exp-tl-item" data-role="4" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/aia-logo.jpg" alt="AIA"></span>
+          <p class="exp-tl-date">Dec 2009 &ndash; Aug 2011</p>
+          <p class="exp-tl-role">Communications Manager</p>
+          <p class="exp-tl-co">AIA Singapore</p>
+        </li>
+
+        <li class="exp-tl-item" data-role="5" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/go-react-logo.jpg" alt="Go/React"></span>
+          <p class="exp-tl-date">Jun 2008 &ndash; Dec 2009</p>
+          <p class="exp-tl-role">Relationship Manager</p>
+          <p class="exp-tl-co">Go/React</p>
+        </li>
+
+        <li class="exp-tl-item" data-role="6" tabindex="0">
+          <span class="exp-tl-dot"><img src="assets/img/m-amp-c-saatchi-logo.jpg" alt="M&C Saatchi"></span>
+          <p class="exp-tl-date">Apr 2005 &ndash; Jun 2008</p>
+          <p class="exp-tl-role">Account Manager</p>
+          <p class="exp-tl-co">M&amp;C Saatchi</p>
+        </li>
+
+      </ol>
+    </aside>
+
+    <!-- RIGHT: role rows with collapsible bullets -->
+    <div class="exp-panels">
+
+      <article class="exp-row active" data-role="0">
+        <button class="exp-row-head" aria-expanded="true">
+          <img class="exp-row-logo" src="assets/img/motion-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Head of Strategy &amp; Communications</span>
+            <span class="exp-row-co">Motion: For Impact</span>
+          </span>
+          <span class="exp-row-date">Aug 2023 &ndash; Present</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">Led a 20+ person team to deliver purpose-led brand experiences for leading regional clients, tightly managing budgets and relationships across client, partner and commercial stakeholders.</p>
+          <ul class="exp-bullets">
+            <li>Elevated Hilton's Asia Pacific GM Conference brand equity to its highest-ever internal ratings, directing end-to-end creative direction, messaging consistency and omni-channel communications across app, email, surveys and on-site experience.</li>
+            <li>Tripled RQAM's LinkedIn engagement and follower base through a content-led visual identity revamp aligned with corporate purpose and brand positioning.</li>
+            <li>Launched UOB's "Right By You" exhibition, developing all storytelling content and aligning historical brand values with modern consumer narratives for a March 2025 public debut.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="exp-row" data-role="1">
+        <button class="exp-row-head" aria-expanded="false">
+          <img class="exp-row-logo" src="assets/img/bj-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Group Head of Operations</span>
+            <span class="exp-row-co">Bonsey Jaden</span>
+          </span>
+          <span class="exp-row-date">Jan 2022 &ndash; May 2023</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">Oversaw operational, budget and client service delivery across 160+ staff in 6 Southeast Asian markets.</p>
+          <ul class="exp-bullets">
+            <li>Increased average client profitability by 30%, measured by agency gross margins, by streamlining workflows, restructuring teams and coaching client service leads.</li>
+            <li>Improved Malaysia Airlines' campaign output and brand consistency, supervising the creative development of their 2022 brand film aligned with national tourism and aviation narratives.</li>
+            <li>Led senior-level media and crisis communication alignment, establishing cross-market ops reviews and stakeholder feedback loops with GMs and regional clients.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="exp-row" data-role="2">
+        <button class="exp-row-head" aria-expanded="false">
+          <img class="exp-row-logo" src="assets/img/bj-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Group Head of Business</span>
+            <span class="exp-row-co">Bonsey Jaden</span>
+          </span>
+          <span class="exp-row-date">Jun 2019 &ndash; Dec 2021</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">Directed client growth and cross-border strategy for major regional accounts.</p>
+          <ul class="exp-bullets">
+            <li>Increased AHC Skincare's account profitability by 60% (year-on-year revenue growth) by aligning integrated brand campaigns with audience segmentation insights and full-funnel messaging.</li>
+            <li>Drove brand preference for clients such as Apple Fox, Dole and Cetaphil through creative storytelling campaigns, winning pitches that expanded account revenue.</li>
+            <li>Strengthened regional client reputation through clear communication narratives across SEA, driving operational alignment across multi-market brand executions.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="exp-row" data-role="3">
+        <button class="exp-row-head" aria-expanded="false">
+          <img class="exp-row-logo" src="assets/img/emirates-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Advertising Manager &ndash; Emirates Skywards, Group Marketing, Employer Brand &amp; Recruitment</span>
+            <span class="exp-row-co">The Emirates Group</span>
+          </span>
+          <span class="exp-row-date">Aug 2011 &ndash; May 2019</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">Owned global communications and product marketing for the Emirates Skywards Frequent Flyer Programme, alongside group brand campaigns, the Emirates Flight Training Academy launch and global recruitment.</p>
+          <ul class="exp-bullets">
+            <li>Directed end-to-end, full-funnel integrated global communications and product marketing for Emirates Skywards, driving membership growth from 8M to 20M+ globally while enhancing partner-led member value, benefits and retention.</li>
+            <li>Led multi-channel launch campaigns for the Cash+Miles product and Business Rewards refresh, generating over USD 2 million in incremental revenue within 6 months and a 50% jump in the active member base.</li>
+            <li>Owned partner-led loyalty campaigns end to end, partnering with airline, financial and commercial partners to deliver joint campaigns, co-branded offers and shared reward structures aligned to commercial agreements.</li>
+            <li>Created the full brand identity and go-to-market strategy for the Emirates Flight Training Academy, achieving a 100% cadet cohort fill rate within 2 months of launch.</li>
+            <li>Led global recruitment campaigns for airline crew, pilots, engineering, dnata and university programmes, expanding the year-on-year talent pipeline.</li>
+            <li>Developed campaigns that lifted online sales by 35% and grew Emirates Skywards members' contribution to total airline revenue from 41% to over 45%.</li>
+            <li>Directed integrated campaigns across South America and Africa with 6 creative and 2 media agencies, delivering on time and on budget for an average 20% year-on-year sales increase.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="exp-row" data-role="4">
+        <button class="exp-row-head" aria-expanded="false">
+          <img class="exp-row-logo" src="assets/img/aia-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Communications Manager</span>
+            <span class="exp-row-co">AIA Singapore</span>
+          </span>
+          <span class="exp-row-date">Dec 2009 &ndash; Aug 2011</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">Drove commercial revenue through university partnerships and digital campaigns, managing the dedicated budget.</p>
+          <ul class="exp-bullets">
+            <li>Exceeded youth-segment sales targets by launching data-driven microsite campaigns for university markets, managing 3 agencies and aligning messaging with market-specific personas.</li>
+            <li>Strengthened brand credibility in educational partnerships through integrated digital campaigns focused on insurance product adoption.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="exp-row" data-role="5">
+        <button class="exp-row-head" aria-expanded="false">
+          <img class="exp-row-logo" src="assets/img/go-react-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Relationship Manager</span>
+            <span class="exp-row-co">Go/React</span>
+          </span>
+          <span class="exp-row-date">Jun 2008 &ndash; Dec 2009</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">Worked with the Managing Director on business process reorganisation, CRM programmes, data and contact strategy, integrated campaigns, email marketing and SEO.</p>
+          <ul class="exp-bullets">
+            <li>Increased Microsoft event turnout across 5 markets by 40% with integrated campaigns for the Windows Live product launch, leveraging CRM and SEO.</li>
+            <li>Strengthened Qantas' regional presence, expanding account revenue by 25% via tailored messaging and loyalty campaign support.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+      <article class="exp-row" data-role="6">
+        <button class="exp-row-head" aria-expanded="false">
+          <img class="exp-row-logo" src="assets/img/m-amp-c-saatchi-logo.jpg" alt="">
+          <span class="exp-row-titles">
+            <span class="exp-row-role">Account Manager</span>
+            <span class="exp-row-co">M&amp;C Saatchi</span>
+          </span>
+          <span class="exp-row-date">Apr 2005 &ndash; Jun 2008</span>
+          <span class="exp-row-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="exp-row-body"><div class="exp-row-body-inner"><div class="exp-row-content">
+          <p class="exp-row-intro">My introduction to advertising and agency life in Asia, working closely with creative teams, planners and clients.</p>
+          <ul class="exp-bullets">
+            <li>Developed creative briefs, supported new-business pitching and the Regional Strategic Planning Director and CEO, and managed campaign development, execution and client relationships.</li>
+            <li>Built client relationships strong enough that when M&amp;C Saatchi closed, the Qantas account followed me to my next agency.</li>
+            <li>Developed regional brand and tactical campaigns for Pan Pacific Hotels &amp; Resorts, InterContinental Hotels, British Airways, Qantas, Australian Tourism, Ford, Peugeot and Land Rover.</li>
+          </ul>
+        </div></div></div>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <a href="index.html" class="exp-back">&larr; Back to home</a>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ──────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="footer-brand">Iain McMullan</span>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="https://www.linkedin.com/in/iainmcmullan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="index.html#work">Case Studies</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 Iain McMullan</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* mobile menu (mirrors portfolio.js) */
+  var menuBtn = document.getElementById('menu-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener('click', function () {
+      var open = mobileMenu.classList.toggle('open');
+      menuBtn.classList.toggle('open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    mobileMenu.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobileMenu.classList.remove('open');
+        menuBtn.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  /* experience: synced left timeline + right rows */
+  var items = Array.prototype.slice.call(document.querySelectorAll('.exp-tl-item'));
+  var rows  = Array.prototype.slice.call(document.querySelectorAll('.exp-row'));
+  var isDesktop = function () { return window.matchMedia('(min-width: 901px)').matches; };
+
+  function setActive(i) {
+    items.forEach(function (el, n) { el.classList.toggle('active', n === i); });
+    rows.forEach(function (el, n) {
+      var on = n === i;
+      el.classList.toggle('active', on);
+      var head = el.querySelector('.exp-row-head');
+      if (head) head.setAttribute('aria-expanded', String(on));
+    });
+  }
+  function collapseAll() {
+    items.forEach(function (el) { el.classList.remove('active'); });
+    rows.forEach(function (el) {
+      el.classList.remove('active');
+      var head = el.querySelector('.exp-row-head');
+      if (head) head.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  // desktop: hovering a timeline item or a row switches the open role
+  items.forEach(function (el) {
+    var i = parseInt(el.getAttribute('data-role'), 10);
+    el.addEventListener('mouseenter', function () { if (isDesktop()) setActive(i); });
+    el.addEventListener('focus', function () { setActive(i); });
+    el.addEventListener('click', function () { setActive(i); });
+  });
+  rows.forEach(function (el) {
+    var i = parseInt(el.getAttribute('data-role'), 10);
+    el.addEventListener('mouseenter', function () { if (isDesktop()) setActive(i); });
+    var head = el.querySelector('.exp-row-head');
+    if (head) head.addEventListener('click', function () {
+      // tap/click toggles (single-open accordion)
+      if (el.classList.contains('active')) { collapseAll(); } else { setActive(i); }
+    });
+  });
+
+  // default: first role open
+  setActive(0);
+})();
+</script>
+</body>
+</html>
