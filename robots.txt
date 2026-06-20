@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iainmcmullan.com/sitemap.xml
+Sitemap: https://www.iainmcmullan.com/sitemap.xml
