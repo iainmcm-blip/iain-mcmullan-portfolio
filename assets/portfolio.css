@@ -363,6 +363,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  /* opaque backdrop INSIDE the isolated context so the difference-blend always has
+     something to invert against (e.g. when reduced-motion hides the video) */
+  background: var(--bg);
 }
 /* Ambient ink video background */
 .hero-video-wrap {
@@ -863,6 +866,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   justify-content: center;
   overflow: hidden;
   padding: 6px;
+  z-index: 2;          /* sit above the gold spine so the logos aren't crossed by the line */
 }
 .timeline-dot img {
   width: 100%;
@@ -1122,15 +1126,25 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .hero-grid {
     grid-template-columns: 1fr;
   }
-  /* Single-column: keep the vertical gradient but veil a little more than desktop,
-     since the text spans full width (avoids busy two-tone over the long bio). */
+  /* Mobile GPUs flicker on mix-blend-mode over a transformed/playing video, and the
+     blended headline can fail to a stuck white (layer promotion / blocked autoplay /
+     reduced-motion). So on small screens drop the adaptive blend entirely: solid text
+     on a more heavily veiled, subtle ink. */
+  .hero-h1, .hero-word-row, .hero-bio, .hero-stats { mix-blend-mode: normal; }
+  .hero-h1  { color: var(--ink); }
+  .hero-word-row { color: var(--gold); }
+  .hero-bio { color: var(--ink); }
+  .hero-stats { color: var(--ink); }
+  .stat-label { color: var(--ink-mid); }
+  .hero-bio, .hero-stats, .hero-word-row {
+    text-shadow: 0 1px 10px rgba(250, 248, 244, 0.92), 0 0 3px rgba(250, 248, 244, 0.7);
+  }
   .hero-video-overlay {
     background: linear-gradient(to bottom,
-      rgba(250, 248, 244, 0.82) 0%,
-      rgba(250, 248, 244, 0.42) 19%,
-      rgba(250, 248, 244, 0.60) 40%,
-      rgba(250, 248, 244, 0.64) 66%,
-      rgba(250, 248, 244, 0.82) 100%);
+      rgba(250, 248, 244, 0.80) 0%,
+      rgba(250, 248, 244, 0.66) 32%,
+      rgba(250, 248, 244, 0.70) 62%,
+      rgba(250, 248, 244, 0.84) 100%);
   }
   .principle-grid { grid-template-columns: repeat(2, 1fr); }
   .persp-grid { grid-template-columns: 1fr; }
@@ -1159,6 +1173,12 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .persp-art { aspect-ratio: 16 / 6; }
   /* roomier tap targets, full-width primary CTA */
   .hero-ctas { gap: 0.75rem; }
+
+  /* Mobile browsers can drop the animated marquee content when it's masked
+     (mask-image + transform compositing bug). Remove the mask and lift opacity so
+     the brand logos are reliably visible. */
+  .marquee-outer { -webkit-mask-image: none; mask-image: none; }
+  .marquee-logo { filter: grayscale(1) opacity(0.78); }
 }
 
 @media (max-width: 480px) {
