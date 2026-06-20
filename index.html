@@ -22,6 +22,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/portfolio.css">
+<!-- progressive-enhancement flag: only JS-capable browsers get the pre-animation hidden states -->
+<script>document.documentElement.classList.add('js');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -93,15 +95,15 @@
      ═══════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-  <!-- Ambient ink background (recoloured to gold, multiply-blended onto paper) -->
+  <!-- Full-bleed ambient ink video (recoloured warm gold) + warm legibility overlay -->
   <div class="hero-video-wrap" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/img/ink-poster.jpg">
-      <source src="assets/video/ink-abstract.mp4" type="video/mp4">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/video/hero-poster.jpg">
+      <source src="assets/video/hero-bg.mp4" type="video/mp4">
     </video>
-    <div class="hero-video-scrim"></div>
+    <div class="hero-video-overlay"></div>
   </div>
 
-  <div class="container" style="width:100%; position:relative; z-index:1;">
+  <div class="container" style="width:100%; position:relative; z-index:2;">
     <div class="hero-grid">
 
       <!-- Left: text column -->
@@ -109,8 +111,9 @@
 
         <p class="hero-name hero-el hero-el-1">Iain McMullan</p>
 
-        <h1 class="hero-h1 hero-el hero-el-2">
-          Senior Brand &amp;<br>Marketing Leader.
+        <h1 class="hero-h1" id="hero-h1" aria-label="Shaping brands for the global stage.">
+          <span class="h1-line"><span class="h1-word">Shaping</span> <span class="h1-word">brands</span> <span class="h1-word">for</span></span>
+          <span class="h1-line"><span class="h1-word">the</span> <span class="h1-word">global</span> <span class="h1-word">stage.</span></span>
         </h1>
 
         <div class="hero-word-row hero-el hero-el-3">
@@ -152,79 +155,6 @@
         </p>
 
       </div><!-- /hero-left -->
-
-      <!-- Right: abstract geometric SVG -->
-      <div class="hero-right">
-        <div class="hero-svg-wrap">
-          <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" class="hero-svg" role="img" aria-label="Abstract geometric illustration representing global brand architecture">
-
-            <!-- Subtle bg circle -->
-            <circle cx="240" cy="240" r="236" fill="#F5F0E8" opacity="0.5"/>
-
-            <!-- Outer dashed ring — rotates slowly -->
-            <g class="svg-ring-outer">
-              <circle cx="240" cy="240" r="218" fill="none" stroke="#C4922A" stroke-width="1" stroke-dasharray="6 5" opacity="0.4"/>
-            </g>
-
-            <!-- Mid dashed ring — counter-rotates -->
-            <g class="svg-ring-mid">
-              <circle cx="240" cy="240" r="170" fill="none" stroke="#C4922A" stroke-width="0.6" stroke-dasharray="3 9" opacity="0.25"/>
-            </g>
-
-            <!-- Globe longitude arcs -->
-            <ellipse cx="240" cy="240" rx="90" ry="130" fill="none" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-            <ellipse cx="240" cy="240" rx="50" ry="130" fill="none" stroke="#C4922A" stroke-width="0.5" opacity="0.12"/>
-
-            <!-- Globe latitude arcs -->
-            <ellipse cx="240" cy="240" rx="130" ry="42" fill="none" stroke="#C4922A" stroke-width="0.5" opacity="0.18" transform="rotate(-12 240 240)"/>
-            <ellipse cx="240" cy="240" rx="110" ry="32" fill="none" stroke="#C4922A" stroke-width="0.5" opacity="0.12" transform="rotate(15 240 240)"/>
-
-            <!-- Inner solid circle -->
-            <circle cx="240" cy="240" r="130" fill="none" stroke="#C4922A" stroke-width="0.7" opacity="0.2"/>
-
-            <!-- Axis cross -->
-            <line x1="30" y1="240" x2="450" y2="240" stroke="#C4922A" stroke-width="0.4" opacity="0.15"/>
-            <line x1="240" y1="30" x2="240" y2="450" stroke="#C4922A" stroke-width="0.4" opacity="0.15"/>
-
-            <!-- 4 primary nodes on outer ring (cardinal positions) -->
-            <g class="svg-float-1">
-              <circle cx="240" cy="22" r="6" fill="#C4922A" opacity="0.75"/>
-              <circle cx="458" cy="240" r="6" fill="#C4922A" opacity="0.75"/>
-              <circle cx="240" cy="458" r="6" fill="#C4922A" opacity="0.55"/>
-              <circle cx="22" cy="240" r="6" fill="#C4922A" opacity="0.55"/>
-            </g>
-
-            <!-- Connection lines between primary nodes -->
-            <line x1="240" y1="22" x2="458" y2="240" stroke="#C4922A" stroke-width="0.8" opacity="0.22"/>
-            <line x1="458" y1="240" x2="240" y2="458" stroke="#C4922A" stroke-width="0.8" opacity="0.22"/>
-            <line x1="240" y1="458" x2="22" y2="240" stroke="#C4922A" stroke-width="0.8" opacity="0.22"/>
-            <line x1="22" y1="240" x2="240" y2="22" stroke="#C4922A" stroke-width="0.8" opacity="0.22"/>
-
-            <!-- 4 secondary nodes at 45° (on the inner circle ~r130) -->
-            <g class="svg-float-2">
-              <circle cx="332" cy="148" r="4.5" fill="#C4922A" opacity="0.55"/>
-              <circle cx="332" cy="332" r="4.5" fill="#C4922A" opacity="0.55"/>
-              <circle cx="148" cy="332" r="3.5" fill="#C4922A" opacity="0.4"/>
-              <circle cx="148" cy="148" r="3.5" fill="#C4922A" opacity="0.4"/>
-            </g>
-
-            <!-- Lines from secondary nodes to nearest primary -->
-            <line x1="332" y1="148" x2="458" y2="240" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-            <line x1="332" y1="148" x2="240" y2="22" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-            <line x1="148" y1="148" x2="22" y2="240" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-            <line x1="148" y1="148" x2="240" y2="22" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-            <line x1="332" y1="332" x2="458" y2="240" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-            <line x1="148" y1="332" x2="22" y2="240" stroke="#C4922A" stroke-width="0.5" opacity="0.18"/>
-
-            <!-- Central focal: soft glow rings + dot -->
-            <circle cx="240" cy="240" r="38" fill="#C4922A" opacity="0.06"/>
-            <circle cx="240" cy="240" r="20" fill="#C4922A" opacity="0.1"/>
-            <circle cx="240" cy="240" r="9" fill="#C4922A" opacity="0.95"/>
-            <circle cx="240" cy="240" r="4" fill="#FAFAF8" opacity="1"/>
-
-          </svg>
-        </div>
-      </div><!-- /hero-right -->
 
     </div><!-- /hero-grid -->
   </div>
@@ -310,6 +240,7 @@
     <div class="marquee-track" aria-hidden="true">
       <!-- First set -->
       <img src="assets/img/emirates-logo.jpg"         alt="Emirates"             class="marquee-logo" loading="lazy">
+      <img src="assets/img/malaysia-airlines-mono.png" alt="Malaysia Airlines"   class="marquee-logo" loading="lazy" style="height:30px">
       <img src="assets/img/aia-logo.jpg"              alt="AIA"                  class="marquee-logo" loading="lazy">
       <img src="assets/img/british-airways.png"       alt="British Airways"      class="marquee-logo" loading="lazy">
       <img src="assets/img/microsoft.png"             alt="Microsoft"            class="marquee-logo" loading="lazy" style="height:36px">
@@ -321,6 +252,7 @@
       <img src="assets/img/ahc.jpg"                   alt="AHC"                  class="marquee-logo" loading="lazy" style="height:36px">
       <!-- Duplicate for seamless loop -->
       <img src="assets/img/emirates-logo.jpg"         alt=""                     class="marquee-logo" loading="lazy" aria-hidden="true">
+      <img src="assets/img/malaysia-airlines-mono.png" alt=""                    class="marquee-logo" loading="lazy" aria-hidden="true" style="height:30px">
       <img src="assets/img/aia-logo.jpg"              alt=""                     class="marquee-logo" loading="lazy" aria-hidden="true">
       <img src="assets/img/british-airways.png"       alt=""                     class="marquee-logo" loading="lazy" aria-hidden="true">
       <img src="assets/img/microsoft.png"             alt=""                     class="marquee-logo" loading="lazy" aria-hidden="true" style="height:36px">
@@ -575,6 +507,7 @@
     </div>
 
     <ol class="timeline-list" aria-label="Career history">
+      <span class="timeline-spine" aria-hidden="true"></span>
 
       <li class="timeline-item reveal-left">
         <span class="timeline-dot">
@@ -673,8 +606,8 @@
         </div>
       </article>
 
-      <!-- Full-width pull quote: spans all columns -->
-      <div class="persp-pull reveal">
+      <!-- Full-width pull quote: spans all columns (chars reveal via GSAP) -->
+      <div class="persp-pull">
         <blockquote>"AI won't replace marketers. It will replace the marketing that was already replaceable."</blockquote>
       </div>
 
@@ -857,6 +790,12 @@
   </div>
 </footer>
 
-<script src="assets/portfolio.js"></script>
+<!-- Ambient film grain (very subtle, non-interactive) -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- GSAP + ScrollTrigger (CDN) — drives hero word-rise, parallax, timeline scrub, pull-quote reveal -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="assets/portfolio.js" defer></script>
 </body>
 </html>

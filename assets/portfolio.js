@@ -195,4 +195,79 @@
     sections.forEach(s => spy.observe(s));
   }
 
+  /* ── GSAP MOTION LAYER ─────────────────────────────────── */
+  // Split the pull quote into per-character spans (needed for reveal + fallback)
+  const pullQuote = document.querySelector('.persp-pull blockquote');
+  if (pullQuote && !pullQuote.querySelector('.char')) {
+    const text = pullQuote.textContent;
+    pullQuote.textContent = '';
+    for (const ch of text) {
+      const s = document.createElement('span');
+      s.className = 'char';
+      s.textContent = ch;
+      pullQuote.appendChild(s);
+    }
+  }
+
+  const showHeroWords = () =>
+    document.querySelectorAll('.h1-word').forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
+  const showPullChars = () =>
+    document.querySelectorAll('.persp-pull .char').forEach(c => { c.style.opacity = '1'; });
+
+  if (reduce || typeof window.gsap === 'undefined') {
+    // No motion / GSAP unavailable — guarantee everything is visible
+    showHeroWords();
+    showPullChars();
+  } else {
+    try {
+      const hasST = typeof window.ScrollTrigger !== 'undefined';
+      if (hasST) gsap.registerPlugin(ScrollTrigger);
+
+      // 1) Hero headline — each word rises from below, 0.08s stagger, after 300ms
+      gsap.to('.h1-word', {
+        y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.08, delay: 0.3,
+        onComplete: () => document.querySelectorAll('.h1-word').forEach(w => { w.style.willChange = 'auto'; })
+      });
+      // Failsafe: never let the headline stay hidden if the ticker stalls
+      setTimeout(showHeroWords, 2500);
+
+      if (hasST) {
+        // 2) Case-study image parallax (moves at ~0.6x within an oversized frame)
+        gsap.utils.toArray('.case-img-wrap img').forEach(img => {
+          const card = img.closest('.case-card');
+          gsap.fromTo(img, { yPercent: -14 }, {
+            yPercent: -4, ease: 'none',
+            scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: true }
+          });
+        });
+
+        // 3) Career-timeline gold spine draws downward as you scroll the section
+        const spine = document.querySelector('.timeline-spine');
+        if (spine) {
+          gsap.fromTo(spine, { scaleY: 0 }, {
+            scaleY: 1, ease: 'none', transformOrigin: 'top center',
+            scrollTrigger: { trigger: '.timeline-list', start: 'top 78%', end: 'bottom 82%', scrub: 1 }
+          });
+        }
+
+        // 4) Perspectives pull quote — characters fade in on entry
+        const chars = document.querySelectorAll('.persp-pull .char');
+        if (chars.length) {
+          gsap.to(chars, {
+            opacity: 1, duration: 0.012, stagger: 0.016, ease: 'none',
+            scrollTrigger: { trigger: '.persp-pull', start: 'top 82%' }
+          });
+        }
+
+        ScrollTrigger.refresh();
+      } else {
+        showPullChars(); // ScrollTrigger missing — reveal scroll-gated content
+      }
+    } catch (err) {
+      // Any GSAP failure must never strand content hidden
+      showHeroWords();
+      showPullChars();
+    }
+  }
+
 })();
