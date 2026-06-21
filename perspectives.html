@@ -29,6 +29,36 @@
 .pf-back { display: inline-flex; align-items: center; gap: 0.4rem; margin: 3rem 0 0; font-size: 0.9rem; color: var(--ink-mid); transition: color 0.2s; }
 .pf-back:hover { color: var(--gold); }
 @media (max-width: 768px) { .pf-header { padding-top: 2.5rem; } }
+
+/* ── Expanding article tiles ─────────────────────────────────── */
+.persp-card { cursor: pointer; }
+.persp-card.is-open { cursor: default; }
+.persp-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+/* Article collapsed via 0fr rows — instant (no height transition) so FLIP measures true layout */
+.persp-article { display: grid; grid-template-rows: 0fr; }
+.persp-article-inner { overflow: hidden; min-height: 0; }
+.persp-article-content { padding: 0 1.5rem 1.75rem; }
+.persp-article-content p { font-size: 0.95rem; line-height: 1.7; color: var(--ink-mid); margin-bottom: 1rem; }
+.persp-draft-note { font-size: 0.8rem; font-style: italic; color: var(--gold-dark); }
+
+.persp-card.is-open { grid-column: 1 / -1; }
+.persp-card.is-open:hover { transform: none; }
+.persp-card.is-open .persp-article { grid-template-rows: 1fr; }
+.persp-card.is-open .persp-art { aspect-ratio: auto; height: 200px; }
+.persp-card.is-open .persp-body,
+.persp-card.is-open .persp-article-content { max-width: 720px; margin-inline: auto; width: 100%; }
+.persp-card.is-open .persp-body { padding-top: 2rem; }
+.persp-card.is-open .persp-title { font-size: clamp(24px, 3vw, 34px); }
+
+.persp-collapse {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  margin-top: 0.75rem; padding: 0.6rem 1.4rem;
+  border: 1.5px solid var(--divider); border-radius: var(--radius-pill);
+  font-family: var(--ff-body); font-weight: 500; font-size: 0.875rem; color: var(--ink);
+  background: transparent; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease;
+}
+.persp-collapse:hover { border-color: var(--gold); color: var(--gold); }
 </style>
 </head>
 <body>
@@ -93,6 +123,16 @@
             <h3 class="persp-title">Loyalty isn't a points programme.</h3>
             <p class="persp-text">The brands that win treat loyalty as a relationship, not a transaction. Scaling Skywards past 20 million members, and launching My Family, taught me the real lever is emotional, not mathematical.</p>
           </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>Most loyalty programmes are discount schemes wearing a nicer logo. They buy a transaction, then wonder why the relationship never deepens.</p>
+                <p>The brands that win start from the other end. They ask what would make a member feel recognised rather than simply rewarded, and build the mechanics in service of that feeling. Points are the plumbing. Belonging is the product.</p>
+                <p class="persp-draft-note">Placeholder body. Full article to come.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
+          </div>
         </article>
 
         <!-- Card 2 -->
@@ -106,6 +146,16 @@
             <span class="persp-tag">AI &amp; Craft</span>
             <h3 class="persp-title">AI won't replace marketers.</h3>
             <p class="persp-text">It will replace the marketing that was already replaceable. The leaders who thrive pair machine speed with human taste, using AI to reach the good idea faster, not to skip having one.</p>
+          </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>Every wave of automation removes the work that was already commoditised. AI is doing it faster and across more of the funnel, which is why the nervous people are usually the ones whose output was replaceable to begin with.</p>
+                <p>The leaders who thrive treat AI as a way to reach the good idea faster, not as a substitute for having one. Machine speed, human taste. The taste is still the job.</p>
+                <p class="persp-draft-note">Placeholder body. Full article to come.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -121,6 +171,16 @@
             <h3 class="persp-title">It's a false choice.</h3>
             <p class="persp-text">Across aviation, finance and hospitality I've watched teams burn budget defending brand against performance. The job is to build brands that also convert, and to measure both honestly.</p>
           </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>The brand-versus-performance debate is mostly a budgeting argument dressed up as a philosophy. Each side defends its line item by insisting the other doesn't work.</p>
+                <p>The honest answer is that brands which convert are built deliberately, measured properly, and judged on both the short and the long number. The job is not to pick a side. It is to refuse the false choice.</p>
+                <p class="persp-draft-note">Placeholder body. Full article to come.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
+          </div>
         </article>
 
         <!-- Card 4 — placeholder -->
@@ -134,6 +194,15 @@
             <span class="persp-tag">Leadership</span>
             <h3 class="persp-title">Culture is built in the edits.</h3>
             <p class="persp-text">[Placeholder] A short piece on how the small, repeated decisions, what gets praised, what gets cut, shape a team far more than any values deck. Full article to come.</p>
+          </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>[Placeholder] Culture is not the poster in the lobby or the values on the careers page. It is the sum of what gets praised and what gets quietly cut in the day-to-day edits.</p>
+                <p>[Placeholder] This piece will look at how small, repeated decisions shape a team far more than any offsite or framework. Full article to come.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -149,6 +218,15 @@
             <h3 class="persp-title">An event is a brand, compressed.</h3>
             <p class="persp-text">[Placeholder] What live experiences teach you about clarity, pace and the cost of a weak idea, when there's no second take. Full article to come.</p>
           </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>[Placeholder] A live event is a brand under pressure. There is no second take, no patch, no quiet edit after launch. Everything you believe about the brand has to hold in the room.</p>
+                <p>[Placeholder] This piece will cover what experiential work teaches about clarity, pace and the real cost of a weak idea. Full article to come.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
+          </div>
         </article>
 
         <!-- Card 6 — placeholder -->
@@ -162,6 +240,15 @@
             <span class="persp-tag">Strategy</span>
             <h3 class="persp-title">The brief is a hypothesis.</h3>
             <p class="persp-text">[Placeholder] Why the strongest strategies are written to be tested, not defended, and how to keep a team honest about what the evidence actually says. Full article to come.</p>
+          </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>[Placeholder] The strongest strategies are written to be tested, not defended. They make a clear bet and say plainly what would prove it wrong.</p>
+                <p>[Placeholder] This piece will argue for treating the brief as a hypothesis and keeping the team honest about what the evidence actually says. Full article to come.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
           </div>
         </article>
 
@@ -188,5 +275,106 @@
 </footer>
 
 <script src="assets/portfolio.js" defer></script>
+
+<!-- Expand-in-place article tiles: clicked card spans full width, others reflow (FLIP) -->
+<script>
+(function () {
+  var grid = document.querySelector('.persp-grid');
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.persp-card'));
+  if (!cards.length) return;
+  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var openCard = null;
+
+  function setClosed(card) {
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-expanded', 'false');
+  }
+  function setOpen(card) {
+    card.setAttribute('role', 'group');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-expanded', 'true');
+  }
+
+  cards.forEach(function (card, i) {
+    card.dataset.idx = i;
+    card.style.order = i * 10;
+    setClosed(card);
+    card.addEventListener('click', function (e) {
+      if (card.classList.contains('is-open')) return;     // open: allow text selection
+      if (e.target.closest('.persp-collapse')) return;
+      openTile(card);
+    });
+    card.addEventListener('keydown', function (e) {
+      if (card.classList.contains('is-open')) return;
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openTile(card); }
+    });
+    var btn = card.querySelector('.persp-collapse');
+    if (btn) btn.addEventListener('click', function (e) { e.stopPropagation(); closeTile(card); });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && openCard) closeTile(openCard);
+  });
+
+  function colCount() {
+    var top = cards[0].getBoundingClientRect().top, n = 0;
+    for (var i = 0; i < cards.length; i++) {
+      if (Math.abs(cards[i].getBoundingClientRect().top - top) < 4) n++; else break;
+    }
+    return Math.max(1, n);
+  }
+
+  var flipAnims = [];
+  function flip(mutate) {
+    // Web Animations API: animates from the inverted offset back to natural and
+    // auto-reverts (fill: none) — no leftover inline transforms to get stuck.
+    if (reduceMQ.matches || !cards[0].animate) { mutate(); return; }
+    flipAnims.forEach(function (a) { try { a.cancel(); } catch (e) {} });   // settle any in-flight run first
+    flipAnims = [];
+    var first = cards.map(function (c) { return c.getBoundingClientRect(); });
+    mutate();
+    cards.forEach(function (c, i) {
+      var last = c.getBoundingClientRect();
+      var dx = first[i].left - last.left;
+      var dy = first[i].top - last.top;
+      if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
+      flipAnims.push(c.animate(
+        [{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0px,0px)' }],
+        { duration: 500, easing: 'cubic-bezier(0.22,1,0.36,1)' }
+      ));
+    });
+  }
+
+  function openTile(card) {
+    var cols = colCount();
+    var rowStart = Math.floor(parseInt(card.dataset.idx, 10) / cols) * cols;
+    var prev = openCard;
+    flip(function () {
+      if (prev && prev !== card) {
+        prev.classList.remove('is-open'); setClosed(prev);
+        prev.style.order = parseInt(prev.dataset.idx, 10) * 10;
+      }
+      card.classList.add('is-open'); setOpen(card);
+      card.style.order = rowStart * 10 - 1;
+    });
+    openCard = card;
+    window.setTimeout(function () {
+      var y = card.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: y, behavior: reduceMQ.matches ? 'auto' : 'smooth' });
+    }, reduceMQ.matches ? 0 : 80);
+  }
+
+  function closeTile(card) {
+    flip(function () {
+      card.classList.remove('is-open'); setClosed(card);
+      card.style.order = parseInt(card.dataset.idx, 10) * 10;
+    });
+    openCard = null;
+    try { card.focus({ preventScroll: true }); } catch (e) { card.focus(); }
+  }
+})();
+</script>
 </body>
 </html>
