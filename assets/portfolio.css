@@ -1193,6 +1193,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 @media (max-width: 480px) {
   :root { --gutter: 1.25rem; }
   .hero-h1 { font-size: 31px; }
+  /* tidy, full-width stacked CTAs on phones */
+  .hero-ctas { flex-direction: column; align-items: stretch; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
   .case-grid { gap: 1.25rem; }
   .cred-grid { grid-template-columns: 1fr; }
   .impact-grid { grid-template-columns: 1fr; }
@@ -1351,10 +1354,11 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 @media (max-width: 768px) {
   .case-strip { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.875rem; padding-bottom: 0.6rem; -webkit-overflow-scrolling: touch; }
   .case-mini { flex: 0 0 64%; scroll-snap-align: start; }
-  .career-strip { gap: 0.4rem; }
-  .career-node-logo { width: 44px; height: 44px; padding: 6px; border-radius: 10px; }
-  .career-strip::before { top: 22px; }
+  .career-strip { gap: 0.3rem; }
+  .career-node-logo { width: 38px; height: 38px; padding: 5px; border-radius: 9px; }
+  .career-strip::before { top: 19px; }
   .career-row { padding: 2.5rem 0; }
+  .career-node-pop { display: none; }   /* no hover on touch; also prevents width overflow */
 }
 
 /* ═══════════════════════════════════════════════════════════════
