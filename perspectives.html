@@ -405,7 +405,7 @@
       if (Math.abs(dx) < 1 && Math.abs(dy) < 1) return;
       flipAnims.push(c.animate(
         [{ transform: 'translate(' + dx + 'px,' + dy + 'px)' }, { transform: 'translate(0px,0px)' }],
-        { duration: 2400, easing: 'cubic-bezier(0.22,1,0.36,1)' }
+        { duration: 1000, easing: 'cubic-bezier(0.22,1,0.36,1)' }
       ));
     });
   }
