@@ -1282,6 +1282,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .skills-grid.active .skill-col:nth-child(3) .skill-list li:nth-child(5) { transition-delay: 1.54s; }
   .skills-grid.active .skill-col:nth-child(3) .skill-list li:nth-child(6) { transition-delay: 1.60s; }
   .skills-grid.active .skill-col:nth-child(3) .skill-list li:nth-child(7) { transition-delay: 1.66s; }
+  .skills-grid.active .skill-col:nth-child(3) .skill-list li:nth-child(8) { transition-delay: 1.72s; }
+  .skills-grid.active .skill-col:nth-child(3) .skill-list li:nth-child(9) { transition-delay: 1.78s; }
 }
 @media (prefers-reduced-motion: reduce) {
   .skill-col, .skill-list li { opacity: 1; transform: none; }
@@ -1355,3 +1357,26 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .career-strip::before { top: 22px; }
   .career-row { padding: 2.5rem 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   V4 ADDITIONS — Career Highlights cards + career-strip heading
+   ═══════════════════════════════════════════════════════════════ */
+
+/* "By the numbers" — career highlight cards */
+.highlights { padding: 5rem 0; }
+.highlights-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2.5rem; }
+.highlight-card { background: var(--surface); border: 1px solid var(--divider); border-radius: var(--radius-md); box-shadow: var(--shadow-card); padding: 1.75rem 1.5rem; transition: box-shadow 0.3s ease, transform 0.3s ease; }
+.highlight-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.highlight-company { font-family: var(--ff-display); font-weight: 700; font-size: 1.4rem; line-height: 1.1; color: var(--ink); margin: 0 0 0.85rem; position: relative; padding-bottom: 0.85rem; }
+.highlight-company::after { content: ''; position: absolute; left: 0; bottom: 0; width: 32px; height: 2px; background: var(--gold); }
+.highlight-desc { font-size: 0.9rem; line-height: 1.55; color: var(--ink-mid); margin: 0; }
+
+@media (max-width: 1024px) { .highlights-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .highlights-grid { grid-template-columns: 1fr; } }
+
+/* career-strip heading block ("My career journey") */
+.career-row-head { text-align: center; margin-bottom: 2.5rem; }
+.career-row-head .section-label { display: block; }
+.career-row-head .display-heading { margin: 0.25rem 0 0.65rem; }
+.career-row-link { display: inline-flex; align-items: center; gap: 0.35rem; color: var(--gold-dark); font-weight: 500; font-size: 0.95rem; transition: gap 0.2s ease, color 0.2s ease; }
+.career-row-link:hover { gap: 0.6rem; color: var(--gold); }
