@@ -374,6 +374,13 @@
     if (e.key === 'Escape' && openCard) closeTile(openCard);
   });
 
+  // Click anywhere outside the cards collapses the open article back to its place.
+  // (Clicking a card opens it / clicking inside an open card is ignored here; the card's
+  // own handlers manage those, and this runs after them in the bubble phase.)
+  document.addEventListener('click', function (e) {
+    if (openCard && !e.target.closest('.persp-card')) closeTile(openCard);
+  });
+
   function colCount() {
     var top = cards[0].getBoundingClientRect().top, n = 0;
     for (var i = 0; i < cards.length; i++) {
