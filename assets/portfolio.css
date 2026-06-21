@@ -1133,19 +1133,17 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .hero-grid {
     grid-template-columns: 1fr;
   }
-  /* Mobile GPUs flicker on mix-blend-mode over a transformed/playing video, and the
-     blended headline can fail to a stuck white (layer promotion / blocked autoplay /
-     reduced-motion). So on small screens drop the adaptive blend entirely: solid text
-     on a more heavily veiled, subtle ink. */
-  .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-stats, .hero-scroll-hint { mix-blend-mode: normal; }
+  /* SAFE DEFAULT: solid text over a veiled ink. Used until JS confirms the hero video is
+     genuinely painting frames (covers blocked autoplay, data-saver, reduced-motion and
+     mobile blend quirks) so the masthead can never end up unreadable. */
+  .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-scroll-hint { mix-blend-mode: normal; }
   .hero-h1  { color: var(--ink); }
   .hero-name { color: var(--gold); }
   .hero-word-row { color: var(--gold); }
   .hero-bio { color: var(--ink); }
-  .hero-stats { color: var(--ink); }
   .hero-scroll-hint { color: var(--ink-mid); }
   .stat-label { color: var(--ink-mid); }
-  .hero-bio, .hero-stats, .hero-word-row {
+  .hero-bio, .hero-word-row {
     text-shadow: 0 1px 10px rgba(250, 248, 244, 0.92), 0 0 3px rgba(250, 248, 244, 0.7);
   }
   .hero-video-overlay {
@@ -1154,6 +1152,23 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
       rgba(250, 248, 244, 0.66) 32%,
       rgba(250, 248, 244, 0.70) 62%,
       rgba(250, 248, 244, 0.84) 100%);
+  }
+
+  /* VIDEO CONFIRMED LIVE (.ink-live set by JS): replicate the desktop adaptive effect,
+     letters invert against the ink as it moves. Lighter veil so the ink reads as vivid
+     as desktop and the colour-flip lands bright. */
+  .hero.ink-live .hero-h1,
+  .hero.ink-live .hero-name,
+  .hero.ink-live .hero-word-row,
+  .hero.ink-live .hero-bio,
+  .hero.ink-live .hero-scroll-hint { color: #ffffff; mix-blend-mode: difference; text-shadow: none; }
+  .hero.ink-live .hero-video-overlay {
+    background: linear-gradient(to bottom,
+      rgba(250, 248, 244, 0.60) 0%,
+      rgba(250, 248, 244, 0.18) 24%,
+      rgba(250, 248, 244, 0.12) 50%,
+      rgba(250, 248, 244, 0.30) 74%,
+      rgba(250, 248, 244, 0.56) 100%);
   }
   .principle-grid { grid-template-columns: repeat(2, 1fr); }
   .persp-grid { grid-template-columns: 1fr; }

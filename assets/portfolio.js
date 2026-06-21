@@ -284,6 +284,25 @@
     }
   }
 
+  /* ── MOBILE ADAPTIVE HERO TEXT FAILSAFE ─────────────────── */
+  // The colour-inverting headline (mix-blend-mode) is gated on .ink-live, which is only
+  // added once the hero video is genuinely advancing frames. If autoplay is blocked or
+  // the video stalls/errors, the class is never added (or is removed) and the masthead
+  // stays solid and legible. Reduced-motion hides the video, so we leave it solid.
+  (function heroInkLive() {
+    const hero = document.querySelector('.hero');
+    const video = document.querySelector('.hero-video');
+    if (!hero || !video || reduce) return;
+    const on = function () { hero.classList.add('ink-live'); };
+    const off = function () { hero.classList.remove('ink-live'); };
+    video.addEventListener('timeupdate', on);   // fires only while frames actually advance
+    video.addEventListener('pause', off);
+    video.addEventListener('stalled', off);
+    video.addEventListener('error', off);
+    video.addEventListener('emptied', off);
+    try { const p = video.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+  })();
+
   /* ── ADAPTIVE "GET IN TOUCH" BORDER ─────────────────────── */
   // Periwinkle border on light; flips to white when dark ink is behind it.
   // Samples the hero video, inverse-maps the button's position through the video's
