@@ -284,23 +284,74 @@
     }
   }
 
-  /* ── MOBILE ADAPTIVE HERO TEXT FAILSAFE ─────────────────── */
-  // The colour-inverting headline (mix-blend-mode) is gated on .ink-live, which is only
-  // added once the hero video is genuinely advancing frames. If autoplay is blocked or
-  // the video stalls/errors, the class is never added (or is removed) and the masthead
-  // stays solid and legible. Reduced-motion hides the video, so we leave it solid.
-  (function heroInkLive() {
+  /* ── MOBILE ADAPTIVE MASTHEAD ───────────────────────────── */
+  // iOS Safari will not apply mix-blend-mode over a <video> (the video is composited on its
+  // own GPU layer), so the desktop per-letter blend is unreadable on a phone. On mobile we
+  // instead sample the video brightness behind each hero line — the same inverse-transform
+  // mapping the adaptive CTA uses — and flip its colour directly via an .on-ink class: dark
+  // over the pale ground, light over the dark ink. Desktop keeps its CSS blend; the .on-ink
+  // colours only exist inside the (max-width: 900px) rules, so this is a no-op above that.
+  // Hysteresis on the threshold stops the lines flickering at the boundary.
+  (function heroAdaptiveText() {
     const hero = document.querySelector('.hero');
     const video = document.querySelector('.hero-video');
-    if (!hero || !video || reduce) return;
-    const on = function () { hero.classList.add('ink-live'); };
-    const off = function () { hero.classList.remove('ink-live'); };
-    video.addEventListener('timeupdate', on);   // fires only while frames actually advance
-    video.addEventListener('pause', off);
-    video.addEventListener('stalled', off);
-    video.addEventListener('error', off);
-    video.addEventListener('emptied', off);
+    const wrap = document.querySelector('.hero-video-wrap');
+    if (!hero || !video || !wrap || reduce) return;
+    if (typeof DOMMatrix === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 900px)');
+    const els = ['.hero-name', '.hero-h1', '.hero-word-row', '.hero-bio', '.hero-scroll-hint']
+      .map(function (s) { return document.querySelector(s); }).filter(Boolean);
+    if (!els.length) return;
+    const cvs = document.createElement('canvas');
+    const ctx = cvs.getContext('2d', { willReadFrequently: true });
     try { const p = video.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    let last = 0, failed = false;
+    function step(t) {
+      if (failed) return;                         // tainted canvas / unsupported: hand off to the veil fallback
+      requestAnimationFrame(step);
+      if (!mq.matches) { els.forEach(function (el) { el.classList.remove('on-ink'); }); return; }
+      if (t - last < 150) return;
+      last = t;
+      const vw = video.videoWidth, vh = video.videoHeight;
+      if (!vw || video.readyState < 2) return;
+      try {
+        if (cvs.width !== vw) { cvs.width = vw; cvs.height = vh; }
+        ctx.drawImage(video, 0, 0, vw, vh);
+        const wr = wrap.getBoundingClientRect();
+        const bw = video.offsetWidth, bh = video.offsetHeight;          // layout box (pre-transform)
+        const ox = 0.55 * wr.width + bw / 2;                            // transform-origin, wrap coords
+        const oy = 0.50 * wr.height + bh / 2;
+        const inv = new DOMMatrix(getComputedStyle(video).transform).inverse();
+        const scale = Math.max(bw / vw, bh / vh);                        // object-fit: cover
+        els.forEach(function (el) {
+          const r = el.getBoundingClientRect();
+          if (!r.width) return;
+          const rel = inv.transformPoint(new DOMPoint(
+            r.left + r.width / 2 - wr.left - ox,
+            r.top + r.height / 2 - wr.top - oy));
+          const lx = rel.x + bw / 2, ly = rel.y + bh / 2;               // local box coords
+          let sx = (lx - (bw - vw * scale) / 2) / scale;
+          let sy = (ly - (bh - vh * scale) / 2) / scale;
+          sx = Math.max(0, Math.min(vw - 1, sx)); sy = Math.max(0, Math.min(vh - 1, sy));
+          const d = ctx.getImageData(sx | 0, sy | 0, 1, 1).data;
+          let L = (0.299 * d[0] + 0.587 * d[1] + 0.114 * d[2]) / 255;
+          L = ((L - 0.5) * 1.55 + 0.5) * 0.72;                          // approx the CSS contrast+brightness
+          const vis = L * 0.70 + 0.28;                                  // approx composite over the veil
+          const onNow = el.classList.contains('on-ink');
+          let next = onNow;
+          if (vis < 0.52) next = true; else if (vis > 0.62) next = false;
+          el.classList.toggle('on-ink', next);
+        });
+      } catch (e) {
+        if (e && e.name === 'SecurityError') {        // canvas tainted: cannot sample at all
+          failed = true;
+          hero.classList.add('sample-failed');        // CSS swaps in a heavy veil; text stays dark + legible
+          els.forEach(function (el) { el.classList.remove('on-ink'); });
+        }
+        /* other (transient) errors: keep the last state and try again next frame */
+      }
+    }
+    requestAnimationFrame(step);
   })();
 
   /* ── ADAPTIVE "GET IN TOUCH" BORDER ─────────────────────── */

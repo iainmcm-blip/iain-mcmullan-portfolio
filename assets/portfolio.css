@@ -1133,43 +1133,46 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .hero-grid {
     grid-template-columns: 1fr;
   }
-  /* SAFE DEFAULT: solid text over a veiled ink. Used until JS confirms the hero video is
-     genuinely painting frames (covers blocked autoplay, data-saver, reduced-motion and
-     mobile blend quirks) so the masthead can never end up unreadable. */
-  .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-scroll-hint { mix-blend-mode: normal; }
-  .hero-h1  { color: var(--ink); }
-  .hero-name { color: var(--gold); }
-  .hero-word-row { color: var(--gold); }
-  .hero-bio { color: var(--ink); }
+  /* MOBILE ADAPTIVE MASTHEAD — iOS Safari does not apply mix-blend-mode over a <video>
+     (the video sits on its own GPU layer), so the desktop per-letter blend comes out
+     illegible on a phone. Here JS samples the video brightness behind each line (the same
+     inverse-transform mapping the adaptive CTA uses) and flips its colour directly: dark
+     over the pale ground, light over the dark ink. Solid colours stay legible at every
+     frame; a moderate veil keeps the ink vivid and is the backstop if autoplay is blocked
+     (the text simply holds its dark default over a veiled ground). No white glow — that
+     was the stray strip behind the name. */
+  .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-scroll-hint {
+    mix-blend-mode: normal;
+    transition: color 0.45s ease, text-shadow 0.45s ease;
+  }
+  /* default — over the light ground */
+  .hero-h1  { color: var(--ink); text-shadow: 0 1px 2px rgba(250, 248, 244, 0.55); }
+  .hero-name { color: var(--gold-dark); }
+  .hero-word-row { color: var(--gold-dark); }
+  .hero-bio { color: var(--ink); text-shadow: 0 1px 2px rgba(250, 248, 244, 0.55); }
   .hero-scroll-hint { color: var(--ink-mid); }
   .stat-label { color: var(--ink-mid); }
-  .hero-bio, .hero-word-row {
-    text-shadow: 0 1px 10px rgba(250, 248, 244, 0.92), 0 0 3px rgba(250, 248, 244, 0.7);
-  }
+  /* over the dark ink — class added per line by JS */
+  .hero-h1.on-ink  { color: #ffffff; text-shadow: 0 1px 8px rgba(8, 10, 32, 0.5); }
+  .hero-name.on-ink { color: var(--gold-mid); }
+  .hero-word-row.on-ink { color: var(--gold-mid); }
+  .hero-bio.on-ink { color: #f4efe6; text-shadow: 0 1px 8px rgba(8, 10, 32, 0.5); }
+  .hero-scroll-hint.on-ink { color: rgba(255, 255, 255, 0.86); }
   .hero-video-overlay {
     background: linear-gradient(to bottom,
-      rgba(250, 248, 244, 0.80) 0%,
-      rgba(250, 248, 244, 0.66) 32%,
-      rgba(250, 248, 244, 0.70) 62%,
-      rgba(250, 248, 244, 0.84) 100%);
+      rgba(250, 248, 244, 0.50) 0%,
+      rgba(250, 248, 244, 0.30) 20%,
+      rgba(250, 248, 244, 0.28) 55%,
+      rgba(250, 248, 244, 0.48) 100%);
   }
-
-  /* VIDEO CONFIRMED LIVE (.ink-live set by JS): the HEADLINE alone inverts against the
-     ink as it moves (the clean, dramatic flip). The eyebrow, rotating specialism line and
-     bio stay in their solid brand colours — applying the blend to all of them produced
-     muddy, inconsistent shifting colours on the thinner text. Veil kept clear behind the
-     headline band (~20-40%) for a vivid flip, then ramped up lower so the solid gold line
-     and dark bio stay legible. */
-  .hero.ink-live .hero-h1 { color: #ffffff; mix-blend-mode: difference; text-shadow: none; }
-  .hero.ink-live .hero-video-overlay {
+  /* Fallback when the video pixels can't be sampled (tainted canvas / unsupported):
+     heavier veil so the solid dark-and-gold text is always legible without the flip. */
+  .hero.sample-failed .hero-video-overlay {
     background: linear-gradient(to bottom,
-      rgba(250, 248, 244, 0.55) 0%,
-      rgba(250, 248, 244, 0.20) 14%,
-      rgba(250, 248, 244, 0.13) 24%,
-      rgba(250, 248, 244, 0.16) 40%,
-      rgba(250, 248, 244, 0.42) 50%,
-      rgba(250, 248, 244, 0.62) 70%,
-      rgba(250, 248, 244, 0.74) 100%);
+      rgba(250, 248, 244, 0.82) 0%,
+      rgba(250, 248, 244, 0.70) 35%,
+      rgba(250, 248, 244, 0.72) 65%,
+      rgba(250, 248, 244, 0.85) 100%);
   }
   .principle-grid { grid-template-columns: repeat(2, 1fr); }
   .persp-grid { grid-template-columns: 1fr; }
