@@ -59,6 +59,8 @@
   background: transparent; cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease;
 }
 .persp-collapse:hover { border-color: var(--gold); color: var(--gold); }
+.persp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
+.persp-actions .persp-collapse { margin-top: 0; }
 /* Closed cards: clamp the standfirst preview so heights stay even; full text shows when open */
 .persp-card:not(.is-open) .persp-text { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 .persp-card.is-open .persp-text { font-size: 1.05rem; line-height: 1.7; color: var(--ink); }
@@ -284,6 +286,97 @@
           </div>
         </article>
 
+        <!-- Card 7 -->
+        <article class="persp-card reveal">
+          <div class="persp-art">
+            <span class="persp-blob" style="width:62%;aspect-ratio:1/1;left:-8%;top:-12%;background:#C4922A;opacity:0.18"></span>
+            <span class="persp-blob" style="width:52%;aspect-ratio:1/1;right:-10%;bottom:-12%;background:#F0E6D0;opacity:0.6"></span>
+            <span class="persp-blob" style="width:36%;aspect-ratio:1/1;left:38%;top:42%;background:#E8D5A0;opacity:0.4"></span>
+          </div>
+          <div class="persp-body">
+            <span class="persp-tag">Cultural Intelligence</span>
+            <h3 class="persp-title">Starbucks Didn't Make a Marketing Mistake. They Made a History Mistake.</h3>
+            <p class="persp-text">On May 18th, 2026, Starbucks Korea launched a new branded tumbler. They called it a tank tumbler. They called the day 'Tank Day.' They used the date 5/18 prominently in the promotional materials. May 18th is the 46th anniversary of the Gwangju Uprising, the day in 1980 when South Korea's military dictatorship sent troops and tanks into the city of Gwangju to suppress a pro-democracy movement, killing hundreds. For most South Koreans, it's one of the most solemn dates in the modern national calendar. For Starbucks Korea's marketing team, apparently, it was a great day to launch a drinks container. When the 3 minutes of time investment using Google was skipped, it turned an error into a catastrophe.</p>
+          </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>And the consequences of this schoolboy error were swift and severe. The CEO was fired. All 1,800 stores closed early for mandatory history training. The South Korean president posted on social media calling the campaign 'inhumane.' Government ministries announced boycotts. Protesters smashed Starbucks cups in the streets of Gwangju. The chairman of the parent company, Shinsegae Group, bowed in public apology twice in a fortnight. Starbucks global headquarters called it 'unintentional' but said it 'never should have happened.' That last part, at least, is accurate.</p>
+                <p>The easy read on this story is cultural insensitivity: a global brand failed to understand local history. That's true, but it's also the least interesting thing about it. The more uncomfortable question is actually a structural one. How on earth does a campaign reach execution, across a market the brand has operated in since 1999, without a single person in ANY of the relevant rooms knowing what May 18th means in South Korea? That's not just a gap in knowledge, it's a process failure with the knowledge gap as a glaring, throbbing, incandescently combusting symptom.</p>
+                <p>I've spent a significant part of my career working across Asian and Middle Eastern markets, and the version of this mistake I've seen most often is a variation of Hanlon's Law ('never ascribe to malice that which can otherwise be explained by stupidity'). So it's not down to malice. Rather in this case, it's down to distance. Creative and marketing decisions more often than not, get made in rooms that are geographically or organisationally removed from the markets they're speaking to. Local teams exist, but they're often downstream of the decision, brought in at execution rather than concept. The brief arrives to them fully formed. The calendar is set. The question 'does this date mean anything here?' doesn't get asked because nobody upstream thought to ask it, and the people who would know aren't in the room yet. This is lamentable naïveté and yet again makes me think of the Korea air disasters from decades ago that happened because the junior was too terrified by cultural convention, to question the actions of the senior.</p>
+                <p>Global brand consistency is a real discipline and it matters. But consistency of visual identity and tone isn't the same as uniformity of process. The brands that operate well across multiple markets aren't the ones that have eliminated local judgment. They're the ones that have built local judgment into the brief rather than the approval. By the time a campaign reaches final sign-off, the local knowledge should already be embedded in the idea, not shyly waiting at the door to be consulted as a compliance step.</p>
+                <p>There's also something worth naming about the specific nature of this failure. Starbucks Korea isn't a Western brand parachuting into an unfamiliar market. It's been in South Korea for 27 years. It has 1,800 stores. It has thousands of Korean employees. If the institutional knowledge to avoid this wasn't present somewhere in that organisation (with…how many hundreds or thousands of people??), the question isn't 'how do we improve cultural training?' It's 'who are we actually listening to, and at what point in the process?'</p>
+                <p>The closing of stores for history training is a meaningful gesture, and certainly the right one. But it's a response to a failure, not a prevention of it. The brief that prevents this isn't a cultural sensitivity checklist. It's a process that takes local knowledge and the people who possess it, seriously enough to include it before the idea is formed. And not after the cups are smashed on the pavement in Gwangju.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 -->
+        <article class="persp-card reveal">
+          <div class="persp-art">
+            <span class="persp-blob" style="width:60%;aspect-ratio:1/1;right:-10%;top:-10%;background:#F0E6D0;opacity:0.65"></span>
+            <span class="persp-blob" style="width:54%;aspect-ratio:1/1;left:-12%;bottom:-10%;background:#C4922A;opacity:0.16"></span>
+            <span class="persp-blob" style="width:34%;aspect-ratio:1/1;left:42%;top:24%;background:#E8D5A0;opacity:0.45"></span>
+          </div>
+          <div class="persp-body">
+            <span class="persp-tag">Industry Structure</span>
+            <h3 class="persp-title">WPP Is Merging Ogilvy, VML and AKQA. Three cheers for the accountants!</h3>
+            <p class="persp-text">In February 2026, WPP announced it would fold Ogilvy, VML and AKQA into a single creative entity called WPP Creative, as part of a broader restructure into four divisions targeting £500 million in gross annual savings by 2028. Revenue had fallen 8.1% year on year. The CFO confirmed the savings would 'inevitably involve headcount reductions.' The CEO said they'd be hiring 'AI-native' employees while cutting others. It has been presented as transformation. When in actual fact it's a consolidation. The distinction matters, because the two produce very different outcomes for the clients and the thousands of people caught in the middle.</p>
+          </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>I want to be careful here, because this isn't a criticism of any of the agencies involved. Ogilvy, VML and AKQA each have genuine creative heritage and myriad incredibly talented people. The question isn't about the quality of what they do. It's about what happens to distinct creative cultures when they're merged under a shared P&amp;L, governed by a holding company that needs to find half a billion pounds in savings — publicly stating that most of those savings are at the expense of people.</p>
+                <p>The holding company model was always built on a particular argument: that you could own multiple competing agencies, keep them culturally independent, and sell that independence to clients as a feature rather than a bug. Clients got genuine creative competition.</p>
+                <p>Agencies kept their identity.</p>
+                <p>The holding company took a margin.</p>
+                <p>It was a reasonable model when the economics held.</p>
+                <p>But the economics stopped holding. Clients started taking work in-house (something I've increasingly seen first-hand), AI started compressing the cost of production, and the talent premium that justified agency fees started eroding. The margin fell… then disappeared, and what's left is the structure without the justification.</p>
+                <p>What concerns me about the WPP move isn't the logic of it as in a business where your cost base is predominantly people, if you need to rapidly cut costs, buying less premium sparking water for the office isn't going to do the trick. So you cut people. That's not a cynical view — it's merely arithmetic.</p>
+                <p>What is most concerning is the creative consequence of merging agencies that have built distinct positioning over decades, then assuming that the sum will be at least as good as its parts. Creative culture isn't a spreadsheet line. It's the accumulated result of who a place hires, what it rewards, what it's willing to do and refuse, who leads it and what they care about. You can't preserve that in a merger deck and inch-thick report to management.</p>
+                <p>I've worked with and inside agency structures across my career, and the pattern is consistent. When agencies merge under financial pressure, the short-term savings are real and the long-term creative output suffers in ways that don't show up in the quarterly numbers until we've all travelled much farther down the road. The clients who valued the distinct voice of one of those agencies quietly start to look elsewhere. The talent who built that voice starts leaving. The merger that was supposed to create something stronger ends up with something larger, more faceless and more bland.</p>
+                <p>The harder question, which few if anyone at a holding company level seems to want to address directly, is whether the holding company model itself is the right structure for what clients actually need in 2026. If clients want integrated, AI-enabled, data-driven marketing delivered efficiently, a holding company with premium pricing and multiple overlapping agencies probably isn't the answer. If they want brilliant, distinctive creative work with genuine cultural authority, merging those agencies and cutting the headcount isn't the answer to that either.</p>
+                <p>WPP isn't alone in this. The whole sector is doing versions of the same thing, reorganising around a challenge they don't yet fully understand and are adapting to day-to-day, week-to-week. That's not a result of incompetence, but rather one of uncertainty. But calling it 'transformation' when it's actually survival doesn't make the decisions better.</p>
+                <p>As Judge Judy said in the title of her 1997 book: Don't Pee on My Leg and Tell Me It's Raining.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 9 -->
+        <article class="persp-card reveal">
+          <div class="persp-art">
+            <span class="persp-blob" style="width:58%;aspect-ratio:1/1;left:-6%;bottom:-12%;background:#C4922A;opacity:0.15"></span>
+            <span class="persp-blob" style="width:56%;aspect-ratio:1/1;right:-8%;top:-10%;background:#F0E6D0;opacity:0.62"></span>
+            <span class="persp-blob" style="width:36%;aspect-ratio:1/1;left:40%;top:42%;background:#E8D5A0;opacity:0.42"></span>
+          </div>
+          <div class="persp-body">
+            <span class="persp-tag">Creativity &amp; Standards</span>
+            <h3 class="persp-title">Cannes Just Stripped a Grand Prix for Faking It With AI. The Surprise Is That Anyone Is Surprised.</h3>
+            <p class="persp-text">Cannes Lions 2026 just opened. This year's festival, running June 22 to 26, is the first since the awards body stripped twelve Lions from a single agency after discovering that AI-generated content had been used to simulate real-world events and fake campaign outcomes in a case study. One Grand Prix, three golds, four silvers, three bronzes — all gone. The agency's chief creative officer resigned. Cannes introduced mandatory AI disclosure rules and announced AI-detection processes for future entries. And the industry responded, as it tends to, with a mixture of outrage, hand-wringing, and the quiet sense that everyone knew this was happening and nobody had quite got around to doing anything about it.</p>
+          </div>
+          <div class="persp-article">
+            <div class="persp-article-inner">
+              <div class="persp-article-content">
+                <p>The fraud itself is fairly simple to describe. A case study film is an agency's evidence that a campaign did what it claims to have done. It's the artefact that goes to the judges, that wins or loses the award, and then gets shared across the industry as proof of effectiveness. If the case study fabricates its own evidence using AI (faking the coverage, the results, or the real-world impact) then what's being awarded isn't a campaign. It's a fiction. The award, in that case, isn't for doing good work. It's for producing a convincing enough story about having done good work.</p>
+                <p>The uncomfortable truth that the industry is dancing around is that the incentive structure that produced this fraud has been in place for decades. A Cannes Lion changes an agency's commercial trajectory. It attracts clients, justifies fees, elevates careers. The award is worth more than the work it was supposed to celebrate. When the prize is so valuable and the verification is so weak, no-one needs AI to create the conditions for fraud — but AI does make the fabrication cheaper, faster and harder to detect. The technology industrialised the problem rather than just create it.</p>
+                <p>I've been in enough rooms where award entries were being prepared to know that the gap between what a campaign achieved and how it's described in a case study has always been….malleable. Results get selected for their persuasiveness. Numbers are chosen carefully. The narrative is drafted and crafted. None of that is necessarily dishonest, as good communication involves presenting evidence in its most compelling form, but there's a spectrum; and AI has made it much easier to slide toward the ill end of it without anyone noticing until the nice sparkly Lion figurines are already on the shelf.</p>
+                <p>What Cannes has now introduced in terms of mandatory AI disclosure, detection tools, a code of conduct requiring signatories to confirm their entries are factually accurate — is the right response. But it's a response to a symptom rather than the cause. The underlying question is what the awards are actually for. If they're for celebrating real creative work that produced real results for real clients, then the verification infrastructure needs to match that ambition. However if they're for celebrating the craft of persuasion (including and perhaps specifically aimed at the persuasion of awards judges), then perhaps what happened was just someone playing the game with better tools.</p>
+                <p>There's a version of this that's straightforwardly about integrity, and I think that version is the right one.</p>
+                <p>The industry benefits from awards that mean something, and awards mean something only when they're trusted. Once the possibility of fabrication is on the table, then the value of a Lion becomes contingent on whether the judges happened to catch it, which isn't a foundation anyone wants to build a career on.</p>
+                <p>But there's also a version of this that's a genuine opportunity.</p>
+                <p>The moment Cannes starts rigorously verifying that case studies reflect reality is the moment it becomes a much more valuable signal about what actually works in marketing. Not what can be made to look like it works in a slickly edited four-minute film with an energising soundtrack.</p>
+                <p>What actually, verifiably works.</p>
+                <p>Now that would be worth flying to the South of France for.</p>
+                <button type="button" class="persp-collapse">Collapse <span aria-hidden="true">&uarr;</span></button>
+              </div>
+            </div>
+          </div>
+        </article>
+
       </div>
 
       <a href="index.html" class="pf-back">&larr; Back to home</a>
@@ -320,12 +413,15 @@
 
   // Card artwork (order matches the cards in the grid). objectPosition tunes the banner crop.
   var ART = [
-    { src: 'assets/img/perspectives/loyalty.jpg', alt: 'An airport lounge host welcoming a returning guest', pos: 'center 35%' },
-    { src: 'assets/img/perspectives/ai-craft.jpg', alt: 'A designer sketching by hand beside a laptop', pos: 'center 40%' },
-    { src: 'assets/img/perspectives/brand-performance.jpg', alt: 'A team in conversation beside a strategist mapping metrics', pos: 'center' },
-    { src: 'assets/img/perspectives/leadership.jpg', alt: 'A team collaborating around a table', pos: 'center 35%' },
-    { src: 'assets/img/perspectives/experiential.jpg', alt: 'Guests gathered at a live brand event', pos: 'center 50%' },
-    { src: 'assets/img/perspectives/strategy.jpg', alt: 'An antique map, coins and a journal of plans', pos: 'center 45%' }
+    { slug: 'loyalty', alt: 'An airport lounge host welcoming a returning guest', pos: 'center 35%' },
+    { slug: 'ai-craft', alt: 'A designer sketching by hand beside a laptop', pos: 'center 40%' },
+    { slug: 'brand-performance', alt: 'A team in conversation beside a strategist mapping metrics', pos: 'center' },
+    { slug: 'leadership', alt: 'A team collaborating around a table', pos: 'center 35%' },
+    { slug: 'experiential', alt: 'Guests gathered at a live brand event', pos: 'center 50%' },
+    { slug: 'strategy', alt: 'An antique map, coins and a journal of plans', pos: 'center 45%' },
+    { slug: 'cultural-intelligence', alt: 'An editorial image for an essay on cultural intelligence in marketing', pos: 'center' },
+    { slug: 'industry-structure', alt: 'An editorial image for an article on agency consolidation', pos: 'center' },
+    { slug: 'creativity-standards', alt: 'An editorial image for an article on creative awards and AI', pos: 'center' }
   ];
 
   function setClosed(card) {
@@ -353,9 +449,24 @@
     var artBox = card.querySelector('.persp-art');
     if (art && artBox) {
       var im = document.createElement('img');
-      im.src = art.src; im.alt = art.alt; im.loading = 'lazy';
+      im.src = 'assets/img/perspectives/' + art.slug + '.jpg'; im.alt = art.alt; im.loading = 'lazy';
       im.style.objectPosition = art.pos;
       artBox.appendChild(im);
+    }
+    // Expanded-view actions: a "Read as full page" link to the standalone article, plus Collapse.
+    var collapseEl = card.querySelector('.persp-collapse');
+    if (collapseEl) {
+      var actions = document.createElement('div');
+      actions.className = 'persp-actions';
+      collapseEl.parentNode.insertBefore(actions, collapseEl);
+      if (art && art.slug) {
+        var pageLink = document.createElement('a');
+        pageLink.className = 'btn btn-gold persp-pagelink';
+        pageLink.href = 'articles/' + art.slug + '.html';
+        pageLink.innerHTML = 'Read as full page <span aria-hidden="true">&rarr;</span>';
+        actions.appendChild(pageLink);
+      }
+      actions.appendChild(collapseEl);
     }
     card.addEventListener('click', function (e) {
       if (card.classList.contains('is-open')) return;     // open: allow text selection

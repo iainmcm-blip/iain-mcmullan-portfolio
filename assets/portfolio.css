@@ -1390,3 +1390,27 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 
 /* Perspective card artwork images (sit above the gradient placeholder, fill the frame) */
 .persp-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 1; }
+
+/* ═══════════════════════════════════════════════════════════════
+   V5 — individual article pages + home "Read Full Article" link
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Standalone article pages (articles/<slug>.html) */
+.article-page { padding-top: var(--nav-h); }
+.article-hero { width: 100%; height: clamp(280px, 46vh, 520px); overflow: hidden; background: var(--gold-warm); }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.article-head { max-width: 760px; margin: 0 auto; padding-top: 2.75rem; }
+.article-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 500; color: var(--ink-mid); margin-bottom: 1.25rem; transition: gap 0.2s ease, color 0.2s ease; }
+.article-back:hover { gap: 0.65rem; color: var(--gold); }
+.article-head .section-label { display: block; }
+.article-title { font-family: var(--ff-display); font-weight: 700; font-size: clamp(30px, 4vw, 52px); line-height: 1.08; color: var(--ink); margin-top: 0.5rem; }
+.article-body { max-width: 720px; margin: 2.25rem auto 0; }
+.article-body p { font-size: 1.0625rem; line-height: 1.8; color: var(--ink); margin-bottom: 1.35rem; }
+.article-body p:first-child { font-size: 1.2rem; line-height: 1.7; color: var(--ink); }
+.article-cta { max-width: 720px; margin: 3rem auto 5.5rem; padding-top: 2.5rem; border-top: 1px solid var(--divider); text-align: center; }
+@media (max-width: 768px) { .article-head { padding-top: 2rem; } .article-body p:first-child { font-size: 1.1rem; } }
+
+/* Home perspective cards: "Read Full Article" link pinned to the card base */
+.persp-card .persp-body { display: flex; flex-direction: column; }
+.persp-readfull { margin-top: auto; padding-top: 1.1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); display: inline-flex; align-items: center; gap: 0.4rem; transition: gap 0.2s ease, color 0.2s ease; }
+.persp-readfull:hover { gap: 0.7rem; color: var(--gold); }
