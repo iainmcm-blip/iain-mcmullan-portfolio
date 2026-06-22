@@ -1148,7 +1148,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
     filter: saturate(1.08) contrast(1.03);
   }
   .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-scroll-hint { mix-blend-mode: normal; }
-  .hero-h1  { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); }
+  .hero-h1  { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); margin-bottom: 1.5rem; }
+  /* Smaller word-rise on mobile so 'results.' never drops onto the rotating specialism line on load */
+  .js .hero-h1 .h1-word { transform: translateY(14px); }
   .hero-name { color: var(--gold-dark); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.65); }
   .hero-word-row { color: var(--gold-dark); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.65); }
   .hero-bio { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); }

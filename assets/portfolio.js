@@ -237,8 +237,10 @@
       const hasST = typeof window.ScrollTrigger !== 'undefined';
       if (hasST) gsap.registerPlugin(ScrollTrigger);
 
-      // 1) Hero headline — each word rises from below, 0.08s stagger, after 300ms
-      gsap.fromTo('.h1-word', { y: 40 }, {
+      // 1) Hero headline — each word rises from below, 0.08s stagger, after 300ms.
+      // Smaller rise on mobile so the last line never overlaps the rotating specialism line.
+      const riseY = window.matchMedia('(max-width: 900px)').matches ? 14 : 40;
+      gsap.fromTo('.h1-word', { y: riseY }, {
         y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.08, delay: 0.3,
         onComplete: () => document.querySelectorAll('.h1-word').forEach(w => { w.style.willChange = 'auto'; })
       });
