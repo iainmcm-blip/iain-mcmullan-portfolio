@@ -287,23 +287,46 @@
   }
 
 
-  /* ── ABOUT INK: keep the mirrored ink clip in sync with the hero video (mobile) ── */
+  /* ── ABOUT INK: mirror the hero video into a canvas (perfect sync + identical texture) ──
+     A second <video> drifts out of sync; drawing the hero's own frames into a canvas, flipped
+     vertically, guarantees the same frame/scale/texture and a true mirror. Mobile only. */
   (function aboutInk() {
     if (reduce) return;
     if (!window.matchMedia('(max-width: 900px)').matches) return;
     var hero = document.querySelector('.hero-video');
-    var ink = document.querySelector('.about-ink-video');
-    if (!hero || !ink) return;
-    ink.muted = true;
-    try { var p = ink.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
-    function sync() {
-      if (hero.readyState < 2 || ink.readyState < 2) return;
-      if (Math.abs(ink.currentTime - hero.currentTime) > 0.1) {
-        try { ink.currentTime = hero.currentTime; } catch (e) {}
+    var canvas = document.querySelector('.about-ink-canvas');
+    if (!hero || !canvas) return;
+    var ctx = canvas.getContext('2d');
+    try { hero.playbackRate = 0.6; } catch (e) {}          // slow the ink ~40%
+    try { var p = hero.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    function draw() {
+      var vw = hero.videoWidth, vh = hero.videoHeight;
+      var rect = canvas.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      var cw = rect.width, ch = rect.height;
+      if (cw && ch) {
+        var bw = Math.round(cw * dpr), bh = Math.round(ch * dpr);
+        if (canvas.width !== bw || canvas.height !== bh) { canvas.width = bw; canvas.height = bh; }
       }
+      if (vw && cw && hero.readyState >= 2) {
+        var heroH = hero.getBoundingClientRect().height || (vh * (cw / vw));
+        var scale = heroH / vh;                 // match the hero's cover scale so the texture matches
+        var dW = vw * scale, dH = vh * scale;
+        var offX = (cw - dW) / 2;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.save();
+        ctx.scale(1, -1);                       // flip vertically -> canvas top mirrors the hero's bottom edge
+        try { ctx.drawImage(hero, offX, -dH, dW, dH); } catch (e) {}
+        ctx.restore();
+      }
+      schedule();
     }
-    hero.addEventListener('timeupdate', sync);
-    ink.addEventListener('loadeddata', sync);
+    function schedule() {
+      if (hero.requestVideoFrameCallback) hero.requestVideoFrameCallback(draw);
+      else requestAnimationFrame(draw);
+    }
+    schedule();
   })();
 
   /* ── MOBILE ADAPTIVE MASTHEAD ───────────────────────────── */

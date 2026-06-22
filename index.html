@@ -139,9 +139,7 @@
   <!-- Mobile only: a flipped, in-sync copy of the hero ink that bleeds down behind the photo
        and fades to paper by mid-photo (iOS-safe; box-reflect doesn't render over <video> on iOS). -->
   <div class="about-ink" aria-hidden="true">
-    <video class="about-ink-video" autoplay muted loop playsinline crossorigin="anonymous" preload="auto">
-      <source src="assets/video/hero-bg-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
-    </video>
+    <canvas class="about-ink-canvas"></canvas>
   </div>
   <div class="container">
     <div class="about-grid reveal">
