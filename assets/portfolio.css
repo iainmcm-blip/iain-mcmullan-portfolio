@@ -1146,13 +1146,23 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
     transform: none !important;
     object-fit: cover; object-position: center;
     filter: saturate(1.08) contrast(1.03);
-    /* Extend the ink below the hero with a perfectly in-sync mirror, faded out by mid-photo,
-       so it bleeds smoothly behind the About section instead of stopping at a hard edge. */
-    -webkit-box-reflect: below 0 linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 72%, rgba(0,0,0,0.4) 86%, rgba(0,0,0,1) 98%);
   }
-  /* Let the reflection escape the hero/wrap and flow into the About area (mobile only). */
-  .hero { overflow: visible; }
-  .hero-video-wrap { overflow: visible; }
+  /* Ink bleed behind the About photo: a flipped, in-sync copy of the hero clip, faded to paper. */
+  .about-ink {
+    display: block !important;   /* beats the base rule that's defined later in the file */
+    position: absolute; top: 0; left: 0; right: 0; height: 360px;
+    overflow: hidden; z-index: 0; pointer-events: none;
+  }
+  .about-ink-video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    transform: scaleY(-1);                 /* mirror so it joins the hero seamlessly */
+    filter: saturate(1.08) contrast(1.03);
+  }
+  .about-ink::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(250,248,244,0) 0%, rgba(250,248,244,0) 26%, rgba(250,248,244,0.85) 68%, var(--bg) 88%);
+  }
   .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-scroll-hint { mix-blend-mode: normal; }
   .hero-h1  { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); margin-bottom: 1.5rem; }
   /* Smaller word-rise on mobile so 'results.' never drops onto the rotating specialism line on load */
@@ -1438,7 +1448,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 .persp-readfull:hover { gap: 0.7rem; color: var(--gold); }
 
 /* ── HOMEPAGE ABOUT BAND ─────────────────────────────────── */
-.about { padding: 5rem 0; }
+.about { padding: 5rem 0; position: relative; }
+.about-ink { display: none; }                 /* shown on mobile only (see media query) */
+.about > .container { position: relative; z-index: 1; }   /* content sits above the ink layer */
 .about-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
 .about-portrait { align-self: start; }
 .about-portrait-frame {

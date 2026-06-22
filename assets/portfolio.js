@@ -287,6 +287,25 @@
   }
 
 
+  /* ── ABOUT INK: keep the mirrored ink clip in sync with the hero video (mobile) ── */
+  (function aboutInk() {
+    if (reduce) return;
+    if (!window.matchMedia('(max-width: 900px)').matches) return;
+    var hero = document.querySelector('.hero-video');
+    var ink = document.querySelector('.about-ink-video');
+    if (!hero || !ink) return;
+    ink.muted = true;
+    try { var p = ink.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    function sync() {
+      if (hero.readyState < 2 || ink.readyState < 2) return;
+      if (Math.abs(ink.currentTime - hero.currentTime) > 0.1) {
+        try { ink.currentTime = hero.currentTime; } catch (e) {}
+      }
+    }
+    hero.addEventListener('timeupdate', sync);
+    ink.addEventListener('loadeddata', sync);
+  })();
+
   /* ── MOBILE ADAPTIVE MASTHEAD ───────────────────────────── */
   // iOS Safari will not apply mix-blend-mode over a <video> (the video is composited on its
   // own GPU layer), so the desktop per-letter blend is unreadable on a phone. On mobile we
