@@ -298,6 +298,11 @@
     const wrap = document.querySelector('.hero-video-wrap');
     if (!hero || !video || !wrap || reduce) return;
     if (typeof DOMMatrix === 'undefined') return;
+    // Mobile now has its own upright portrait clip with solid, veiled text (no colour-flip);
+    // desktop uses the CSS mix-blend. So this sampler is retired — just nudge autoplay.
+    try { const p0 = video.play(); if (p0 && p0.catch) p0.catch(function () {}); } catch (e) {}
+    return;
+    /* eslint-disable no-unreachable */
     const mq = window.matchMedia('(max-width: 900px)');
     const els = ['.hero-name', '.hero-h1', '.hero-word-row', '.hero-bio', '.hero-scroll-hint']
       .map(function (s) { return document.querySelector(s); }).filter(Boolean);
@@ -364,6 +369,7 @@
     const wrap = document.querySelector('.hero-video-wrap');
     if (!btn || !video || !wrap || reduce) return;          // reduced-motion hides the video → periwinkle default
     if (typeof DOMMatrix === 'undefined') return;
+    if (window.matchMedia('(max-width: 900px)').matches) return;  // mobile uses its own clip; keep the default border
     const cvs = document.createElement('canvas');
     const ctx = cvs.getContext('2d', { willReadFrequently: true });
     let last = 0;
