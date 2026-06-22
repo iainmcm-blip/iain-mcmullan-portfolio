@@ -400,17 +400,32 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
     if (!body || !inner) return;
     body.style.height = on ? (inner.scrollHeight + 'px') : '0px';
   }
+  var holdSeq = 0;
   function openEntry(entry) {
     if (!entry || entry === current) return;
+    var head = entry.querySelector('.exp-card-head');
+    var anchor = head ? head.getBoundingClientRect().top : null;   // header's viewport position before the change
     entries.forEach(function (e) {
       var on = (e === entry);
       e.classList.toggle('open', on);
-      var head = e.querySelector('.exp-card-head');
-      if (head) head.setAttribute('aria-expanded', String(on));
+      var h = e.querySelector('.exp-card-head');
+      if (h) h.setAttribute('aria-expanded', String(on));
       setBodyHeight(e, on);
     });
     current = entry;
     positionSpine(); updateFill();
+    // Hold the opened header at its pre-open position throughout the height transition, so the card
+    // only ever grows downward — a collapsing card above can never shove it up the screen.
+    if (anchor != null && head) {
+      var myHold = ++holdSeq;
+      var t0 = Date.now();
+      (function hold() {
+        if (myHold !== holdSeq) return;            // a newer open superseded this one
+        var d = head.getBoundingClientRect().top - anchor;
+        if (d) window.scrollBy(0, d);
+        if (Date.now() - t0 < 540) requestAnimationFrame(hold);
+      })();
+    }
   }
 
   entries.forEach(function (entry) {
