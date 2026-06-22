@@ -1,707 +1,248 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iain McMullan | Senior Brand &amp; Marketing Leader</title>
-<meta name="description" content="Senior brand and marketing leader with 20+ years across aviation, finance and hospitality — Emirates, Hilton, Malaysia Airlines, UOB. Based in Singapore.">
-<link rel="canonical" href="https://www.iainmcmullan.com/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Iain McMullan | Senior Brand &amp; Marketing Leader">
-<meta property="og:description" content="20+ years shaping brands for the global stage: Emirates, Hilton, Malaysia Airlines, UOB.">
-<meta property="og:url" content="https://www.iainmcmullan.com/">
-<meta property="og:image" content="https://www.iainmcmullan.com/assets/img/og-card.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://www.iainmcmullan.com/assets/img/og-card.png">
-<meta name="theme-color" content="#FAFAF8">
-<meta name="robots" content="index, follow">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C4922A'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23FAFAF8' text-anchor='middle'%3EIM%3C/text%3E%3C/svg%3E">
+<title>Iain McMullan — Brand &amp; Marketing Leadership</title>
+<meta name="description" content="Iain McMullan — 20 years of brand, marketing and AI leadership across aviation, finance and hospitality. Strategy that survives contact with delivery.">
+<meta name="theme-color" content="#07091C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307091C'/%3E%3Ctext x='32' y='44' font-family='Raleway,sans-serif' font-size='28' font-weight='600' fill='%238AABFF' text-anchor='middle'%3EIM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/portfolio.css">
-<!-- progressive-enhancement flag: only JS-capable browsers get the pre-animation hidden states -->
-<script>document.documentElement.classList.add('js');</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Iain McMullan",
-  "url": "https://www.iainmcmullan.com/",
-  "image": "https://www.iainmcmullan.com/assets/img/iain-mcmullan.jpg",
-  "jobTitle": "Head of Strategy & Communications",
-  "worksFor": { "@type": "Organization", "name": "Motion: For Impact" },
-  "address": { "@type": "PostalAddress", "addressLocality": "Singapore" },
-  "email": "mailto:iainmcm@gmail.com",
-  "sameAs": ["https://www.linkedin.com/in/iainmcmullan/"],
-  "knowsAbout": ["Brand Strategy","Integrated Marketing","Employer Branding","AI Strategy","Digital Transformation","CRM & Loyalty","Internal Communications","Operational Leadership"]
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,100..700,0..1,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="assets/ms-tailwind-config.js"></script>
+<link rel="stylesheet" href="assets/ms-site.css">
 </head>
-<body>
+<body class="bg-background text-ink font-sans antialiased selection:bg-primary/25">
 
-<a href="#main" class="skip-link">Skip to content</a>
+<!-- ── Custom cursor ─────────────────────────────────────── -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
 
-<!-- ── NAVIGATION ─────────────────────────────────────────── -->
-<nav class="nav" id="nav" role="navigation" aria-label="Primary navigation">
-  <div class="nav-inner">
-    <a href="#hero" class="nav-brand" aria-label="Home — back to top">Home</a>
+<!-- ── Intro loader ──────────────────────────────────────── -->
+<div id="loader" aria-hidden="true">
+  <div class="loader-logo text-center">
+    <span class="block text-2xl tracking-[0.5em] font-extralight text-ink">IAIN McMULLAN</span>
+  </div>
+  <div class="loader-line"></div>
+  <div class="loader-tag">Brand &middot; Strategy &middot; AI</div>
+</div>
 
-    <ul class="nav-links" role="list">
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="portfolio.html">Portfolio</a></li>
-      <li><a href="experience.html">Experience</a></li>
-      <li><a href="perspectives.html">Perspectives</a></li>
-      <li><a href="lets-talk.html">Let's talk</a></li>
-    </ul>
-
-    <div class="nav-avail">
-      <span class="avail-dot" aria-hidden="true">
-        <span></span><span></span>
-      </span>
-      Open to opportunities
+<!-- ── Navigation ────────────────────────────────────────── -->
+<nav class="fixed top-0 inset-x-0 z-[120] h-20 flex items-center" style="background:rgba(7,9,28,0)">
+  <div class="w-full max-w-[1500px] mx-auto px-margin-mobile md:px-margin-desktop flex items-center justify-between">
+    <a href="index.html" class="text-sm tracking-[0.18em] font-medium text-ink">IAIN McMULLAN</a>
+    <div class="hidden md:flex items-center gap-10 text-[12px] tracking-[0.18em] uppercase text-ink-dim font-medium">
+      <a href="skills.html" class="link-line hover:text-ink transition-colors">Capabilities</a>
+      <a href="portfolio.html" class="link-line hover:text-ink transition-colors">Work</a>
+      <a href="experience.html" class="link-line hover:text-ink transition-colors">Experience</a>
+      <a href="perspectives.html" class="link-line hover:text-ink transition-colors">Perspectives</a>
+      <a href="lets-talk.html" class="link-line text-primary hover:text-ink transition-colors">Let's talk</a>
     </div>
-
-    <button class="nav-hamburger" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-      <span></span><span></span><span></span>
+    <button id="menu-open" class="md:hidden flex flex-col gap-[5px]" aria-label="Open menu">
+      <span class="block w-6 h-px bg-ink"></span><span class="block w-6 h-px bg-ink"></span><span class="block w-4 h-px bg-ink ml-auto"></span>
     </button>
   </div>
 </nav>
 
 <!-- Mobile menu -->
-<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <a href="#skills">Skills</a>
-  <a href="portfolio.html">Portfolio</a>
-  <a href="experience.html">Experience</a>
-  <a href="perspectives.html">Perspectives</a>
-  <a href="lets-talk.html">Let's talk</a>
+<div id="mobile-menu" class="fixed inset-0 z-[130] bg-background flex flex-col items-center justify-center gap-8 text-2xl font-extralight" aria-hidden="true">
+  <button id="menu-close" class="absolute top-7 right-6 text-ink-dim text-sm tracking-[0.2em] uppercase" aria-label="Close menu">Close</button>
+  <a href="skills.html" class="text-ink">Capabilities</a>
+  <a href="portfolio.html" class="text-ink">Work</a>
+  <a href="experience.html" class="text-ink">Experience</a>
+  <a href="perspectives.html" class="text-ink">Perspectives</a>
+  <a href="lets-talk.html" class="text-primary">Let's talk</a>
 </div>
 
-<main id="main">
+<main>
 
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 1 — HERO
-     ═══════════════════════════════════════════════════════ -->
-<section class="hero" id="hero">
+<!-- ── Hero ──────────────────────────────────────────────── -->
+<section class="relative h-screen min-h-[640px] flex flex-col items-center justify-center text-center overflow-hidden px-margin-mobile md:px-margin-desktop">
+  <div id="hero-canvas-container"><canvas id="hero-canvas"></canvas></div>
+  <div class="light-bloom absolute inset-0"></div>
+  <div class="absolute inset-0" style="background:linear-gradient(to bottom, rgba(7,9,28,.2) 0%, rgba(7,9,28,.1) 45%, rgba(7,9,28,.85) 100%)"></div>
 
-  <!-- Full-bleed ambient ink video (recoloured warm gold) + warm legibility overlay -->
-  <div class="hero-video-wrap" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline crossorigin="anonymous" preload="auto">
-      <source src="assets/video/hero-bg-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
-      <source src="assets/video/hero-bg.mp4" type="video/mp4">
-    </video>
-    <div class="hero-video-overlay"></div>
-  </div>
-
-  <div class="container" style="width:100%; position:relative;">
-    <div class="hero-grid">
-
-      <!-- Left: text column -->
-      <div class="hero-left">
-
-        <p class="hero-name hero-el hero-el-1">Iain McMullan</p>
-
-        <h1 class="hero-h1" id="hero-h1" aria-label="I turn business problems into brand ideas, and brand ideas into business results.">
-          <span class="h1-line"><span class="h1-word">I</span> <span class="h1-word">turn</span> <span class="h1-word">business</span> <span class="h1-word">problems</span> <span class="h1-word">into</span> <span class="h1-word">brand</span> <span class="h1-word">ideas,</span></span>
-          <span class="h1-line"><span class="h1-word">and</span> <span class="h1-word">brand</span> <span class="h1-word">ideas</span> <span class="h1-word">into</span> <span class="h1-word">business</span> <span class="h1-word">results.</span></span>
-        </h1>
-
-        <div class="hero-word-row hero-el hero-el-3">
-          <span id="word-swap" class="word-swap">Brand Strategy</span>
-        </div>
-
-        <p class="hero-bio hero-el hero-el-4">
-          Put plainly, I help leaders make braver brand decisions and defend them with numbers. 20 years across aviation, finance, and hospitality taught me the best and most effective ideas are the ones that survive the business case.
-        </p>
-
-        <div class="hero-ctas hero-el hero-el-6">
-          <a href="#work" class="btn btn-gold">View My Work</a>
-          <a href="lets-talk.html" class="btn btn-outline btn-adaptive" id="hero-cta-outline">Start a conversation</a>
-        </div>
-
-        <p class="hero-scroll-hint hero-el hero-el-7" aria-hidden="true">
-          <span>Scroll to explore &darr;</span>
-        </p>
-
-      </div><!-- /hero-left -->
-
-    </div><!-- /hero-grid -->
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 1.5 — ABOUT
-     ═══════════════════════════════════════════════════════ -->
-<section class="about" id="profile">
-  <!-- Mobile only: a flipped, in-sync copy of the hero ink that bleeds down behind the photo
-       and fades to paper by mid-photo (iOS-safe; box-reflect doesn't render over <video> on iOS). -->
-  <div class="about-ink" aria-hidden="true">
-    <canvas class="about-ink-canvas"></canvas>
-  </div>
-  <div class="container">
-    <div class="about-grid reveal">
-
-      <div class="about-portrait">
-        <div class="about-portrait-frame">
-          <img src="assets/img/iain-mcmullan.jpg" alt="Iain McMullan" loading="lazy">
-        </div>
-      </div>
-
-      <div class="about-text">
-        <span class="section-label">About</span>
-        <h2 class="display-heading display-md about-h2">The strategy, the ideas and the follow-through.</h2>
-        <p class="about-body">I build brands from inside the business and alongside it. I have led communications strategy and marketing for brands like Emirates, Hilton, Malaysia Airlines, UOB, and AIA, usually on the challenges that look commercial first and creative second. I uncover the ideas that hold up in the boardroom and in market, and do what it takes to see them through.</p>
-        <p class="about-avail"><span class="avail-dot" aria-hidden="true"><span></span><span></span></span> Singapore-based. Open to select opportunities.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 2 — SKILLS
-     ═══════════════════════════════════════════════════════ -->
-<section class="skills" id="skills">
-  <div class="container">
-
-    <div class="skills-heading-area reveal">
-      <span class="section-label">01 &middot; What I bring</span>
-      <h2 class="display-heading display-lg">The full toolkit.</h2>
-    </div>
-
-    <p class="section-intro reveal">Most careers follow a familiar arc: generalist first, then specialist. But the best ones don't stop there. Over time, deep specialism in one discipline becomes a foundation for genuine expertise across many. Mine is project direction and operational rigour, the discipline that keeps everything else honest. Every other capability I've built (brand strategy, integrated campaigns, content, digital, AI adoption) grows from that foundation. Which means I don't just think strategically. I deliver.</p>
-
-    <div class="skills-grid reveal">
-
-      <div class="skill-col">
-        <span class="skill-col-num">01</span>
-        <p class="skills-group-title">Strategy &amp; Leadership</p>
-        <ul class="skill-list">
-          <li>Brand Strategy</li>
-          <li>Marketing Strategy</li>
-          <li>Operational Leadership</li>
-          <li>New Business Development</li>
-          <li>Account Management</li>
-          <li>Financial Rigour</li>
-          <li>Project Direction</li>
-          <li>Digital Transformation</li>
-          <li>Internal Communications</li>
-        </ul>
-      </div>
-
-      <div class="skill-col">
-        <span class="skill-col-num">02</span>
-        <p class="skills-group-title">Brand &amp; Marketing</p>
-        <ul class="skill-list">
-          <li>Integrated Marketing</li>
-          <li>Content Strategy</li>
-          <li>Copywriting &amp; Editing</li>
-          <li>Employer Brand</li>
-          <li>Global Advertising</li>
-          <li>CRM &amp; Loyalty</li>
-          <li>Experiential Marketing</li>
-          <li>Campaign Strategy</li>
-        </ul>
-      </div>
-
-      <div class="skill-col">
-        <span class="skill-col-num">03</span>
-        <p class="skills-group-title">Digital, AI &amp; Craft</p>
-        <ul class="skill-list">
-          <li>AI Strategy</li>
-          <li>Agentic AI Workflows</li>
-          <li>Web &amp; Digital Marketing</li>
-          <li>UX/UI Design</li>
-          <li>Content Systems</li>
-          <li>Marketing Technology</li>
-          <li>Performance Analysis</li>
-          <li>Prompt Engineering</li>
-          <li>AI-Augmented Production</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <p class="skills-statement reveal italic">
-      20+ years across Asia and the Middle East. One consistent standard.
+  <div class="relative z-10 max-w-[1100px]">
+    <p class="hero-fade text-[11px] md:text-xs tracking-[0.5em] uppercase text-primary mb-8 font-medium">Brand &amp; Marketing Leadership</p>
+    <h1 class="font-extralight leading-[1.05] text-[clamp(34px,6vw,82px)] text-ink">
+      <span class="line-mask"><span>I turn business problems</span></span>
+      <span class="line-mask line-delay-1"><span>into brand ideas, and brand</span></span>
+      <span class="line-mask line-delay-2"><span>ideas into <em class="italic font-light text-primary">business results.</em></span></span>
+    </h1>
+    <p class="hero-fade mx-auto mt-8 max-w-[620px] text-base md:text-lg font-light leading-relaxed text-ink-dim">
+      Twenty years across aviation, finance and hospitality, building brands that move people and the numbers.
     </p>
+    <div class="hero-fade mt-11 flex flex-wrap items-center justify-center gap-5">
+      <a href="portfolio.html" class="magnetic btn-premium inline-flex items-center gap-3 px-9 py-4 rounded-full bg-volt text-ink text-[12px] tracking-[0.22em] uppercase font-medium">View the work <span class="material-symbols-outlined text-base">arrow_outward</span></a>
+      <a href="lets-talk.html" class="magnetic inline-flex items-center gap-3 px-9 py-4 rounded-full border border-ink/20 text-ink text-[12px] tracking-[0.22em] uppercase font-medium hover:border-primary transition-colors">Let's talk</a>
+    </div>
+  </div>
 
+  <div class="hero-fade absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-ink-dim">
+    <span class="text-[10px] tracking-[0.4em] uppercase">Scroll</span>
+    <span class="material-symbols-outlined text-lg animate-bounce" style="animation-duration:2.4s">expand_more</span>
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 3 — BRANDS MARQUEE
-     ═══════════════════════════════════════════════════════ -->
-<section class="brands" id="brands" style="background:var(--surface); border-top:1px solid var(--divider); border-bottom:1px solid var(--divider);">
-  <div class="container">
-    <span class="section-label reveal" style="text-align:center; display:block; margin-bottom:1.5rem;">02 &middot; Trusted by brands that set the standard</span>
-  </div>
-  <div class="marquee-outer">
-    <div class="marquee-track" aria-hidden="true">
-      <!-- First set -->
-      <img src="assets/img/emirates-logo.jpg"         alt="Emirates"             class="marquee-logo">
-      <img src="assets/img/malaysia-airlines-mono.png" alt="Malaysia Airlines"   class="marquee-logo" style="height:30px">
-      <img src="assets/img/aia-logo.jpg"              alt="AIA"                  class="marquee-logo">
-      <img src="assets/img/british-airways.png"       alt="British Airways"      class="marquee-logo" style="height:55px">
-      <img src="assets/img/microsoft.png"             alt="Microsoft"            class="marquee-logo" style="height:29px">
-      <img src="assets/img/ihg.png"                   alt="IHG"                  class="marquee-logo">
-      <img src="assets/img/pan-pacific-hotels-group.png" alt="Pan Pacific Hotels" class="marquee-logo">
-      <img src="assets/img/dubai-mall.png"            alt="Dubai Mall"           class="marquee-logo">
-      <img src="assets/img/cetaphil.png"              alt="Cetaphil"             class="marquee-logo">
-      <img src="assets/img/dole.png"                  alt="Dole"                 class="marquee-logo">
-      <img src="assets/img/ahc.jpg"                   alt="AHC"                  class="marquee-logo" style="height:36px">
-      <!-- Duplicate for seamless loop -->
-      <img src="assets/img/emirates-logo.jpg"         alt=""                     class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/malaysia-airlines-mono.png" alt=""                    class="marquee-logo" aria-hidden="true" style="height:30px">
-      <img src="assets/img/aia-logo.jpg"              alt=""                     class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/british-airways.png"       alt=""                     class="marquee-logo" style="height:55px" aria-hidden="true">
-      <img src="assets/img/microsoft.png"             alt=""                     class="marquee-logo" aria-hidden="true" style="height:29px">
-      <img src="assets/img/ihg.png"                   alt=""                     class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/pan-pacific-hotels-group.png" alt=""                  class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/dubai-mall.png"            alt=""                     class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/cetaphil.png"              alt=""                     class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/dole.png"                  alt=""                     class="marquee-logo" aria-hidden="true">
-      <img src="assets/img/ahc.jpg"                   alt=""                     class="marquee-logo" aria-hidden="true" style="height:36px">
+<!-- ── Brands marquee ────────────────────────────────────── -->
+<section class="py-20 border-y border-white/5 overflow-hidden">
+  <p class="reveal-up text-center text-[11px] tracking-[0.4em] uppercase text-ink-faint mb-12">Trusted by brands that set the standard</p>
+  <div class="marquee">
+    <div class="marquee-track text-2xl md:text-3xl font-extralight text-ink-dim">
+      <span>Emirates</span><span class="text-primary/40">&middot;</span><span>Hilton</span><span class="text-primary/40">&middot;</span><span>Malaysia Airlines</span><span class="text-primary/40">&middot;</span><span>UOB</span><span class="text-primary/40">&middot;</span><span>AIA</span><span class="text-primary/40">&middot;</span><span>Microsoft</span><span class="text-primary/40">&middot;</span><span>British Airways</span><span class="text-primary/40">&middot;</span><span>IHG</span><span class="text-primary/40">&middot;</span>
+      <span>Emirates</span><span class="text-primary/40">&middot;</span><span>Hilton</span><span class="text-primary/40">&middot;</span><span>Malaysia Airlines</span><span class="text-primary/40">&middot;</span><span>UOB</span><span class="text-primary/40">&middot;</span><span>AIA</span><span class="text-primary/40">&middot;</span><span>Microsoft</span><span class="text-primary/40">&middot;</span><span>British Airways</span><span class="text-primary/40">&middot;</span><span>IHG</span><span class="text-primary/40">&middot;</span>
     </div>
   </div>
 </section>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 4 — CASE STUDIES
-     ═══════════════════════════════════════════════════════ -->
-<section class="case-studies" id="work">
-  <div class="container">
-
-    <div class="reveal">
-      <span class="section-label">03 &middot; Selected work</span>
-      <h2 class="display-heading display-lg">A world-class portfolio.</h2>
-      <p class="section-intro">Twenty years. Two regions. Seven of the world's most demanding markets. The work below represents a fraction of what's been built (brand campaigns, global launches, product activations, and large-scale productions) for clients who don't accept anything less than exceptional.</p>
+<!-- ── Capabilities (service rows) ───────────────────────── -->
+<section id="capabilities" class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-[1500px] mx-auto">
+  <div class="reveal-up flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+    <div>
+      <p class="text-[11px] tracking-[0.4em] uppercase text-primary mb-5">01 — What I bring</p>
+      <h2 class="font-extralight leading-tight text-[clamp(30px,4vw,56px)] max-w-[640px]">Depth in the discipline of delivery, breadth on top of it.</h2>
     </div>
+    <a href="skills.html" class="link-line text-[12px] tracking-[0.22em] uppercase text-ink-dim hover:text-ink transition-colors whitespace-nowrap">See the full range &nbsp;&rarr;</a>
+  </div>
 
-    <div class="case-strip reveal">
-
-      <a href="case-studies/malaysia-airlines.html" class="case-mini" aria-label="Malaysia Airlines case study">
-        <div class="case-mini-img"><img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines brand campaign" loading="lazy"></div>
-        <span class="case-mini-tag">Brand Campaign</span>
-        <h3 class="case-mini-title">Malaysia Airlines</h3>
-      </a>
-
-      <a href="case-studies/emirates-flight-training-academy.html" class="case-mini" aria-label="Emirates Flight Training Academy case study">
-        <div class="case-mini-img"><img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy" loading="lazy"></div>
-        <span class="case-mini-tag">Integrated Campaign</span>
-        <h3 class="case-mini-title">Emirates Flight Training Academy</h3>
-      </a>
-
-      <a href="case-studies/emirates-pilot-recruitment.html" class="case-mini" aria-label="Emirates Pilot Recruitment case study">
-        <div class="case-mini-img"><img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates Adventure Awaits campaign" loading="lazy"></div>
-        <span class="case-mini-tag">Employer Branding</span>
-        <h3 class="case-mini-title">Emirates Pilot Recruitment</h3>
-      </a>
-
-      <a href="case-studies/emirates-skywards-my-family.html" class="case-mini" aria-label="Emirates Skywards My Family case study">
-        <div class="case-mini-img" style="border:1px solid #E0E0E0;"><img src="assets/img/skywards-my-family.jpg" alt="Emirates Skywards My Family" loading="lazy"></div>
-        <span class="case-mini-tag">Loyalty</span>
-        <h3 class="case-mini-title">Skywards: My Family</h3>
-      </a>
-
-      <a href="case-studies/uob-gallery.html" class="case-mini" aria-label="UOB Gallery case study">
-        <div class="case-mini-img"><img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery" loading="lazy"></div>
-        <span class="case-mini-tag">Finance</span>
-        <h3 class="case-mini-title">The UOB Gallery</h3>
-      </a>
-
-      <a href="case-studies/hilton-asia-conference.html" class="case-mini" aria-label="Hilton APAC Conference case study">
-        <div class="case-mini-img"><img src="assets/img/hilton-plenary.jpg" alt="Hilton APAC conference" loading="lazy"></div>
-        <span class="case-mini-tag">Hospitality</span>
-        <h3 class="case-mini-title">Hilton APAC Conference</h3>
-      </a>
-
-    </div>
-
-    <a href="portfolio.html" class="case-viewall reveal">See the full portfolio <span aria-hidden="true">&rarr;</span></a>
-
+  <div id="services-list" class="reveal-up">
+    <a href="skills.html#strategy" class="service-row grid grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10 py-8 md:py-10" data-img="assets/img/hilton-plenary.jpg">
+      <span class="service-num text-sm font-light text-ink-faint">01</span>
+      <div>
+        <h3 class="text-2xl md:text-4xl font-extralight text-ink">Strategy &amp; Leadership</h3>
+        <p class="mt-2 text-sm text-ink-dim font-light max-w-[520px]">Deciding what matters, then running it all the way to delivery.</p>
+      </div>
+      <span class="service-arrow material-symbols-outlined text-primary">arrow_outward</span>
+    </a>
+    <a href="skills.html#brand" class="service-row grid grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10 py-8 md:py-10" data-img="assets/img/malaysia-airlines.jpg">
+      <span class="service-num text-sm font-light text-ink-faint">02</span>
+      <div>
+        <h3 class="text-2xl md:text-4xl font-extralight text-ink">Brand &amp; Marketing</h3>
+        <p class="mt-2 text-sm text-ink-dim font-light max-w-[520px]">Turning a position into work that moves people and the numbers.</p>
+      </div>
+      <span class="service-arrow material-symbols-outlined text-primary">arrow_outward</span>
+    </a>
+    <a href="skills.html#digital" class="service-row grid grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10 py-8 md:py-10" data-img="assets/img/uob-gallery.jpg">
+      <span class="service-num text-sm font-light text-ink-faint">03</span>
+      <div>
+        <h3 class="text-2xl md:text-4xl font-extralight text-ink">Digital, AI &amp; Craft</h3>
+        <p class="mt-2 text-sm text-ink-dim font-light max-w-[520px]">Modern tooling and AI applied with craft and judgement, not hype.</p>
+      </div>
+      <span class="service-arrow material-symbols-outlined text-primary">arrow_outward</span>
+    </a>
   </div>
 </section>
+<div id="service-preview" class="rounded-md"><img data-preview src="" alt=""></div>
 
-
-<!-- ═══════════════════════════════════════════════════════
-     CAREER HIGHLIGHTS — "By the numbers" (placeholder content)
-     ═══════════════════════════════════════════════════════ -->
-<section class="highlights" id="highlights">
-  <div class="container">
-
-    <div class="reveal" style="max-width:640px">
-      <span class="section-label">Career highlights</span>
-      <h2 class="display-heading display-lg">By the numbers.</h2>
+<!-- ── Selected work (split-reveal cards) ────────────────── -->
+<section id="work" class="py-section-gap bg-surface-lowest border-y border-white/5">
+  <div class="px-margin-mobile md:px-margin-desktop max-w-[1500px] mx-auto">
+    <div class="reveal-up mb-16">
+      <p class="text-[11px] tracking-[0.4em] uppercase text-primary mb-5">02 — Selected work</p>
+      <h2 class="font-extralight leading-tight text-[clamp(30px,4vw,56px)] max-w-[700px]">Twenty years. Two regions. The work that earned its keep.</h2>
     </div>
 
-    <div class="highlights-grid">
-
-      <div class="highlight-card reveal">
-        <h3 class="highlight-company">The Emirates Group</h3>
-        <p class="highlight-desc">Directed 80+ global campaigns across Emirates Airline, Emirates Skywards loyalty programme, Emirates Flight Training Academy, and Pilot &amp; Crew recruitment.</p>
-      </div>
-
-      <div class="highlight-card reveal">
-        <h3 class="highlight-company">Malaysia Airlines</h3>
-        <p class="highlight-desc">Head of Operations and Project Director on the brand's flagship integrated campaign, bronze medal at Kancil Awards 2023.</p>
-      </div>
-
-      <div class="highlight-card reveal">
-        <h3 class="highlight-company">Bonsey Jaden</h3>
-        <p class="highlight-desc">Scaled agency operations across 6 markets as Group Head of Operations and Group Head of Business, increasing client profitability by 30%.</p>
-      </div>
-
-      <div class="highlight-card reveal">
-        <h3 class="highlight-company">Hilton</h3>
-        <p class="highlight-desc">Led strategy and communications for Hilton APAC GM and Commercial Conference 2024, complimented by their global CEO as Hilton's best global event that year.</p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     CAREER STRIP — links into the Experience page
-     ═══════════════════════════════════════════════════════ -->
-<section class="career-row reveal" aria-label="Career history">
-  <div class="container">
-    <div class="career-row-head">
-      <span class="section-label">My career journey</span>
-      <h2 class="display-heading display-md">Two decades, seven roles.</h2>
-      <a class="career-row-link" href="experience.html">See the full journey &rarr;</a>
-    </div>
-    <ol class="career-strip">
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=0" aria-label="Head of Strategy & Communications at Motion, Aug 2023 to Present">
-          <span class="career-node-logo"><img src="assets/img/motion-logo.jpg" alt="Motion: For Impact" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Head of Strategy &amp; Communications</span><span class="career-node-years">Aug 2023 &ndash; Present</span></span>
-        </a>
-      </li>
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=1" aria-label="Group Head of Operations at Bonsey Jaden, Jan 2022 to May 2023">
-          <span class="career-node-logo"><img src="assets/img/bj-logo.jpg" alt="Bonsey Jaden" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Group Head of Operations</span><span class="career-node-years">Jan 2022 &ndash; May 2023</span></span>
-        </a>
-      </li>
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=2" aria-label="Group Head of Business at Bonsey Jaden, Jun 2019 to Dec 2021">
-          <span class="career-node-logo"><img src="assets/img/bj-logo.jpg" alt="Bonsey Jaden" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Group Head of Business</span><span class="career-node-years">Jun 2019 &ndash; Dec 2021</span></span>
-        </a>
-      </li>
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=3" aria-label="Advertising Manager at The Emirates Group, Aug 2011 to May 2019">
-          <span class="career-node-logo"><img src="assets/img/emirates-logo.jpg" alt="The Emirates Group" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Advertising Manager &ndash; Emirates Skywards</span><span class="career-node-years">Aug 2011 &ndash; May 2019</span></span>
-        </a>
-      </li>
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=4" aria-label="Communications Manager at AIA Singapore, Dec 2009 to Aug 2011">
-          <span class="career-node-logo"><img src="assets/img/aia-logo.jpg" alt="AIA Singapore" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Communications Manager</span><span class="career-node-years">Dec 2009 &ndash; Aug 2011</span></span>
-        </a>
-      </li>
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=5" aria-label="Relationship Manager at Go/React, Jun 2008 to Dec 2009">
-          <span class="career-node-logo"><img src="assets/img/go-react-logo.jpg" alt="Go/React" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Relationship Manager</span><span class="career-node-years">Jun 2008 &ndash; Dec 2009</span></span>
-        </a>
-      </li>
-      <li class="career-node">
-        <a class="career-node-link" href="experience.html?role=6" aria-label="Account Manager at M&C Saatchi, Apr 2005 to Jun 2008">
-          <span class="career-node-logo"><img src="assets/img/m-amp-c-saatchi-logo.jpg" alt="M&C Saatchi" loading="lazy"></span>
-          <span class="career-node-pop"><span class="career-node-role">Account Manager</span><span class="career-node-years">Apr 2005 &ndash; Jun 2008</span></span>
-        </a>
-      </li>
-    </ol>
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 6 — LEADERSHIP PRINCIPLES
-     ═══════════════════════════════════════════════════════ -->
-<section class="leadership" id="about">
-  <div class="container">
-
-    <div class="reveal" style="max-width:600px">
-      <span class="section-label">04 &middot; How I lead</span>
-      <h2 class="display-heading display-lg">Leadership,<br>in practice.</h2>
-      <p style="margin-top:1rem; font-size:1rem; color:var(--ink-mid); line-height:1.6;">Two decades across Asia and the Middle East taught me one thing above all others: strategy is only ever as good as the team that executes it.</p>
-    </div>
-
-    <div class="principle-grid">
-
-      <div class="principle-card reveal">
-        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M22 2L11 13"/><path d="M22 2L15 22l-4-9-9-4 20-7z"/>
-        </svg>
-        <h3 class="principle-title">Sound strategy as the foundation.</h3>
-        <p class="principle-desc">A plan that doesn't survive contact with execution isn't a strategy. It's a wish. I close the gap between what's decided in the room and what actually reaches the market.</p>
-      </div>
-
-      <div class="principle-card reveal">
-        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-        </svg>
-        <h3 class="principle-title">Hire for attitude.</h3>
-        <p class="principle-desc">Skills can be learned but personality and perspectives are innate. The right people are those who bring the right attitude, with a hunger for development and accomplishment. I help to nurture both.</p>
-      </div>
-
-      <div class="principle-card reveal">
-        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-        </svg>
-        <h3 class="principle-title">Clarity is kindness.</h3>
-        <p class="principle-desc">Ambiguity is the enemy of great work. Clear direction, clear feedback, clear expectations: these aren't management ideals, they're the conditions that let creative people do their best work.</p>
-      </div>
-
-      <div class="principle-card reveal">
-        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-        </svg>
-        <h3 class="principle-title">Live in the detail.</h3>
-        <p class="principle-desc">The difference between good and exceptional is almost always found in the details others didn't think to check. I've directed hundreds of campaigns and productions across more than a dozen markets. The brief matters. And so does the kerning.</p>
-      </div>
-
-      <div class="principle-card reveal">
-        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
-        </svg>
-        <h3 class="principle-title">Own the numbers.</h3>
-        <p class="principle-desc">Brand love and business results are not conflicting things. I've spent more than 20 years proving it, building campaigns that move people and move the needle. Creative ambition with commercial discipline. Both of them. Always.</p>
-      </div>
-
-      <div class="principle-card reveal">
-        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-        <h3 class="principle-title">Move fast. Build to last.</h3>
-        <p class="principle-desc">Speed without rigour produces noise and mess. Rigour without urgency produces nothing at all. I've built workflows, teams and campaigns that move quickly, and hold up over time.</p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 8 — PERSPECTIVES
-     ═══════════════════════════════════════════════════════ -->
-<section class="perspectives" id="perspectives">
-  <div class="container">
-
-    <div class="reveal">
-      <span class="section-label">05 &middot; Perspectives</span>
-      <h2 class="display-heading display-lg">What I'm thinking about.</h2>
-      <p style="margin-top:0.875rem; color:var(--ink-mid); max-width:520px; font-size:1rem; line-height:1.6;">Short takes on brand, loyalty and the craft of marketing leadership — drawn from twenty years of building them.</p>
-    </div>
-
-    <div class="persp-grid persp-grid--strip">
-
-      <!-- Card 1 -->
-      <article class="persp-card reveal">
-        <div class="persp-art">
-          <img src="assets/img/perspectives/loyalty.jpg" alt="An airport lounge host welcoming a returning guest" loading="lazy" style="object-position:center 35%">
-          <span class="persp-blob" style="width:65%;aspect-ratio:1/1;left:-8%;top:-14%;background:#C4922A;opacity:0.2"></span>
-          <span class="persp-blob" style="width:50%;aspect-ratio:1/1;right:-10%;bottom:-12%;background:#F0E6D0;opacity:0.6"></span>
-          <span class="persp-blob" style="width:38%;aspect-ratio:1/1;left:36%;top:42%;background:#E8D5A0;opacity:0.4"></span>
+    <div class="grid md:grid-cols-2 gap-x-10 gap-y-16">
+      <a href="portfolio.html" class="project-card reveal-up group block">
+        <div class="industry-tile rounded-md aspect-[4/3] mb-6">
+          <img class="split-reveal-img w-full h-full object-cover" src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines brand campaign" loading="lazy">
         </div>
-        <div class="persp-body">
-          <span class="persp-tag">Loyalty</span>
-          <h3 class="persp-title">Your Points Programme is Not a Loyalty Programme.</h3>
-          <p class="persp-text">What most brands call a loyalty programme is actually a discount engine with a badge on it. That is not loyalty. It is arbitrage.</p>
-          <a class="persp-readfull" href="articles/loyalty.html">Read Full Article <span aria-hidden="true">&rarr;</span></a>
+        <p class="text-[11px] tracking-[0.3em] uppercase text-primary mb-2">Brand campaign</p>
+        <h3 class="text-2xl font-extralight text-ink">Malaysia Airlines — This is Malaysian hospitality</h3>
+      </a>
+      <a href="portfolio.html" class="project-card reveal-up stagger-1 group block md:mt-16">
+        <div class="industry-tile rounded-md aspect-[4/3] mb-6">
+          <img class="split-reveal-img w-full h-full object-cover" src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy" loading="lazy">
         </div>
-      </article>
-
-      <!-- Card 2 -->
-      <article class="persp-card reveal">
-        <div class="persp-art">
-          <img src="assets/img/perspectives/ai-craft.jpg" alt="A designer sketching by hand beside a laptop" loading="lazy" style="object-position:center 40%">
-          <span class="persp-blob" style="width:60%;aspect-ratio:1/1;right:-10%;top:-8%;background:#F0E6D0;opacity:0.7"></span>
-          <span class="persp-blob" style="width:54%;aspect-ratio:1/1;left:-12%;bottom:-10%;background:#C4922A;opacity:0.18"></span>
-          <span class="persp-blob" style="width:38%;aspect-ratio:1/1;left:40%;top:22%;background:#E8D5A0;opacity:0.5"></span>
+        <p class="text-[11px] tracking-[0.3em] uppercase text-primary mb-2">Integrated campaign</p>
+        <h3 class="text-2xl font-extralight text-ink">Emirates Flight Training Academy</h3>
+      </a>
+      <a href="portfolio.html" class="project-card reveal-up group block">
+        <div class="industry-tile rounded-md aspect-[4/3] mb-6">
+          <img class="split-reveal-img w-full h-full object-cover" src="assets/img/uob-gallery.jpg" alt="The UOB Gallery" loading="lazy">
         </div>
-        <div class="persp-body">
-          <span class="persp-tag">AI &amp; Craft</span>
-          <h3 class="persp-title">AI Won't Replace You. It Will Replace the Version of You That Was Already on Autopilot.</h3>
-          <p class="persp-text">The question isn't whether AI can do your job. It's which parts of your job were already replaceable before AI arrived.</p>
-          <a class="persp-readfull" href="articles/ai-craft.html">Read Full Article <span aria-hidden="true">&rarr;</span></a>
+        <p class="text-[11px] tracking-[0.3em] uppercase text-primary mb-2">Finance</p>
+        <h3 class="text-2xl font-extralight text-ink">The UOB Gallery</h3>
+      </a>
+      <a href="portfolio.html" class="project-card reveal-up stagger-1 group block md:mt-16">
+        <div class="industry-tile rounded-md aspect-[4/3] mb-6">
+          <img class="split-reveal-img w-full h-full object-cover" src="assets/img/hilton-plenary.jpg" alt="Hilton APAC conference" loading="lazy">
         </div>
-      </article>
-
-      <!-- Card 3 -->
-      <article class="persp-card reveal">
-        <div class="persp-art">
-          <img src="assets/img/perspectives/brand-performance.jpg" alt="A team in conversation beside a strategist mapping metrics" loading="lazy" style="object-position:center">
-          <span class="persp-blob" style="width:56%;aspect-ratio:1/1;left:-6%;bottom:-10%;background:#C4922A;opacity:0.15"></span>
-          <span class="persp-blob" style="width:56%;aspect-ratio:1/1;right:-8%;top:-10%;background:#F0E6D0;opacity:0.6"></span>
-          <span class="persp-blob" style="width:36%;aspect-ratio:1/1;left:42%;top:44%;background:#E8D5A0;opacity:0.4"></span>
-        </div>
-        <div class="persp-body">
-          <span class="persp-tag">Brand vs. Performance</span>
-          <h3 class="persp-title">Stop Defending 'Brand'. Start Proving It.</h3>
-          <p class="persp-text">The brand versus performance debate is not a debate. It's a budget conversation wearing the costume of a philosophy.</p>
-          <a class="persp-readfull" href="articles/brand-performance.html">Read Full Article <span aria-hidden="true">&rarr;</span></a>
-        </div>
-      </article>
-
-    </div>
-
-    <a href="perspectives.html" class="persp-readmore reveal">See all articles <span aria-hidden="true">&rarr;</span></a>
-
-    <!-- Full-width pull quote (chars reveal via GSAP) -->
-    <div class="persp-pull">
-      <blockquote>"AI won't replace marketers. It will replace the marketing that was already replaceable."</blockquote>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 9 — CREDENTIALS
-     ═══════════════════════════════════════════════════════ -->
-<section class="credentials" id="credentials" style="background:var(--gold-warm)">
-  <div class="container">
-
-    <div class="reveal">
-      <span class="section-label">06 &middot; Credentials</span>
-      <h2 class="display-heading display-lg">Qualifications.</h2>
-      <p style="margin-top:1rem; font-size:1rem; color:var(--ink-mid); line-height:1.6; max-width:600px;">Built on academic rigour. Sharpened in the field.</p>
-    </div>
-
-    <div class="cred-grid">
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/cim-logo.jpg" alt="CIM" loading="lazy">
-        <div class="cred-qual">CIM</div>
-        <p class="cred-name">Chartered Marketer</p>
-        <p class="cred-inst">CIM</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/ulster-logo.jpg" alt="Ulster University" loading="lazy">
-        <div class="cred-qual">MA</div>
-        <p class="cred-name">Marketing</p>
-        <p class="cred-inst">Ulster University</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/idm-logo.jpg" alt="IDM" loading="lazy">
-        <div class="cred-qual">PG Dip</div>
-        <p class="cred-name">Digital Marketing</p>
-        <p class="cred-inst">IDM</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/warwick-logo.jpg" alt="Warwick University" loading="lazy">
-        <div class="cred-qual">ELDP</div>
-        <p class="cred-name">Leadership Development</p>
-        <p class="cred-inst">Warwick University &amp; The Emirates Group</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/uwtsd-logo.jpg" alt="University of Wales Trinity Saint David" loading="lazy">
-        <div class="cred-qual">MA</div>
-        <p class="cred-name">Ancient History</p>
-        <p class="cred-inst">UWTSD</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/loughborough-logo.jpg" alt="Loughborough University" loading="lazy">
-        <div class="cred-qual">BSc</div>
-        <p class="cred-name">English with Sports Science</p>
-        <p class="cred-inst">Loughborough University</p>
-      </div>
-
-    </div>
-
-    <h3 class="courses-heading reveal">Professional Development</h3>
-
-    <div class="course-grid">
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/google-cloud.png" alt="Google Cloud" loading="lazy">
-        <p class="cred-name">Generative AI Leader</p>
-        <p class="cred-inst">Google Cloud</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/google-g.png" alt="Google" loading="lazy">
-        <p class="cred-name">UX Design Specialisation</p>
-        <p class="cred-inst">Google</p>
-      </div>
-
-      <div class="cred-card reveal">
-        <img class="cred-logo" src="assets/img/vanderbilt.png" alt="Vanderbilt University" loading="lazy">
-        <p class="cred-name">Agentic AI &amp; AI Agents for Leaders</p>
-        <p class="cred-inst">Vanderbilt University</p>
-      </div>
-
-    </div>
-
-    <p class="courses-note reveal" style="margin-top:1.5rem; font-size:0.85rem; color:var(--ink-mid); font-style:italic; text-align:center;">Continuously updated, because the industry doesn't stop moving.</p>
-
-  </div>
-</section>
-
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 10 — CONTACT (dark)
-     ═══════════════════════════════════════════════════════ -->
-<section class="contact" id="contact">
-  <div class="contact-inner reveal">
-
-    <h2 class="contact-heading">Let's talk.</h2>
-
-    <p class="contact-sub">If you're building something that needs serious marketing leadership, I'd like to hear about it.</p>
-    <p class="contact-sub" style="margin-top:0.6rem; font-size:0.95rem; opacity:0.82;">The best conversations start with a brief. Or sometimes just a coffee. Either works.</p>
-
-    <div class="contact-ctas">
-      <a href="lets-talk.html" class="btn-gold-dark">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Get in touch
+        <p class="text-[11px] tracking-[0.3em] uppercase text-primary mb-2">Hospitality</p>
+        <h3 class="text-2xl font-extralight text-ink">Hilton APAC — Our Team. Our Time.</h3>
       </a>
     </div>
 
+    <div class="reveal-up mt-16 text-center">
+      <a href="portfolio.html" class="magnetic inline-flex items-center gap-3 px-9 py-4 rounded-full border border-ink/20 text-ink text-[12px] tracking-[0.22em] uppercase font-medium hover:border-primary transition-colors">See the full portfolio <span class="material-symbols-outlined text-base">arrow_outward</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ── By the numbers (count-up) ─────────────────────────── -->
+<section class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-[1500px] mx-auto">
+  <div class="reveal-up mb-16">
+    <p class="text-[11px] tracking-[0.4em] uppercase text-primary mb-5">03 — By the numbers</p>
+    <h2 class="font-extralight leading-tight text-[clamp(30px,4vw,56px)] max-w-[640px]">Brand love and business results, proven.</h2>
+  </div>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 reveal-up">
+    <div>
+      <p class="stat-num text-[clamp(44px,6vw,84px)] leading-none"><span data-count="20" data-decimals="0">0</span>M+</p>
+      <p class="mt-3 text-xs tracking-[0.25em] uppercase text-ink-dim">Skywards members grown</p>
+    </div>
+    <div>
+      <p class="stat-num text-[clamp(44px,6vw,84px)] leading-none"><span data-count="45" data-decimals="0">0</span>%</p>
+      <p class="mt-3 text-xs tracking-[0.25em] uppercase text-ink-dim">Loyalty share of airline revenue</p>
+    </div>
+    <div>
+      <p class="stat-num text-[clamp(44px,6vw,84px)] leading-none"><span data-count="50" data-decimals="0">0</span>%</p>
+      <p class="mt-3 text-xs tracking-[0.25em] uppercase text-ink-dim">Team utilisation lift with AI</p>
+    </div>
+    <div>
+      <p class="stat-num text-[clamp(44px,6vw,84px)] leading-none"><span data-count="20" data-decimals="0">0</span>+</p>
+      <p class="mt-3 text-xs tracking-[0.25em] uppercase text-ink-dim">Years across Asia &amp; the Gulf</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Philosophy ────────────────────────────────────────── -->
+<section class="py-section-gap bg-surface-lowest border-y border-white/5 relative overflow-hidden">
+  <div class="light-bloom absolute inset-0"></div>
+  <div class="relative px-margin-mobile md:px-margin-desktop max-w-[1100px] mx-auto text-center">
+    <p class="reveal-up text-[11px] tracking-[0.4em] uppercase text-primary mb-10">The approach</p>
+    <p class="reveal-up font-extralight leading-[1.25] text-[clamp(24px,3.4vw,46px)] text-ink">
+      I build brands from inside the business and alongside it &mdash; finding the <em class="italic font-light text-primary">ideas that hold up in the boardroom and in market</em>, and doing what it takes to see them through.
+    </p>
+    <p class="reveal-up stagger-2 mt-10 text-sm tracking-[0.2em] uppercase text-ink-dim">Iain McMullan &middot; Singapore</p>
+  </div>
+</section>
+
+<!-- ── Contact ───────────────────────────────────────────── -->
+<section id="contact" class="py-section-gap px-margin-mobile md:px-margin-desktop max-w-[1500px] mx-auto text-center relative overflow-hidden">
+  <div class="light-bloom absolute inset-0"></div>
+  <div class="relative max-w-[900px] mx-auto">
+    <p class="reveal-up text-[11px] tracking-[0.4em] uppercase text-primary mb-8">Let's talk</p>
+    <h2 class="reveal-up font-extralight leading-[1.05] text-[clamp(40px,7vw,96px)] text-ink">Let's talk.</h2>
+    <p class="reveal-up stagger-1 mx-auto mt-8 max-w-[560px] text-base md:text-lg font-light text-ink-dim">If you're building something that needs serious marketing leadership, I'd like to hear about it.</p>
+    <div class="reveal-up stagger-2 mt-12 flex flex-wrap items-center justify-center gap-5">
+      <a href="mailto:iainmcm@gmail.com" class="magnetic btn-premium inline-flex items-center gap-3 px-10 py-5 rounded-full bg-volt text-ink text-[12px] tracking-[0.22em] uppercase font-medium">Start a conversation <span class="material-symbols-outlined text-base">arrow_outward</span></a>
+      <a href="https://www.linkedin.com/in/iainmcmullan/" target="_blank" rel="noopener noreferrer" class="magnetic link-line text-[12px] tracking-[0.22em] uppercase text-ink-dim hover:text-ink transition-colors">LinkedIn</a>
+    </div>
   </div>
 </section>
 
 </main>
 
-<!-- ── FOOTER ──────────────────────────────────────────────── -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <span class="footer-brand">Iain McMullan</span>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="https://www.linkedin.com/in/iainmcmullan/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="#work">Case Studies</a>
-      <a href="lets-talk.html">Contact</a>
-    </nav>
-    <p class="footer-copy">&copy; 2026 Iain McMullan</p>
-  </div>
+<!-- ── Footer ────────────────────────────────────────────── -->
+<footer class="px-margin-mobile md:px-margin-desktop max-w-[1500px] mx-auto py-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] tracking-[0.2em] uppercase text-ink-faint">
+  <span class="text-ink-dim">Iain McMullan</span>
+  <span>&copy; 2026 &middot; Singapore</span>
 </footer>
 
-<!-- Ambient film grain (very subtle, non-interactive) -->
-<div class="grain" aria-hidden="true"></div>
-
-<!-- GSAP + ScrollTrigger (CDN) — drives hero word-rise, parallax, timeline scrub, pull-quote reveal -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="assets/portfolio.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@2/dist/lenis.min.js"></script>
+<script src="assets/ms-site.js"></script>
 </body>
 </html>
