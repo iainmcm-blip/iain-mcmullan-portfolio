@@ -286,6 +286,20 @@
     }
   }
 
+  /* ── BRANDS MARQUEE: eager-load logos + clone a second row (shown on mobile) ───── */
+  (function dualMarquee() {
+    const outer = document.querySelector('.marquee-outer');
+    const track = outer && outer.querySelector('.marquee-track');
+    if (!outer || !track) return;
+    track.classList.add('marquee-track--1');
+    const clone = track.cloneNode(true);
+    clone.classList.remove('marquee-track--1');
+    clone.classList.add('marquee-track--2');
+    outer.appendChild(clone);
+    // mobile Safari can skip lazy off-screen animated images — force them to load
+    outer.querySelectorAll('.marquee-logo').forEach(function (im) { im.loading = 'eager'; });
+  })();
+
   /* ── MOBILE ADAPTIVE MASTHEAD ───────────────────────────── */
   // iOS Safari will not apply mix-blend-mode over a <video> (the video is composited on its
   // own GPU layer), so the desktop per-letter blend is unreadable on a phone. On mobile we

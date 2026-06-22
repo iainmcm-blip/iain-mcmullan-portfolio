@@ -665,6 +665,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   gap: 4rem;
   width: max-content;
 }
+.marquee-track--2 { display: none; }   /* desktop is a single row; second row is shown on mobile */
 @media (prefers-reduced-motion: no-preference) {
   .marquee-track { animation: marqueeScroll 55s linear infinite; }
 }
@@ -1193,8 +1194,11 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   /* Mobile browsers can drop the animated marquee content when it's masked
      (mask-image + transform compositing bug). Remove the mask and lift opacity so
      the brand logos are reliably visible. */
-  .marquee-outer { -webkit-mask-image: none; mask-image: none; }
-  .marquee-logo { filter: grayscale(1) opacity(0.78); }
+  /* Mobile: two rows, faster, no mask (mobile can drop masked animated content). */
+  .marquee-outer { -webkit-mask-image: none; mask-image: none; display: flex; flex-direction: column; gap: 1.1rem; }
+  .marquee-track { animation-duration: 20s; gap: 2.25rem; }
+  .marquee-track--2 { display: flex; animation-direction: reverse; animation-delay: -10s; }
+  .marquee-logo { height: 38px; filter: grayscale(1) opacity(0.9); }
 }
 
 @media (max-width: 480px) {
