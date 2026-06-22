@@ -665,7 +665,6 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   gap: 4rem;
   width: max-content;
 }
-.marquee-track--2 { display: none; }   /* desktop is a single row; second row is shown on mobile */
 @media (prefers-reduced-motion: no-preference) {
   .marquee-track { animation: marqueeScroll 55s linear infinite; }
 }
@@ -1173,7 +1172,10 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .nav-hamburger { display: flex; }
   .skills-grid { grid-template-columns: 1fr; }
   .cred-grid   { grid-template-columns: repeat(2, 1fr); }
-  .course-grid { grid-template-columns: 1fr; }
+  .course-grid { grid-template-columns: repeat(2, 1fr); }
+  .course-grid .cred-card:nth-child(3) { grid-column: 1 / -1; }   /* Vanderbilt full width below the two Google cards */
+  /* show the Perspectives pull-quote statically on mobile (its desktop char-reveal can leave it blank) */
+  .js .persp-pull blockquote .char { opacity: 1 !important; }
   .principle-grid { grid-template-columns: 1fr; }
   .impact-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-stats { gap: 1.5rem; }
@@ -1194,11 +1196,10 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   /* Mobile browsers can drop the animated marquee content when it's masked
      (mask-image + transform compositing bug). Remove the mask and lift opacity so
      the brand logos are reliably visible. */
-  /* Mobile: two rows, faster, no mask (mobile can drop masked animated content). */
-  .marquee-outer { -webkit-mask-image: none; mask-image: none; display: flex; flex-direction: column; gap: 1.1rem; }
-  .marquee-track { animation-duration: 20s; gap: 2.25rem; }
-  .marquee-track--2 { display: flex; animation-direction: reverse; animation-delay: -10s; }
-  .marquee-logo { height: 38px; filter: grayscale(1) opacity(0.9); }
+  /* Mobile: single row, faster, no mask (mobile can drop masked animated content). */
+  .marquee-outer { -webkit-mask-image: none; mask-image: none; }
+  .marquee-track { animation-duration: 22s; gap: 2.5rem; }
+  .marquee-logo { filter: grayscale(1) opacity(0.9); }
 }
 
 @media (max-width: 480px) {
@@ -1208,7 +1209,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .hero-ctas { flex-direction: column; align-items: stretch; }
   .hero-ctas .btn { width: 100%; justify-content: center; }
   .case-grid { gap: 1.25rem; }
-  .cred-grid { grid-template-columns: 1fr; }
+  .cred-grid { grid-template-columns: repeat(2, 1fr); }
   .impact-grid { grid-template-columns: 1fr; }
   .contact-links { gap: 2rem; }
   .timeline-list { padding-left: 4rem; }
