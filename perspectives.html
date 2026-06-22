@@ -70,6 +70,21 @@
 .persp-cue::after { content: '\2192'; }
 .persp-card:hover .persp-cue { color: var(--gold); }
 .persp-card.is-open .persp-cue { display: none; }
+
+/* ── Topic filter chips (JS-injected) ────────────────────────── */
+.persp-filter { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 2.5rem; }
+.persp-chip {
+  font-family: var(--ff-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.01em;
+  padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); cursor: pointer;
+  border: 1px solid var(--divider); background: var(--surface); color: var(--ink-mid);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.persp-chip:hover { border-color: var(--gold-mid); color: var(--ink); }
+.persp-chip.active { background: var(--gold-dark); border-color: var(--gold-dark); color: #fff; }
+.persp-chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.persp-chip-count { opacity: 0.6; font-size: 0.78em; margin-left: 0.35rem; }
+.persp-card.persp-hide { display: none; }
+.persp-empty { display: none; color: var(--ink-mid); font-size: 1rem; padding: 1rem 0 2rem; }
 </style>
 </head>
 <body>
@@ -410,18 +425,29 @@
   if (!cards.length) return;
   var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
   var openCard = null;
+  var activeCat = 'all';
+  function visibleCards() { return cards.filter(function (c) { return !c.classList.contains('persp-hide'); }); }
 
   // Card artwork (order matches the cards in the grid). objectPosition tunes the banner crop.
+  // cat = topic filter group.
   var ART = [
-    { slug: 'loyalty', alt: 'An airport lounge host welcoming a returning guest', pos: 'center 35%' },
-    { slug: 'ai-craft', alt: 'A designer sketching by hand beside a laptop', pos: 'center 40%' },
-    { slug: 'brand-performance', alt: 'A team in conversation beside a strategist mapping metrics', pos: 'center' },
-    { slug: 'leadership', alt: 'A team collaborating around a table', pos: 'center 35%' },
-    { slug: 'experiential', alt: 'Guests gathered at a live brand event', pos: 'center 50%' },
-    { slug: 'strategy', alt: 'An antique map, coins and a journal of plans', pos: 'center 45%' },
-    { slug: 'cultural-intelligence', alt: 'An editorial image for an essay on cultural intelligence in marketing', pos: 'center' },
-    { slug: 'industry-structure', alt: 'An editorial image for an article on agency consolidation', pos: 'center' },
-    { slug: 'creativity-standards', alt: 'An editorial image for an article on creative awards and AI', pos: 'center' }
+    { slug: 'loyalty', cat: 'brand', alt: 'An airport lounge host welcoming a returning guest', pos: 'center 35%' },
+    { slug: 'ai-craft', cat: 'ai', alt: 'A designer sketching by hand beside a laptop', pos: 'center 40%' },
+    { slug: 'brand-performance', cat: 'brand', alt: 'A team in conversation beside a strategist mapping metrics', pos: 'center' },
+    { slug: 'leadership', cat: 'strategy', alt: 'A team collaborating around a table', pos: 'center 35%' },
+    { slug: 'experiential', cat: 'brand', alt: 'Guests gathered at a live brand event', pos: 'center 50%' },
+    { slug: 'strategy', cat: 'strategy', alt: 'An antique map, coins and a journal of plans', pos: 'center 45%' },
+    { slug: 'cultural-intelligence', cat: 'industry', alt: 'An editorial image for an essay on cultural intelligence in marketing', pos: 'center' },
+    { slug: 'industry-structure', cat: 'industry', alt: 'An editorial image for an article on agency consolidation', pos: 'center' },
+    { slug: 'creativity-standards', cat: 'ai', alt: 'An editorial image for an article on creative awards and AI', pos: 'center' }
+  ];
+
+  // Topic filter groups (order = chip order). 'all' is added first as the default.
+  var CATS = [
+    { key: 'brand', label: 'Brand & Marketing' },
+    { key: 'strategy', label: 'Strategy & Leadership' },
+    { key: 'ai', label: 'AI & Creativity' },
+    { key: 'industry', label: 'Industry & Culture' }
   ];
 
   function setClosed(card) {
@@ -437,6 +463,7 @@
 
   cards.forEach(function (card, i) {
     card.dataset.idx = i;
+    if (ART[i] && ART[i].cat) card.dataset.cat = ART[i].cat;
     card.style.order = i * 10;
     setClosed(card);
     var cue = document.createElement('span');
@@ -481,6 +508,69 @@
     if (btn) btn.addEventListener('click', function (e) { e.stopPropagation(); closeTile(card); });
   });
 
+  /* ── Topic filter (progressive enhancement: built in JS, so no dead controls without JS) ── */
+  var chips = [];
+  (function buildFilter() {
+    var count = function (key) {
+      return key === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat === key; }).length;
+    };
+    var bar = document.createElement('div');
+    bar.className = 'persp-filter';
+    bar.setAttribute('role', 'group');
+    bar.setAttribute('aria-label', 'Filter articles by topic');
+    var defs = [{ key: 'all', label: 'All' }].concat(CATS);
+    defs.forEach(function (d) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'persp-chip' + (d.key === 'all' ? ' active' : '');
+      b.dataset.cat = d.key;
+      b.setAttribute('aria-pressed', String(d.key === 'all'));
+      b.innerHTML = d.label + ' <span class="persp-chip-count">' + count(d.key) + '</span>';
+      b.addEventListener('click', function () {
+        applyFilter(d.key === activeCat && d.key !== 'all' ? 'all' : d.key);   // re-click a label to reset
+      });
+      bar.appendChild(b);
+      chips.push(b);
+    });
+    grid.parentNode.insertBefore(bar, grid);
+
+    var empty = document.createElement('p');
+    empty.className = 'persp-empty';
+    empty.textContent = 'No articles in this topic yet.';
+    grid.parentNode.insertBefore(empty, grid.nextSibling);
+  })();
+
+  function applyFilter(cat) {
+    activeCat = cat;
+    // collapse any open article instantly (no FLIP) before reflowing the grid
+    if (openCard) {
+      openCard.classList.remove('is-open'); setClosed(openCard);
+      openCard.style.order = parseInt(openCard.dataset.idx, 10) * 10;
+      openCard = null;
+    }
+    chips.forEach(function (ch) {
+      var on = ch.dataset.cat === cat;
+      ch.classList.toggle('active', on);
+      ch.setAttribute('aria-pressed', String(on));
+    });
+    var shown = [];
+    cards.forEach(function (card) {
+      var match = (cat === 'all' || card.dataset.cat === cat);
+      card.classList.toggle('persp-hide', !match);
+      if (match) shown.push(card);
+    });
+    var empty = document.querySelector('.persp-empty');
+    if (empty) empty.style.display = shown.length ? 'none' : 'block';
+    if (!reduceMQ.matches && cards[0].animate) {
+      shown.forEach(function (card, i) {
+        card.animate(
+          [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }],
+          { duration: 450, delay: Math.min(i, 8) * 40, easing: 'cubic-bezier(0.22,1,0.36,1)' }
+        );
+      });
+    }
+  }
+
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && openCard) closeTile(openCard);
   });
@@ -493,9 +583,11 @@
   });
 
   function colCount() {
-    var top = cards[0].getBoundingClientRect().top, n = 0;
-    for (var i = 0; i < cards.length; i++) {
-      if (Math.abs(cards[i].getBoundingClientRect().top - top) < 4) n++; else break;
+    var vis = visibleCards();
+    if (!vis.length) return 1;
+    var top = vis[0].getBoundingClientRect().top, n = 0;
+    for (var i = 0; i < vis.length; i++) {
+      if (Math.abs(vis[i].getBoundingClientRect().top - top) < 4) n++; else break;
     }
     return Math.max(1, n);
   }
@@ -507,9 +599,10 @@
     if (reduceMQ.matches || !cards[0].animate) { mutate(); return; }
     flipAnims.forEach(function (a) { try { a.cancel(); } catch (e) {} });   // settle any in-flight run first
     flipAnims = [];
-    var first = cards.map(function (c) { return c.getBoundingClientRect(); });
+    var vis = visibleCards();
+    var first = vis.map(function (c) { return c.getBoundingClientRect(); });
     mutate();
-    cards.forEach(function (c, i) {
+    vis.forEach(function (c, i) {
       var last = c.getBoundingClientRect();
       var dx = first[i].left - last.left;
       var dy = first[i].top - last.top;
@@ -522,8 +615,10 @@
   }
 
   function openTile(card) {
+    var vis = visibleCards();
     var cols = colCount();
-    var rowStart = Math.floor(parseInt(card.dataset.idx, 10) / cols) * cols;
+    var p = vis.indexOf(card);
+    var rowLeader = vis[Math.floor(p / cols) * cols] || card;       // first card on the open card's visual row
     var prev = openCard;
     flip(function () {
       if (prev && prev !== card) {
@@ -531,7 +626,7 @@
         prev.style.order = parseInt(prev.dataset.idx, 10) * 10;
       }
       card.classList.add('is-open'); setOpen(card);
-      card.style.order = rowStart * 10 - 1;
+      card.style.order = parseInt(rowLeader.dataset.idx, 10) * 10 - 1;
     });
     openCard = card;
     window.setTimeout(function () {
