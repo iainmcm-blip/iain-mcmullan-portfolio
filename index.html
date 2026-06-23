@@ -86,14 +86,14 @@
      ═══════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
 
-  <!-- Full-bleed ambient ink video (recoloured warm gold) + warm legibility overlay -->
-  <div class="hero-video-wrap" aria-hidden="true">
-    <video class="hero-video" autoplay muted loop playsinline crossorigin="anonymous" preload="auto">
-      <source src="assets/video/hero-bg-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
-      <source src="assets/video/hero-bg.mp4" type="video/mp4">
+  <!-- Warm gold ink accent (Option 1), right-biased and masked into the paper ground -->
+  <div class="hero-ink" aria-hidden="true">
+    <video class="hero-ink-vid" autoplay muted loop playsinline preload="auto">
+      <source src="assets/video/hero-ink-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
+      <source src="assets/video/hero-ink.mp4" type="video/mp4">
     </video>
-    <div class="hero-video-overlay"></div>
   </div>
+  <div class="hero-vignette" aria-hidden="true"></div>
 
   <div class="container" style="width:100%; position:relative;">
     <div class="hero-grid">
@@ -101,38 +101,37 @@
       <!-- Left: text column -->
       <div class="hero-left">
 
-        <p class="hero-name hero-el hero-el-1">Iain McMullan</p>
+        <p class="hero-name hero-el hero-el-1">Iain McMullan <span class="hero-rule" aria-hidden="true"></span></p>
 
         <h1 class="hero-h1" id="hero-h1" aria-label="I turn business problems into brand ideas, and brand ideas into business results.">
-          <span class="h1-line"><span class="h1-word">I</span> <span class="h1-word">turn</span> <span class="h1-word">business</span> <span class="h1-word">problems</span> <span class="h1-word">into</span> <span class="h1-word">brand</span> <span class="h1-word">ideas,</span></span>
-          <span class="h1-line"><span class="h1-word">and</span> <span class="h1-word">brand</span> <span class="h1-word">ideas</span> <span class="h1-word">into</span> <span class="h1-word">business</span> <span class="h1-word">results.</span></span>
+          <span class="h1-line"><span class="h1-word">I</span> <span class="h1-word">turn</span> <span class="h1-word">business</span> <span class="h1-word">problems</span> <span class="h1-word">into</span> <span class="h1-gold"><span class="h1-word">brand</span> <span class="h1-word">ideas,</span></span></span>
+          <span class="h1-line"><span class="h1-word">and</span> <span class="h1-word">brand</span> <span class="h1-word">ideas</span> <span class="h1-word">into</span> <span class="h1-gold"><span class="h1-word">business</span> <span class="h1-word">results.</span></span></span>
         </h1>
 
         <p class="hero-role hero-el hero-el-2">Senior brand and marketing leader, Singapore.</p>
 
-        <!-- [VERIFY BEFORE LIVE: hero proof figures are drawn from the Emirates Skywards role copy] -->
-        <div class="hero-stats hero-el hero-el-3">
-          <div class="stat-item">
-            <div class="stat-number">20M<span>+</span></div>
-            <div class="stat-label">Skywards members,<br>grown from 8M</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">45%<span>+</span></div>
-            <div class="stat-label">of airline revenue<br>from loyalty</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">USD&nbsp;2M<span>+</span></div>
-            <div class="stat-label">incremental revenue<br>from one launch</div>
-          </div>
+        <div class="hero-ctas hero-el hero-el-4">
+          <a href="#work" class="btn btn-gold">View My Work</a>
+          <a href="lets-talk.html" class="btn btn-outline" id="hero-cta-outline">Start a conversation</a>
         </div>
 
-        <p class="hero-bio hero-el hero-el-4">
-          Put plainly, I help leaders make braver brand decisions and defend them with numbers. 20 years across aviation, finance, and hospitality taught me the best and most effective ideas are the ones that survive the business case.
-        </p>
-
-        <div class="hero-ctas hero-el hero-el-6">
-          <a href="#work" class="btn btn-gold">View My Work</a>
-          <a href="lets-talk.html" class="btn btn-outline btn-adaptive" id="hero-cta-outline">Start a conversation</a>
+        <!-- [VERIFY BEFORE LIVE: hero proof figures are drawn from the Emirates Skywards role copy] -->
+        <div class="hero-proof hero-el hero-el-6">
+          <p class="hero-proof-eye">The proof, in numbers</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">20M<span>+</span></div>
+              <div class="stat-label">Skywards members,<br>grown from 8M</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">45%<span>+</span></div>
+              <div class="stat-label">of airline revenue<br>from loyalty</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">USD&nbsp;2M<span>+</span></div>
+              <div class="stat-label">incremental revenue<br>from one launch</div>
+            </div>
+          </div>
         </div>
 
         <p class="hero-scroll-hint hero-el hero-el-7" aria-hidden="true">

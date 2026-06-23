@@ -579,6 +579,77 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   50%      { transform: translateY(-8px); }
 }
 
+/* ═══ EDITORIAL HERO — gold ink accent + solid paper-legible type ═══ */
+.hero-ink {
+  position: absolute; inset: 0 0 0 auto; width: 62%; z-index: 0;
+  overflow: hidden; pointer-events: none;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 36%, #000 100%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 36%, #000 100%);
+}
+.hero-ink-vid {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 62% center;
+  filter: sepia(0.32) saturate(1.32) hue-rotate(-12deg) brightness(1.02) contrast(1.04);
+  mix-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: reduce) { .hero-ink { display: none; } }
+.hero-vignette {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(125% 95% at 36% 36%, transparent 56%, rgba(58,40,10,0.10) 100%);
+}
+.hero-grid { position: relative; z-index: 2; }
+
+.hero-name {
+  color: var(--ink-mid); mix-blend-mode: normal;
+  font-size: clamp(13px, 1.2vw, 15px); letter-spacing: 0.3em;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-rule { flex: 0 0 auto; height: 1.5px; width: 0; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+@media (prefers-reduced-motion: no-preference) { .hero-rule { animation: heroRule 1.05s cubic-bezier(0.4,0,0.2,1) 0.5s forwards; } }
+@media (prefers-reduced-motion: reduce) { .hero-rule { width: 96px; } }
+@keyframes heroRule { to { width: 96px; } }
+
+.hero-h1 { color: var(--ink); mix-blend-mode: normal; margin-bottom: 2.25rem; }
+.hero-h1 .h1-gold { color: var(--gold-dark); font-style: italic; position: relative; }
+.hero-h1 .h1-gold::after {
+  content: ""; position: absolute; left: 0.02em; right: 0.06em; bottom: 0.01em; height: 2px;
+  transform: scaleX(0); transform-origin: left;
+  background: linear-gradient(90deg, var(--gold), rgba(196,146,42,0.12));
+}
+@media (prefers-reduced-motion: no-preference) { .hero-h1 .h1-gold::after { animation: heroDraw 0.9s cubic-bezier(0.4,0,0.2,1) 1.55s forwards; } }
+@media (prefers-reduced-motion: reduce) { .hero-h1 .h1-gold::after { transform: scaleX(1); } }
+@keyframes heroDraw { to { transform: scaleX(1); } }
+
+.hero-role { color: var(--ink-mid); mix-blend-mode: normal; }
+
+.hero-proof { margin-top: 3rem; }
+.hero-proof-eye {
+  font-size: 0.7rem; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold-dark); font-weight: 600; margin: 0 0 1.1rem;
+  padding-top: 1rem; border-top: 1px solid var(--divider);
+}
+.hero-stats { color: var(--ink); mix-blend-mode: normal; margin-bottom: 0; }
+.hero-stats .stat-number > span { color: var(--gold) !important; }
+.hero-proof .stat-label { color: var(--ink-mid); }
+
+.hero-scroll-hint { color: var(--gold-dark); mix-blend-mode: normal; }
+@media (prefers-reduced-motion: no-preference) { .hero-scroll-hint span { animation: heroBreath 2s ease-in-out infinite; } }
+@keyframes heroBreath { 0%,100% { opacity: 0.55; transform: translateY(0); } 50% { opacity: 1; transform: translateY(3px); } }
+
+@media (max-width: 900px) {
+  .hero-ink {
+    width: 100%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 28%, transparent 84%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 28%, transparent 84%);
+    opacity: 0.5;
+  }
+  .hero-ink-vid { object-position: center; }
+  .hero-rule { display: none; }
+  .hero-h1 .h1-gold::after { display: none; }
+  .hero-name { gap: 0.75rem; }
+  .hero-proof { margin-top: 2rem; }
+}
+
 /* ── SKILLS SECTION ─────────────────────────────────────────── */
 .skills { padding: 5rem 0; }
 .skills-heading-area { margin-bottom: 3rem; }
@@ -1510,8 +1581,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   font-weight: 500;
   font-size: clamp(1rem, 1.5vw, 1.2rem);
   letter-spacing: 0.01em;
-  color: #ffffff;
-  mix-blend-mode: difference;
+  color: var(--ink-mid);
+  mix-blend-mode: normal;
   margin-bottom: 1.5rem;
 }
 
