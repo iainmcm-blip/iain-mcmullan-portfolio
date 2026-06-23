@@ -691,11 +691,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   height: 48px;
   width: auto;
   object-fit: contain;
-  filter: grayscale(1) opacity(0.55);
-  transition: filter 0.3s ease;
+  filter: none;                 /* permanently colourised */
   flex-shrink: 0;
 }
-.marquee-logo:hover { filter: grayscale(0) opacity(1); }
 
 /* ── CASE STUDIES ───────────────────────────────────────────── */
 .case-studies { padding: 5rem 0; }
@@ -1231,7 +1229,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   /* Mobile: single row, faster, no mask (mobile can drop masked animated content). */
   .marquee-outer { -webkit-mask-image: none; mask-image: none; }
   .marquee-track { animation-duration: 22s; gap: 2.5rem; }
-  .marquee-logo { filter: grayscale(1) opacity(0.9); }
+  .marquee-logo { filter: none; }
 }
 
 @media (max-width: 480px) {

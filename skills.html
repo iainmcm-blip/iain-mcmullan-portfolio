@@ -69,6 +69,7 @@
 .sk-proof-text.swap { opacity: 0; }
 .sk-proof-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); transition: gap 0.2s ease, color 0.2s ease; }
 .sk-proof-link:hover { gap: 0.65rem; color: var(--gold); }
+.sk-proof-link[hidden] { display: none; }   /* hidden for skills with no case study to link to */
 
 .sk-foot { margin-top: 3.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2rem; }
 .sk-foot-line { font-size: 1.05rem; font-style: italic; color: var(--ink-mid); font-family: var(--ff-body); }
@@ -142,15 +143,15 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-proof="Repositioned Malaysia Airlines from service to soul with 'This is Malaysian hospitality' (Kancil bronze, 2023).">Brand Strategy</li>
-          <li class="sk-tag" tabindex="0" data-proof="Lifted Emirates Skywards from 41% to 45%+ of airline revenue using marketing-mix and media-mix modelling.">Marketing Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/malaysia-airlines.html" data-proof="Repositioned Malaysia Airlines from service to soul with 'This is Malaysian hospitality' (Kancil bronze, 2023).">Brand Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Lifted Emirates Skywards from 41% to 45%+ of airline revenue using marketing-mix and media-mix modelling.">Marketing Strategy</li>
           <li class="sk-tag" tabindex="0" data-proof="Ran delivery across a 160-person, six-market agency at Bonsey Jaden, lifting client profitability 30%.">Operational Leadership</li>
           <li class="sk-tag" tabindex="0" data-proof="Won Dole, Everise and Air Selangor through competitive multi-market pitches.">New Business Development</li>
           <li class="sk-tag" tabindex="0" data-proof="Owned account P&amp;L across 20+ client teams in six markets as Group Head of Business.">Account Management</li>
           <li class="sk-tag" tabindex="0" data-proof="Grew AHC skincare profitability 60% by reworking scope, renegotiating terms and tightening delivery.">Financial Rigour</li>
-          <li class="sk-tag" tabindex="0" data-proof="Project Director on Malaysia Airlines' 2022 brand film, from brief to final cut.">Project Direction</li>
-          <li class="sk-tag" tabindex="0" data-proof="Cut content turnaround and lifted team utilisation 50% by folding AI into production at Motion.">Digital Transformation</li>
-          <li class="sk-tag" tabindex="0" data-proof="Directed Hilton's APAC conference across 8 communications touchpoints to a record 92% engagement.">Internal Communications</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/malaysia-airlines.html" data-proof="Project Director on Malaysia Airlines' 2022 brand film, from brief to final cut.">Project Direction</li>
+          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Cut content turnaround and lifted team utilisation 50% by folding AI into production at Motion.">Digital Transformation</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Directed Hilton's APAC conference across 8 communications touchpoints to a record 92% engagement.">Internal Communications</li>
         </ul>
         <div class="sk-proof-wrap">
           <p class="sk-proof" aria-live="polite">
@@ -171,14 +172,14 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-proof="Directed 150+ integrated Skywards campaigns across email, CRM, digital and ATL in 25 languages.">Integrated Marketing</li>
-          <li class="sk-tag" tabindex="0" data-proof="Owned every piece of storytelling content for 'Right By You: The UOB Story', opened on time March 2025.">Content Strategy</li>
-          <li class="sk-tag" tabindex="0" data-proof="Nine published essays on brand, loyalty, AI and the craft of marketing leadership.">Copywriting &amp; Editing</li>
-          <li class="sk-tag" tabindex="0" data-proof="Built Emirates' 'Adventure Awaits' pilot recruitment and the Flight Training Academy launch (100% cohort filled).">Employer Brand</li>
-          <li class="sk-tag" tabindex="0" data-proof="Led Emirates global campaigns across 25 languages, seven agencies and six continents.">Global Advertising</li>
-          <li class="sk-tag" tabindex="0" data-proof="Grew Emirates Skywards from 8M to 20M+ members and launched the My Family Miles-pooling feature.">CRM &amp; Loyalty</li>
-          <li class="sk-tag" tabindex="0" data-proof="Delivered Hilton's 1,400-delegate APAC conference, the Global CEO's best-organised global event.">Experiential Marketing</li>
-          <li class="sk-tag" tabindex="0" data-proof="USD 2M+ incremental revenue from the Cash+Miles launch, built on segmentation and CRM personalisation.">Campaign Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Directed 150+ integrated Skywards campaigns across email, CRM, digital and ATL in 25 languages.">Integrated Marketing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/uob-gallery.html" data-proof="Owned every piece of storytelling content for 'Right By You: The UOB Story', opened on time March 2025.">Content Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="perspectives.html" data-proof="Nine published essays on brand, loyalty, AI and the craft of marketing leadership.">Copywriting &amp; Editing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Built Emirates' 'Adventure Awaits' pilot recruitment and the Flight Training Academy launch (100% cohort filled).">Employer Brand</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-flight-training-academy.html" data-proof="Led Emirates global campaigns across 25 languages, seven agencies and six continents.">Global Advertising</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Grew Emirates Skywards from 8M to 20M+ members and launched the My Family Miles-pooling feature.">CRM &amp; Loyalty</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Delivered Hilton's 1,400-delegate APAC conference, the Global CEO's best-organised global event.">Experiential Marketing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="USD 2M+ incremental revenue from the Cash+Miles launch, built on segmentation and CRM personalisation.">Campaign Strategy</li>
         </ul>
         <div class="sk-proof-wrap">
           <p class="sk-proof" aria-live="polite">
@@ -199,7 +200,7 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-proof="Folded AI into Motion's production process, cutting turnaround and lifting team utilisation 50%.">AI Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Folded AI into Motion's production process, cutting turnaround and lifting team utilisation 50%.">AI Strategy</li>
           <li class="sk-tag" tabindex="0" data-proof="Certified in Agentic AI for Leaders (Vanderbilt); building AI agent workflows into marketing production.">Agentic AI Workflows</li>
           <li class="sk-tag" tabindex="0" data-proof="Grew Emirates online sales 35% through performance-led programmes and continuous channel-mix refinement.">Web &amp; Digital Marketing</li>
           <li class="sk-tag" tabindex="0" data-proof="Google UX Design certified; led data-informed microsite launches for campus audiences at AIA.">UX/UI Design</li>
@@ -207,7 +208,7 @@
           <li class="sk-tag" tabindex="0" data-proof="Applied marketing-mix and media-mix modelling to channel investment across the Skywards programme.">Marketing Technology</li>
           <li class="sk-tag" tabindex="0" data-proof="Ran structured A/B testing, segmentation and KPI frameworks across 150+ campaigns.">Performance Analysis</li>
           <li class="sk-tag" tabindex="0" data-proof="Daily use of LLMs for research, first-draft structure and pressure-testing arguments.">Prompt Engineering</li>
-          <li class="sk-tag" tabindex="0" data-proof="Built AI into Motion's content production, speeding delivery without dropping the standard.">AI-Augmented Production</li>
+          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Built AI into Motion's content production, speeding delivery without dropping the standard.">AI-Augmented Production</li>
         </ul>
         <div class="sk-proof-wrap">
           <p class="sk-proof" aria-live="polite">
@@ -252,22 +253,30 @@
     var textEl = move.querySelector('.sk-proof-text');
     if (!textEl || !tags.length) return;
     var def = textEl.getAttribute('data-default') || textEl.textContent;
+    var linkEl = move.querySelector('.sk-proof-link');
+    var defHref = linkEl ? linkEl.getAttribute('href') : null;   // the section's resting "See the work" target
     function show(t) {
       if (textEl.textContent === t) return;
       textEl.classList.add('swap');
       setTimeout(function () { textEl.textContent = t; textEl.classList.remove('swap'); }, 110);
     }
     function setActive(tag) { tags.forEach(function (x) { x.classList.toggle('is-cited', x === tag); }); }
+    function setLink(href) {
+      if (!linkEl) return;
+      if (href) { linkEl.setAttribute('href', href); linkEl.hidden = false; }
+      else { linkEl.hidden = true; }   // skill has no case study -> hide the link entirely
+    }
+    function activate(tag) { show(tag.getAttribute('data-proof')); setActive(tag); setLink(tag.getAttribute('data-href')); }
+    function reset() { show(def); setActive(null); setLink(defHref); }
     tags.forEach(function (tag) {
-      var p = tag.getAttribute('data-proof');
-      if (!p) return;
-      if (canHover) tag.addEventListener('mouseenter', function () { show(p); setActive(tag); });
-      else tag.addEventListener('click', function () { show(p); setActive(tag); });
-      tag.addEventListener('focus', function () { show(p); setActive(tag); });
+      if (!tag.getAttribute('data-proof')) return;
+      if (canHover) tag.addEventListener('mouseenter', function () { activate(tag); });
+      else tag.addEventListener('click', function () { activate(tag); });
+      tag.addEventListener('focus', function () { activate(tag); });
     });
     if (canHover) {
       var main = move.querySelector('.sk-move-main') || move;
-      main.addEventListener('mouseleave', function () { show(def); setActive(null); });
+      main.addEventListener('mouseleave', reset);
     }
   });
 })();
