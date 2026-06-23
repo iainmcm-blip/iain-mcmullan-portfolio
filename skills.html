@@ -42,9 +42,9 @@
 /* Equal-width tag grid (3 across on desktop) so the pills line up cleanly */
 .sk-tags { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; align-items: stretch; }
 .sk-tag {
-  font-family: var(--ff-body); font-size: 0.82rem; font-weight: 500; color: var(--ink); text-align: center;
-  display: flex; align-items: center; justify-content: center; line-height: 1.25; height: 100%; white-space: nowrap;
-  padding: 0.55rem 0.7rem; border-radius: var(--radius-pill);
+  font-family: var(--ff-body); font-size: 0.84rem; font-weight: 500; color: var(--ink); text-align: center;
+  display: flex; align-items: center; justify-content: center; line-height: 1.2; min-height: 3.05rem;
+  padding: 0.35rem 0.7rem; border-radius: var(--radius-pill);
   border: 1px solid var(--divider); background: var(--surface);
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
@@ -62,7 +62,7 @@
 .sk-proof-wrap { margin-top: 1.6rem; }
 .sk-proof {
   display: flex; align-items: baseline; gap: 0.6rem; margin: 0;
-  min-height: 3em; font-size: 0.95rem; line-height: 1.5; color: var(--ink-mid);
+  min-height: 4.4em; font-size: 0.95rem; line-height: 1.5; color: var(--ink-mid);
 }
 .sk-proof-label { flex: 0 0 auto; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold-dark); }
 .sk-proof-text { transition: opacity 0.16s ease; }
@@ -143,15 +143,13 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-href="case-studies/malaysia-airlines.html" data-proof="Repositioned Malaysia Airlines from service to soul with 'This is Malaysian hospitality' (Kancil bronze, 2023).">Brand Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Owned brand strategy for campaigns across Malaysia Airlines, British Airways, Emirates, AIA, Skywards and Air Selangor.">Brand Strategy</li>
           <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Lifted Emirates Skywards from 41% to 45%+ of airline revenue using marketing-mix and media-mix modelling.">Marketing Strategy</li>
           <li class="sk-tag" tabindex="0" data-proof="Ran delivery across a 160-person, six-market agency at Bonsey Jaden, lifting client profitability 30%.">Operational Leadership</li>
-          <li class="sk-tag" tabindex="0" data-proof="Won Dole, Everise and Air Selangor through competitive multi-market pitches.">New Business Development</li>
-          <li class="sk-tag" tabindex="0" data-proof="Owned account P&amp;L across 20+ client teams in six markets as Group Head of Business.">Account Management</li>
-          <li class="sk-tag" tabindex="0" data-proof="Grew AHC skincare profitability 60% by reworking scope, renegotiating terms and tightening delivery.">Financial Rigour</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/malaysia-airlines.html" data-proof="Project Director on Malaysia Airlines' 2022 brand film, from brief to final cut.">Project Direction</li>
-          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Cut content turnaround and lifted team utilisation 50% by folding AI into production at Motion.">Digital Transformation</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Directed Hilton's APAC conference across 8 communications touchpoints to a record 92% engagement.">Internal Communications</li>
+          <li class="sk-tag" tabindex="0" data-proof="Won Dole, Everise, Air Selangor, Hilton, DSO and more via competitive multi-market pitches.">New Business Development</li>
+          <li class="sk-tag" tabindex="0" data-proof="I have owned the project management of every project I've worked on for more than 15 years.">Project Management</li>
+          <li class="sk-tag" tabindex="0" data-proof="Grown client profitability on the agency side, and added millions of dollars in incremental revenue on the client side.">Financial Rigour</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Multiple internal campaigns across all channels at The Emirates Group, plus Hilton.">Internal Communications</li>
         </ul>
         <div class="sk-proof-wrap">
           <p class="sk-proof" aria-live="polite">
@@ -172,14 +170,16 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Directed 150+ integrated Skywards campaigns across email, CRM, digital and ATL in 25 languages.">Integrated Marketing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/uob-gallery.html" data-proof="Owned every piece of storytelling content for 'Right By You: The UOB Story', opened on time March 2025.">Content Strategy</li>
-          <li class="sk-tag" tabindex="0" data-href="perspectives.html" data-proof="Nine published essays on brand, loyalty, AI and the craft of marketing leadership.">Copywriting &amp; Editing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Built Emirates' 'Adventure Awaits' pilot recruitment and the Flight Training Academy launch (100% cohort filled).">Employer Brand</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-flight-training-academy.html" data-proof="Led Emirates global campaigns across 25 languages, seven agencies and six continents.">Global Advertising</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Grew Emirates Skywards from 8M to 20M+ members and launched the My Family Miles-pooling feature.">CRM &amp; Loyalty</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Delivered Hilton's 1,400-delegate APAC conference, the Global CEO's best-organised global event.">Experiential Marketing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="USD 2M+ incremental revenue from the Cash+Miles launch, built on segmentation and CRM personalisation.">Campaign Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Directed 80+ integrated campaigns across business units at The Emirates Group, and dozens more agency-side.">Integrated Marketing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/uob-gallery.html" data-proof="Owned the storytelling for The UOB Gallery, plus all client content across the past seven years.">Content Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="perspectives.html" data-proof="In-house de facto Copy head at Emirates; drafted content across channels for NTU, Hilton, Dole and Malaysia Airlines.">Copywriting &amp; Editing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Built full campaigns for Emirates pilot and crew recruitment, plus dnata and Emirates Aviation University.">Employer Brand &amp; Recruitment</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Managed campaigns across Africa and South America at Emirates, plus global campaigns for Emirates Skywards.">Global Advertising</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Directed marketing communications for eight years at Emirates Skywards, growing membership from 8M to over 20M.">CRM &amp; Loyalty</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Owned strategy and comms for Hilton's 2024 APAC conference, lauded by their global CEO as the best he'd seen.">Experiential Marketing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Crafted campaign strategy for my internal and external clients for more than 15 years.">Campaign Strategy</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Across many campaigns and tools for Emirates recruitment and loyalty, plus AIA, Dole, AHC, Cetaphil and Air Selangor.">Performance Marketing</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-flight-training-academy.html" data-proof="Developed the Emirates Flight Training Academy brand from scratch while the academy was still under construction.">Brand Development</li>
         </ul>
         <div class="sk-proof-wrap">
           <p class="sk-proof" aria-live="polite">
@@ -200,15 +200,14 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Folded AI into Motion's production process, cutting turnaround and lifting team utilisation 50%.">AI Strategy</li>
-          <li class="sk-tag" tabindex="0" data-proof="Certified in Agentic AI for Leaders (Vanderbilt); building AI agent workflows into marketing production.">Agentic AI Workflows</li>
-          <li class="sk-tag" tabindex="0" data-proof="Grew Emirates online sales 35% through performance-led programmes and continuous channel-mix refinement.">Web &amp; Digital Marketing</li>
-          <li class="sk-tag" tabindex="0" data-proof="Google UX Design certified; led data-informed microsite launches for campus audiences at AIA.">UX/UI Design</li>
-          <li class="sk-tag" tabindex="0" data-proof="Rebuilt brief-to-delivery workflows at Motion so output stays predictable at regional scale.">Content Systems</li>
-          <li class="sk-tag" tabindex="0" data-proof="Applied marketing-mix and media-mix modelling to channel investment across the Skywards programme.">Marketing Technology</li>
-          <li class="sk-tag" tabindex="0" data-proof="Ran structured A/B testing, segmentation and KPI frameworks across 150+ campaigns.">Performance Analysis</li>
-          <li class="sk-tag" tabindex="0" data-proof="Daily use of LLMs for research, first-draft structure and pressure-testing arguments.">Prompt Engineering</li>
-          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Built AI into Motion's content production, speeding delivery without dropping the standard.">AI-Augmented Production</li>
+          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Skilled across Claude, Claude Code, ChatGPT, DeepSeek, Kimi, Copilot, Gemini, NotebookLM and Google Stitch.">AI Platforms &amp; Tools</li>
+          <li class="sk-tag" tabindex="0" data-proof="Built sites for DSO, apps for Hilton, and overseen dozens of digital marketing campaigns.">Web &amp; Digital Marketing</li>
+          <li class="sk-tag" tabindex="0" data-proof="Google-qualified; I provide and oversee sitemaps, wireframes, interfaces, prototypes, UAT and troubleshooting.">UX/UI Design</li>
+          <li class="sk-tag" tabindex="0" data-proof="Both built and managed, including Strapi, WordPress and Sanity.">Content Management Systems</li>
+          <li class="sk-tag" tabindex="0" data-proof="I find the right tools for the right jobs, across measurement and optimisation, for efficiency and effectiveness.">Marketing Technology</li>
+          <li class="sk-tag" tabindex="0" data-proof="Through Google Analytics, HubSpot or research. The approach required is the approach taken.">Performance Analysis</li>
+          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Daily use of LLMs across the familiar AI tools for speed, effectiveness and rigour of decision-making.">Advanced Prompt Engineering</li>
+          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="With clients such as Hilton and UOB.">AI-Augmented Production</li>
         </ul>
         <div class="sk-proof-wrap">
           <p class="sk-proof" aria-live="polite">

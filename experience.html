@@ -487,8 +487,7 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
   window.addEventListener('load', relayout);
   window.addEventListener('resize', relayout);
 
-  /* open the Emirates role by default — the strongest proof (8M to 20M+ members, 45%+ revenue) */
-  openEntry(entries[3] || entries[0]);
+  /* all roles start collapsed; the visitor expands whichever they want */
 
   /* deep link: ?role=N opens and scrolls to that role (homepage career strip) */
   var deep = parseInt(new URLSearchParams(window.location.search).get('role'), 10);
