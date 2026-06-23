@@ -58,6 +58,9 @@
 .sk-tag.is-cited { border-color: var(--gold); background: var(--gold-pale); color: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-card); }
 .sk-tag:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .sk-hint { margin-top: 1rem; font-size: 0.82rem; font-style: italic; color: var(--gold-dark); }
+.sk-outcomes { list-style: none; margin: 1.85rem 0 0; padding: 0 0 0 1.25rem; max-width: 760px; border-left: 2px solid var(--gold); }
+.sk-outcomes li { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.2rem, 2.2vw, 1.7rem); color: var(--ink); line-height: 1.38; letter-spacing: -0.01em; }
+.sk-outcomes li strong { color: var(--gold-dark); font-weight: 700; }
 
 .sk-proof-wrap { margin-top: 1.6rem; }
 .sk-proof {
@@ -131,7 +134,14 @@
     <span class="section-label sk-fade">Capabilities</span>
     <h1 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">The full toolkit.</h1>
     <p class="sk-intro sk-fade" style="animation-delay:0.1s">Most careers go generalist, then specialist. The best ones keep going: deep specialism in one discipline becomes the foundation for genuine range across many. Mine is <strong>project direction and operational rigour</strong>, the part that keeps everything else honest. Brand strategy, integrated campaigns, content, digital, and AI all grow from there. Which means I don't only think strategically. I deliver.</p>
-    <p class="sk-hint sk-fade" style="animation-delay:0.13s">Hover or tap any skill below for a real example from my career.</p>
+    <ul class="sk-outcomes sk-fade" style="animation-delay:0.15s" aria-label="What I do">
+      <li>I build the <strong>strategy</strong>.</li>
+      <li>I run the <strong>team</strong>.</li>
+      <li>I ship the <strong>work</strong>.</li>
+      <li>I measure the <strong>result</strong>.</li>
+      <li>I modernise it with <strong>AI</strong>.</li>
+    </ul>
+    <p class="sk-hint sk-fade" style="animation-delay:0.18s">Hover or tap any skill below for a real example from my career.</p>
   </header>
 
   <div class="container sk-body">
