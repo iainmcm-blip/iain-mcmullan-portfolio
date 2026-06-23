@@ -145,7 +145,7 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
     <span class="section-label">Career</span>
     <h1 class="display-heading display-lg">Professional journey.</h1>
     <p class="exp-intro">Twenty years of brand, marketing and loyalty leadership across aviation, finance and hospitality.</p>
-    <p class="exp-hint">Hover or tap a role to read the detail.</p>
+    <p class="exp-hint">Click or tap a role to expand it.</p>
     <p style="margin-top:1.5rem;"><a class="btn btn-outline" href="assets/iain-mcmullan-cv.pdf" download>Download CV (PDF) <span aria-hidden="true">&darr;</span></a></p>
   </header>
 
@@ -390,10 +390,10 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
   var track = document.querySelector('.exp-spine-track');
   var fill = document.querySelector('.exp-spine-fill');
 
-  /* ── Hover-driven single-open accordion ──────────────────────────────
-     Exactly one role is open at a time. It follows the pointer; on touch and
-     keyboard it follows tap/focus. The first role is open by default and stays
-     open until another is hovered, tapped or focused. */
+  /* ── Click/tap-to-toggle single-open accordion ───────────────────────
+     A role only opens or closes on an explicit click/tap (or Enter/Space) on
+     its header; there is no hover or focus auto-expand. Opening one closes any
+     other. The Emirates role is open by default. */
   var current = null;
   function setBodyHeight(e, on) {
     var body = e.querySelector('.exp-card-body');
@@ -429,14 +429,26 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
     }
   }
 
+  function closeEntry(entry) {
+    if (!entry) return;
+    entry.classList.remove('open');
+    var h = entry.querySelector('.exp-card-head');
+    if (h) h.setAttribute('aria-expanded', 'false');
+    setBodyHeight(entry, false);
+    if (current === entry) current = null;
+    positionSpine(); updateFill();
+  }
+  function toggleEntry(entry) {
+    if (entry === current) closeEntry(entry);   // an open card collapses on click
+    else openEntry(entry);                       // otherwise open it (and close any other)
+  }
+
   entries.forEach(function (entry) {
     var head = entry.querySelector('.exp-card-head');
-    entry.addEventListener('mouseenter', function () { openEntry(entry); });
     if (head) {
-      head.addEventListener('click', function () { openEntry(entry); });
-      head.addEventListener('focusin', function () { openEntry(entry); });
+      head.addEventListener('click', function () { toggleEntry(entry); });
       head.addEventListener('keydown', function (ev) {
-        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openEntry(entry); }
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); toggleEntry(entry); }
       });
     }
     /* recompute spine geometry once each expand/collapse transition settles */

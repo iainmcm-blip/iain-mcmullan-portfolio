@@ -464,7 +464,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
      near-black over pale paper, light over the dark blue plume. Always legible. */
   color: #ffffff;
   mix-blend-mode: difference;
-  margin-bottom: 1rem;
+  margin-bottom: 2.75rem;   /* desktop: clear the headline word-rise so 'results.' never overlaps the role line on load (mobile overrides to 1.5rem) */
   letter-spacing: -0.01em;
 }
 .hero-word-row {
@@ -1474,12 +1474,12 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 }
 .about-portrait-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
-  /* warm monochrome; pairs with the duotone wash below so a colour photo reads toned to the paper */
-  filter: grayscale(100%) contrast(1.06) brightness(1.02);
+  /* natural colour with a light grade, kept subtle so it still sits in the warm palette */
+  filter: contrast(1.03) saturate(1.03);
 }
 .about-portrait-frame::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(160deg, rgba(196, 146, 42, 0.30), rgba(10, 10, 10, 0.12));
+  background: linear-gradient(160deg, rgba(196, 146, 42, 0.16), rgba(10, 10, 10, 0.08));
   mix-blend-mode: soft-light;
 }
 .about-portrait-ph {
@@ -1573,7 +1573,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 .article-author-photo {
   flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%;
   object-fit: cover; object-position: center 18%;
-  filter: grayscale(100%) contrast(1.05) brightness(1.02);
+  filter: contrast(1.03) saturate(1.03);   /* colour, matching the home portrait */
   box-shadow: 0 0 0 1px rgba(196, 146, 42, 0.4);
 }
 .article-author-name { font-family: var(--ff-display); font-weight: 700; font-size: 1.4rem; line-height: 1.1; color: var(--ink); margin-bottom: 0.35rem; }
