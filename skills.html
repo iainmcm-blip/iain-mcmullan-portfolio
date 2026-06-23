@@ -69,7 +69,9 @@
 .sk-proof-text.swap { opacity: 0; }
 .sk-proof-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); transition: gap 0.2s ease, color 0.2s ease; }
 .sk-proof-link:hover { gap: 0.65rem; color: var(--gold); }
-.sk-proof-link[hidden] { display: none; }   /* hidden for skills with no case study to link to */
+/* Keep the link's space reserved (visibility, not display) so the section height never
+   changes when the link shows/hides — no jump moving between linked and link-free skills. */
+.sk-proof-link[hidden] { visibility: hidden; }
 
 .sk-foot { margin-top: 3.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2rem; }
 .sk-foot-line { font-size: 1.05rem; font-style: italic; color: var(--ink-mid); font-family: var(--ff-body); }
