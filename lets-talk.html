@@ -37,6 +37,13 @@
 .talk-card h3 { font-family: var(--ff-display); font-weight: 700; font-size: 1.4rem; line-height: 1.15; color: var(--ink); margin: 0 0 0.6rem; }
 .talk-card p { font-size: 0.95rem; line-height: 1.6; color: var(--ink-mid); margin: 0; }
 
+/* Single-identity lead: brand & marketing leadership leads, freelance/sensory drop to a secondary line */
+.talk-lead { background: var(--surface); border: 1px solid var(--divider); border-left: 3px solid var(--gold); border-radius: 14px; box-shadow: var(--shadow-card); padding: 1.9rem 2rem; }
+.talk-lead h3 { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.5rem, 2.4vw, 1.85rem); line-height: 1.12; color: var(--ink); margin: 0 0 0.6rem; }
+.talk-lead p { font-size: 1.0rem; line-height: 1.62; color: var(--ink-mid); margin: 0; }
+.talk-secondary { margin-top: 1.25rem; font-size: 0.95rem; line-height: 1.66; color: var(--ink-mid); max-width: 640px; }
+.talk-secondary strong { color: var(--ink); font-weight: 600; }
+
 /* Contact */
 .talk-contact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
 .talk-link {
@@ -126,20 +133,11 @@
     <!-- How I can help -->
     <section class="talk-section" aria-labelledby="talk-help-h">
       <h2 class="talk-h2 talk-fade" id="talk-help-h" style="animation-delay:0.15s">How I can help</h2>
-      <div class="talk-help-grid">
-        <article class="talk-card talk-fade" style="animation-delay:0.2s">
-          <h3>Brand &amp; marketing leadership</h3>
-          <p>Senior brand, marketing and communications leadership for organisations that need strategy and a steady hand to run it. Permanent or fractional.</p>
-        </article>
-        <article class="talk-card talk-fade" style="animation-delay:0.27s">
-          <h3>Freelance strategy &amp; copywriting</h3>
-          <p>Positioning, messaging and campaign strategy, with the words to carry them. Sharp thinking for teams that need it at pace.</p>
-        </article>
-        <article class="talk-card talk-fade" style="animation-delay:0.34s">
-          <h3>Advisory &amp; sensory branding</h3>
-          <p>Advisory engagements, and sensory branding through Motion Sensory for brands investing in how they sound, smell and feel.</p>
-        </article>
-      </div>
+      <article class="talk-lead talk-fade" style="animation-delay:0.2s">
+        <h3>Senior brand and marketing leadership</h3>
+        <p>Brand, marketing and communications leadership for organisations that need clear strategy and a steady hand to run it from first brief to delivery. Permanent or fractional.</p>
+      </article>
+      <p class="talk-secondary talk-fade" style="animation-delay:0.27s">Also available for <strong>freelance strategy and copywriting</strong>, positioning, messaging and campaign work at pace, and for <strong>advisory and sensory branding</strong> through Motion Sensory.</p>
     </section>
 
     <!-- Contact -->
@@ -182,12 +180,13 @@
         Currently Head of Strategy at Motion, open to select opportunities.
       </p>
 
-      <div class="talk-cta talk-fade" style="animation-delay:0.49s">
+      <div class="talk-cta talk-fade" style="animation-delay:0.49s; display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center;">
         <!-- EMAIL: keep this address in sync with the one above -->
         <a class="btn-gold-dark" href="mailto:iainmcm@gmail.com?subject=Let's%20talk">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Start a conversation
         </a>
+        <a class="btn btn-outline" href="assets/iain-mcmullan-cv.pdf" download>Download CV (PDF) <span aria-hidden="true">&darr;</span></a>
       </div>
       <!-- /CONTACT DETAILS -->
 

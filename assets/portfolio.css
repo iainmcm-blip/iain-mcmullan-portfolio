@@ -1499,3 +1499,59 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   .about-grid { grid-template-columns: 1fr; gap: 2rem; }
   .about-portrait-frame { max-width: 320px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   V6 — proof-forward revamp: hero role + proof strip, six-stat wall,
+   four leadership cards, About CV button
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero positioning line (replaces the rotating specialism word). Adaptive like the
+   rest of the hero: white + difference over the ink on desktop, solid on mobile. */
+.hero-role {
+  font-family: var(--ff-body);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  letter-spacing: 0.01em;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  margin-bottom: 1.5rem;
+}
+
+/* About band: Download CV button row */
+.about-cta-row { margin-top: 1.6rem; }
+
+/* "By the numbers" — six-stat proof wall (reuses .impact-number / .impact-label) */
+.stat-wall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.75rem 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+/* Leadership — four cards in a 2x2 grid (trimmed from six) */
+.principle-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+  max-width: 960px;
+}
+
+@media (max-width: 900px) {
+  /* iOS can't mix-blend over the portrait video clip, so make the new hero elements solid */
+  .hero-role, .hero-stats { mix-blend-mode: normal; }
+  .hero-role  { color: var(--gold-dark); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.65); }
+  .hero-stats { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); }
+  .hero-stats .stat-number > span { color: var(--gold-dark) !important; }
+  .stat-wall { grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; }
+  .principle-grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .principle-grid-4 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .stat-wall { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1rem; }
+}

@@ -146,6 +146,7 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
     <h1 class="display-heading display-lg">Professional journey.</h1>
     <p class="exp-intro">Twenty years of brand, marketing and loyalty leadership across aviation, finance and hospitality.</p>
     <p class="exp-hint">Hover or tap a role to read the detail.</p>
+    <p style="margin-top:1.5rem;"><a class="btn btn-outline" href="assets/iain-mcmullan-cv.pdf" download>Download CV (PDF) <span aria-hidden="true">&darr;</span></a></p>
   </header>
 
   <div class="container">
@@ -474,8 +475,8 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
   window.addEventListener('load', relayout);
   window.addEventListener('resize', relayout);
 
-  /* open the first role by default */
-  openEntry(entries[0]);
+  /* open the Emirates role by default — the strongest proof (8M to 20M+ members, 45%+ revenue) */
+  openEntry(entries[3] || entries[0]);
 
   /* deep link: ?role=N opens and scrolls to that role (homepage career strip) */
   var deep = parseInt(new URLSearchParams(window.location.search).get('role'), 10);
