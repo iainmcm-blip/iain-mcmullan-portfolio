@@ -1555,3 +1555,40 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 @media (max-width: 480px) {
   .stat-wall { grid-template-columns: repeat(2, 1fr); gap: 1.75rem 1rem; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   V7 — cross-page polish: article byline + author card, perspectives
+   card date, portfolio result line
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Article byline (under the title) */
+.article-byline { margin-top: 0.8rem; font-size: 0.9rem; color: var(--ink-mid); }
+.article-byline .byl-sep { color: var(--gold); margin: 0 0.15rem; }
+.article-byline .byl-date { font-style: italic; color: var(--gold-dark); }   /* placeholder cue until the real date is set */
+
+/* Author card at the end of each article (converts the "I want to meet this person" moment) */
+.article-author {
+  max-width: 720px; margin: 3rem auto 5.5rem; padding-top: 2.5rem;
+  border-top: 1px solid var(--divider);
+  display: flex; gap: 1.5rem; align-items: center;
+}
+.article-author-photo {
+  flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%;
+  object-fit: cover; object-position: center 18%;
+  filter: grayscale(100%) contrast(1.05) brightness(1.02);
+  box-shadow: 0 0 0 1px rgba(196, 146, 42, 0.4);
+}
+.article-author-name { font-family: var(--ff-display); font-weight: 700; font-size: 1.4rem; line-height: 1.1; color: var(--ink); margin-bottom: 0.35rem; }
+.article-author-bio { font-size: 0.95rem; line-height: 1.6; color: var(--ink-mid); margin-bottom: 1.1rem; }
+.article-author-cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+@media (max-width: 600px) {
+  .article-author { flex-direction: column; align-items: flex-start; margin-bottom: 4rem; }
+  .article-author-cta .btn { width: auto; }
+}
+
+/* Perspectives card date (recency at a glance on the index) */
+.persp-date { display: block; margin-top: 0.45rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.03em; font-style: italic; color: var(--gold-dark); }
+
+/* Portfolio card result line (one outcome per card) */
+.case-result { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-dark); }
+.case-result::before { content: ''; flex: 0 0 auto; width: 16px; height: 2px; background: var(--gold); }

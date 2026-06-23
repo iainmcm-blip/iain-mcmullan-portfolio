@@ -94,7 +94,7 @@
 <!-- ── NAVIGATION ─────────────────────────────────────────── -->
 <nav class="nav scrolled" id="nav" role="navigation" aria-label="Primary navigation">
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand" aria-label="Home">Home</a>
+    <a href="index.html" class="nav-brand" aria-label="Home">Iain McMullan</a>
 
     <ul class="nav-links" role="list">
       <li><a href="skills.html">Skills</a></li>
@@ -370,7 +370,7 @@
           </div>
           <div class="persp-body">
             <span class="persp-tag">Creativity &amp; Standards</span>
-            <h3 class="persp-title">Cannes Just Stripped a Grand Prix for Faking It With AI. The Surprise Is That Anyone Is Surprised.</h3>
+            <h3 class="persp-title">Last year Cannes Stripped a Grand Prix for Faking It With AI. The Surprise Is That Anyone was Surprised.</h3>
             <p class="persp-text">Cannes Lions 2026 just opened. This year's festival, running June 22 to 26, is the first since the awards body stripped twelve Lions from a single agency after discovering that AI-generated content had been used to simulate real-world events and fake campaign outcomes in a case study. One Grand Prix, three golds, four silvers, three bronzes — all gone. The agency's chief creative officer resigned. Cannes introduced mandatory AI disclosure rules and announced AI-detection processes for future entries. And the industry responded, as it tends to, with a mixture of outrage, hand-wringing, and the quiet sense that everyone knew this was happening and nobody had quite got around to doing anything about it.</p>
           </div>
           <div class="persp-article">
@@ -430,16 +430,17 @@
 
   // Card artwork (order matches the cards in the grid). objectPosition tunes the banner crop.
   // cat = topic filter group.
+  // ⚠️ date: publish-date placeholders — replace '[Add date]' with the real date for each piece (e.g. 'June 2026').
   var ART = [
-    { slug: 'loyalty', cat: 'brand', alt: 'An airport lounge host welcoming a returning guest', pos: 'center 35%' },
-    { slug: 'ai-craft', cat: 'ai', alt: 'A designer sketching by hand beside a laptop', pos: 'center 40%' },
-    { slug: 'brand-performance', cat: 'brand', alt: 'A team in conversation beside a strategist mapping metrics', pos: 'center' },
-    { slug: 'leadership', cat: 'strategy', alt: 'A team collaborating around a table', pos: 'center 35%' },
-    { slug: 'experiential', cat: 'brand', alt: 'Guests gathered at a live brand event', pos: 'center 50%' },
-    { slug: 'strategy', cat: 'strategy', alt: 'An antique map, coins and a journal of plans', pos: 'center 45%' },
-    { slug: 'cultural-intelligence', cat: 'industry', alt: 'An editorial image for an essay on cultural intelligence in marketing', pos: 'center' },
-    { slug: 'industry-structure', cat: 'industry', alt: 'An editorial image for an article on agency consolidation', pos: 'center' },
-    { slug: 'creativity-standards', cat: 'ai', alt: 'An editorial image for an article on creative awards and AI', pos: 'center' }
+    { slug: 'loyalty', cat: 'brand', date: '[Add date]', alt: 'An airport lounge host welcoming a returning guest', pos: 'center 35%' },
+    { slug: 'ai-craft', cat: 'ai', date: '[Add date]', alt: 'A designer sketching by hand beside a laptop', pos: 'center 40%' },
+    { slug: 'brand-performance', cat: 'brand', date: '[Add date]', alt: 'A team in conversation beside a strategist mapping metrics', pos: 'center' },
+    { slug: 'leadership', cat: 'strategy', date: '[Add date]', alt: 'A team collaborating around a table', pos: 'center 35%' },
+    { slug: 'experiential', cat: 'brand', date: '[Add date]', alt: 'Guests gathered at a live brand event', pos: 'center 50%' },
+    { slug: 'strategy', cat: 'strategy', date: '[Add date]', alt: 'An antique map, coins and a journal of plans', pos: 'center 45%' },
+    { slug: 'cultural-intelligence', cat: 'industry', date: '[Add date]', alt: 'An editorial image for an essay on cultural intelligence in marketing', pos: 'center' },
+    { slug: 'industry-structure', cat: 'industry', date: '[Add date]', alt: 'An editorial image for an article on agency consolidation', pos: 'center' },
+    { slug: 'creativity-standards', cat: 'ai', date: '[Add date]', alt: 'An editorial image for an article on creative awards and AI', pos: 'center' }
   ];
 
   // Topic filter groups (order = chip order). 'all' is added first as the default.
@@ -479,6 +480,14 @@
       im.src = 'assets/img/perspectives/' + art.slug + '.jpg'; im.alt = art.alt; im.loading = 'lazy';
       im.style.objectPosition = art.pos;
       artBox.appendChild(im);
+    }
+    // Publish date under the tag (recency at a glance)
+    var tag = card.querySelector('.persp-tag');
+    if (tag && art && art.date) {
+      var dt = document.createElement('span');
+      dt.className = 'persp-date';
+      dt.textContent = art.date;
+      tag.insertAdjacentElement('afterend', dt);
     }
     // Expanded-view actions: a "Read as full page" link to the standalone article, plus Collapse.
     var collapseEl = card.querySelector('.persp-collapse');
