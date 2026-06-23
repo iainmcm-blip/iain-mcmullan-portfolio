@@ -39,23 +39,36 @@
 .sk-move-head { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.25rem); line-height: 1.1; color: var(--ink); margin: 0.6rem 0 0.95rem; }
 .sk-move-lead { margin: 0; font-size: 1rem; line-height: 1.62; color: var(--ink-mid); max-width: 34ch; }
 
-.sk-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+/* Equal-width tag grid (3 across on desktop) so the pills line up cleanly */
+.sk-tags { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; align-items: stretch; }
 .sk-tag {
-  font-family: var(--ff-body); font-size: 0.92rem; font-weight: 500; color: var(--ink);
-  padding: 0.5rem 1.05rem; border-radius: var(--radius-pill);
+  font-family: var(--ff-body); font-size: 0.82rem; font-weight: 500; color: var(--ink); text-align: center;
+  display: flex; align-items: center; justify-content: center; line-height: 1.25; height: 100%; white-space: nowrap;
+  padding: 0.55rem 0.7rem; border-radius: var(--radius-pill);
   border: 1px solid var(--divider); background: var(--surface);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
+@media (max-width: 1100px) and (min-width: 821px) { .sk-tag { white-space: normal; } }
 .sk-tag:hover { border-color: var(--gold-mid); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+@media (max-width: 820px) { .sk-tags { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .sk-tags { grid-template-columns: 1fr; } }
 
+/* Interactive skill tags: hover/tap a skill to swap the Proof line beneath */
+.sk-tag { cursor: pointer; }
+.sk-tag.is-cited { border-color: var(--gold); background: var(--gold-pale); color: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.sk-tag:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.sk-hint { margin-top: 1rem; font-size: 0.82rem; font-style: italic; color: var(--gold-dark); }
+
+.sk-proof-wrap { margin-top: 1.6rem; }
 .sk-proof {
-  display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 0.5rem;
-  margin-top: 1.75rem; font-size: 0.95rem; line-height: 1.5; color: var(--ink-mid);
-  transition: color 0.2s ease, gap 0.2s ease;
+  display: flex; align-items: baseline; gap: 0.6rem; margin: 0;
+  min-height: 3em; font-size: 0.95rem; line-height: 1.5; color: var(--ink-mid);
 }
-.sk-proof-label { flex: 0 0 auto; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold-dark); transform: translateY(-1px); }
-.sk-proof .arr { color: var(--gold-dark); }
-.sk-proof:hover { color: var(--ink); gap: 0.7rem; }
+.sk-proof-label { flex: 0 0 auto; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold-dark); }
+.sk-proof-text { transition: opacity 0.16s ease; }
+.sk-proof-text.swap { opacity: 0; }
+.sk-proof-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); transition: gap 0.2s ease, color 0.2s ease; }
+.sk-proof-link:hover { gap: 0.65rem; color: var(--gold); }
 
 .sk-foot { margin-top: 3.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2rem; }
 .sk-foot-line { font-size: 1.05rem; font-style: italic; color: var(--ink-mid); font-family: var(--ff-body); }
@@ -82,7 +95,7 @@
 <!-- ── NAVIGATION ─────────────────────────────────────────── -->
 <nav class="nav scrolled" id="nav" role="navigation" aria-label="Primary navigation">
   <div class="nav-inner">
-    <a href="index.html" class="nav-brand" aria-label="Home">Iain McMullan</a>
+    <a href="index.html" class="nav-brand" aria-label="Home">Iain McMullan - Home</a>
     <ul class="nav-links" role="list">
       <li><a href="skills.html" class="active">Skills</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
@@ -115,6 +128,7 @@
     <span class="section-label sk-fade">Capabilities</span>
     <h1 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">The full toolkit.</h1>
     <p class="sk-intro sk-fade" style="animation-delay:0.1s">Most careers go generalist, then specialist. The best ones keep going: deep specialism in one discipline becomes the foundation for genuine range across many. Mine is <strong>project direction and operational rigour</strong>, the part that keeps everything else honest. Brand strategy, integrated campaigns, content, digital, and AI all grow from there. Which means I don't only think strategically. I deliver.</p>
+    <p class="sk-hint sk-fade" style="animation-delay:0.13s">Hover or tap any skill below for a real example from my career.</p>
   </header>
 
   <div class="container sk-body">
@@ -128,20 +142,23 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag">Brand Strategy</li>
-          <li class="sk-tag">Marketing Strategy</li>
-          <li class="sk-tag">Operational Leadership</li>
-          <li class="sk-tag">New Business Development</li>
-          <li class="sk-tag">Account Management</li>
-          <li class="sk-tag">Financial Rigour</li>
-          <li class="sk-tag">Project Direction</li>
-          <li class="sk-tag">Digital Transformation</li>
-          <li class="sk-tag">Internal Communications</li>
+          <li class="sk-tag" tabindex="0" data-proof="Repositioned Malaysia Airlines from service to soul with 'This is Malaysian hospitality' (Kancil bronze, 2023).">Brand Strategy</li>
+          <li class="sk-tag" tabindex="0" data-proof="Lifted Emirates Skywards from 41% to 45%+ of airline revenue using marketing-mix and media-mix modelling.">Marketing Strategy</li>
+          <li class="sk-tag" tabindex="0" data-proof="Ran delivery across a 160-person, six-market agency at Bonsey Jaden, lifting client profitability 30%.">Operational Leadership</li>
+          <li class="sk-tag" tabindex="0" data-proof="Won Dole, Everise and Air Selangor through competitive multi-market pitches.">New Business Development</li>
+          <li class="sk-tag" tabindex="0" data-proof="Owned account P&amp;L across 20+ client teams in six markets as Group Head of Business.">Account Management</li>
+          <li class="sk-tag" tabindex="0" data-proof="Grew AHC skincare profitability 60% by reworking scope, renegotiating terms and tightening delivery.">Financial Rigour</li>
+          <li class="sk-tag" tabindex="0" data-proof="Project Director on Malaysia Airlines' 2022 brand film, from brief to final cut.">Project Direction</li>
+          <li class="sk-tag" tabindex="0" data-proof="Cut content turnaround and lifted team utilisation 50% by folding AI into production at Motion.">Digital Transformation</li>
+          <li class="sk-tag" tabindex="0" data-proof="Directed Hilton's APAC conference across 8 communications touchpoints to a record 92% engagement.">Internal Communications</li>
         </ul>
-        <a class="sk-proof" href="case-studies/emirates-skywards-my-family.html">
-          <span class="sk-proof-label">Proof</span>
-          <span>Grew Emirates Skywards from 8M to 20M+ members and lifted its share of airline revenue past 45%. <span class="arr" aria-hidden="true">&rarr;</span></span>
-        </a>
+        <div class="sk-proof-wrap">
+          <p class="sk-proof" aria-live="polite">
+            <span class="sk-proof-label">Proof</span>
+            <span class="sk-proof-text" data-default="Grew Emirates Skywards from 8M to 20M+ members and lifted its share of airline revenue past 45%.">Grew Emirates Skywards from 8M to 20M+ members and lifted its share of airline revenue past 45%.</span>
+          </p>
+          <a class="sk-proof-link" href="case-studies/emirates-skywards-my-family.html">See the work <span aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </section>
 
@@ -154,19 +171,22 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag">Integrated Marketing</li>
-          <li class="sk-tag">Content Strategy</li>
-          <li class="sk-tag">Copywriting &amp; Editing</li>
-          <li class="sk-tag">Employer Brand</li>
-          <li class="sk-tag">Global Advertising</li>
-          <li class="sk-tag">CRM &amp; Loyalty</li>
-          <li class="sk-tag">Experiential Marketing</li>
-          <li class="sk-tag">Campaign Strategy</li>
+          <li class="sk-tag" tabindex="0" data-proof="Directed 150+ integrated Skywards campaigns across email, CRM, digital and ATL in 25 languages.">Integrated Marketing</li>
+          <li class="sk-tag" tabindex="0" data-proof="Owned every piece of storytelling content for 'Right By You: The UOB Story', opened on time March 2025.">Content Strategy</li>
+          <li class="sk-tag" tabindex="0" data-proof="Nine published essays on brand, loyalty, AI and the craft of marketing leadership.">Copywriting &amp; Editing</li>
+          <li class="sk-tag" tabindex="0" data-proof="Built Emirates' 'Adventure Awaits' pilot recruitment and the Flight Training Academy launch (100% cohort filled).">Employer Brand</li>
+          <li class="sk-tag" tabindex="0" data-proof="Led Emirates global campaigns across 25 languages, seven agencies and six continents.">Global Advertising</li>
+          <li class="sk-tag" tabindex="0" data-proof="Grew Emirates Skywards from 8M to 20M+ members and launched the My Family Miles-pooling feature.">CRM &amp; Loyalty</li>
+          <li class="sk-tag" tabindex="0" data-proof="Delivered Hilton's 1,400-delegate APAC conference, the Global CEO's best-organised global event.">Experiential Marketing</li>
+          <li class="sk-tag" tabindex="0" data-proof="USD 2M+ incremental revenue from the Cash+Miles launch, built on segmentation and CRM personalisation.">Campaign Strategy</li>
         </ul>
-        <a class="sk-proof" href="case-studies/malaysia-airlines.html">
-          <span class="sk-proof-label">Proof</span>
-          <span>Repositioned Malaysia Airlines around 'This is Malaysian hospitality', and ran Emirates' global recruitment across 25 languages. <span class="arr" aria-hidden="true">&rarr;</span></span>
-        </a>
+        <div class="sk-proof-wrap">
+          <p class="sk-proof" aria-live="polite">
+            <span class="sk-proof-label">Proof</span>
+            <span class="sk-proof-text" data-default="Repositioned Malaysia Airlines around 'This is Malaysian hospitality', and ran Emirates' global recruitment across 25 languages.">Repositioned Malaysia Airlines around 'This is Malaysian hospitality', and ran Emirates' global recruitment across 25 languages.</span>
+          </p>
+          <a class="sk-proof-link" href="case-studies/malaysia-airlines.html">See the work <span aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </section>
 
@@ -179,20 +199,23 @@
       </div>
       <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
         <ul class="sk-tags">
-          <li class="sk-tag">AI Strategy</li>
-          <li class="sk-tag">Agentic AI Workflows</li>
-          <li class="sk-tag">Web &amp; Digital Marketing</li>
-          <li class="sk-tag">UX/UI Design</li>
-          <li class="sk-tag">Content Systems</li>
-          <li class="sk-tag">Marketing Technology</li>
-          <li class="sk-tag">Performance Analysis</li>
-          <li class="sk-tag">Prompt Engineering</li>
-          <li class="sk-tag">AI-Augmented Production</li>
+          <li class="sk-tag" tabindex="0" data-proof="Folded AI into Motion's production process, cutting turnaround and lifting team utilisation 50%.">AI Strategy</li>
+          <li class="sk-tag" tabindex="0" data-proof="Certified in Agentic AI for Leaders (Vanderbilt); building AI agent workflows into marketing production.">Agentic AI Workflows</li>
+          <li class="sk-tag" tabindex="0" data-proof="Grew Emirates online sales 35% through performance-led programmes and continuous channel-mix refinement.">Web &amp; Digital Marketing</li>
+          <li class="sk-tag" tabindex="0" data-proof="Google UX Design certified; led data-informed microsite launches for campus audiences at AIA.">UX/UI Design</li>
+          <li class="sk-tag" tabindex="0" data-proof="Rebuilt brief-to-delivery workflows at Motion so output stays predictable at regional scale.">Content Systems</li>
+          <li class="sk-tag" tabindex="0" data-proof="Applied marketing-mix and media-mix modelling to channel investment across the Skywards programme.">Marketing Technology</li>
+          <li class="sk-tag" tabindex="0" data-proof="Ran structured A/B testing, segmentation and KPI frameworks across 150+ campaigns.">Performance Analysis</li>
+          <li class="sk-tag" tabindex="0" data-proof="Daily use of LLMs for research, first-draft structure and pressure-testing arguments.">Prompt Engineering</li>
+          <li class="sk-tag" tabindex="0" data-proof="Built AI into Motion's content production, speeding delivery without dropping the standard.">AI-Augmented Production</li>
         </ul>
-        <a class="sk-proof" href="articles/ai-craft.html">
-          <span class="sk-proof-label">Proof</span>
-          <span>Cut content turnaround and lifted team utilisation by 50% by folding AI into the production process at Motion. <span class="arr" aria-hidden="true">&rarr;</span></span>
-        </a>
+        <div class="sk-proof-wrap">
+          <p class="sk-proof" aria-live="polite">
+            <span class="sk-proof-label">Proof</span>
+            <span class="sk-proof-text" data-default="Cut content turnaround and lifted team utilisation by 50% by folding AI into the production process at Motion.">Cut content turnaround and lifted team utilisation by 50% by folding AI into the production process at Motion.</span>
+          </p>
+          <a class="sk-proof-link" href="articles/ai-craft.html">See the work <span aria-hidden="true">&rarr;</span></a>
+        </div>
       </div>
     </section>
 
@@ -219,5 +242,35 @@
 </footer>
 
 <script src="assets/portfolio.js" defer></script>
+
+<!-- Skill -> Proof: hover/focus (desktop) or tap (touch) a skill to swap the Proof line to a real example -->
+<script>
+(function () {
+  var canHover = window.matchMedia('(hover: hover)').matches;
+  Array.prototype.forEach.call(document.querySelectorAll('.sk-move'), function (move) {
+    var tags = Array.prototype.slice.call(move.querySelectorAll('.sk-tag'));
+    var textEl = move.querySelector('.sk-proof-text');
+    if (!textEl || !tags.length) return;
+    var def = textEl.getAttribute('data-default') || textEl.textContent;
+    function show(t) {
+      if (textEl.textContent === t) return;
+      textEl.classList.add('swap');
+      setTimeout(function () { textEl.textContent = t; textEl.classList.remove('swap'); }, 110);
+    }
+    function setActive(tag) { tags.forEach(function (x) { x.classList.toggle('is-cited', x === tag); }); }
+    tags.forEach(function (tag) {
+      var p = tag.getAttribute('data-proof');
+      if (!p) return;
+      if (canHover) tag.addEventListener('mouseenter', function () { show(p); setActive(tag); });
+      else tag.addEventListener('click', function () { show(p); setActive(tag); });
+      tag.addEventListener('focus', function () { show(p); setActive(tag); });
+    });
+    if (canHover) {
+      var main = move.querySelector('.sk-move-main') || move;
+      main.addEventListener('mouseleave', function () { show(def); setActive(null); });
+    }
+  });
+})();
+</script>
 </body>
 </html>
