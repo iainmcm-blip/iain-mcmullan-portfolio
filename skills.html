@@ -29,76 +29,84 @@
 <link rel="stylesheet" href="assets/portfolio.css">
 <script>document.documentElement.classList.add('js');</script>
 <style>
-/* ── SKILLS / CAPABILITIES PAGE ──────────────────────────── */
+/* ── SKILLS / CAPABILITIES PAGE — "Spotlight" ───────────────── */
 .sk-page { padding-top: var(--nav-h); }
-.sk-header { padding-top: 4rem; padding-bottom: 1rem; }
+.sk-header { position: relative; padding-top: 4rem; padding-bottom: 1rem; overflow: hidden; }
 .sk-header .section-label { display: block; margin-bottom: 0.75rem; }
 .sk-intro { margin-top: 1rem; max-width: 680px; font-size: 1.0625rem; line-height: 1.72; color: var(--ink-mid); }
 .sk-intro strong { color: var(--ink); font-weight: 600; }
-.sk-body { padding-bottom: 4.5rem; }
-
-/* Each capability area is an editorial "movement", threaded by a thin gold rule */
-.sk-move {
-  display: grid; grid-template-columns: 0.82fr 1.18fr; gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: start; padding: 3.25rem 0; border-top: 1px solid var(--gold-mid);
-}
-.sk-move:last-of-type { border-bottom: 1px solid var(--gold-mid); }
-.sk-move-num { display: block; font-family: var(--ff-display); font-weight: 700; font-size: clamp(2.6rem, 5vw, 3.6rem); line-height: 0.9; color: var(--gold-mid); }
-.sk-move-head { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.7rem, 3vw, 2.25rem); line-height: 1.1; color: var(--ink); margin: 0.6rem 0 0.95rem; }
-.sk-move-lead { margin: 0; font-size: 1rem; line-height: 1.62; color: var(--ink-mid); max-width: 34ch; }
-
-/* Equal-width tag grid (3 across on desktop) so the pills line up cleanly */
-.sk-tags { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; align-items: stretch; }
-.sk-tag {
-  font-family: var(--ff-body); font-size: 0.84rem; font-weight: 500; color: var(--ink); text-align: center;
-  display: flex; align-items: center; justify-content: center; line-height: 1.2; min-height: 3.05rem;
-  padding: 0.35rem 0.7rem; border-radius: var(--radius-pill);
-  border: 1px solid var(--divider); background: var(--surface);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
-}
-@media (max-width: 1100px) and (min-width: 821px) { .sk-tag { white-space: normal; } }
-.sk-tag:hover { border-color: var(--gold-mid); transform: translateY(-2px); box-shadow: var(--shadow-card); }
-@media (max-width: 820px) { .sk-tags { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 420px) { .sk-tags { grid-template-columns: 1fr; } }
-
-/* Interactive skill tags: hover/tap a skill to swap the Proof line beneath */
-.sk-tag { cursor: pointer; }
-.sk-tag.is-cited { border-color: var(--gold); background: var(--gold-pale); color: var(--gold-dark); transform: translateY(-2px); box-shadow: var(--shadow-card); }
-.sk-tag:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
-.sk-hint { margin-top: 1rem; font-size: 0.82rem; font-style: italic; color: var(--gold-dark); }
 .sk-outcomes { list-style: none; margin: 1.85rem 0 0; padding: 0 0 0 1.25rem; max-width: 760px; border-left: 2px solid var(--gold); }
 .sk-outcomes li { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.2rem, 2.2vw, 1.7rem); color: var(--ink); line-height: 1.38; letter-spacing: -0.01em; }
 .sk-outcomes li strong { color: var(--gold-dark); font-weight: 700; }
+.sk-hint { margin-top: 1.1rem; font-size: 0.82rem; font-style: italic; color: var(--gold-dark); }
 
-.sk-proof-wrap { margin-top: 1.6rem; }
-.sk-proof {
-  display: flex; align-items: baseline; gap: 0.6rem; margin: 0;
-  min-height: 4.4em; font-size: 0.95rem; line-height: 1.5; color: var(--ink-mid);
-}
-.sk-proof-label { flex: 0 0 auto; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--gold-dark); }
-.sk-proof-text { transition: opacity 0.16s ease; }
-.sk-proof-text.swap { opacity: 0; }
-.sk-proof-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); transition: gap 0.2s ease, color 0.2s ease; }
-.sk-proof-link:hover { gap: 0.65rem; color: var(--gold); }
-/* Keep the link's space reserved (visibility, not display) so the section height never
-   changes when the link shows/hides — no jump moving between linked and link-free skills. */
-.sk-proof-link[hidden] { visibility: hidden; }
+/* Masthead ink, echoed faintly behind the header to tie the page to the home page */
+.sk-header-ink { position: absolute; z-index: 0; top: -14%; right: -8%; width: 52%; height: 150%; pointer-events: none; opacity: 0.42;
+  -webkit-mask-image: radial-gradient(closest-side, #000 38%, transparent 78%); mask-image: radial-gradient(closest-side, #000 38%, transparent 78%); }
+.sk-header-ink video { width: 100%; height: 100%; object-fit: cover; }
+.sk-header > * { position: relative; z-index: 1; }
+
+.sk-body { padding-bottom: 4.5rem; }
+
+/* ── The split: skill menu (left) + spotlight (right) ── */
+.sk-split { display: grid; grid-template-columns: 0.94fr 1.06fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; margin-top: 2.6rem; }
+
+.sk-group { margin-bottom: 1.7rem; }
+.sk-group:last-child { margin-bottom: 0; }
+.sk-group-label { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.35rem; padding-bottom: 0.45rem; border-bottom: 1px solid var(--ink); }
+.sk-group-label .n { font-family: var(--ff-display); font-weight: 700; font-size: 1.05rem; color: var(--gold); }
+.sk-group-label .t { font-family: var(--ff-display); font-weight: 700; font-size: 1.3rem; color: var(--ink); letter-spacing: -0.01em; }
+
+.sk-item { border-bottom: 1px solid var(--divider); }
+.sk-item:last-child { border-bottom: 0; }
+.sk-item-btn { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; text-align: left; background: none; border: 0; border-left: 2px solid transparent; cursor: pointer;
+  font-family: var(--ff-body); font-size: 0.97rem; font-weight: 500; color: var(--ink-mid); line-height: 1.3; padding: 0.6rem 0; transition: color 0.18s ease, padding 0.18s ease, border-color 0.18s ease; }
+.sk-item-btn:hover { color: var(--ink); }
+.sk-item-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.sk-item.is-active > .sk-item-btn { color: var(--gold-dark); padding-left: 0.6rem; border-left-color: var(--gold); }
+.sk-chev { flex: 0 0 auto; font-family: var(--ff-body); font-weight: 400; font-size: 1.15rem; color: var(--gold); line-height: 1; transition: transform 0.22s ease; display: none; }
+
+/* desktop: inline panels collapsed — the spotlight does the talking */
+.sk-item-panel { display: none; }
+
+/* ── Spotlight panel ── */
+.sk-spotlight { position: sticky; top: calc(var(--nav-h) + 1.75rem); border: 1px solid var(--gold-mid); border-radius: 16px; overflow: hidden; background: var(--gold-pale); min-height: 360px; }
+.sk-spot-ink { position: absolute; inset: 0; z-index: 0; opacity: 0.4; pointer-events: none;
+  -webkit-mask-image: linear-gradient(120deg, transparent 8%, #000 95%); mask-image: linear-gradient(120deg, transparent 8%, #000 95%); }
+.sk-spot-ink video { width: 100%; height: 100%; object-fit: cover; }
+.sk-spot-inner { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 360px; padding: 2.5rem 2.4rem 2.2rem; }
+.sk-spot-cat { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); }
+.sk-spot-name { font-family: var(--ff-display); font-weight: 700; font-size: clamp(2rem, 3.4vw, 2.95rem); line-height: 1.05; letter-spacing: -0.01em; color: var(--ink); margin: 0.7rem 0 1.05rem; }
+.sk-spot-proof { font-size: 1.08rem; line-height: 1.62; color: #534D40; flex: 1 1 auto; margin: 0; max-width: 38ch; }
+.sk-spot-name, .sk-spot-proof, .sk-spot-cat { transition: opacity 0.18s ease; }
+.sk-spotlight.swap .sk-spot-name, .sk-spotlight.swap .sk-spot-proof, .sk-spotlight.swap .sk-spot-cat { opacity: 0; }
+.sk-spot-link { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1.5rem; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); transition: gap 0.2s ease, color 0.2s ease; }
+.sk-spot-link:hover { gap: 0.7rem; color: var(--gold); }
+.sk-spot-link[hidden] { visibility: hidden; }
 
 .sk-foot { margin-top: 3.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem 2rem; }
 .sk-foot-line { font-size: 1.05rem; font-style: italic; color: var(--ink-mid); font-family: var(--ff-body); }
 .sk-back { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; color: var(--ink-mid); transition: gap 0.2s ease, color 0.2s ease; }
 .sk-back:hover { gap: 0.65rem; color: var(--gold); }
 
-/* Self-contained load fade — never leaves content hidden (no observer dependency) */
+/* Self-contained load fade */
 @media (prefers-reduced-motion: no-preference) {
   .sk-fade { opacity: 0; animation: skFade 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
   @keyframes skFade { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 }
 
+/* ── Mobile: spotlight becomes a tap-to-reveal accordion ── */
 @media (max-width: 820px) {
   .sk-header { padding-top: 2.5rem; }
-  .sk-move { grid-template-columns: 1fr; gap: 1.4rem; padding: 2.5rem 0; }
-  .sk-move-lead { max-width: none; }
+  .sk-split { grid-template-columns: 1fr; gap: 0; margin-top: 2rem; }
+  .sk-spotlight { display: none; }
+  .sk-chev { display: inline-block; }
+  .sk-item.is-open .sk-chev { transform: rotate(45deg); }
+  .sk-item-panel { display: block; max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .sk-item.is-open .sk-item-panel { max-height: 320px; }
+  .sk-item-panel-inner { padding: 0 0 1rem 0.6rem; border-left: 2px solid var(--gold-mid); }
+  .sk-item-proof { margin: 0; font-size: 0.95rem; line-height: 1.58; color: var(--ink-mid); }
+  .sk-item-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.7rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); }
 }
 </style>
 </head>
@@ -139,6 +147,12 @@
 <main id="main" class="sk-page">
 
   <header class="sk-header container">
+    <div class="sk-header-ink" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/hero-ink-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
+        <source src="assets/video/hero-ink.mp4" type="video/mp4">
+      </video>
+    </div>
     <span class="section-label sk-fade">Capabilities</span>
     <h1 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">The full toolkit.</h1>
     <p class="sk-intro sk-fade" style="animation-delay:0.1s">Most careers go generalist, then specialist. The best ones keep going: deep specialism in one discipline becomes the foundation for genuine range across many. Mine is <strong>project direction and operational rigour</strong>, the part that keeps everything else honest. Brand strategy, integrated campaigns, content, digital, and AI all grow from there. Which means I don't only think strategically. I deliver.</p>
@@ -149,95 +163,146 @@
       <li>I measure the <strong>results</strong>.</li>
       <li>I modernise it with <strong>AI</strong>.</li>
     </ul>
-    <p class="sk-hint sk-fade" style="animation-delay:0.18s">Hover or tap any skill below for a real example from my career.</p>
+    <p class="sk-hint sk-fade" style="animation-delay:0.18s">Hover any skill to see a real example, or on a phone, tap to expand it.</p>
   </header>
 
   <div class="container sk-body">
+    <div class="sk-split sk-fade" style="animation-delay:0.2s">
 
-    <!-- Movement 01 -->
-    <section class="sk-move" id="strategy" aria-labelledby="sk-h-1">
-      <div class="sk-move-aside sk-fade" style="animation-delay:0.15s">
-        <span class="sk-move-num">01</span>
-        <h2 class="sk-move-head" id="sk-h-1">Strategy &amp; Leadership</h2>
-        <p class="sk-move-lead">The discipline that keeps everything else honest: deciding what matters, then running it all the way to delivery.</p>
-      </div>
-      <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
-        <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Owned brand strategy for campaigns across Malaysia Airlines, British Airways, Emirates, AIA, Skywards and Air Selangor.">Brand Strategy</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Lifted Emirates Skywards from 41% to 45%+ of airline revenue using marketing-mix and media-mix modelling.">Marketing Strategy</li>
-          <li class="sk-tag" tabindex="0" data-proof="Ran delivery across a 160-person, six-market agency at Bonsey Jaden, lifting client profitability 30%.">Operational Leadership</li>
-          <li class="sk-tag" tabindex="0" data-proof="Won Dole, Everise, Air Selangor, Hilton, DSO and more via competitive multi-market pitches.">New Business Development</li>
-          <li class="sk-tag" tabindex="0" data-proof="I have owned the project management of every project I've worked on for more than 15 years.">Project Management</li>
-          <li class="sk-tag" tabindex="0" data-proof="Grown client profitability on the agency side, and added millions of dollars in incremental revenue on the client side.">Financial Rigour</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Multiple internal campaigns across all channels at The Emirates Group, plus Hilton.">Internal Communications</li>
-        </ul>
-        <div class="sk-proof-wrap">
-          <p class="sk-proof" aria-live="polite">
-            <span class="sk-proof-label">Proof</span>
-            <span class="sk-proof-text" data-default="Grew Emirates Skywards from 8M to 20M+ members and lifted its share of airline revenue past 45%.">Grew Emirates Skywards from 8M to 20M+ members and lifted its share of airline revenue past 45%.</span>
-          </p>
-          <a class="sk-proof-link" href="case-studies/emirates-skywards-my-family.html">See the work <span aria-hidden="true">&rarr;</span></a>
-        </div>
-      </div>
-    </section>
+      <!-- LEFT: the skill menu -->
+      <div class="sk-menu">
 
-    <!-- Movement 02 -->
-    <section class="sk-move" id="brand" aria-labelledby="sk-h-2">
-      <div class="sk-move-aside sk-fade" style="animation-delay:0.15s">
-        <span class="sk-move-num">02</span>
-        <h2 class="sk-move-head" id="sk-h-2">Brand &amp; Marketing</h2>
-        <p class="sk-move-lead">Turning a position into work that earns attention and moves the business, across every channel that matters.</p>
-      </div>
-      <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
-        <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Directed 80+ integrated campaigns across business units at The Emirates Group, and dozens more agency-side.">Integrated Marketing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/uob-gallery.html" data-proof="Owned the storytelling for The UOB Gallery, plus all client content across the past seven years.">Content Strategy</li>
-          <li class="sk-tag" tabindex="0" data-href="perspectives.html" data-proof="In-house de facto Copy head at Emirates; drafted content across channels for NTU, Hilton, Dole and Malaysia Airlines.">Copywriting &amp; Editing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Built full campaigns for Emirates pilot and crew recruitment, plus dnata and Emirates Aviation University.">Employer Brand &amp; Recruitment</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Managed campaigns across Africa and South America at Emirates, plus global campaigns for Emirates Skywards.">Global Advertising</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Directed marketing communications for eight years at Emirates Skywards, growing membership from 8M to over 20M.">CRM &amp; Loyalty</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="Owned strategy and comms for Hilton's 2024 APAC conference, lauded by their global CEO as the best he'd seen.">Experiential Marketing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-skywards-my-family.html" data-proof="Crafted campaign strategy for my internal and external clients for more than 15 years.">Campaign Strategy</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-pilot-recruitment.html" data-proof="Across many campaigns and tools for Emirates recruitment and loyalty, plus AIA, Dole, AHC, Cetaphil and Air Selangor.">Performance Marketing</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/emirates-flight-training-academy.html" data-proof="Developed the Emirates Flight Training Academy brand from scratch while the academy was still under construction.">Brand Development</li>
-        </ul>
-        <div class="sk-proof-wrap">
-          <p class="sk-proof" aria-live="polite">
-            <span class="sk-proof-label">Proof</span>
-            <span class="sk-proof-text" data-default="Repositioned Malaysia Airlines around 'This is Malaysian hospitality', and ran Emirates' global recruitment across 25 languages.">Repositioned Malaysia Airlines around 'This is Malaysian hospitality', and ran Emirates' global recruitment across 25 languages.</span>
-          </p>
-          <a class="sk-proof-link" href="case-studies/malaysia-airlines.html">See the work <span aria-hidden="true">&rarr;</span></a>
+        <div class="sk-group" id="strategy">
+          <p class="sk-group-label"><span class="n">01</span><span class="t">Strategy &amp; Leadership</span></p>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="Brand Strategy" data-href="case-studies/emirates-pilot-recruitment.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Brand Strategy<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Owned brand strategy for campaigns across Malaysia Airlines, British Airways, Emirates, AIA, Skywards and Air Selangor.</p><a class="sk-item-link" href="case-studies/emirates-pilot-recruitment.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="Marketing Strategy" data-href="case-studies/emirates-skywards-my-family.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Marketing Strategy<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Lifted Emirates Skywards from 41% to 45%+ of airline revenue using marketing-mix and media-mix modelling.</p><a class="sk-item-link" href="case-studies/emirates-skywards-my-family.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="Operational Leadership">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Operational Leadership<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Ran delivery across a 160-person, six-market agency at Bonsey Jaden, lifting client profitability 30%.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="New Business Development">
+            <button class="sk-item-btn" type="button" aria-expanded="false">New Business Development<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Won Dole, Everise, Air Selangor, Hilton, DSO and more via competitive multi-market pitches.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="Project Management">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Project Management<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">I have owned the project management of every project I've worked on for more than 15 years.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="Financial Rigour">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Financial Rigour<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Grown client profitability on the agency side, and added millions of dollars in incremental revenue on the client side.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Strategy &amp; Leadership" data-name="Internal Communications" data-href="case-studies/hilton-asia-conference.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Internal Communications<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Multiple internal campaigns across all channels at The Emirates Group, plus Hilton.</p><a class="sk-item-link" href="case-studies/hilton-asia-conference.html">See the work &rarr;</a></div></div>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Movement 03 -->
-    <section class="sk-move" id="digital" aria-labelledby="sk-h-3">
-      <div class="sk-move-aside sk-fade" style="animation-delay:0.15s">
-        <span class="sk-move-num">03</span>
-        <h2 class="sk-move-head" id="sk-h-3">Digital, AI &amp; Craft</h2>
-        <p class="sk-move-lead">Modern tooling and AI applied with craft and judgement, not hype, to make better work faster.</p>
-      </div>
-      <div class="sk-move-main sk-fade" style="animation-delay:0.2s">
-        <ul class="sk-tags">
-          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Skilled across Claude, Claude Code, ChatGPT, DeepSeek, Kimi, Copilot, Gemini, NotebookLM and Google Stitch.">AI Platforms &amp; Tools</li>
-          <li class="sk-tag" tabindex="0" data-proof="Built sites for DSO, apps for Hilton, and overseen dozens of digital marketing campaigns.">Web &amp; Digital Marketing</li>
-          <li class="sk-tag" tabindex="0" data-proof="Google-qualified; I provide and oversee sitemaps, wireframes, interfaces, prototypes, UAT and troubleshooting.">UX/UI Design</li>
-          <li class="sk-tag" tabindex="0" data-proof="Both built and managed, including Strapi, WordPress and Sanity.">Content Management Systems</li>
-          <li class="sk-tag" tabindex="0" data-proof="I find the right tools for the right jobs, across measurement and optimisation, for efficiency and effectiveness.">Marketing Technology</li>
-          <li class="sk-tag" tabindex="0" data-proof="Through Google Analytics, HubSpot or research. The approach required is the approach taken.">Performance Analysis</li>
-          <li class="sk-tag" tabindex="0" data-href="articles/ai-craft.html" data-proof="Daily use of LLMs across the familiar AI tools for speed, effectiveness and rigour of decision-making.">Advanced Prompt Engineering</li>
-          <li class="sk-tag" tabindex="0" data-href="case-studies/hilton-asia-conference.html" data-proof="With clients such as Hilton and UOB.">AI-Augmented Production</li>
-        </ul>
-        <div class="sk-proof-wrap">
-          <p class="sk-proof" aria-live="polite">
-            <span class="sk-proof-label">Proof</span>
-            <span class="sk-proof-text" data-default="Cut content turnaround and lifted team utilisation by 50% by folding AI into the production process at Motion.">Cut content turnaround and lifted team utilisation by 50% by folding AI into the production process at Motion.</span>
-          </p>
-          <a class="sk-proof-link" href="articles/ai-craft.html">See the work <span aria-hidden="true">&rarr;</span></a>
+        <div class="sk-group" id="brand">
+          <p class="sk-group-label"><span class="n">02</span><span class="t">Brand &amp; Marketing</span></p>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Integrated Marketing" data-href="case-studies/hilton-asia-conference.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Integrated Marketing<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Directed 80+ integrated campaigns across business units at The Emirates Group, and dozens more agency-side.</p><a class="sk-item-link" href="case-studies/hilton-asia-conference.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Content Strategy" data-href="case-studies/uob-gallery.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Content Strategy<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Owned the storytelling for The UOB Gallery, plus all client content across the past seven years.</p><a class="sk-item-link" href="case-studies/uob-gallery.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Copywriting &amp; Editing" data-href="perspectives.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Copywriting &amp; Editing<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">In-house de facto Copy head at Emirates; drafted content across channels for NTU, Hilton, Dole and Malaysia Airlines.</p><a class="sk-item-link" href="perspectives.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Employer Brand &amp; Recruitment" data-href="case-studies/emirates-pilot-recruitment.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Employer Brand &amp; Recruitment<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Built full campaigns for Emirates pilot and crew recruitment, plus dnata and Emirates Aviation University.</p><a class="sk-item-link" href="case-studies/emirates-pilot-recruitment.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Global Advertising" data-href="case-studies/emirates-skywards-my-family.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Global Advertising<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Managed campaigns across Africa and South America at Emirates, plus global campaigns for Emirates Skywards.</p><a class="sk-item-link" href="case-studies/emirates-skywards-my-family.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="CRM &amp; Loyalty" data-href="case-studies/emirates-skywards-my-family.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">CRM &amp; Loyalty<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Directed marketing communications for eight years at Emirates Skywards, growing membership from 8M to over 20M.</p><a class="sk-item-link" href="case-studies/emirates-skywards-my-family.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Experiential Marketing" data-href="case-studies/hilton-asia-conference.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Experiential Marketing<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Owned strategy and comms for Hilton's 2024 APAC conference, lauded by their global CEO as the best he'd seen.</p><a class="sk-item-link" href="case-studies/hilton-asia-conference.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Campaign Strategy" data-href="case-studies/emirates-skywards-my-family.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Campaign Strategy<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Crafted campaign strategy for my internal and external clients for more than 15 years.</p><a class="sk-item-link" href="case-studies/emirates-skywards-my-family.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Performance Marketing" data-href="case-studies/emirates-pilot-recruitment.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Performance Marketing<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Across many campaigns and tools for Emirates recruitment and loyalty, plus AIA, Dole, AHC, Cetaphil and Air Selangor.</p><a class="sk-item-link" href="case-studies/emirates-pilot-recruitment.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Brand &amp; Marketing" data-name="Brand Development" data-href="case-studies/emirates-flight-training-academy.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Brand Development<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Developed the Emirates Flight Training Academy brand from scratch while the academy was still under construction.</p><a class="sk-item-link" href="case-studies/emirates-flight-training-academy.html">See the work &rarr;</a></div></div>
+          </div>
         </div>
+
+        <div class="sk-group" id="digital">
+          <p class="sk-group-label"><span class="n">03</span><span class="t">Digital, AI &amp; Craft</span></p>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="AI Platforms &amp; Tools" data-href="articles/ai-craft.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">AI Platforms &amp; Tools<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Skilled across Claude, Claude Code, ChatGPT, DeepSeek, Kimi, Copilot, Gemini, NotebookLM and Google Stitch.</p><a class="sk-item-link" href="articles/ai-craft.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="Web &amp; Digital Marketing">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Web &amp; Digital Marketing<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Built sites for DSO, apps for Hilton, and overseen dozens of digital marketing campaigns.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="UX/UI Design">
+            <button class="sk-item-btn" type="button" aria-expanded="false">UX/UI Design<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Google-qualified; I provide and oversee sitemaps, wireframes, interfaces, prototypes, UAT and troubleshooting.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="Content Management Systems">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Content Management Systems<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Both built and managed, including Strapi, WordPress and Sanity.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="Marketing Technology">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Marketing Technology<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">I find the right tools for the right jobs, across measurement and optimisation, for efficiency and effectiveness.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="Performance Analysis">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Performance Analysis<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Through Google Analytics, HubSpot or research. The approach required is the approach taken.</p></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="Advanced Prompt Engineering" data-href="articles/ai-craft.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">Advanced Prompt Engineering<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Daily use of LLMs across the familiar AI tools for speed, effectiveness and rigour of decision-making.</p><a class="sk-item-link" href="articles/ai-craft.html">See the work &rarr;</a></div></div>
+          </div>
+          <div class="sk-item" data-cat="Digital, AI &amp; Craft" data-name="AI-Augmented Production" data-href="case-studies/hilton-asia-conference.html">
+            <button class="sk-item-btn" type="button" aria-expanded="false">AI-Augmented Production<span class="sk-chev" aria-hidden="true">+</span></button>
+            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">Cut content turnaround and lifted team utilisation by 50% by folding AI into the production process at Motion, with clients such as Hilton and UOB.</p><a class="sk-item-link" href="case-studies/hilton-asia-conference.html">See the work &rarr;</a></div></div>
+          </div>
+        </div>
+
       </div>
-    </section>
+
+      <!-- RIGHT: the spotlight -->
+      <aside class="sk-spotlight" aria-live="polite" aria-label="Selected skill">
+        <div class="sk-spot-ink" aria-hidden="true">
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="assets/video/hero-ink-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
+            <source src="assets/video/hero-ink.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="sk-spot-inner">
+          <span class="sk-spot-cat">Strategy &amp; Leadership</span>
+          <h2 class="sk-spot-name">Brand Strategy</h2>
+          <p class="sk-spot-proof">Owned brand strategy for campaigns across Malaysia Airlines, British Airways, Emirates, AIA, Skywards and Air Selangor.</p>
+          <a class="sk-spot-link" href="case-studies/emirates-pilot-recruitment.html">See the work <span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </aside>
+
+    </div>
 
     <div class="sk-foot">
       <p class="sk-foot-line">20+ years across Asia and the Middle East. One consistent standard.</p>
@@ -263,40 +328,55 @@
 
 <script src="assets/portfolio.js" defer></script>
 
-<!-- Skill -> Proof: hover/focus (desktop) or tap (touch) a skill to swap the Proof line to a real example -->
+<!-- Spotlight: desktop hover/focus fills the panel; mobile tap expands the proof inline -->
 <script>
 (function () {
-  var canHover = window.matchMedia('(hover: hover)').matches;
-  Array.prototype.forEach.call(document.querySelectorAll('.sk-move'), function (move) {
-    var tags = Array.prototype.slice.call(move.querySelectorAll('.sk-tag'));
-    var textEl = move.querySelector('.sk-proof-text');
-    if (!textEl || !tags.length) return;
-    var def = textEl.getAttribute('data-default') || textEl.textContent;
-    var linkEl = move.querySelector('.sk-proof-link');
-    var defHref = linkEl ? linkEl.getAttribute('href') : null;   // the section's resting "See the work" target
-    function show(t) {
-      if (textEl.textContent === t) return;
-      textEl.classList.add('swap');
-      setTimeout(function () { textEl.textContent = t; textEl.classList.remove('swap'); }, 110);
-    }
-    function setActive(tag) { tags.forEach(function (x) { x.classList.toggle('is-cited', x === tag); }); }
-    function setLink(href) {
-      if (!linkEl) return;
-      if (href) { linkEl.setAttribute('href', href); linkEl.hidden = false; }
-      else { linkEl.hidden = true; }   // skill has no case study -> hide the link entirely
-    }
-    function activate(tag) { show(tag.getAttribute('data-proof')); setActive(tag); setLink(tag.getAttribute('data-href')); }
-    function reset() { show(def); setActive(null); setLink(defHref); }
-    tags.forEach(function (tag) {
-      if (!tag.getAttribute('data-proof')) return;
-      if (canHover) tag.addEventListener('mouseenter', function () { activate(tag); });
-      else tag.addEventListener('click', function () { activate(tag); });
-      tag.addEventListener('focus', function () { activate(tag); });
+  var split = document.querySelector('.sk-split');
+  if (!split) return;
+  var mqMobile = window.matchMedia('(max-width: 820px)');
+  var items = Array.prototype.slice.call(split.querySelectorAll('.sk-item'));
+  var spot = split.querySelector('.sk-spotlight');
+  var sCat = spot && spot.querySelector('.sk-spot-cat');
+  var sName = spot && spot.querySelector('.sk-spot-name');
+  var sProof = spot && spot.querySelector('.sk-spot-proof');
+  var sLink = spot && spot.querySelector('.sk-spot-link');
+
+  function fill(item) {
+    if (!spot) return;
+    var proofEl = item.querySelector('.sk-item-proof');
+    var name = item.getAttribute('data-name');
+    if (sName.innerHTML === name) return;
+    spot.classList.add('swap');
+    setTimeout(function () {
+      sCat.innerHTML = item.getAttribute('data-cat');
+      sName.innerHTML = name;
+      sProof.textContent = proofEl ? proofEl.textContent : '';
+      var href = item.getAttribute('data-href');
+      if (href) { sLink.setAttribute('href', href); sLink.hidden = false; }
+      else { sLink.hidden = true; }
+      spot.classList.remove('swap');
+    }, 120);
+    items.forEach(function (x) { x.classList.toggle('is-active', x === item); });
+  }
+
+  function toggle(item) {
+    var open = item.classList.contains('is-open');
+    items.forEach(function (x) {
+      x.classList.remove('is-open');
+      var b = x.querySelector('.sk-item-btn'); if (b) b.setAttribute('aria-expanded', 'false');
     });
-    if (canHover) {
-      var main = move.querySelector('.sk-move-main') || move;
-      main.addEventListener('mouseleave', reset);
+    if (!open) {
+      item.classList.add('is-open');
+      item.querySelector('.sk-item-btn').setAttribute('aria-expanded', 'true');
     }
+  }
+
+  items.forEach(function (item) {
+    var btn = item.querySelector('.sk-item-btn');
+    if (!btn) return;
+    btn.addEventListener('mouseenter', function () { if (!mqMobile.matches) fill(item); });
+    btn.addEventListener('focus', function () { if (!mqMobile.matches) fill(item); });
+    btn.addEventListener('click', function () { if (mqMobile.matches) toggle(item); else fill(item); });
   });
 })();
 </script>
