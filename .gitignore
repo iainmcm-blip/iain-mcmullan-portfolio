@@ -1,2 +1,6 @@
 build/tailwindcss
 .DS_Store
+node_modules/
+.env
+.env.*
+.vercel

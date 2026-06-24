@@ -1,0 +1,14 @@
+{
+  "name": "iain-mcmullan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static portfolio site. Perspectives content is generated from Sanity by scripts/generate.mjs.",
+  "scripts": {
+    "generate": "node scripts/generate.mjs"
+  },
+  "dependencies": {
+    "@portabletext/to-html": "^5.0.2",
+    "@sanity/client": "^7.23.0"
+  }
+}
