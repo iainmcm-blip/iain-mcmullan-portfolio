@@ -31,7 +31,7 @@
 <style>
 /* ── SKILLS / CAPABILITIES PAGE — "Spotlight" ───────────────── */
 .sk-page { padding-top: var(--nav-h); }
-.sk-header { position: relative; padding-top: 4rem; padding-bottom: 1rem; overflow: hidden; }
+.sk-header { padding-top: 4rem; padding-bottom: 1rem; }
 .sk-header .section-label { display: block; margin-bottom: 0.75rem; }
 .sk-intro { margin-top: 1rem; max-width: 680px; font-size: 1.0625rem; line-height: 1.72; color: var(--ink-mid); }
 .sk-intro strong { color: var(--ink); font-weight: 600; }
@@ -39,12 +39,6 @@
 .sk-outcomes li { font-family: var(--ff-display); font-weight: 700; font-size: clamp(1.2rem, 2.2vw, 1.7rem); color: var(--ink); line-height: 1.38; letter-spacing: -0.01em; }
 .sk-outcomes li strong { color: var(--gold-dark); font-weight: 700; }
 .sk-hint { margin-top: 1.1rem; font-size: 0.82rem; font-style: italic; color: var(--gold-dark); }
-
-/* Masthead ink, echoed faintly behind the header to tie the page to the home page */
-.sk-header-ink { position: absolute; z-index: 0; top: -14%; right: -8%; width: 52%; height: 150%; pointer-events: none; opacity: 0.42;
-  -webkit-mask-image: radial-gradient(closest-side, #000 38%, transparent 78%); mask-image: radial-gradient(closest-side, #000 38%, transparent 78%); }
-.sk-header-ink video { width: 100%; height: 100%; object-fit: cover; }
-.sk-header > * { position: relative; z-index: 1; }
 
 .sk-body { padding-bottom: 4.5rem; }
 
@@ -147,12 +141,6 @@
 <main id="main" class="sk-page">
 
   <header class="sk-header container">
-    <div class="sk-header-ink" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="auto">
-        <source src="assets/video/hero-ink-mobile.mp4" media="(max-width: 900px)" type="video/mp4">
-        <source src="assets/video/hero-ink.mp4" type="video/mp4">
-      </video>
-    </div>
     <span class="section-label sk-fade">Capabilities</span>
     <h1 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">The full toolkit.</h1>
     <p class="sk-intro sk-fade" style="animation-delay:0.1s">Most careers go generalist, then specialist. The best ones keep going: deep specialism in one discipline becomes the foundation for genuine range across many. Mine is <strong>project direction and operational rigour</strong>, the part that keeps everything else honest. Brand strategy, integrated campaigns, content, digital, and AI all grow from there. Which means I don't only think strategically. I deliver.</p>
