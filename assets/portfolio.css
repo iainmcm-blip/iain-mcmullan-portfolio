@@ -611,15 +611,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 @keyframes heroRule { to { width: 96px; } }
 
 .hero-h1 { color: var(--ink); mix-blend-mode: normal; margin-bottom: 2.25rem; }
-.hero-h1 .h1-gold { color: var(--gold-dark); font-style: italic; position: relative; }
-.hero-h1 .h1-gold::after {
-  content: ""; position: absolute; left: 0.02em; right: 0.06em; bottom: 0.01em; height: 2px;
-  transform: scaleX(0); transform-origin: left;
-  background: linear-gradient(90deg, var(--gold), rgba(196,146,42,0.12));
-}
-@media (prefers-reduced-motion: no-preference) { .hero-h1 .h1-gold::after { animation: heroDraw 0.9s cubic-bezier(0.4,0,0.2,1) 1.55s forwards; } }
-@media (prefers-reduced-motion: reduce) { .hero-h1 .h1-gold::after { transform: scaleX(1); } }
-@keyframes heroDraw { to { transform: scaleX(1); } }
+/* Single emphasis: gold italic, no underline. The accent is the colour + slope, nothing more. */
+.hero-h1 .h1-gold { color: var(--gold-dark); font-style: italic; }
 
 .hero-role { color: var(--ink-mid); mix-blend-mode: normal; }
 
@@ -633,7 +626,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 .hero-stats .stat-number > span { color: var(--gold) !important; }
 .hero-proof .stat-label { color: var(--ink-mid); }
 
-.hero-scroll-hint { color: var(--gold-dark); mix-blend-mode: normal; }
+.hero-scroll-hint { color: var(--ink-mid); mix-blend-mode: normal; }
 @media (prefers-reduced-motion: no-preference) { .hero-scroll-hint span { animation: heroBreath 2s ease-in-out infinite; } }
 @keyframes heroBreath { 0%,100% { opacity: 0.55; transform: translateY(0); } 50% { opacity: 1; transform: translateY(3px); } }
 
@@ -652,7 +645,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 }
 
 /* ── hero role classification (recruiter pattern-match) ── */
-.hero-class { color: var(--gold-dark); font-weight: 600; font-size: clamp(1rem, 1.55vw, 1.22rem); letter-spacing: 0.005em; margin: 0.55rem 0 0; mix-blend-mode: normal; }
+.hero-class { color: var(--ink-mid); font-weight: 400; font-size: clamp(1rem, 1.55vw, 1.22rem); letter-spacing: 0.005em; margin: 0.55rem 0 0; mix-blend-mode: normal; }
 @media (max-width: 900px) { .hero-class { font-size: 1.02rem; } }
 /* hero 'Start a conversation' outline border tinted to the ink yellow */
 #hero-cta-outline { border-color: #F0B62E; }
