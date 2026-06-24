@@ -791,6 +791,21 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+/* British Airways logo: nudged larger to balance its weight against the other marks
+   (desktop +30%, mobile +20% off the 55px base). */
+.marquee-logo[alt="British Airways"] { height: 72px !important; }
+@media (max-width: 900px) { .marquee-logo[alt="British Airways"] { height: 66px !important; } }
+
+/* Mobile masthead: distribute vertically. Copy sits up top, the CTAs drop into the
+   thumb zone, giving the headline and standfirst more breathing room above them. */
+@media (max-width: 900px) {
+  .hero { align-items: stretch; }
+  .hero > .container { display: flex; flex-direction: column; }
+  .hero-grid { flex: 1 1 auto; min-height: 0; }
+  .hero-left { display: flex; flex-direction: column; }
+  .hero-left .hero-ctas { margin-top: auto; padding-top: 1.75rem; }
+}
+
 .marquee-logo {
   height: 48px;
   width: auto;
