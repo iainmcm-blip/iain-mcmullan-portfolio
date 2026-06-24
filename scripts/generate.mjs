@@ -71,7 +71,7 @@ const bodyHtml = (body) => toHTML(body || [], {
 
 async function main() {
   const cats = await client.fetch(`*[_type=="category"]|order(order asc){ "key":slug.current, "label":title }`);
-  const arts = await client.fetch(`*[_type=="article" && defined(slug.current)]|order(publishDate desc, _createdAt asc){
+  const arts = await client.fetch(`*[_type=="article" && defined(slug.current)]|order(orderRank asc, publishDate desc){
     title, "slug":slug.current, "cat":category->slug.current, "catLabel":category->title,
     publishDate, excerpt, homepagePosition,
     "alt":heroImage.alt, "hotspot":heroImage.hotspot, "imgUrl":heroImage.asset->url,
