@@ -30,31 +30,50 @@
 <link rel="stylesheet" href="../assets/case-study.css">
 <script>document.documentElement.classList.add('js');</script>
 <style>
-  /* Full-bleed hero: high-res landscape image, bottle on right, warm wood left */
-  .cs-hero--cdd { background: #1a0e05; }
-  .cs-hero--cdd .cs-hero-img { object-position: right center; }
-  /* Dual gradient: horizontal (dark left for text) + vertical (dark bottom) */
+  /* Hero: professional food-styling image, centered composition */
+  .cs-hero--cdd { background: #1a0a04; }
+  .cs-hero--cdd .cs-hero-img { object-position: center center; }
   .cs-hero--cdd::after {
     background:
       linear-gradient(to right,
-        rgba(12,6,1,0.90) 0%,
-        rgba(12,6,1,0.82) 22%,
-        rgba(12,6,1,0.48) 50%,
-        rgba(12,6,1,0.12) 74%,
-        rgba(12,6,1,0.02) 100%
+        rgba(8,3,1,0.62) 0%,
+        rgba(8,3,1,0.28) 35%,
+        rgba(8,3,1,0.04) 62%,
+        rgba(8,3,1,0.00) 100%
       ),
       linear-gradient(to top,
-        rgba(12,6,1,0.88) 0%,
-        rgba(12,6,1,0.28) 36%,
-        rgba(12,6,1,0.00) 62%
+        rgba(8,3,1,0.97) 0%,
+        rgba(8,3,1,0.72) 26%,
+        rgba(8,3,1,0.22) 52%,
+        rgba(8,3,1,0.00) 74%
       );
   }
   @media (max-width: 768px) {
     .cs-hero--cdd .cs-hero-img { object-position: center center; }
     .cs-hero--cdd::after {
       background: linear-gradient(to top,
-        rgba(12,6,1,0.95) 0%, rgba(12,6,1,0.65) 42%, rgba(12,6,1,0.35) 100%);
+        rgba(8,3,1,0.97) 0%, rgba(8,3,1,0.68) 40%, rgba(8,3,1,0.32) 100%);
     }
+  }
+
+  /* Execution section: asymmetric editorial grid — image anchors left, content flows right */
+  .cdd-exec-grid {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+  .cs-figure.cdd-portrait { aspect-ratio: 2 / 3; }
+  .cdd-exec-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 768px) {
+    .cdd-exec-grid { grid-template-columns: 1fr; }
+    .cdd-exec-img { order: 1; }
+    .cdd-exec-content { order: 0; }
   }
 </style>
 </head>
@@ -171,18 +190,18 @@
   <!-- EXECUTION -->
   <section class="cs-section" id="execution">
     <div class="container">
-      <div class="cs-split text-lead">
-        <div class="reveal">
+      <div class="cdd-exec-grid">
+        <div class="reveal cdd-exec-img">
+          <div class="cs-figure cdd-portrait">
+            <img src="../assets/img/casillero-del-diablo-instagram.jpg" alt="Novita Lam's Legendary Pairings Instagram content — Casillero del Diablo wines alongside local Singapore ingredients" loading="lazy">
+          </div>
+        </div>
+        <div class="reveal cdd-exec-content">
           <span class="cs-eyebrow">03 &middot; Execution</span>
           <h2 class="cs-h2">From strategy to hawker table.</h2>
           <p class="cs-lead">The campaign ran across three months — July to September 2020 — across paid social, influencer partnerships, and an earned media drop that made the pairing strategy physical.</p>
-          <p class="cs-p">23 posts across Facebook and Instagram established the Legendary Pairings content series. Two paid influencers with combined followings of 350,000 extended reach to audiences already interested in Singapore food culture. And for the earned campaign, we produced a media kit that said more about the strategy than any brief could: a laser-etched wooden crate, two bottles of CDD, branded wine glasses, and a curated selection of locally-sourced Singapore snacks — four chosen to pair with red, four with white.</p>
-        </div>
-        <div class="reveal">
-          <div class="cs-figure tall">
-            <img src="../assets/img/casillero-del-diablo-instagram.jpg" alt="Novita Lam's Legendary Pairings Instagram content featuring Casillero del Diablo wines" loading="lazy">
-          </div>
-          <div class="cs-notes">
+          <p class="cs-p">23 posts across Facebook and Instagram established the Legendary Pairings content series. Two paid influencers with combined followings of 350,000 extended reach to audiences already interested in Singapore food culture. And for the earned campaign, we produced a media kit that said more about the strategy than any brief could: a laser-etched wooden crate, two CDD bottles, branded wine glasses, and locally-sourced Singapore snacks — four chosen to pair with red, four with white.</p>
+          <div class="cdd-exec-notes">
             <div class="cs-note">
               <h4>Paid influencers</h4>
               <p>Novita Lam (242K) and Rozz Lee (110K) — both with strong food-adjacent audiences and established credibility with Singapore's lifestyle community.</p>
