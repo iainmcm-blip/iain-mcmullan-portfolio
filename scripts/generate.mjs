@@ -91,6 +91,16 @@ async function main() {
   console.log('Hero images synced.');
 
   // 2) standalone article pages, from the live passion.html as the template
+  const RELATED_WORK = {
+    'loyalty':           { url: '../case-studies/emirates-skywards-my-family.html', title: 'Emirates Skywards: My Family' },
+    'experiential':      { url: '../case-studies/hilton-asia-conference.html',       title: 'Hilton APAC GM &amp; Commercial Conference' },
+    'brand-performance': { url: '../case-studies/malaysia-airlines.html',            title: 'Malaysia Airlines: This is Malaysian Hospitality' },
+  };
+  const relatedBlock = (slug) => {
+    const r = RELATED_WORK[slug];
+    if (!r) return '';
+    return `\n      <div class="article-related reveal">\n        <p class="article-related-label">See the work</p>\n        <a href="${r.url}" class="article-related-link">${r.title} &rarr;</a>\n      </div>`;
+  };
   const tpl = readFileSync(resolve(SITE, 'articles/passion.html'), 'utf8');
   for (const a of arts) {
     const desc = a.metaDescription || a.excerpt || '';
@@ -110,7 +120,8 @@ async function main() {
       .replace('"SCHEMA_HEADLINE"', `"${escJson(a.title)}"`)
       .replace('"SCHEMA_DESCRIPTION"', `"${escJson(desc)}"`)
       .replace('"SCHEMA_DATE"', `"${isoDate(a.publishDate)}"`)
-      .replace(/SCHEMA_URL/g, `https://www.iainmcmullan.com/articles/${a.slug}.html`);
+      .replace(/SCHEMA_URL/g, `https://www.iainmcmullan.com/articles/${a.slug}.html`)
+      .replace('    </article>', relatedBlock(a.slug) + '\n    </article>');
     writeFileSync(resolve(SITE, 'articles', a.slug + '.html'), html);
   }
   console.log(`Wrote ${arts.length} article pages.`);
