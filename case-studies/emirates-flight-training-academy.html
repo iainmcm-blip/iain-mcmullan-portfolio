@@ -18,7 +18,7 @@
 <meta property="og:title" content="Emirates Flight Training Academy, brand and launch | Iain McMullan">
 <meta property="og:description" content="Full brand identity and go-to-market for the world's most advanced pilot training facility.">
 <meta property="og:url" content="https://www.iainmcmullan.com/case-studies/emirates-flight-training-academy.html">
-<meta property="og:image" content="https://www.iainmcmullan.com/assets/img/efta-academy-exterior.png">
+<meta property="og:image" content="https://www.iainmcmullan.com/assets/img/efta-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#FAFAF8">
@@ -29,6 +29,46 @@
 <link rel="stylesheet" href="../assets/portfolio.css">
 <link rel="stylesheet" href="../assets/case-study.css">
 <script>document.documentElement.classList.add('js');</script>
+<style>
+  /* Hero: bright daylight group photo — strong bottom and left gradients for text */
+  .cs-hero--efta { background: #0a0f18; }
+  .cs-hero--efta .cs-hero-img { object-position: center 25%; }
+  .cs-hero--efta::after {
+    background:
+      linear-gradient(to right,
+        rgba(10,15,24,0.82) 0%,
+        rgba(10,15,24,0.50) 30%,
+        rgba(10,15,24,0.15) 58%,
+        rgba(10,15,24,0.00) 100%
+      ),
+      linear-gradient(to top,
+        rgba(10,15,24,0.97) 0%,
+        rgba(10,15,24,0.80) 22%,
+        rgba(10,15,24,0.38) 46%,
+        rgba(10,15,24,0.08) 70%,
+        rgba(10,15,24,0.00) 90%
+      );
+  }
+  @media (max-width: 768px) {
+    .cs-hero--efta .cs-hero-img { object-position: 60% 25%; }
+    .cs-hero--efta::after {
+      background: linear-gradient(to top,
+        rgba(10,15,24,0.97) 0%, rgba(10,15,24,0.72) 38%, rgba(10,15,24,0.32) 100%);
+    }
+  }
+
+  /* Square figure pair for identity section */
+  .efta-fig-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 3rem);
+    margin-top: 2.5rem;
+    align-items: start;
+  }
+  @media (max-width: 640px) {
+    .efta-fig-pair { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
@@ -63,15 +103,15 @@
 
 <main id="main" class="cs-main">
 
-  <header class="cs-hero">
-    <img class="cs-hero-img" src="../assets/img/efta-academy-exterior.png" alt="The Emirates Flight Training Academy building at dusk">
+  <header class="cs-hero cs-hero--efta">
+    <img class="cs-hero-img" src="../assets/img/efta-hero.webp" alt="The inaugural cadet cohort assembled at the Emirates Flight Training Academy">
     <div class="cs-hero-inner">
       <div class="cs-tagrow">
         <span class="cs-pill">Brand &amp; Go-to-Market</span>
-        <span class="cs-pill">Aviation</span>
+        <span class="cs-pill">Aviation &middot; 2017</span>
       </div>
       <h1 class="cs-title">Emirates Flight Training Academy.</h1>
-      <p class="cs-lede">The full brand identity and go-to-market for the launch of one of the world's most advanced pilot training facilities, pairing Emirates' standard of luxury with the precision of ab-initio flight training.</p>
+      <p class="cs-lede">The full brand identity and go-to-market for the launch of one of the world's most advanced pilot training facilities — designed to pair Emirates' standard of precision with the ambition of the next generation of pilots.</p>
       <div class="cs-meta">
         <span class="cs-meta-pill"><span class="lbl">Role</span>Brand &amp; Go-to-Market Lead</span>
         <span class="cs-meta-pill"><span class="lbl">For</span>The Emirates Group</span>
@@ -79,37 +119,51 @@
     </div>
   </header>
 
-  <section class="cs-section" id="strategy">
+  <!-- 01: THE BRIEF -->
+  <section class="cs-section" id="brief">
     <div class="container">
       <div class="cs-split text-lead">
         <div class="reveal">
           <span class="cs-eyebrow">01 &middot; The brief</span>
           <h2 class="cs-h2">Launch a school as a statement of intent.</h2>
-          <p class="cs-lead">This was not just opening a training school. It was defining how Emirates would attract and shape the next generation of pilots. The brief was to create the academy's brand identity from the ground up and take it to market.</p>
-          <p class="cs-p">I owned the brand identity and the go-to-market strategy, aligning a high-tech training environment with the prestige of the Emirates name, then turning that into a recruitment proposition that filled the inaugural intake.</p>
+          <p class="cs-lead">This was not simply opening a training facility. EFTA was Emirates' answer to a global pilot shortage — a purpose-built academy designed to become the world's leading source of ab-initio pilot training, built from the ground up while the building was still under construction.</p>
+          <p class="cs-p">The brief was to develop the full brand identity — from brand essence and visual language to environmental design across every space in the building — and then take that brand to market before the first cohort had applied.</p>
         </div>
         <div class="reveal">
-          <div class="cs-figure wide"><img src="../assets/img/efta-flight-simulator.png" alt="A full-motion flight simulator at the Emirates Flight Training Academy" loading="lazy"></div>
+          <div class="cs-figure wide">
+            <img src="../assets/img/efta-brand-values.webp" alt="EFTA brand foundations: mission, vision, and values — Ambitious, Diligent, Safe, Accountable, Collaborative" loading="lazy">
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="cs-section surface" id="film">
+  <!-- 02: THE IDENTITY -->
+  <section class="cs-section surface" id="identity">
     <div class="container">
       <div class="reveal" style="max-width:680px">
-        <span class="cs-eyebrow">02 &middot; The work</span>
-        <h2 class="cs-h2">Inside the academy.</h2>
-        <p class="cs-lead">The campaign framed the academy the way the aircraft were engineered, with intent and precision in every detail, from the identity system to the recruitment journey.</p>
+        <span class="cs-eyebrow">02 &middot; The identity</span>
+        <h2 class="cs-h2">Go Beyond.</h2>
+        <p class="cs-lead">The brand essence came from a positioning audit across the aviation-education sector — an industry found to be visually and tonally homogenous. The opportunity was differentiation at every level, from the founding philosophy to the typeface on the wall.</p>
+        <p class="cs-p">The visual language drew on biomimicry — the flight paths of birds that have inspired aviators for centuries — expressed through a colour palette drawn from cockpit light and typography rooted in the transportation sector. The identity extended through every physical space: atriums, classrooms, corridors, and residential areas, carrying aspirational quotes from pioneering aviators and imagery from Emirates destinations around the world.</p>
       </div>
-      <div class="reveal">
-        <div class="cs-video">
-          <iframe src="https://www.youtube-nocookie.com/embed/PzqQ5_CuZzA?rel=0" title="The Emirates Flight Training Academy" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <div class="reveal" style="margin-top:3rem">
+        <div class="cs-figure wide">
+          <img src="../assets/img/efta-environment.webp" alt="Brand environment wayfinding inside the Emirates Flight Training Academy — large-scale '01' typography on teal" loading="lazy">
+        </div>
+      </div>
+      <div class="efta-fig-pair reveal">
+        <div class="cs-figure" style="aspect-ratio:1/1">
+          <img src="../assets/img/efta-brand-font.webp" alt="EFTA typography system — Emirates and PF DIN typefaces on the academy's teal brand colour" loading="lazy">
+        </div>
+        <div class="cs-figure" style="aspect-ratio:1/1">
+          <img src="../assets/img/efta-aviators.webp" alt="Pioneering aviators wall installation inside the Emirates Flight Training Academy" loading="lazy">
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 03: IMPACT -->
   <section class="cs-section alt" id="impact">
     <div class="container">
       <div class="reveal" style="max-width:680px">
@@ -130,7 +184,15 @@
           <div class="cs-stat-label">brand identity and go-to-market, built from a blank page</div>
         </div>
       </div>
-      <p class="cs-p reveal" style="max-width:62ch">A brand and a recruitment proposition strong enough to fill every place in the first intake within two months of launch.</p>
+      <p class="cs-p reveal" style="max-width:62ch; margin-top:2rem">A brand strong enough to attract the world's most ambitious young pilots — and a recruitment proposition that filled every place in the first intake within two months of launch.</p>
+      <div class="reveal" style="margin-top:3rem">
+        <div class="cs-figure wide" style="margin-bottom:2.5rem">
+          <img src="../assets/img/efta-auditorium.webp" alt="The branded student commons inside the Emirates Flight Training Academy" loading="lazy">
+        </div>
+        <div class="cs-video">
+          <iframe src="https://www.youtube-nocookie.com/embed/PzqQ5_CuZzA?rel=0" title="The Emirates Flight Training Academy" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
     </div>
   </section>
 
