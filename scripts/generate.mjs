@@ -40,6 +40,8 @@ const client = createClient({ projectId: 'yespk9j6', dataset: 'production', apiV
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const escAttr = (s = '') => esc(s).replace(/"/g, '&quot;');
+const escJson = (s = '') => String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+const isoDate = (d) => d ? String(d).substring(0, 10) : '2026-06-20';
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const fmtDate = (iso) => { if (!iso) return ''; const [y, m, d] = iso.split('-').map(Number); return `${d} ${MONTHS[m - 1]} ${y}`; };
 const objPos = (h) => (h && typeof h.x === 'number' ? `${Math.round(h.x * 100)}% ${Math.round(h.y * 100)}%` : 'center');
@@ -104,7 +106,11 @@ async function main() {
       .replace(/(<span class="section-label">)[\s\S]*?(<\/span>)/, `$1${esc(a.catLabel || '')}$2`)
       .replace(/<h1 class="article-title">[\s\S]*?<\/h1>/, `<h1 class="article-title">${esc(a.title)}</h1>`)
       .replace(/(<span class="byl-date">)[\s\S]*?(<\/span>)/, `$1${esc(fmtDate(a.publishDate))}$2`)
-      .replace(/(<div class="article-body reveal">)[\s\S]*?(<\/div>\s*<div class="article-author)/, `$1\n        ${bodyHtml(a.body)}\n      $2`);
+      .replace(/(<div class="article-body reveal">)[\s\S]*?(<\/div>\s*<div class="article-author)/, `$1\n        ${bodyHtml(a.body)}\n      $2`)
+      .replace('"SCHEMA_HEADLINE"', `"${escJson(a.title)}"`)
+      .replace('"SCHEMA_DESCRIPTION"', `"${escJson(desc)}"`)
+      .replace('"SCHEMA_DATE"', `"${isoDate(a.publishDate)}"`)
+      .replace(/SCHEMA_URL/g, `https://www.iainmcmullan.com/articles/${a.slug}.html`);
     writeFileSync(resolve(SITE, 'articles', a.slug + '.html'), html);
   }
   console.log(`Wrote ${arts.length} article pages.`);

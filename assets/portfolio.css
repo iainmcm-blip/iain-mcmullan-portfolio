@@ -1718,3 +1718,11 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 /* Portfolio card result line (one outcome per card) */
 .case-result { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: var(--gold-dark); }
 .case-result::before { content: ''; flex: 0 0 auto; width: 16px; height: 2px; background: var(--gold); }
+
+/* Article related work link */
+
+.article-related { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--divider); }
+.article-related-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-dark); margin: 0 0 0.5rem; }
+.article-related-link { font-family: var(--ff-display); font-size: 1.25rem; font-weight: 700; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+.article-related-link:hover { color: var(--gold); }
+
