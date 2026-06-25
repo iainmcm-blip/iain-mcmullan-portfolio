@@ -30,32 +30,30 @@
 <link rel="stylesheet" href="../assets/case-study.css">
 <script>document.documentElement.classList.add('js');</script>
 <style>
-  /* Hero: image pinned to right half only — avoids stretching a 615px source full-bleed */
-  .cs-hero--cdd { background: #140202; }
-  .cs-hero--cdd .cs-hero-img {
-    position: absolute;
-    top: 0; right: 0; bottom: 0; left: auto;
-    width: 48%; height: 100%;
-    object-fit: cover; object-position: left center;
-  }
-  /* Horizontal fade: solid dark on left (text readable), image fades in on right */
+  /* Full-bleed hero: high-res landscape image, bottle on right, warm wood left */
+  .cs-hero--cdd { background: #1a0e05; }
+  .cs-hero--cdd .cs-hero-img { object-position: right center; }
+  /* Dual gradient: horizontal (dark left for text) + vertical (dark bottom) */
   .cs-hero--cdd::after {
-    background: linear-gradient(to right,
-      rgba(10,2,2,1.00) 0%,
-      rgba(10,2,2,1.00) 28%,
-      rgba(10,2,2,0.80) 46%,
-      rgba(10,2,2,0.15) 68%,
-      rgba(10,2,2,0.05) 100%
-    );
+    background:
+      linear-gradient(to right,
+        rgba(12,6,1,0.90) 0%,
+        rgba(12,6,1,0.82) 22%,
+        rgba(12,6,1,0.48) 50%,
+        rgba(12,6,1,0.12) 74%,
+        rgba(12,6,1,0.02) 100%
+      ),
+      linear-gradient(to top,
+        rgba(12,6,1,0.88) 0%,
+        rgba(12,6,1,0.28) 36%,
+        rgba(12,6,1,0.00) 62%
+      );
   }
-  /* Mobile: full-bleed, dimmed, standard vertical overlay */
   @media (max-width: 768px) {
-    .cs-hero--cdd .cs-hero-img {
-      left: 0; width: 100%; opacity: 0.35;
-    }
+    .cs-hero--cdd .cs-hero-img { object-position: center center; }
     .cs-hero--cdd::after {
       background: linear-gradient(to top,
-        rgba(10,2,2,0.97) 0%, rgba(10,2,2,0.70) 45%, rgba(10,2,2,0.30) 100%);
+        rgba(12,6,1,0.95) 0%, rgba(12,6,1,0.65) 42%, rgba(12,6,1,0.35) 100%);
     }
   }
 </style>
@@ -181,6 +179,9 @@
           <p class="cs-p">23 posts across Facebook and Instagram established the Legendary Pairings content series. Two paid influencers with combined followings of 350,000 extended reach to audiences already interested in Singapore food culture. And for the earned campaign, we produced a media kit that said more about the strategy than any brief could: a laser-etched wooden crate, two bottles of CDD, branded wine glasses, and a curated selection of locally-sourced Singapore snacks — four chosen to pair with red, four with white.</p>
         </div>
         <div class="reveal">
+          <div class="cs-figure tall">
+            <img src="../assets/img/casillero-del-diablo-instagram.jpg" alt="Novita Lam's Legendary Pairings Instagram content featuring Casillero del Diablo wines" loading="lazy">
+          </div>
           <div class="cs-notes">
             <div class="cs-note">
               <h4>Paid influencers</h4>
