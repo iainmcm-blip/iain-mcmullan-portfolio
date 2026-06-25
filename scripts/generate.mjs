@@ -68,6 +68,9 @@ const bodyHtml = (body) => toHTML(body || [], {
     types: {
       seoImage: ({ value }) => value?.asset ? `<figure class="article-figure"><img src="${escAttr(value.assetUrl || '')}" alt="${escAttr(value.alt || '')}" loading="lazy"></figure>` : '',
     },
+    marks: {
+      textColor: ({ children, value }) => `<span style="color:${escAttr(value?.color || 'inherit')}">${children}</span>`,
+    },
   },
 });
 
