@@ -487,7 +487,7 @@
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if (!e.isIntersecting) return;
-        cascade(panels[active], 130);
+        cascade(panels[active], 400);   // slow, clearly sequential 1 -> 2 -> 3 flow on first reveal
         io.disconnect();
       });
     }, { threshold: 0.25 });
@@ -511,7 +511,7 @@
       setTimeout(function(){
         cur.classList.remove('tl-active', 'tl-fading');
         nxt.classList.add('tl-active');
-        cascade(nxt, 60);             // quick re-cascade so switching has life, not a flat swap
+        cascade(nxt, 180);            // gentler re-cascade on switch, in keeping with the flow
         if (focus) tabs[i].focus();
       }, 170);
     }
