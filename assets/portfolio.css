@@ -1778,3 +1778,43 @@ html.js .tl-step.tl-in { opacity: 1; transform: none; }
   html.js .tl-step { transform: none; transition: opacity 0.5s ease; }
   html.js .tl-panel { transition: opacity 0.3s ease; }
 }
+
+/* ============================================================
+   THROUGHLINE v3 — desktop "verdict" column (right of the steps)
+   ============================================================ */
+.tl-proof { display: none; }                 /* hidden on mobile/tablet; desktop only */
+.tl-verdict-label {
+  display: block; font-family: var(--ff-body); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.85rem;
+}
+.tl-fig {
+  font-family: var(--ff-display); font-weight: 700; color: var(--gold);
+  font-size: clamp(64px, 7.5vw, 112px); line-height: 0.86; letter-spacing: -0.02em;
+}
+.tl-fig-unit { font-size: 0.46em; vertical-align: 0.42em; letter-spacing: 0; }
+.tl-fig-cap {
+  margin-top: 0.85rem; font-family: var(--ff-body); font-size: 0.95rem; line-height: 1.5;
+  color: var(--ink-mid); max-width: 22ch;
+}
+.tl-verdict-line {
+  font-family: var(--ff-display); font-weight: 700; font-style: italic; color: var(--gold);
+  font-size: clamp(26px, 2.9vw, 40px); line-height: 1.2; max-width: 16ch;
+}
+
+/* Two-column on desktop: steps left, verdict right, tied by a hairline rule. */
+@media (min-width: 900px) {
+  html.js .tl-row {
+    display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.95fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem); align-items: center;
+  }
+  .tl-proof {
+    display: block; border-left: 1px solid var(--divider); padding-left: clamp(2rem, 4vw, 3.5rem);
+  }
+}
+
+/* Verdict column reveals with the same enter pattern as the nodes. */
+html.js .tl-proof { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+html.js .tl-proof.tl-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .tl-proof { transform: none; transition: opacity 0.5s ease; }
+}

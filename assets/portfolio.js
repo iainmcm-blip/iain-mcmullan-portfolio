@@ -459,7 +459,7 @@
     var active = 0;
 
     function showInstant(panel){
-      panel.querySelectorAll('.tl-step').forEach(function(s){ s.classList.add('tl-in'); });
+      panel.querySelectorAll('.tl-step, .tl-proof').forEach(function(s){ s.classList.add('tl-in'); });
     }
 
     // First scroll-into-view: stagger the active panel's nodes. Never fires before
@@ -467,7 +467,7 @@
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if (!e.isIntersecting) return;
-        panels[active].querySelectorAll('.tl-step').forEach(function(s, idx){
+        panels[active].querySelectorAll('.tl-step, .tl-proof').forEach(function(s, idx){
           if (reduce) { s.classList.add('tl-in'); return; }
           setTimeout(function(){ s.classList.add('tl-in'); }, idx * 90);
         });
