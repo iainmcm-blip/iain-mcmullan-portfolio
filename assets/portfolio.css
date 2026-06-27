@@ -1773,7 +1773,7 @@ html.js .tl-panel-label { display: none; }
 /* Node entrance: same fade + small rise on scroll-into-view as the rest of the page,
    JS-gated so the section is fully readable with JS disabled. */
 html.js .tl-step { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.tl-step.tl-in { opacity: 1; transform: none; }
+html.js .tl-step.tl-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html.js .tl-step { transform: none; transition: opacity 0.5s ease; }
   html.js .tl-panel { transition: opacity 0.3s ease; }
