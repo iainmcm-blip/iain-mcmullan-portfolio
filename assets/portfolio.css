@@ -1742,3 +1742,39 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 .tl-link { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.1rem; font-size: 0.9rem; font-weight: 500; color: var(--gold); transition: color 0.2s ease; }
 .tl-link:hover { color: var(--gold-dark); }
 @media (max-width: 768px) { .tl-step { padding-left: 1.4rem; } .tl-v { font-size: clamp(20px, 5.5vw, 26px); } }
+
+/* ============================================================
+   THROUGHLINE v2 — tabbed three-case sector switcher (homepage)
+   ============================================================ */
+/* Pill switcher: shown only when JS is active (progressive enhancement) */
+.tl-tabs { display: none; }
+html.js .tl-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0 2rem; }
+.tl-tab {
+  font-family: var(--ff-body); font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.02em;
+  padding: 0.5rem 1.05rem; border: 1px solid var(--divider); border-radius: var(--radius-pill);
+  color: var(--ink-mid); background: transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.tl-tab:hover { border-color: var(--gold); color: var(--ink); }
+.tl-tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tl-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* Panels: with JS, only the active panel shows (no flash, footprint unchanged);
+   without JS, all three render stacked and labelled. */
+html.js .tl-panel { display: none; transition: opacity 0.18s ease; }
+html.js .tl-panel.tl-active { display: block; }
+.tl-panel.tl-fading { opacity: 0; }
+.tl-panel-label {
+  display: block; font-family: var(--ff-body); font-weight: 500; font-size: 11px;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin: 1.5rem 0 0.85rem;
+}
+html.js .tl-panel-label { display: none; }
+
+/* Node entrance: same fade + small rise on scroll-into-view as the rest of the page,
+   JS-gated so the section is fully readable with JS disabled. */
+html.js .tl-step { opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.tl-step.tl-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html.js .tl-step { transform: none; transition: opacity 0.5s ease; }
+  html.js .tl-panel { transition: opacity 0.3s ease; }
+}

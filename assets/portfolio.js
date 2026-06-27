@@ -449,4 +449,70 @@
     requestAnimationFrame(step);
   })();
 
+  /* ── THROUGHLINE: three-case sector switcher ────────────── */
+  (function throughlineTabs(){
+    var sec = document.getElementById('throughline');
+    if (!sec) return;
+    var tabs = [].slice.call(sec.querySelectorAll('.tl-tab'));
+    var panels = [].slice.call(sec.querySelectorAll('.tl-panel'));
+    if (tabs.length < 2 || tabs.length !== panels.length) return;
+    var active = 0;
+
+    function showInstant(panel){
+      panel.querySelectorAll('.tl-step').forEach(function(s){ s.classList.add('tl-in'); });
+    }
+
+    // First scroll-into-view: stagger the active panel's nodes. Never fires before
+    // the section is visible, so nothing autoplays on load.
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        panels[active].querySelectorAll('.tl-step').forEach(function(s, idx){
+          if (reduce) { s.classList.add('tl-in'); return; }
+          setTimeout(function(){ s.classList.add('tl-in'); }, idx * 90);
+        });
+        io.disconnect();
+      });
+    }, { threshold: 0.25 });
+    io.observe(sec);
+
+    function select(i, focus){
+      if (i === active || i < 0 || i >= tabs.length) return;
+      var cur = panels[active], nxt = panels[i];
+      tabs[active].setAttribute('aria-selected', 'false'); tabs[active].tabIndex = -1;
+      tabs[i].setAttribute('aria-selected', 'true'); tabs[i].tabIndex = 0;
+      active = i;
+      if (reduce) {
+        cur.classList.remove('tl-active');
+        nxt.classList.add('tl-active'); showInstant(nxt);
+        if (focus) tabs[i].focus();
+        return;
+      }
+      // Crossfade (≈170ms each way); skip the entrance stagger after the first load.
+      cur.classList.add('tl-fading');
+      setTimeout(function(){
+        cur.classList.remove('tl-active', 'tl-fading');
+        nxt.classList.add('tl-active', 'tl-fading');
+        showInstant(nxt);
+        void nxt.offsetWidth;
+        nxt.classList.remove('tl-fading');
+        if (focus) tabs[i].focus();
+      }, 170);
+    }
+
+    tabs.forEach(function(t, i){
+      t.addEventListener('click', function(){ select(i, false); });
+      t.addEventListener('keydown', function(e){
+        var n = -1;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = tabs.length - 1;
+        else return;
+        e.preventDefault();
+        select(n, true);
+      });
+    });
+  })();
+
 })();
