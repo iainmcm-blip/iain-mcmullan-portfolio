@@ -449,7 +449,7 @@
     requestAnimationFrame(step);
   })();
 
-  /* ── THROUGHLINE: three-case sector switcher ────────────── */
+  /* ── THROUGHLINE: three-case sector switcher + reveal ───── */
   (function throughlineTabs(){
     var sec = document.getElementById('throughline');
     if (!sec) return;
@@ -458,19 +458,36 @@
     if (tabs.length < 2 || tabs.length !== panels.length) return;
     var active = 0;
 
-    function showInstant(panel){
-      panel.querySelectorAll('.tl-step, .tl-proof').forEach(function(s){ s.classList.add('tl-in'); });
+    // Figures start at zero so they can count up on reveal (no-JS keeps the real value).
+    if (!reduce) {
+      sec.querySelectorAll('.tl-fig-num[data-fig]').forEach(function(el){ el.textContent = '0'; });
+    }
+    function countFigs(panel){
+      panel.querySelectorAll('.tl-fig-num[data-fig]').forEach(function(el){
+        var t = parseInt(el.getAttribute('data-fig'), 10);
+        if (isNaN(t)) return;
+        if (reduce) { el.textContent = String(t); return; }
+        animateCounter(el, t, 1300, '');
+      });
+    }
+    function items(panel){ return panel.querySelectorAll('.tl-step, .tl-proof'); }
+    function cascade(panel, step){
+      var els = items(panel);
+      els.forEach(function(s){ s.classList.remove('tl-in'); });
+      void panel.offsetWidth;                       // reflow so a re-cascade re-animates
+      els.forEach(function(s, idx){
+        if (reduce) { s.classList.add('tl-in'); return; }
+        setTimeout(function(){ s.classList.add('tl-in'); }, idx * step);
+      });
+      setTimeout(function(){ countFigs(panel); }, reduce ? 0 : els.length * step);
     }
 
-    // First scroll-into-view: stagger the active panel's nodes. Never fires before
-    // the section is visible, so nothing autoplays on load.
+    // First scroll-into-view: orchestrated cascade of the active panel. Never fires
+    // before the section is visible, so nothing autoplays on load.
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if (!e.isIntersecting) return;
-        panels[active].querySelectorAll('.tl-step, .tl-proof').forEach(function(s, idx){
-          if (reduce) { s.classList.add('tl-in'); return; }
-          setTimeout(function(){ s.classList.add('tl-in'); }, idx * 90);
-        });
+        cascade(panels[active], 130);
         io.disconnect();
       });
     }, { threshold: 0.25 });
@@ -484,18 +501,17 @@
       active = i;
       if (reduce) {
         cur.classList.remove('tl-active');
-        nxt.classList.add('tl-active'); showInstant(nxt);
+        nxt.classList.add('tl-active');
+        items(nxt).forEach(function(s){ s.classList.add('tl-in'); });
+        countFigs(nxt);
         if (focus) tabs[i].focus();
         return;
       }
-      // Crossfade (≈170ms each way); skip the entrance stagger after the first load.
       cur.classList.add('tl-fading');
       setTimeout(function(){
         cur.classList.remove('tl-active', 'tl-fading');
-        nxt.classList.add('tl-active', 'tl-fading');
-        showInstant(nxt);
-        void nxt.offsetWidth;
-        nxt.classList.remove('tl-fading');
+        nxt.classList.add('tl-active');
+        cascade(nxt, 60);             // quick re-cascade so switching has life, not a flat swap
         if (focus) tabs[i].focus();
       }, 170);
     }
