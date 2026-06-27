@@ -1772,14 +1772,14 @@ html.js .tl-panel-label { display: none; }
 
 /* Node entrance: same fade + small rise on scroll-into-view as the rest of the page,
    JS-gated so the section is fully readable with JS disabled. */
-html.js .tl-step { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
+html.js .tl-step { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 1s cubic-bezier(0.4, 0, 0.2, 1); }
 html.js .tl-step.tl-in { opacity: 1; transform: none; }
-/* Gold node dots ease in with each step (smooth, no bounce, in keeping with the flow). */
-html.js .tl-step::before { transform: scale(0); transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1); }
-html.js .tl-step.tl-in::before { transform: scale(1); }
+/* Gold node dots fade and grow gently with each step (no pop). */
+html.js .tl-step::before { opacity: 0; transform: scale(0.6); transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
+html.js .tl-step.tl-in::before { opacity: 1; transform: scale(1); }
 @media (prefers-reduced-motion: reduce) {
   html.js .tl-step { transform: none; transition: opacity 0.5s ease; }
-  html.js .tl-step::before, html.js .tl-step.tl-in::before { transform: scale(1); transition: none; }
+  html.js .tl-step::before, html.js .tl-step.tl-in::before { opacity: 1; transform: scale(1); transition: none; }
   html.js .tl-panel { transition: opacity 0.3s ease; }
 }
 
@@ -1817,7 +1817,7 @@ html.js .tl-step.tl-in::before { transform: scale(1); }
 }
 
 /* Verdict column reveals with the same enter pattern as the nodes. */
-html.js .tl-proof { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 1s cubic-bezier(0.22, 1, 0.36, 1); }
+html.js .tl-proof { opacity: 0; transform: translateY(16px); transition: opacity 0.8s ease, transform 1s cubic-bezier(0.4, 0, 0.2, 1); }
 html.js .tl-proof.tl-in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   html.js .tl-proof { transform: none; transition: opacity 0.5s ease; }
