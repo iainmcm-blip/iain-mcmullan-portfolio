@@ -1946,3 +1946,18 @@ html.js .tl-proof.tl-in { opacity: 1; transform: none; }
   text-decoration: none;
 }
 .rec-footer-link:hover { color: var(--gold, #C4922A); }
+
+
+/* ═══════════════════════════════════════════════════════
+   .pf-page — shared layout for sub-pages (Perspectives, Portfolio,
+   Recommendations). Previously duplicated as inline styles inside each
+   page's <head>; moved here so /recommendations and any future sub-page
+   inherits the same nav clearance and header rhythm.
+   ═══════════════════════════════════════════════════════ */
+.pf-page { padding-top: var(--nav-h); }
+.pf-header { padding-top: 4rem; padding-bottom: 1rem; }
+.pf-header .section-label { display: block; margin-bottom: 0.75rem; }
+.pf-intro { margin-top: 1rem; max-width: 640px; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-mid); }
+.pf-back { display: inline-flex; align-items: center; gap: 0.4rem; margin: 3rem 0 0; font-size: 0.9rem; color: var(--ink-mid); transition: color 0.2s; }
+.pf-back:hover { color: var(--gold); }
+@media (max-width: 768px) { .pf-header { padding-top: 2.5rem; } }
