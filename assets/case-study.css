@@ -44,6 +44,14 @@
   font-size: clamp(1.05rem, 1.5vw, 1.28rem); line-height: 1.55;
   color: rgba(255,255,255,0.86); max-width: 60ch; margin-bottom: 1.6rem;
 }
+.cs-scope {
+  font-style: italic; font-size: 0.95rem; line-height: 1.55;
+  color: rgba(255,255,255,0.78); max-width: 60ch;
+  margin: -0.6rem 0 1.6rem;
+  border-left: 2px solid var(--gold-mid, rgba(196,146,42,0.6));
+  padding-left: 1rem;
+}
+.cs-scope strong { color: #fff; font-style: normal; font-weight: 600; }
 .cs-meta { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .cs-meta-pill {
   display: inline-flex; align-items: baseline; gap: 0.5rem;
