@@ -799,8 +799,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 @media (max-width: 900px) {
   .marquee-logo[alt="British Airways"] {
     height: auto !important;
-    max-width: 120px;
-    max-height: 32px;
+    max-width: 160px;
+    /* Height scales naturally from the BA wordmark's ~5:1 aspect ratio so the
+       lettering never squashes. */
   }
 }
 
