@@ -791,8 +791,8 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.marquee-logo[alt="British Airways"] { height: 74px !important; }
-@media (max-width: 900px) { .marquee-logo[alt="British Airways"] { height: 60px !important; } }
+.marquee-logo[alt="British Airways"] { height: 52px !important; }
+@media (max-width: 900px) { .marquee-logo[alt="British Airways"] { height: 42px !important; } }
 
 /* Mobile masthead: distribute vertically. Copy sits up top, the CTAs drop into the
    thumb zone, giving the headline and standfirst more breathing room above them. */
@@ -1961,3 +1961,40 @@ html.js .tl-proof.tl-in { opacity: 1; transform: none; }
 .pf-back { display: inline-flex; align-items: center; gap: 0.4rem; margin: 3rem 0 0; font-size: 0.9rem; color: var(--ink-mid); transition: color 0.2s; }
 .pf-back:hover { color: var(--gold); }
 @media (max-width: 768px) { .pf-header { padding-top: 2.5rem; } }
+
+
+/* ═══════════════════════════════════════════════════════
+   Recommendations — staggered text-flow reveal on scroll.
+   Each .rec-item enters via the global .reveal pattern (handled in
+   portfolio.js); within an active item, the quote paragraphs and the
+   attribution fade-and-slide-up sequentially for an editorial cascade.
+   ═══════════════════════════════════════════════════════ */
+html.js .rec-item .rec-text p,
+html.js .rec-item .rec-meta {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.85s cubic-bezier(0.2, 0.65, 0.2, 1),
+              transform 0.85s cubic-bezier(0.2, 0.65, 0.2, 1);
+  will-change: opacity, transform;
+}
+html.js .rec-item.active .rec-text p,
+html.js .rec-item.active .rec-meta {
+  opacity: 1;
+  transform: none;
+}
+html.js .rec-item.active .rec-text p:nth-child(1) { transition-delay: 0.08s; }
+html.js .rec-item.active .rec-text p:nth-child(2) { transition-delay: 0.22s; }
+html.js .rec-item.active .rec-text p:nth-child(3) { transition-delay: 0.36s; }
+html.js .rec-item.active .rec-text p:nth-child(4) { transition-delay: 0.50s; }
+html.js .rec-item.active .rec-text p:nth-child(5) { transition-delay: 0.64s; }
+html.js .rec-item.active .rec-text p:nth-child(6) { transition-delay: 0.78s; }
+html.js .rec-item.active .rec-meta { transition-delay: 0.92s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .rec-item .rec-text p,
+  html.js .rec-item .rec-meta {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
