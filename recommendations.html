@@ -31,6 +31,19 @@
 
 <link rel="stylesheet" href="assets/portfolio.css">
 
+<style>
+  /* Inline layout fallback — guarantees nav clearance even if a cached
+     portfolio.css is missing the .pf-page rules. */
+  html { scroll-padding-top: var(--nav-h, 72px); }
+  .pf-page { padding-top: var(--nav-h, 72px); }
+  .pf-header { padding-top: 4rem; padding-bottom: 1rem; }
+  .pf-header .section-label { display: block; margin-bottom: 0.75rem; }
+  .pf-intro { margin-top: 1rem; max-width: 640px; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-mid, #55535C); }
+  .pf-back { display: inline-flex; align-items: center; gap: 0.4rem; margin: 3rem 0 0; font-size: 0.9rem; color: var(--ink-mid, #55535C); transition: color 0.2s; }
+  .pf-back:hover { color: var(--gold, #C4922A); }
+  @media (max-width: 768px) { .pf-header { padding-top: 2.5rem; } }
+</style>
+
 <script>document.documentElement.classList.add('js');</script>
 </head>
 <body class="pf">
