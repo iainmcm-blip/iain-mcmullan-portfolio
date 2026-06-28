@@ -87,6 +87,33 @@
 .exp-back { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 3rem; font-size: 0.9rem; color: var(--ink-mid); transition: gap 0.2s ease, color 0.2s ease; }
 .exp-back:hover { gap: 0.65rem; color: var(--gold); }
 
+/* ── Credentials + Awards sections (below the timeline) ────── */
+.exp-extras { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--divider); }
+.exp-extras + .exp-extras { margin-top: 2.5rem; padding-top: 2.5rem; }
+.exp-extras-head { margin-bottom: 1.75rem; }
+.exp-extras-head .section-label { display: block; margin-bottom: 0.5rem; }
+.exp-extras-intro { margin-top: 0.6rem; font-size: 0.95rem; color: var(--ink-mid); line-height: 1.6; max-width: 56ch; }
+.exp-extras .courses-heading { margin-top: 2rem; }
+
+/* Awards: text-led card grid, no fake award-body logos */
+.award-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 840px) { .award-grid { grid-template-columns: 1fr; } }
+.award-card {
+  background: var(--surface); border: 1px solid var(--divider);
+  border-radius: 14px; box-shadow: var(--shadow-card);
+  padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;
+}
+.award-medal {
+  display: inline-block; align-self: flex-start;
+  font-family: var(--ff-body); font-weight: 700; font-size: 0.7rem; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: var(--radius-pill);
+}
+.award-medal.is-gold   { background: rgba(196, 146, 42, 0.14); color: var(--gold-dark); }
+.award-medal.is-silver { background: rgba(120, 120, 130, 0.14); color: #5a5a66; }
+.award-medal.is-bronze { background: rgba(140, 90, 50, 0.14);  color: #8c5a32; }
+.award-card h3 { font-family: var(--ff-display); font-weight: 700; font-size: 1.15rem; line-height: 1.25; color: var(--ink); margin: 0; }
+.award-card p { font-size: 0.9rem; line-height: 1.5; color: var(--ink-mid); margin: 0; }
+
 /* ── Scroll reveal (header + node + spine), independent of the accordion ───
    Applied only when html.exp-anim is present (set by the head script, and only when
    the user has NOT requested reduced motion). With no JS or reduced motion the class
@@ -351,6 +378,100 @@ html.exp-anim .exp-entry.in .exp-card { opacity: 1; transform: none; }
       </article>
 
     </div>
+
+    <!-- ── CREDENTIALS ───────────────────────────────────────── -->
+    <section class="exp-extras" aria-labelledby="exp-cred-h">
+      <div class="exp-extras-head">
+        <span class="section-label">Credentials</span>
+        <h2 id="exp-cred-h" class="display-heading display-md">Qualifications &amp; certifications.</h2>
+        <p class="exp-extras-intro">From academic foundations to ongoing professional development.</p>
+      </div>
+
+      <div class="cred-grid">
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/cim-logo.jpg" alt="CIM" loading="lazy">
+          <div class="cred-qual">CIM</div>
+          <p class="cred-name">Chartered Marketer</p>
+          <p class="cred-inst">CIM</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/ulster-logo.jpg" alt="Ulster University" loading="lazy">
+          <div class="cred-qual">MA</div>
+          <p class="cred-name">Marketing</p>
+          <p class="cred-inst">Ulster University</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/idm-logo.jpg" alt="IDM" loading="lazy">
+          <div class="cred-qual">PG Dip</div>
+          <p class="cred-name">Digital Marketing</p>
+          <p class="cred-inst">IDM</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/warwick-logo.jpg" alt="Warwick University" loading="lazy">
+          <div class="cred-qual">ELDP</div>
+          <p class="cred-name">Leadership Development</p>
+          <p class="cred-inst">Warwick University &amp; The Emirates Group</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/uwtsd-logo.jpg" alt="University of Wales Trinity Saint David" loading="lazy">
+          <div class="cred-qual">MA</div>
+          <p class="cred-name">Ancient History</p>
+          <p class="cred-inst">UWTSD</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/loughborough-logo.jpg" alt="Loughborough University" loading="lazy">
+          <div class="cred-qual">BSc</div>
+          <p class="cred-name">English with Sports Science</p>
+          <p class="cred-inst">Loughborough University</p>
+        </div>
+      </div>
+
+      <h3 class="courses-heading">Professional Development</h3>
+      <div class="course-grid">
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/google-cloud.png" alt="Google Cloud" loading="lazy">
+          <p class="cred-name">Generative AI Leader</p>
+          <p class="cred-inst">Google Cloud</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/google-g.png" alt="Google" loading="lazy">
+          <p class="cred-name">UX Design Specialisation</p>
+          <p class="cred-inst">Google</p>
+        </div>
+        <div class="cred-card">
+          <img class="cred-logo" src="assets/img/vanderbilt.png" alt="Vanderbilt University" loading="lazy">
+          <p class="cred-name">Agentic AI &amp; AI Agents for Leaders</p>
+          <p class="cred-inst">Vanderbilt University</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── AWARDS & RECOGNITION ─────────────────────────────── -->
+    <section class="exp-extras" aria-labelledby="exp-awards-h">
+      <div class="exp-extras-head">
+        <span class="section-label">Awards &amp; Recognition</span>
+        <h2 id="exp-awards-h" class="display-heading display-md">Selected recognition.</h2>
+        <p class="exp-extras-intro">Industry awards for the work, and the parallel discipline of athletics that sits behind it.</p>
+      </div>
+
+      <div class="award-grid">
+        <div class="award-card">
+          <span class="award-medal is-bronze">Bronze &middot; 2023</span>
+          <h3>Kancil Awards</h3>
+          <p>For the Malaysia Airlines &lsquo;This is Malaysian Hospitality&rsquo; campaign &mdash; craft and impact.</p>
+        </div>
+        <div class="award-card">
+          <span class="award-medal is-silver">Silver &middot; 2025</span>
+          <h3>Asian Masters Athletics Championships</h3>
+          <p>Shot put, age group. Chennai, India &mdash; November 2025.</p>
+        </div>
+        <div class="award-card">
+          <span class="award-medal is-gold">Gold &middot; 2024 &amp; 2025</span>
+          <h3>Singapore Masters Athletics</h3>
+          <p>Shot put, age group. Two consecutive national titles, the path that led to the Asian Masters silver.</p>
+        </div>
+      </div>
+    </section>
 
     <a href="index.html" class="exp-back">&larr; Back to home</a>
   </div>
