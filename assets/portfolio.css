@@ -1771,6 +1771,25 @@ html.js .tl-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.5rem 0
 .tl-tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .tl-tab:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 
+/* Subtle border-breath on inactive tabs so the discovery cue lands without
+   shouting. Each tab is offset by 0.6s so the trio pulses as a rolling wave
+   rather than a synchronised flash. Pulse pauses on hover so the user's
+   attention isn't competing with the animation. */
+@keyframes tl-tab-breath {
+  0%, 100% { border-color: var(--divider); }
+  50%      { border-color: var(--gold); }
+}
+html.js .tl-tab[aria-selected="false"] {
+  animation: tl-tab-breath 3s ease-in-out infinite;
+}
+html.js .tl-tab[aria-selected="false"]:nth-of-type(2) { animation-delay: 0.6s; }
+html.js .tl-tab[aria-selected="false"]:nth-of-type(3) { animation-delay: 1.2s; }
+html.js .tl-tab[aria-selected="false"]:hover,
+html.js .tl-tab[aria-selected="false"]:focus-visible { animation: none; border-color: var(--gold); }
+@media (prefers-reduced-motion: reduce) {
+  html.js .tl-tab[aria-selected="false"] { animation: none; }
+}
+
 /* Panels: with JS, only the active panel shows (no flash, footprint unchanged);
    without JS, all three render stacked and labelled. */
 html.js .tl-panel { display: none; transition: opacity 0.18s ease; }
