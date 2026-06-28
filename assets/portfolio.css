@@ -792,7 +792,17 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   to   { transform: translateX(-50%); }
 }
 .marquee-logo[alt="British Airways"] { height: 52px !important; }
-@media (max-width: 900px) { .marquee-logo[alt="British Airways"] { height: 42px !important; } }
+/* On mobile, the BA wordmark is so horizontal that height-only sizing makes it
+   visually ~2.5x wider than every other logo, dominating the marquee strip.
+   Cap the WIDTH on small screens and let height scale proportionally so the
+   visual footprint matches the rest of the row. */
+@media (max-width: 900px) {
+  .marquee-logo[alt="British Airways"] {
+    height: auto !important;
+    max-width: 120px;
+    max-height: 32px;
+  }
+}
 
 /* Mobile masthead: distribute vertically. Copy sits up top, the CTAs drop into the
    thumb zone, giving the headline and standfirst more breathing room above them. */
