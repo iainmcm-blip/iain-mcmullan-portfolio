@@ -147,3 +147,23 @@
 }
 .cs-video-play::before { content: ''; width: 0; height: 0; border-style: solid; border-width: 9px 0 9px 15px; border-color: transparent transparent transparent #fff; margin-left: 3px; }
 .cs-video-link:hover .cs-video-play { transform: translate(-50%, -50%) scale(1.08); background: var(--gold); }
+
+
+/* ═══════════════════════════════════════════════════════
+   .cs-figure — wide image that renders at natural aspect ratio.
+   Use instead of .cs-video when the asset is a still image whose
+   shape shouldn't be forced into 16:9. Same rounded-corner +
+   shadow treatment so it sits visually with other case-study cards.
+   ═══════════════════════════════════════════════════════ */
+.cs-figure {
+  margin-top: 1.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  background: var(--surface);
+}
+.cs-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
