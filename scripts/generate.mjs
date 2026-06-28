@@ -183,8 +183,69 @@ async function main() {
 
   let index = readFileSync(resolve(SITE, 'index.html'), 'utf8');
   index = replaceBetween(index, '<div class="persp-grid persp-grid--strip">\n', '\n    </div>\n\n    <a href="perspectives.html" class="persp-readmore', '\n' + strip + '\n', 'homepage strip');
+
+  // 4b) Recommendations — homepage pull quote + standalone /recommendations.html page
+  const recs = await client.fetch(`*[_type=="recommendation"]|order(orderRank asc){
+    _id, recommenderName, recommenderTitle, recommenderCompany,
+    linkedinUrl, relationshipNote, dateGiven,
+    quote, featuredOnHomepage, pullQuote
+  }`);
+  console.log(`Fetched ${recs.length} recommendations.`);
+
+  const featured = recs.find((r) => r.featuredOnHomepage) || recs[0];
+
+  // 4b.i) Inject the homepage pull quote into index.html
+  if (featured) {
+    const pullText = (featured.pullQuote && featured.pullQuote.trim()) || (featured.quote || '').split(/\n\s*\n/)[0].trim();
+    const roleLine = [featured.recommenderTitle, featured.recommenderCompany].filter(Boolean).map(esc).join(' &middot; ');
+    const recBlock =
+      '\n    <figure class="rec-quote">' +
+      '\n      <span class="rec-mark" aria-hidden="true">&ldquo;</span>' +
+      '\n      <blockquote class="rec-blockquote">' + esc(pullText) + '</blockquote>' +
+      '\n      <figcaption class="rec-attrib">' +
+      '\n        <span class="rec-name">' + esc(featured.recommenderName || '') + '</span>' +
+      '\n        <span class="rec-role">' + roleLine + '</span>' +
+      (featured.relationshipNote ? '\n        <span class="rec-note">' + esc(featured.relationshipNote) + '</span>' : '') +
+      '\n      </figcaption>' +
+      '\n    </figure>' +
+      '\n    <a class="rec-more" href="recommendations.html">More recommendations <span aria-hidden="true">&rarr;</span></a>' +
+      '\n    ';
+    index = replaceBetween(index, '<!-- RECOMMENDATION:START -->', '<!-- RECOMMENDATION:END -->', recBlock, 'homepage recommendation pull quote');
+    console.log('Wrote index.html (homepage strip + recommendation).');
+  } else {
+    console.warn('No recommendations in Sanity — homepage pull-quote placeholder left in place.');
+    console.log('Wrote index.html (homepage strip).');
+  }
   writeFileSync(resolve(SITE, 'index.html'), index);
-  console.log('Wrote index.html (homepage strip).');
+
+  // 4b.ii) Build the standalone /recommendations.html
+  const recItems = recs.map((r) => {
+    const paragraphs = (r.quote || '').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+    const role = [r.recommenderTitle, r.recommenderCompany].filter(Boolean).map(esc).join(', ');
+    const linkedinLink = r.linkedinUrl
+      ? '\n              <a class="rec-meta-linkedin" href="' + escAttr(r.linkedinUrl) + '" target="_blank" rel="noopener noreferrer">On LinkedIn &rarr;</a>'
+      : '';
+    return '        <article class="rec-item reveal">' +
+      '\n          <div class="rec-text">' +
+      paragraphs.map((p) => '\n            <p>' + esc(p) + '</p>').join('') +
+      '\n          </div>' +
+      '\n          <div class="rec-meta">' +
+      '\n            <div class="rec-meta-text">' +
+      '\n              <p class="rec-meta-name">' + esc(r.recommenderName || '') + '</p>' +
+      '\n              <p class="rec-meta-role">' + role + '</p>' +
+      '\n              <span class="rec-meta-note">' + esc(r.relationshipNote || '') +
+      (r.dateGiven ? '<span class="rec-meta-date"> &middot; ' + esc(fmtDate(r.dateGiven)) + '</span>' : '') +
+      '</span>' + linkedinLink +
+      '\n            </div>' +
+      '\n          </div>' +
+      '\n        </article>';
+  }).join('\n');
+
+  let recPage = readFileSync(resolve(SITE, 'recommendations.html'), 'utf8');
+  const recsBody = recs.length ? '\n' + recItems + '\n        ' : '\n        <p style="text-align:center; color:var(--ink-mid);">No recommendations published yet.</p>\n        ';
+  recPage = replaceBetween(recPage, '<!-- RECOMMENDATIONS:START -->', '<!-- RECOMMENDATIONS:END -->', recsBody, 'recommendations page list');
+  writeFileSync(resolve(SITE, 'recommendations.html'), recPage);
+  console.log(`Wrote recommendations.html (${recs.length} recommendations).`);
 
   // 5) skills.html — the Capabilities page, from the skillsPage singleton
   const sk = await client.fetch(`*[_id=="skillsPage"][0]{
