@@ -206,10 +206,16 @@
   border-radius: 9%;
 }
 
-/* Pair of campaign creatives side-by-side */
-.cs-creatives { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+/* Pair of campaign creatives side-by-side, equal heights so the
+   visual weight balances even when the source aspect ratios differ. */
+.cs-creatives { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
 @media (max-width: 768px) { .cs-creatives { grid-template-columns: 1fr; } }
-.cs-creatives img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
+.cs-creatives img {
+  display: block; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+  aspect-ratio: 16 / 9;
+}
 
 /* HTML5 video wrapper, 16:9 */
 .cs-video-native { position: relative; padding-top: 56.25%; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); background: #000; }
