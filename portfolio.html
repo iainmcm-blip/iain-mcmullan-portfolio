@@ -37,6 +37,20 @@
 .pf-back { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 0 4rem; font-size: 0.9rem; color: var(--ink-mid); transition: color 0.2s; }
 .pf-back:hover { color: var(--gold); }
 @media (max-width: 768px) { .pf-header { padding-top: 2.5rem; } }
+
+/* ── Case-grid sector filter (JS-injected) ────────────────── */
+.cat-filter { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 0 0 2.5rem; }
+.cat-chip {
+  font-family: var(--ff-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.01em;
+  padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); cursor: pointer;
+  border: 1px solid var(--divider); background: var(--surface); color: var(--ink-mid);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.cat-chip:hover { border-color: var(--gold); color: var(--ink); }
+.cat-chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 600; }
+.cat-chip-count { display: inline-block; margin-left: 0.4rem; font-size: 0.72rem; opacity: 0.7; }
+.case-card.case-hide { display: none; }
+.cat-empty { text-align: center; color: var(--ink-mid); font-size: 0.95rem; margin: 1rem 0 2rem; display: none; }
 </style>
 </head>
 <body>
@@ -89,7 +103,7 @@
 
       <div class="case-grid">
 
-        <a href="case-studies/emirates-skywards-tier-advancement.html" class="case-card case-card--contain reveal" aria-label="Emirates Skywards Tier Advancement case study">
+        <a href="case-studies/emirates-skywards-tier-advancement.html" class="case-card case-card--contain reveal" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
           <div class="case-img-wrap">
             <img src="assets/img/skywards-tiers-overlap.png" alt="Emirates Skywards tiers — Blue, Silver, Gold and Platinum" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
@@ -106,13 +120,13 @@
           </div>
         </a>
 
-        <a href="case-studies/malaysia-airlines.html" class="case-card reveal" aria-label="Malaysia Airlines case study">
+        <a href="case-studies/malaysia-airlines.html" class="case-card reveal" data-cat="branding" aria-label="Malaysia Airlines case study">
           <div class="case-img-wrap">
             <img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines This is Malaysian hospitality brand campaign" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
           </div>
           <div class="case-body">
-            <span class="case-tag">Brand Campaign</span>
+            <span class="case-tag">Branding</span>
             <h3 class="case-title">Malaysia Airlines: This is Malaysian hospitality</h3>
             <div class="case-prr">
               <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Shift a national carrier's story from service to soul.</span></div>
@@ -123,13 +137,13 @@
           </div>
         </a>
 
-        <a href="case-studies/emirates-flight-training-academy.html" class="case-card reveal" aria-label="Emirates Flight Training Academy case study">
+        <a href="case-studies/emirates-flight-training-academy.html" class="case-card reveal" data-cat="branding" aria-label="Emirates Flight Training Academy case study">
           <div class="case-img-wrap">
             <img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy exterior" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
           </div>
           <div class="case-body">
-            <span class="case-tag">Integrated Campaign</span>
+            <span class="case-tag">Branding</span>
             <h3 class="case-title">Emirates Flight Training Academy</h3>
             <div class="case-prr">
               <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Launch a new aviation academy brand, mid-construction.</span></div>
@@ -140,13 +154,13 @@
           </div>
         </a>
 
-        <a href="case-studies/emirates-pilot-recruitment.html" class="case-card reveal" aria-label="Emirates Pilot Recruitment case study">
+        <a href="case-studies/emirates-pilot-recruitment.html" class="case-card reveal" data-cat="recruitment" aria-label="Emirates Pilot Recruitment case study">
           <div class="case-img-wrap">
             <img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates Adventure Awaits pilot recruitment campaign" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
           </div>
           <div class="case-body">
-            <span class="case-tag">Employer Branding</span>
+            <span class="case-tag">Employer Brand</span>
             <h3 class="case-title">Emirates Pilot Recruitment</h3>
             <div class="case-prr">
               <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Attract a more diverse global generation of pilots.</span></div>
@@ -157,7 +171,7 @@
           </div>
         </a>
 
-        <a href="case-studies/emirates-skywards-my-family.html" class="case-card reveal" aria-label="Emirates Skywards My Family case study">
+        <a href="case-studies/emirates-skywards-my-family.html" class="case-card reveal" data-cat="loyalty" aria-label="Emirates Skywards My Family case study">
           <div class="case-img-wrap">
             <img src="assets/img/skywards-my-family-photo.jpg" alt="Emirates Skywards My Family loyalty feature" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
@@ -174,13 +188,13 @@
           </div>
         </a>
 
-        <a href="case-studies/uob-gallery.html" class="case-card reveal" aria-label="UOB Gallery case study">
+        <a href="case-studies/uob-gallery.html" class="case-card reveal" data-cat="branding" aria-label="UOB Gallery case study">
           <div class="case-img-wrap">
             <img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery commemorative brand experience" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
           </div>
           <div class="case-body">
-            <span class="case-tag">Finance</span>
+            <span class="case-tag">Branding</span>
             <h3 class="case-title">The UOB Gallery</h3>
             <div class="case-prr">
               <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Tell ninety years of UOB heritage as a public brand experience.</span></div>
@@ -191,13 +205,13 @@
           </div>
         </a>
 
-        <a href="case-studies/hilton-asia-conference.html" class="case-card reveal" aria-label="Hilton APAC Conference case study">
+        <a href="case-studies/hilton-asia-conference.html" class="case-card reveal" data-cat="event" aria-label="Hilton APAC Conference case study">
           <div class="case-img-wrap">
             <img src="assets/img/hilton-plenary.jpg" alt="Hilton Asia GM Commercial Conference plenary" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
           </div>
           <div class="case-body">
-            <span class="case-tag">Hospitality</span>
+            <span class="case-tag">Event</span>
             <h3 class="case-title">Hilton APAC GM &amp; Commercial Conference</h3>
             <div class="case-prr">
               <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Align 1,400 regional leaders around commercial momentum.</span></div>
@@ -208,13 +222,13 @@
           </div>
         </a>
 
-        <a href="case-studies/casillero-del-diablo.html" class="case-card reveal" aria-label="Casillero del Diablo case study">
+        <a href="case-studies/casillero-del-diablo.html" class="case-card reveal" data-cat="social-pr" aria-label="Casillero del Diablo case study">
           <div class="case-img-wrap">
             <img src="assets/img/casillero-del-diablo-card.jpg" alt="Casillero del Diablo Carmenere bottle — Legendary Pairings campaign" loading="lazy">
             <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
           </div>
           <div class="case-body">
-            <span class="case-tag">Brand Localisation</span>
+            <span class="case-tag">Social / PR</span>
             <h3 class="case-title">Casillero del Diablo: Legendary Pairings</h3>
             <div class="case-prr">
               <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Make a Chilean wine brand relevant to Singapore's hawker culture.</span></div>
@@ -252,5 +266,85 @@
 </footer>
 
 <script src="assets/portfolio.js" defer></script>
+
+<!-- Case-grid sector filter — progressive enhancement: built in JS so no
+     dead controls appear without JS. Cards carry data-cat attributes that
+     map to the chip labels below. -->
+<script>
+(function () {
+  'use strict';
+  var grid = document.querySelector('.case-grid');
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.case-card'));
+
+  var CATS = [
+    { key: 'all',         label: 'All' },
+    { key: 'loyalty',     label: 'Loyalty' },
+    { key: 'branding',    label: 'Branding' },
+    { key: 'event',       label: 'Event' },
+    { key: 'social-pr',   label: 'Social Media / PR' },
+    { key: 'recruitment', label: 'Recruitment / Employer Brand' },
+  ];
+
+  function count(key) {
+    return key === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat === key; }).length;
+  }
+
+  var bar = document.createElement('div');
+  bar.className = 'cat-filter';
+  bar.setAttribute('role', 'group');
+  bar.setAttribute('aria-label', 'Filter case studies by sector');
+
+  var chips = [];
+  CATS.forEach(function (d) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'cat-chip' + (d.key === 'all' ? ' active' : '');
+    b.dataset.cat = d.key;
+    b.setAttribute('aria-pressed', String(d.key === 'all'));
+    b.innerHTML = d.label + ' <span class="cat-chip-count">' + count(d.key) + '</span>';
+    b.addEventListener('click', function () {
+      apply(d.key === active && d.key !== 'all' ? 'all' : d.key);
+    });
+    bar.appendChild(b);
+    chips.push(b);
+  });
+
+  grid.parentNode.insertBefore(bar, grid);
+
+  var empty = document.createElement('p');
+  empty.className = 'cat-empty';
+  empty.textContent = 'No case studies in this sector yet.';
+  grid.parentNode.insertBefore(empty, grid.nextSibling);
+
+  var active = 'all';
+  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function apply(cat) {
+    active = cat;
+    chips.forEach(function (ch) {
+      var on = ch.dataset.cat === cat;
+      ch.classList.toggle('active', on);
+      ch.setAttribute('aria-pressed', String(on));
+    });
+    var shown = [];
+    cards.forEach(function (card) {
+      var match = (cat === 'all' || card.dataset.cat === cat);
+      card.classList.toggle('case-hide', !match);
+      if (match) shown.push(card);
+    });
+    empty.style.display = shown.length ? 'none' : 'block';
+    if (!reduceMQ.matches && cards[0].animate) {
+      shown.forEach(function (card, i) {
+        card.animate(
+          [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
+          { duration: 380, delay: Math.min(i, 6) * 45, easing: 'cubic-bezier(0.22,1,0.36,1)' }
+        );
+      });
+    }
+  }
+})();
+</script>
+
 </body>
 </html>
