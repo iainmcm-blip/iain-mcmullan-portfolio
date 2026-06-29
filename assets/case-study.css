@@ -175,3 +175,42 @@
   width: 100%;
   height: auto;
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   .cs-showcase — visual showcase block for case studies that have
+   substantive output to display (video, device mockups, campaign
+   creatives). Used on NTUC.
+   ═══════════════════════════════════════════════════════ */
+.cs-showcase { margin: 2.5rem 0 0; display: flex; flex-direction: column; gap: 2.5rem; }
+
+/* Device mockups — a frame PNG on top, a GIF or image positioned within
+   the screen area underneath. Pure CSS, no JS. */
+.cs-devices { display: grid; grid-template-columns: 2.2fr 1fr; gap: 2.5rem; align-items: center; }
+@media (max-width: 768px) { .cs-devices { grid-template-columns: 1fr; gap: 2rem; } }
+.cs-device { position: relative; display: block; width: 100%; }
+.cs-device .cs-device-frame { display: block; width: 100%; height: auto; position: relative; z-index: 2; pointer-events: none; }
+.cs-device .cs-device-screen { position: absolute; z-index: 1; overflow: hidden; }
+.cs-device .cs-device-screen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* Laptop frame — measured screen area is top 2%, side 10%, bottom 8.7% */
+.cs-device--laptop .cs-device-screen {
+  top: 2%; left: 10%; right: 10%; bottom: 8.7%;
+  border-radius: 6px;
+}
+
+/* Mobile frame — measured screen area is top 3%, side 5%, bottom 3%,
+   with rounded screen corners */
+.cs-device--mobile .cs-device-screen {
+  top: 3%; left: 5%; right: 5%; bottom: 3%;
+  border-radius: 9%;
+}
+
+/* Pair of campaign creatives side-by-side */
+.cs-creatives { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+@media (max-width: 768px) { .cs-creatives { grid-template-columns: 1fr; } }
+.cs-creatives img { display: block; width: 100%; height: auto; border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
+
+/* HTML5 video wrapper, 16:9 */
+.cs-video-native { position: relative; padding-top: 56.25%; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); background: #000; }
+.cs-video-native video { position: absolute; inset: 0; width: 100%; height: 100%; }
