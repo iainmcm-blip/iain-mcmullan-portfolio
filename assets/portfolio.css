@@ -2045,3 +2045,31 @@ html.js .rec-item.active .rec-meta { transition-delay: 0.92s; }
     transition: none !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   Positioning thesis — single-statement section on the homepage
+   between the Throughline and About. Visually a 'breathe' moment,
+   editorial in feel, hairline rules above and below to signal a
+   change in voice from proof to position.
+   ═══════════════════════════════════════════════════════ */
+.pov-wrap {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--surface);
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+.pov-inner { max-width: 760px; }
+.pov-inner .section-label { display: block; margin-bottom: 0.85rem; }
+.pov-headline {
+  font-family: var(--ff-display);
+  font-style: italic;
+  margin: 0;
+}
+.pov-body {
+  margin-top: 1.75rem;
+  max-width: 64ch;
+  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  line-height: 1.65;
+  color: var(--ink);
+}
