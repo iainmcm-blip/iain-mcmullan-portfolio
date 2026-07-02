@@ -1543,6 +1543,7 @@ body.menu-open { overflow: hidden; }
 
 /* Perspectives — pull-quote character reveal */
 .persp-pull blockquote .char { display: inline-block; white-space: pre; }
+.persp-pull blockquote .word { display: inline-block; white-space: nowrap; }
 @media (prefers-reduced-motion: no-preference) {
   .js .persp-pull blockquote .char { opacity: 0; }
 }

@@ -246,12 +246,26 @@
   if (pullQuote && !pullQuote.querySelector('.char')) {
     const text = pullQuote.textContent;
     pullQuote.textContent = '';
-    for (const ch of text) {
-      const s = document.createElement('span');
-      s.className = 'char';
-      s.textContent = ch;
-      pullQuote.appendChild(s);
-    }
+    // Wrap each word in a nowrap .word span so the char reveal never breaks a
+    // word mid-letter; lines break only at the spaces between words.
+    const words = text.split(' ');
+    words.forEach((word, wi) => {
+      const w = document.createElement('span');
+      w.className = 'word';
+      for (const ch of word) {
+        const s = document.createElement('span');
+        s.className = 'char';
+        s.textContent = ch;
+        w.appendChild(s);
+      }
+      pullQuote.appendChild(w);
+      if (wi < words.length - 1) {
+        const sp = document.createElement('span');
+        sp.className = 'char';
+        sp.textContent = ' ';
+        pullQuote.appendChild(sp);   // breakable space between words
+      }
+    });
   }
 
   const showHeroWords = () =>

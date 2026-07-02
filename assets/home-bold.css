@@ -138,3 +138,22 @@ body.theme-bold {
    were pale/dark amber; make them black so yellow stays reserved. */
 .theme-bold .skill-teaser-num { color: var(--ink); }
 .theme-bold .skill-teaser-link { color: var(--ink); }
+
+/* ═══ Discipline the yellow SITE-WIDE ════════════════════════════════════════
+   Text accents -> black; spines/rules/borders -> neutral hairline. Vivid yellow
+   is kept ONLY for: the primary CTA, stat operators (+/%), the By-the-numbers
+   band, the hero ink + highlight, and the availability dot. Link hovers still
+   flash yellow (a deliberate, transient second-colour moment). */
+body.theme-bold {
+  --gold-dark: #0E0E0C;   /* eyebrows, kickers, dates, links, cite, tags -> ink */
+  --gold-mid:  #D6D3C8;   /* spines, connecting rules, card borders -> hairline */
+}
+/* Bright-gold text labels that bypass --gold-dark -> ink (stat operators stay yellow) */
+.theme-bold .case-tag,
+.theme-bold .persp-tag,
+.theme-bold .timeline-date,
+.theme-bold .skill-col-num,
+.theme-bold .skills-statement,
+.theme-bold .cred-qual { color: var(--ink); }
+/* Case tag: neutral outlined chip, not a yellow pill */
+.theme-bold .case-tag { background: transparent; border: 1px solid var(--divider); }
