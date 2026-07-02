@@ -77,3 +77,15 @@ body.theme-bold {
   .cursor-dot, .cursor-ring { display: none !important; }
   .theme-bold { cursor: auto !important; }
 }
+
+/* ── Tweaks ──────────────────────────────────────────────────
+   1) More breathing room under the hero value line before the H1.
+   2) Problem->Idea->Result body reads as body copy, not bold display.
+      (The <strong> highlights in the result line stay bold + gold.) */
+.theme-bold .hero-class { margin-bottom: 1.75rem; }
+.theme-bold .tl-v {
+  font-family: var(--ff-body);
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw, 21px);
+  line-height: 1.55;
+}
