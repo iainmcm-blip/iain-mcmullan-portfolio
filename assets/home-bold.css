@@ -1,0 +1,79 @@
+/* ═══ BOLD BLACK & YELLOW — homepage only (body.theme-bold) ══════════════════
+   Crisp white ground, true-black grotesque type, the yellow ink and yellow
+   blocks as a deliberate second colour. Maximum contrast (black on white), so
+   nothing washes out. Loaded only on index.html; scoped to .theme-bold. */
+
+body.theme-bold {
+  --bg:         #FBFAF7;   /* crisp near-white, not cream */
+  --ink:        #0E0E0C;   /* near-black */
+  --ink-mid:    #47463F;   /* dark grey — secondary text stays readable */
+  --surface:    #FFFFFF;
+  --divider:    #E3E1D8;
+  --gold:       #F2B01E;   /* punchy yellow for fills / accents */
+  --gold-dark:  #8A6300;   /* darker amber where colour meets white as text */
+  --gold-mid:   #F0E2BC;   /* light yellow border / spine */
+  --gold-warm:  #FBF3DE;   /* light yellow surface tint */
+  --gold-pale:  #FCF7EA;   /* lightest yellow band */
+  --ff-display: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Grotesque display wants tighter tracking than the serif did */
+.theme-bold .hero-h1,
+.theme-bold .display-heading,
+.theme-bold .display-lg,
+.theme-bold .display-md { letter-spacing: -0.02em; line-height: 1.04; }
+.theme-bold .h1-gold { color: var(--gold-dark); font-style: normal; }  /* italic grotesque reads odd; use colour only */
+
+/* Two-colour buttons: black-on-yellow primary that inverts on hover; squared */
+.theme-bold .btn { border-radius: 2px; font-weight: 600; }
+.theme-bold .btn-gold,
+.theme-bold .btn-gold-dark {
+  background: var(--gold); color: #0E0E0C; border: 1.5px solid var(--gold);
+}
+.theme-bold .btn-gold:hover,
+.theme-bold .btn-gold-dark:hover {
+  background: #0E0E0C; color: var(--gold); border-color: #0E0E0C;
+}
+.theme-bold .btn-outline,
+.theme-bold .btn-outline-dark {
+  border: 1.5px solid #0E0E0C; color: #0E0E0C; background: transparent;
+}
+.theme-bold .btn-outline:hover,
+.theme-bold .btn-outline-dark:hover { background: #0E0E0C; color: #FBFAF7; }
+
+/* Keep the ink vivid and push it a touch more yellow (multiply over white) */
+.theme-bold .hero-ink-vid {
+  filter: sepia(0.5) saturate(2.3) hue-rotate(-20deg) brightness(1.05) contrast(1.08);
+  mix-blend-mode: multiply;
+}
+
+/* Recommendation band as a soft yellow tint = the second colour, quietly */
+.theme-bold .rec-section { background: var(--gold-pale); }
+
+/* ── Custom circle+dot cursor (recovered from the ln-experiment) ───────────── */
+@media (hover: hover) and (pointer: fine) {
+  .theme-bold, .theme-bold a, .theme-bold button, .theme-bold [role="button"], .theme-bold .btn { cursor: none; }
+}
+.cursor-dot {
+  position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 10000; will-change: transform;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+  border: 1.5px solid rgba(14, 14, 12, 0.55); border-radius: 50%;
+  pointer-events: none; z-index: 9999; will-change: transform;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.cursor-ring.is-hover {
+  width: 56px; height: 56px;
+  background: rgba(242, 176, 30, 0.12); border-color: rgba(242, 176, 30, 0.55);
+}
+.cursor-ring.is-hidden { opacity: 0; }
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+  .theme-bold { cursor: auto !important; }
+}
