@@ -60,6 +60,28 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
 }
 .skip-link:focus { transform: translateY(0); }
 
+/* ── FOCUS VISIBLE (site-wide keyboard affordance) ──────────────
+   Consistent gold ring on any keyboard-focused interactive element.
+   Mouse clicks do not trigger :focus-visible, so this stays invisible
+   to pointer users. */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+[role="button"]:focus-visible,
+.case-mini:focus-visible,
+.case-card:focus-visible,
+.cat-chip:focus-visible,
+.nav-hamburger:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Scroll lock while the mobile menu dialog is open */
+body.menu-open { overflow: hidden; }
+
 /* ── SELECTION ──────────────────────────────────────────────── */
 ::selection { background: var(--gold); color: #fff; }
 
@@ -115,7 +137,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   font-family: var(--ff-body);
   font-weight: 500;
   font-size: 0.9375rem;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -255,7 +277,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   width: 22px;
   height: 1.5px;
   background: var(--ink);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   transform-origin: center;
 }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }

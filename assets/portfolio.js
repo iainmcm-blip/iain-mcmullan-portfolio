@@ -20,25 +20,44 @@
   const menuBtn  = document.getElementById('menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   if (menuBtn && mobileMenu) {
+    const menuLinks = Array.prototype.slice.call(mobileMenu.querySelectorAll('a'));
+
+    // Keyboard handling while open: Escape closes, Tab is trapped within the menu.
+    const onMenuKeydown = (e) => {
+      if (e.key === 'Escape') { closeMenu(); return; }
+      if (e.key !== 'Tab' || !menuLinks.length) return;
+      const focusables = [menuBtn].concat(menuLinks);
+      const first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    };
+
+    const openMenu = () => {
+      mobileMenu.classList.add('open');
+      menuBtn.classList.add('open');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('menu-open');           // scroll lock
+      document.addEventListener('keydown', onMenuKeydown);
+      if (menuLinks[0]) menuLinks[0].focus();              // move focus into the dialog
+    };
+
+    const closeMenu = () => {
+      if (!mobileMenu.classList.contains('open')) return;
+      mobileMenu.classList.remove('open');
+      menuBtn.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+      document.removeEventListener('keydown', onMenuKeydown);
+      menuBtn.focus();   // return focus to the toggle (WAI-ARIA menu-button pattern)
+    };
+
     menuBtn.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('open');
-      menuBtn.classList.toggle('open', open);
-      menuBtn.setAttribute('aria-expanded', String(open));
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
     });
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        menuBtn.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
+    menuLinks.forEach(a => a.addEventListener('click', closeMenu));
     // Close on outside click
     document.addEventListener('click', e => {
-      if (!nav.contains(e.target) && !mobileMenu.contains(e.target)) {
-        mobileMenu.classList.remove('open');
-        menuBtn.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      }
+      if (mobileMenu.classList.contains('open') && !nav.contains(e.target) && !mobileMenu.contains(e.target)) closeMenu();
     });
   }
 
@@ -61,6 +80,18 @@
     // Re-measure once metadata/poster has laid out
     heroVideo.addEventListener('loadedmetadata', sizeHeroVideo);
     window.addEventListener('load', sizeHeroVideo);
+  }
+
+  /* ── HERO INK: load off the critical path ───────────────────
+     The video has preload="none" and no autoplay, so nothing is fetched
+     until we call play() when the browser is idle after first paint.
+     Keeps the hero video out of LCP. Skipped entirely for reduced motion. */
+  const heroInk = document.querySelector('.hero-ink-vid');
+  if (heroInk && !reduce) {
+    const startInk = () => { const p = heroInk.play(); if (p && p.catch) p.catch(() => {}); };
+    const defer = (fn) => (window.requestIdleCallback ? window.requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 300));
+    if (document.readyState === 'complete') defer(startInk);
+    else window.addEventListener('load', () => defer(startInk));
   }
 
   /* ── FLOATING CTA ───────────────────────────────────────── */
