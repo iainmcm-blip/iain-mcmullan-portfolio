@@ -714,7 +714,7 @@ body.menu-open::before {
 @media (max-width: 900px) { .hero-class { font-size: 1.02rem; } }
 /* hero 'Start a conversation' outline border tinted to the ink yellow */
 #hero-cta-outline { border-color: #F0B62E; }
-#hero-cta-outline:hover { border-color: #F0B62E; color: var(--gold-dark); }
+#hero-cta-outline:hover { border-color: #F0B62E; color: var(--gold); }
 
 /* periodic gold sheen sweeping across the CTA */
 @media (prefers-reduced-motion: no-preference) {
