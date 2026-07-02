@@ -89,3 +89,47 @@ body.theme-bold {
   font-size: clamp(18px, 1.6vw, 21px);
   line-height: 1.55;
 }
+
+/* ═══ Panel items 1–4: finish the bold theme (not just recolour it) ═══════════ */
+
+/* (1) Square + flatten: drop the soft radii, warm shadows and gold surface tints
+       inherited from the base editorial system. */
+body.theme-bold {
+  --radius-sm: 2px; --radius-md: 3px; --radius-lg: 4px; --radius-pill: 4px;
+  --shadow-card: none; --shadow-hover: none; --shadow-float: none;
+  --divider: #D6D3C8;                       /* crisper hairline for cards + rules */
+}
+.theme-bold .case-mini-img { background: #ECEBE5; }   /* neutral letterbox, not gold */
+
+/* (2) Hero emphasis: black words on a yellow highlighter slab (kills the muddy amber) */
+.theme-bold .hero-h1 { color: #0E0E0C; mix-blend-mode: normal; }
+.theme-bold .h1-gold {
+  color: #0E0E0C; font-style: normal;
+  background-image: linear-gradient(transparent 60%, rgba(242, 176, 30, 0.92) 60%);
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  padding: 0 0.04em;
+}
+
+/* (3) Discipline the yellow: eyebrows go black. Vivid yellow is now reserved for
+       the hero ink, the primary CTA, the stat operators, the By-the-numbers band
+       and the hero highlight. */
+.theme-bold .section-label,
+.theme-bold .bestfit-label,
+.theme-bold .tl-k,
+.theme-bold .cs-eyebrow,
+.theme-bold .persp-tag { color: var(--ink); }
+
+/* (4) Sharper, bolder type: larger + tighter H1, balanced wrapping, tighter eyebrows */
+.theme-bold .hero-h1 {
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.theme-bold .display-heading,
+.theme-bold .display-lg,
+.theme-bold .display-md { letter-spacing: -0.025em; text-wrap: balance; }
+.theme-bold .section-label,
+.theme-bold .bestfit-label,
+.theme-bold .tl-k,
+.theme-bold .cs-eyebrow { letter-spacing: 0.1em; }
