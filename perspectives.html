@@ -98,6 +98,15 @@
 }
 .persp-sort-btn:hover { border-color: var(--gold); color: var(--ink); }
 .persp-sort-btn.active { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+/* gold sheen on the 'Newest first' sort button — reuses the hero CTA keyframes (cta-shimmer, defined in portfolio.css) */
+@media (prefers-reduced-motion: no-preference) {
+  .persp-sort-btn[data-dir="desc"] { position: relative; overflow: hidden; }
+  .persp-sort-btn[data-dir="desc"]::after {
+    content: ""; position: absolute; inset: 0 auto 0 -60%; width: 40%;
+    background: linear-gradient(105deg, transparent, rgba(240, 182, 46, 0.25), transparent);
+    animation: cta-shimmer 3.6s ease-in-out infinite; pointer-events: none;
+  }
+}
 .persp-chip {
   font-family: var(--ff-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.01em;
   padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); cursor: pointer;
