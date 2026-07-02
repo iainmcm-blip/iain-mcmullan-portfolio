@@ -53,46 +53,41 @@
 .case-card.case-hide { display: none; }
 .cat-empty { text-align: center; color: var(--ink-mid); font-size: 0.95rem; margin: 1rem 0 2rem; display: none; }
 
-/* ── Asymmetric work grid (bento): image with a solid caption panel ─ */
-.bento { display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:250px; gap:1.25rem; }
-.btile { position:relative; overflow:hidden; display:flex; align-items:flex-end; background:var(--ink); border:1px solid var(--divider); }
-.btile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .55s cubic-bezier(.22,1,.36,1); }
-.btile:hover img { transform:scale(1.05); }
-/* Text sits on a solid near-black panel (not a scrim over the photo), so the
-   yellow number always clears WCAG AA regardless of the image behind it. */
-.btile-body { position:relative; z-index:2; width:100%; background:var(--ink); border-top:1px solid rgba(251,250,247,0.10); padding:0.95rem 1.15rem 1.05rem; color:var(--bg); }
-.btile-metric { font-family:var(--ff-display); font-weight:800; line-height:0.95; color:var(--gold); display:block; }
-.btile-label { display:block; font-size:0.78rem; color:rgba(251,250,247,0.82); margin:0.15rem 0 0.45rem; }
-.btile-title { font-family:var(--ff-display); font-weight:700; color:var(--bg); line-height:1.12; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-.btile-sector { display:inline-block; margin-top:0.55rem; font-size:0.72rem; letter-spacing:0.03em; color:rgba(251,250,247,0.78); border:1px solid rgba(251,250,247,0.34); padding:0.2rem 0.6rem; border-radius:var(--radius-pill); }
-.btile-hero { grid-column:span 3; grid-row:span 2; }
-.btile-wide { grid-column:span 3; }
-.btile-md   { grid-column:span 2; }
-.btile-band { grid-column:span 6; }
-.btile-hero .btile-metric { font-size:clamp(44px,5vw,64px); }
-.btile-hero .btile-title  { font-size:clamp(24px,2.4vw,32px); }
-.btile-wide .btile-metric { font-size:clamp(30px,3vw,40px); }
-.btile-wide .btile-title  { font-size:clamp(19px,1.8vw,23px); }
-.btile-md .btile-metric   { font-size:clamp(26px,2.4vw,32px); }
-.btile-md .btile-title    { font-size:clamp(16px,1.5vw,19px); }
-.btile-band .btile-metric { font-size:clamp(34px,3.4vw,46px); }
-.btile-band .btile-title  { font-size:clamp(20px,2vw,26px); }
-.btile.case-hide { display:none; }
-/* Filtered view: reset spans so the subset reflows evenly with no gaps. */
-.bento.is-filtered .btile { grid-column:span 3 !important; grid-row:span 1 !important; }
-.bento.is-filtered .btile-metric { font-size:clamp(30px,3vw,42px); }
-.bento.is-filtered .btile-title  { font-size:clamp(20px,1.8vw,24px); }
-@media (max-width:900px){
-  .bento { grid-template-columns:repeat(2,1fr); grid-auto-rows:230px; }
-  .btile-hero { grid-column:span 2; grid-row:span 2; }
-  .btile-wide, .btile-band { grid-column:span 2; }
-  .btile-md { grid-column:span 1; }
-  .bento.is-filtered .btile { grid-column:span 2 !important; }
-}
-@media (max-width:560px){
-  .bento { grid-template-columns:1fr; grid-auto-rows:250px; }
-  .btile-hero, .btile-wide, .btile-md, .btile-band { grid-column:span 1; grid-row:span 1; }
-  .bento.is-filtered .btile { grid-column:span 1 !important; }
+/* ── Work: featured pair + editorial results index ─────────── */
+.feat-row { display:flex; flex-wrap:wrap; gap:1.75rem; margin-bottom:3.25rem; }
+.feat-card { flex:1 1 320px; min-width:0; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--divider); overflow:hidden; transition:border-color .25s ease, transform .25s ease; }
+.feat-card:hover { border-color:var(--ink); transform:translateY(-3px); }
+.feat-img { aspect-ratio:16/10; overflow:hidden; background:var(--bg); }
+.feat-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.22,1,.36,1); }
+.feat-card:hover .feat-img img { transform:scale(1.04); }
+.feat-body { padding:1.6rem 1.6rem 1.4rem; }
+/* Featured result: black on a yellow highlighter slab (the hero device),
+   so the number is bold yellow-brand yet clears WCAG AA (9.8:1). */
+.feat-metric { display:inline-block; font-family:var(--ff-display); font-weight:800; font-size:clamp(36px,4vw,54px); line-height:1.0; color:var(--ink); background:var(--gold); padding:0.02em 0.24em; }
+.feat-metric .mop { color:inherit; }
+.feat-metric-label { display:block; font-size:0.85rem; color:var(--ink-mid); margin:0.55rem 0 1rem; }
+.feat-title { font-family:var(--ff-display); font-weight:700; font-size:clamp(20px,1.8vw,26px); line-height:1.1; color:var(--ink); margin-bottom:0.55rem; }
+.feat-meta { font-size:0.82rem; color:var(--ink-mid); }
+.feat-sector { font-weight:600; color:var(--ink); }
+.idx-head { font-family:var(--ff-body); text-transform:uppercase; letter-spacing:0.15em; font-size:11px; color:var(--ink-mid); padding-bottom:0.9rem; border-bottom:1px solid var(--ink); }
+.idx-row { display:grid; grid-template-columns:minmax(128px,168px) 1fr auto; align-items:center; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--divider); transition:padding-left .25s ease; }
+.idx-row:hover { padding-left:0.75rem; }
+/* Index result: black number, yellow operators (the By-the-numbers device). */
+.idx-metric { font-family:var(--ff-display); font-weight:800; font-size:clamp(26px,2.5vw,34px); line-height:0.95; color:var(--ink); }
+.idx-metric .mop { color:var(--gold); }
+.idx-title { font-family:var(--ff-display); font-weight:700; font-size:clamp(19px,1.6vw,23px); line-height:1.12; color:var(--ink); }
+.idx-sub { font-size:0.85rem; color:var(--ink-mid); margin-top:0.25rem; }
+.idx-right { display:flex; align-items:center; gap:1.1rem; }
+.idx-sector { font-size:0.76rem; letter-spacing:0.02em; color:var(--ink-mid); border:1px solid var(--divider); padding:0.3rem 0.7rem; border-radius:var(--radius-pill); white-space:nowrap; }
+.idx-arrow { font-size:1.2rem; color:var(--ink); transition:transform .25s ease; }
+.idx-row:hover .idx-arrow { transform:translateX(4px); color:var(--gold); }
+.feat-card.case-hide, .idx-row.case-hide { display:none; }
+@media (max-width:760px){
+  .feat-row { gap:1.25rem; margin-bottom:2.5rem; }
+  .feat-card { flex:1 1 100%; }
+  .idx-row { grid-template-columns:1fr; gap:0.4rem; padding:1.25rem 0; }
+  .idx-metric { font-size:30px; }
+  .idx-right { justify-content:flex-start; gap:0.9rem; margin-top:0.3rem; }
 }
 </style>
 </head>
@@ -148,107 +143,85 @@
   <section class="case-studies">
     <div class="container">
 
-      <div class="bento">
+      <div class="work">
 
-        <a href="case-studies/emirates-skywards-tier-advancement.html" class="btile btile-hero" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
-          <img src="assets/img/skywards-tiers-overlap.png" alt="Emirates Skywards tier coins: Blue, Silver, Gold and Platinum" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">USD 2M+</span>
-            <span class="btile-label">incremental revenue</span>
-            <span class="btile-title">Emirates Skywards Tier Advancement</span>
-            <span class="btile-sector">Loyalty</span>
+        <div class="feat-row">
+
+        <a href="case-studies/emirates-skywards-tier-advancement.html" class="feat-card" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
+          <div class="feat-img"><img src="assets/img/skywards-tiers-overlap.png" alt="Emirates Skywards tier coins: Blue, Silver, Gold and Platinum" loading="lazy"></div>
+          <div class="feat-body">
+            <span class="feat-metric">USD 2M<span class="mop">+</span></span>
+            <span class="feat-metric-label">incremental revenue</span>
+            <h3 class="feat-title">Emirates Skywards Tier Advancement</h3>
+            <p class="feat-meta"><span class="feat-sector">Loyalty</span> &middot; Loyalty and CRM lead</p>
           </div>
         </a>
 
-        <a href="case-studies/ahc-skincare.html" class="btile btile-wide" data-cat="social-pr" aria-label="AHC Skincare: SEA expansion case study">
-          <img src="assets/img/ahc-index.jpg" alt="AHC Peony Bright skincare range" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">4%&#8594;22%</span>
-            <span class="btile-label">ecommerce share, four markets</span>
-            <span class="btile-title">AHC Skincare: SEA expansion</span>
-            <span class="btile-sector">Social / PR</span>
+        <a href="case-studies/ahc-skincare.html" class="feat-card" data-cat="social-pr" aria-label="AHC Skincare: SEA expansion case study">
+          <div class="feat-img"><img src="assets/img/ahc-index.jpg" alt="AHC Peony Bright skincare range" loading="lazy"></div>
+          <div class="feat-body">
+            <span class="feat-metric">4<span class="mop">%</span> <span class="mop">&rarr;</span> 22<span class="mop">%</span></span>
+            <span class="feat-metric-label">ecommerce share, four markets</span>
+            <h3 class="feat-title">AHC Skincare: SEA expansion</h3>
+            <p class="feat-meta"><span class="feat-sector">Social / PR</span> &middot; Senior strategic lead</p>
           </div>
         </a>
 
-        <a href="case-studies/hilton-asia-conference.html" class="btile btile-wide" data-cat="event" aria-label="Hilton APAC GM and Commercial Conference case study">
-          <img src="assets/img/hilton-plenary.jpg" alt="Hilton Asia GM and Commercial Conference plenary" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">92%</span>
-            <span class="btile-label">delegate engagement, a record</span>
-            <span class="btile-title">Hilton APAC GM and Commercial Conference</span>
-            <span class="btile-sector">Event</span>
-          </div>
+        </div>
+
+        <p class="idx-head">The full index</p>
+
+        <div class="work-index">
+
+        <a href="case-studies/hilton-asia-conference.html" class="idx-row" data-cat="event" aria-label="Hilton APAC GM and Commercial Conference case study">
+          <span class="idx-metric">92<span class="mop">%</span></span>
+          <div class="idx-main"><h4 class="idx-title">Hilton APAC GM and Commercial Conference</h4><p class="idx-sub">delegate engagement, a record &middot; Strategy and comms lead</p></div>
+          <span class="idx-right"><span class="idx-sector">Event</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/ntuc-my-first-skool.html" class="btile btile-md" data-cat="integrated" aria-label="NTUC My First Skool: site and campaign case study">
-          <img src="assets/img/ntuc-children.jpg" alt="Two children playing, NTUC My First Skool campaign" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">+39%</span>
-            <span class="btile-label">child registrations in four months</span>
-            <span class="btile-title">NTUC My First Skool: site and campaign</span>
-            <span class="btile-sector">Integrated Campaign</span>
-          </div>
+        <a href="case-studies/ntuc-my-first-skool.html" class="idx-row" data-cat="integrated" aria-label="NTUC My First Skool: site and campaign case study">
+          <span class="idx-metric"><span class="mop">+</span>39<span class="mop">%</span></span>
+          <div class="idx-main"><h4 class="idx-title">NTUC My First Skool: site and campaign</h4><p class="idx-sub">child registrations in four months &middot; Project owner and copywriter</p></div>
+          <span class="idx-right"><span class="idx-sector">Integrated Campaign</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/casillero-del-diablo.html" class="btile btile-md" data-cat="social-pr" aria-label="Casillero del Diablo: Legendary Pairings case study">
-          <img src="assets/img/casillero-del-diablo-card.jpg" alt="Casillero del Diablo Carmenere bottle" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">+23%</span>
-            <span class="btile-label">online sales</span>
-            <span class="btile-title">Casillero del Diablo: Legendary Pairings</span>
-            <span class="btile-sector">Social / PR</span>
-          </div>
+        <a href="case-studies/casillero-del-diablo.html" class="idx-row" data-cat="social-pr" aria-label="Casillero del Diablo: Legendary Pairings case study">
+          <span class="idx-metric"><span class="mop">+</span>23<span class="mop">%</span></span>
+          <div class="idx-main"><h4 class="idx-title">Casillero del Diablo: Legendary Pairings</h4><p class="idx-sub">online sales &middot; Localisation strategy lead</p></div>
+          <span class="idx-right"><span class="idx-sector">Social / PR</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/emirates-flight-training-academy.html" class="btile btile-md" data-cat="branding" aria-label="Emirates Flight Training Academy case study">
-          <img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">100%</span>
-            <span class="btile-label">first cohort filled in under two months</span>
-            <span class="btile-title">Emirates Flight Training Academy</span>
-            <span class="btile-sector">Branding</span>
-          </div>
+        <a href="case-studies/emirates-flight-training-academy.html" class="idx-row" data-cat="branding" aria-label="Emirates Flight Training Academy case study">
+          <span class="idx-metric">100<span class="mop">%</span></span>
+          <div class="idx-main"><h4 class="idx-title">Emirates Flight Training Academy</h4><p class="idx-sub">first cohort filled in under two months &middot; Client-side brand lead</p></div>
+          <span class="idx-right"><span class="idx-sector">Branding</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/malaysia-airlines.html" class="btile btile-md" data-cat="branding" aria-label="Malaysia Airlines: This is Malaysian hospitality case study">
-          <img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines aircraft in flight" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">Bronze</span>
-            <span class="btile-label">Kancil Awards 2023</span>
-            <span class="btile-title">Malaysia Airlines: This is Malaysian hospitality</span>
-            <span class="btile-sector">Branding</span>
-          </div>
+        <a href="case-studies/malaysia-airlines.html" class="idx-row" data-cat="branding" aria-label="Malaysia Airlines: This is Malaysian hospitality case study">
+          <span class="idx-metric">Bronze</span>
+          <div class="idx-main"><h4 class="idx-title">Malaysia Airlines: This is Malaysian hospitality</h4><p class="idx-sub">Kancil Awards 2023 &middot; Project director and strategist</p></div>
+          <span class="idx-right"><span class="idx-sector">Branding</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/emirates-pilot-recruitment.html" class="btile btile-md" data-cat="recruitment" aria-label="Emirates Pilot Recruitment case study">
-          <img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates pilot, Adventure Awaits recruitment campaign" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">3 films</span>
-            <span class="btile-label">global recruitment platform</span>
-            <span class="btile-title">Emirates Pilot Recruitment</span>
-            <span class="btile-sector">Employer Brand</span>
-          </div>
+        <a href="case-studies/emirates-pilot-recruitment.html" class="idx-row" data-cat="recruitment" aria-label="Emirates Pilot Recruitment case study">
+          <span class="idx-metric">3 films</span>
+          <div class="idx-main"><h4 class="idx-title">Emirates Pilot Recruitment</h4><p class="idx-sub">global recruitment platform &middot; Campaign and production lead</p></div>
+          <span class="idx-right"><span class="idx-sector">Employer Brand</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/emirates-skywards-my-family.html" class="btile btile-md" data-cat="loyalty" aria-label="Emirates Skywards: My Family case study">
-          <img src="assets/img/skywards-my-family-photo.jpg" alt="Family at sunset, Emirates Skywards My Family" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">Live</span>
-            <span class="btile-label">shipped end to end, still live</span>
-            <span class="btile-title">Emirates Skywards: My Family</span>
-            <span class="btile-sector">Loyalty</span>
-          </div>
+        <a href="case-studies/emirates-skywards-my-family.html" class="idx-row" data-cat="loyalty" aria-label="Emirates Skywards: My Family case study">
+          <span class="idx-metric">Live</span>
+          <div class="idx-main"><h4 class="idx-title">Emirates Skywards: My Family</h4><p class="idx-sub">shipped end to end, still live &middot; Project and digital lead</p></div>
+          <span class="idx-right"><span class="idx-sector">Loyalty</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
 
-        <a href="case-studies/uob-gallery.html" class="btile btile-band" data-cat="branding" aria-label="The UOB Gallery case study">
-          <img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery exhibition space" loading="lazy">
-          <div class="btile-body">
-            <span class="btile-metric">90 yrs</span>
-            <span class="btile-label">of heritage, opened on time</span>
-            <span class="btile-title">The UOB Gallery</span>
-            <span class="btile-sector">Branding</span>
-          </div>
+        <a href="case-studies/uob-gallery.html" class="idx-row" data-cat="branding" aria-label="The UOB Gallery case study">
+          <span class="idx-metric">90 yrs</span>
+          <div class="idx-main"><h4 class="idx-title">The UOB Gallery</h4><p class="idx-sub">of heritage, opened on time &middot; Strategy and comms lead</p></div>
+          <span class="idx-right"><span class="idx-sector">Branding</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
         </a>
+
+        </div>
 
       </div>
 
@@ -285,9 +258,10 @@
 <script>
 (function () {
   'use strict';
-  var grid = document.querySelector('.bento');
-  if (!grid) return;
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.btile'));
+  var work = document.querySelector('.work');
+  if (!work) return;
+  var items = Array.prototype.slice.call(work.querySelectorAll('.feat-card, .idx-row'));
+  var idxHead = work.querySelector('.idx-head');
 
   var CATS = [
     { key: 'all',         label: 'All' },
@@ -296,11 +270,10 @@
     { key: 'integrated',  label: 'Integrated Campaign' },
     { key: 'event',       label: 'Event' },
     { key: 'social-pr',   label: 'Social Media / PR' },
-    { key: 'recruitment', label: 'Recruitment / Employer Brand' },
+    { key: 'recruitment', label: 'Recruitment / Employer Brand' }
   ];
-
   function count(key) {
-    return key === 'all' ? cards.length : cards.filter(function (c) { return c.dataset.cat === key; }).length;
+    return key === 'all' ? items.length : items.filter(function (i) { return i.dataset.cat === key; }).length;
   }
 
   var bar = document.createElement('div');
@@ -309,6 +282,7 @@
   bar.setAttribute('aria-label', 'Filter case studies by sector');
 
   var chips = [];
+  var active = 'all';
   CATS.forEach(function (d) {
     var b = document.createElement('button');
     b.type = 'button';
@@ -322,35 +296,35 @@
     bar.appendChild(b);
     chips.push(b);
   });
-
-  grid.parentNode.insertBefore(bar, grid);
+  work.parentNode.insertBefore(bar, work);
 
   var empty = document.createElement('p');
   empty.className = 'cat-empty';
   empty.textContent = 'No case studies in this sector yet.';
-  grid.parentNode.insertBefore(empty, grid.nextSibling);
+  work.appendChild(empty);
 
-  var active = 'all';
   var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   function apply(cat) {
     active = cat;
-    grid.classList.toggle('is-filtered', cat !== 'all');
     chips.forEach(function (ch) {
       var on = ch.dataset.cat === cat;
       ch.classList.toggle('active', on);
       ch.setAttribute('aria-pressed', String(on));
     });
     var shown = [];
-    cards.forEach(function (card) {
-      var match = (cat === 'all' || card.dataset.cat === cat);
-      card.classList.toggle('case-hide', !match);
-      if (match) shown.push(card);
+    items.forEach(function (it) {
+      var match = (cat === 'all' || it.dataset.cat === cat);
+      it.classList.toggle('case-hide', !match);
+      if (match) shown.push(it);
     });
+    // The featured / index split is an overview device; when a filter is
+    // active, drop the "full index" label so the matches read as one list.
+    if (idxHead) idxHead.style.display = (cat === 'all') ? '' : 'none';
     empty.style.display = shown.length ? 'none' : 'block';
-    if (!reduceMQ.matches && cards[0].animate) {
-      shown.forEach(function (card, i) {
-        card.animate(
+    if (!reduceMQ.matches && shown[0] && shown[0].animate) {
+      shown.forEach(function (el, i) {
+        el.animate(
           [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
           { duration: 380, delay: Math.min(i, 6) * 45, easing: 'cubic-bezier(0.22,1,0.36,1)' }
         );
