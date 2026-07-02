@@ -1,0 +1,83 @@
+/* ═══ DARK GALLERY THEME — homepage only (body.theme-dark) ═══════════════════
+   Deep warm canvas, off-white type, the gold ink glowing as a light source.
+   Loaded only on index.html and scoped to .theme-dark, so no other page is
+   affected. The site is token-driven, so remapping the CSS variables recolours
+   most of the page; the rules below handle the elements that hardcode colour. */
+
+body.theme-dark {
+  --bg:         #100F0D;   /* deep warm charcoal */
+  --ink:        #F2ECE0;   /* warm off-white text */
+  --ink-mid:    #A49C8D;   /* muted warm grey */
+  --surface:    #1A1815;   /* card surface */
+  --divider:    #2C2A24;
+  --gold:       #F2B838;   /* brighter yellow, glows on dark */
+  --gold-dark:  #F2B838;   /* keep bright — a dark gold would vanish on dark */
+  --gold-mid:   #3A3428;   /* dark warm border / spine */
+  --gold-warm:  #211E18;   /* dark warm surface tint */
+  --gold-pale:  #191712;
+  --ff-display: 'Bodoni Moda', Georgia, 'Times New Roman', serif;
+  --ff-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Nav: dark translucent instead of the white blur */
+.theme-dark .nav { background: rgba(16, 15, 13, 0.82); border-bottom-color: var(--divider); }
+
+/* Hero ink glows as a light source (screen blend adds light on the dark ground) */
+.theme-dark .hero-ink-vid {
+  mix-blend-mode: screen;
+  filter: sepia(0.5) saturate(2.4) hue-rotate(-8deg) brightness(1.15) contrast(1.05);
+}
+.theme-dark .hero-vignette {
+  background: radial-gradient(120% 90% at 62% 40%, transparent 52%, rgba(0,0,0,0.40) 100%);
+}
+
+/* Bodoni is elegant at mid weight; tame the inherited heavy display weight */
+.theme-dark .hero-h1,
+.theme-dark .display-heading,
+.theme-dark .display-lg,
+.theme-dark .display-md,
+.theme-dark h1, .theme-dark h2, .theme-dark h3 { font-weight: 500; }
+.theme-dark .h1-gold { font-style: italic; color: var(--gold); }
+
+/* Squared CTAs read more gallery than the pill */
+.theme-dark .btn { border-radius: 3px; }
+
+/* The brand-marquee logos are dark-on-light artwork; sit them on a light chip
+   so they stay legible on the dark canvas. */
+.theme-dark .marquee-logo {
+  background: #F4F1E9;
+  border-radius: 6px;
+  padding: 10px 14px;
+  box-sizing: content-box;
+}
+
+/* ── Custom circle+dot cursor (recovered from the ln-experiment) ───────────── */
+@media (hover: hover) and (pointer: fine) {
+  .theme-dark, .theme-dark a, .theme-dark button, .theme-dark [role="button"], .theme-dark .btn { cursor: none; }
+}
+.cursor-dot {
+  position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 10000; will-change: transform;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+  border: 1.5px solid rgba(242, 184, 56, 0.60); border-radius: 50%;
+  pointer-events: none; z-index: 9999; will-change: transform;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.cursor-ring.is-hover {
+  width: 56px; height: 56px;
+  background: rgba(242, 184, 56, 0.08); border-color: rgba(242, 184, 56, 0.40);
+}
+.cursor-ring.is-hidden { opacity: 0; }
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+  .theme-dark { cursor: auto !important; }
+}
+
+/* Recommendation band uses var(--paper) (not in the token set), so it fell back
+   to hardcoded cream. Give it a dark surface; its text already uses --ink/--gold. */
+.theme-dark .rec-section { background: var(--surface); }
