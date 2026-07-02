@@ -27,9 +27,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="assets/portfolio.css">
+<link rel="stylesheet" href="assets/home-bold.css">
 
 <style>
   /* Inline layout fallback — guarantees nav clearance even if a cached
@@ -46,9 +47,13 @@
 
 <script>document.documentElement.classList.add('js');</script>
 </head>
-<body class="pf">
+<body class="pf theme-bold">
 
 <a href="#main" class="skip-link">Skip to content</a>
+
+<!-- Custom circle+dot cursor -->
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
 
 <!-- ── NAVIGATION ─────────────────────────────────────────── -->
 <nav class="nav scrolled" id="nav" role="navigation" aria-label="Primary navigation">
@@ -199,5 +204,6 @@
 </footer>
 
 <script src="assets/portfolio.js" defer></script>
+<script src="assets/cursor.js" defer></script>
 </body>
 </html>
