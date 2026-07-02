@@ -5,21 +5,21 @@
 
 /* ── CUSTOM PROPERTIES ─────────────────────────────────────── */
 :root {
-  --gold:       #C4922A;
-  --gold-pale:  #FDF8F0;
-  --gold-mid:   #F0E6D0;
-  --gold-warm:  #F5F0E8;
-  --gold-dark:  #A07820;
-  --bg:         #FAFAF8;
+  --gold:       #1C5551;
+  --gold-pale:  #F1F6F4;
+  --gold-mid:   #CFE0DC;
+  --gold-warm:  #EAF1EE;
+  --gold-dark:  #123F3C;
+  --bg:         #F6F6F3;
   --ink:        #0A0A0A;
-  --ink-mid:    #6B6B6B;
+  --ink-mid:    #5C5C57;
   --surface:    #FFFFFF;
-  --divider:    #E8E4DC;
+  --divider:    #E3E4DF;
   --dark-bg:    #0A0A0A;
   --dark-text:  #FAFAF8;
 
-  --ff-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --ff-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --ff-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --shadow-card:  0 2px 20px rgba(0,0,0,0.06);
   --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
@@ -617,7 +617,7 @@ body.menu-open { overflow: hidden; }
 .hero-ink-vid {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: 62% center;
-  filter: sepia(0.32) saturate(1.32) hue-rotate(-12deg) brightness(1.02) contrast(1.04);
+  filter: grayscale(1) brightness(1.03) contrast(1.02);
   mix-blend-mode: multiply;
 }
 @media (prefers-reduced-motion: reduce) { .hero-ink { display: none; } }
@@ -2113,4 +2113,35 @@ html.js .rec-item.active .rec-meta { transition-delay: 0.92s; }
   font-size: clamp(1.05rem, 1.45vw, 1.25rem);
   line-height: 1.65;
   color: var(--ink);
+}
+
+
+/* ═══ RESKIN TEST (branch: reskin-test) — squared CTAs + circle-dot cursor ═══ */
+.btn { border-radius: 3px; }
+
+/* Custom circle+dot cursor (recovered from the ln-experiment), retinted to the accent.
+   Only on precise-pointer devices; hidden for touch and reduced-motion. */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  a, button, [role="button"], .btn { cursor: none; }
+}
+.cursor-dot {
+  position: fixed; top: 0; left: 0; width: 8px; height: 8px;
+  background: var(--gold); border-radius: 50%;
+  pointer-events: none; z-index: 10000; will-change: transform;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0; width: 40px; height: 40px;
+  border: 1.5px solid rgba(28, 85, 81, 0.60); border-radius: 50%;
+  pointer-events: none; z-index: 9999; will-change: transform;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+.cursor-ring.is-hover {
+  width: 56px; height: 56px;
+  background: rgba(28, 85, 81, 0.07); border-color: rgba(28, 85, 81, 0.35);
+}
+.cursor-ring.is-hidden { opacity: 0; }
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+  body { cursor: auto !important; }
 }
