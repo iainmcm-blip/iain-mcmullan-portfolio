@@ -52,6 +52,47 @@
 .cat-chip-count { display: inline-block; margin-left: 0.4rem; font-size: 0.72rem; opacity: 0.7; }
 .case-card.case-hide { display: none; }
 .cat-empty { text-align: center; color: var(--ink-mid); font-size: 0.95rem; margin: 1rem 0 2rem; display: none; }
+
+/* ── Asymmetric work grid (bento) ─────────────────────────── */
+.bento { display:grid; grid-template-columns:repeat(6,1fr); grid-auto-rows:200px; gap:1.25rem; }
+.btile { position:relative; overflow:hidden; display:flex; align-items:flex-end; background:var(--ink); border:1px solid var(--divider); }
+.btile img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .55s cubic-bezier(.22,1,.36,1); }
+.btile:hover img { transform:scale(1.05); }
+.btile::after { content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(14,14,12,0.82) 0%, rgba(14,14,12,0.25) 45%, rgba(14,14,12,0) 70%); }
+.btile-body { position:relative; z-index:2; padding:1.2rem 1.3rem; color:var(--bg); width:100%; }
+.btile-metric { font-family:var(--ff-display); font-weight:800; line-height:0.95; color:var(--gold); display:block; }
+.btile-label { display:block; font-size:0.78rem; color:rgba(251,250,247,0.82); margin:0.2rem 0 0.5rem; }
+.btile-title { font-family:var(--ff-display); font-weight:700; color:var(--bg); line-height:1.1; }
+.btile-sector { display:inline-block; margin-top:0.5rem; font-size:0.72rem; letter-spacing:0.03em; color:rgba(251,250,247,0.75); border:1px solid rgba(251,250,247,0.32); padding:0.2rem 0.6rem; border-radius:var(--radius-pill); }
+.btile-hero { grid-column:span 3; grid-row:span 2; }
+.btile-wide { grid-column:span 3; }
+.btile-md   { grid-column:span 2; }
+.btile-band { grid-column:span 6; align-items:center; }
+.btile-hero .btile-metric { font-size:clamp(44px,5vw,64px); }
+.btile-hero .btile-title  { font-size:clamp(24px,2.4vw,32px); }
+.btile-wide .btile-metric { font-size:clamp(30px,3vw,42px); }
+.btile-wide .btile-title  { font-size:clamp(20px,1.8vw,24px); }
+.btile-md .btile-metric   { font-size:clamp(26px,2.4vw,34px); }
+.btile-md .btile-title    { font-size:clamp(17px,1.5vw,20px); }
+.btile-band .btile-metric { font-size:clamp(34px,3.4vw,48px); }
+.btile-band .btile-title  { font-size:clamp(22px,2vw,28px); }
+.btile.case-hide { display:none; }
+/* Filtered view: reset spans so the subset reflows evenly with no gaps. */
+.bento.is-filtered .btile { grid-column:span 3 !important; grid-row:span 1 !important; }
+.bento.is-filtered .btile-metric { font-size:clamp(30px,3vw,42px); }
+.bento.is-filtered .btile-title  { font-size:clamp(20px,1.8vw,24px); }
+@media (max-width:900px){
+  .bento { grid-template-columns:repeat(2,1fr); grid-auto-rows:180px; }
+  .btile-hero { grid-column:span 2; grid-row:span 2; }
+  .btile-wide, .btile-band { grid-column:span 2; }
+  .btile-md { grid-column:span 1; }
+  .bento.is-filtered .btile { grid-column:span 2 !important; }
+}
+@media (max-width:560px){
+  .bento { grid-template-columns:1fr; grid-auto-rows:220px; }
+  .btile-hero, .btile-wide, .btile-md, .btile-band { grid-column:span 1; grid-row:span 1; }
+  .bento.is-filtered .btile { grid-column:span 1 !important; }
+}
 </style>
 </head>
 <body class="theme-bold">
@@ -106,175 +147,105 @@
   <section class="case-studies">
     <div class="container">
 
-      <div class="case-grid">
+      <div class="bento">
 
-        <a href="case-studies/emirates-skywards-tier-advancement.html" class="case-card case-card--contain reveal" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/skywards-tiers-overlap.png" alt="Emirates Skywards tiers — Blue, Silver, Gold and Platinum" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Loyalty</span>
-            <h3 class="case-title">Emirates Skywards Tier Advancement</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Incentivise members close to the next tier to make the jump.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Loyalty marketing and CRM lead.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>USD 2M+ in incremental revenue.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/emirates-skywards-tier-advancement.html" class="btile btile-hero" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
+          <img src="assets/img/skywards-tiers-overlap.png" alt="Emirates Skywards tier coins: Blue, Silver, Gold and Platinum" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">USD 2M+</span>
+            <span class="btile-label">incremental revenue</span>
+            <span class="btile-title">Emirates Skywards Tier Advancement</span>
+            <span class="btile-sector">Loyalty</span>
           </div>
         </a>
 
-        <a href="case-studies/malaysia-airlines.html" class="case-card reveal" data-cat="branding" aria-label="Malaysia Airlines case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines This is Malaysian hospitality brand campaign" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Branding</span>
-            <h3 class="case-title">Malaysia Airlines: This is Malaysian hospitality</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Shift a national carrier's story from service to soul.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Project Director and lead strategist, agency-side owner.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>Bronze, Kancil Awards 2023.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/ahc-skincare.html" class="btile btile-wide" data-cat="social-pr" aria-label="AHC Skincare: SEA expansion case study">
+          <img src="assets/img/ahc-index.jpg" alt="AHC Peony Bright skincare range" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">4%&#8594;22%</span>
+            <span class="btile-label">ecommerce share, four markets</span>
+            <span class="btile-title">AHC Skincare: SEA expansion</span>
+            <span class="btile-sector">Social / PR</span>
           </div>
         </a>
 
-        <a href="case-studies/emirates-flight-training-academy.html" class="case-card reveal" data-cat="branding" aria-label="Emirates Flight Training Academy case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy exterior" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Branding</span>
-            <h3 class="case-title">Emirates Flight Training Academy</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Launch a new aviation academy brand, mid-construction.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Client-side lead, from agency pitch to VP sign-off.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>100% of the first cohort filled in under two months.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/hilton-asia-conference.html" class="btile btile-wide" data-cat="event" aria-label="Hilton APAC GM and Commercial Conference case study">
+          <img src="assets/img/hilton-plenary.jpg" alt="Hilton Asia GM and Commercial Conference plenary" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">92%</span>
+            <span class="btile-label">delegate engagement, a record</span>
+            <span class="btile-title">Hilton APAC GM and Commercial Conference</span>
+            <span class="btile-sector">Event</span>
           </div>
         </a>
 
-        <a href="case-studies/emirates-pilot-recruitment.html" class="case-card reveal" data-cat="recruitment" aria-label="Emirates Pilot Recruitment case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates Adventure Awaits pilot recruitment campaign" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Employer Brand</span>
-            <h3 class="case-title">Emirates Pilot Recruitment</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Attract a more diverse global generation of pilots.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Campaign and production lead.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>Global recruitment platform and three pilot films.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/ntuc-my-first-skool.html" class="btile btile-md" data-cat="integrated" aria-label="NTUC My First Skool: site and campaign case study">
+          <img src="assets/img/ntuc-children.jpg" alt="Two children playing, NTUC My First Skool campaign" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">+39%</span>
+            <span class="btile-label">child registrations in four months</span>
+            <span class="btile-title">NTUC My First Skool: site and campaign</span>
+            <span class="btile-sector">Integrated Campaign</span>
           </div>
         </a>
 
-        <a href="case-studies/emirates-skywards-my-family.html" class="case-card reveal" data-cat="loyalty" aria-label="Emirates Skywards My Family case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/skywards-my-family-photo.jpg" alt="Emirates Skywards My Family loyalty feature" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Loyalty</span>
-            <h3 class="case-title">Emirates Skywards: My Family</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Let Skywards members pool and share Miles across a family.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Project and digital marketing lead.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>Shipped end to end, still live today.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/casillero-del-diablo.html" class="btile btile-md" data-cat="social-pr" aria-label="Casillero del Diablo: Legendary Pairings case study">
+          <img src="assets/img/casillero-del-diablo-card.jpg" alt="Casillero del Diablo Carmenere bottle" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">+23%</span>
+            <span class="btile-label">online sales</span>
+            <span class="btile-title">Casillero del Diablo: Legendary Pairings</span>
+            <span class="btile-sector">Social / PR</span>
           </div>
         </a>
 
-        <a href="case-studies/uob-gallery.html" class="case-card reveal" data-cat="branding" aria-label="UOB Gallery case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery commemorative brand experience" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Branding</span>
-            <h3 class="case-title">The UOB Gallery</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Tell ninety years of UOB heritage as a public brand experience.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Strategy and communications lead.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>'Right By You: The UOB Story' opened on time, March 2025.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/emirates-flight-training-academy.html" class="btile btile-md" data-cat="branding" aria-label="Emirates Flight Training Academy case study">
+          <img src="assets/img/emirates-academy.jpg" alt="Emirates Flight Training Academy" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">100%</span>
+            <span class="btile-label">first cohort filled in under two months</span>
+            <span class="btile-title">Emirates Flight Training Academy</span>
+            <span class="btile-sector">Branding</span>
           </div>
         </a>
 
-        <a href="case-studies/hilton-asia-conference.html" class="case-card reveal" data-cat="event" aria-label="Hilton APAC Conference case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/hilton-plenary.jpg" alt="Hilton Asia GM Commercial Conference plenary" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Event</span>
-            <h3 class="case-title">Hilton APAC GM &amp; Commercial Conference</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Align 1,400 regional leaders around commercial momentum.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Led strategy, comms architecture and the delegate experience.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>Record 92% engagement score.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/malaysia-airlines.html" class="btile btile-md" data-cat="branding" aria-label="Malaysia Airlines: This is Malaysian hospitality case study">
+          <img src="assets/img/malaysia-airlines.jpg" alt="Malaysia Airlines aircraft in flight" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">Bronze</span>
+            <span class="btile-label">Kancil Awards 2023</span>
+            <span class="btile-title">Malaysia Airlines: This is Malaysian hospitality</span>
+            <span class="btile-sector">Branding</span>
           </div>
         </a>
 
-        <a href="case-studies/casillero-del-diablo.html" class="case-card reveal" data-cat="social-pr" aria-label="Casillero del Diablo case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/casillero-del-diablo-card.jpg" alt="Casillero del Diablo Carmenere bottle — Legendary Pairings campaign" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Social / PR</span>
-            <h3 class="case-title">Casillero del Diablo: Legendary Pairings</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Make a Chilean wine brand relevant to Singapore's hawker culture.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Led the team that conceived the localisation strategy.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>23% increase in online sales.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/emirates-pilot-recruitment.html" class="btile btile-md" data-cat="recruitment" aria-label="Emirates Pilot Recruitment case study">
+          <img src="assets/img/emirates-pilot-adventure-awaits.png" alt="Emirates pilot, Adventure Awaits recruitment campaign" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">3 films</span>
+            <span class="btile-label">global recruitment platform</span>
+            <span class="btile-title">Emirates Pilot Recruitment</span>
+            <span class="btile-sector">Employer Brand</span>
           </div>
         </a>
 
-        <a href="case-studies/ntuc-my-first-skool.html" class="case-card reveal" data-cat="integrated" aria-label="NTUC My First Skool case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/ntuc-children.jpg" alt="Two children playing — NTUC My First Skool integrated campaign and site rebuild" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Integrated Campaign</span>
-            <h3 class="case-title">NTUC My First Skool: site &amp; campaign</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Rebuild the site and drive Singapore-wide enrolment in parallel.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Project owner, client liaison and copywriter.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>+39% child registrations in 4 months.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/emirates-skywards-my-family.html" class="btile btile-md" data-cat="loyalty" aria-label="Emirates Skywards: My Family case study">
+          <img src="assets/img/skywards-my-family-photo.jpg" alt="Family at sunset, Emirates Skywards My Family" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">Live</span>
+            <span class="btile-label">shipped end to end, still live</span>
+            <span class="btile-title">Emirates Skywards: My Family</span>
+            <span class="btile-sector">Loyalty</span>
           </div>
         </a>
 
-        <a href="case-studies/ahc-skincare.html" class="case-card reveal" data-cat="social-pr" aria-label="AHC Skincare SEA expansion case study">
-          <div class="case-img-wrap">
-            <img src="assets/img/ahc-index.jpg" alt="AHC Peony Bright skincare range on a marble surface" loading="lazy">
-            <div class="case-img-overlay"><span class="case-overlay-text">Read case study &rarr;</span></div>
-          </div>
-          <div class="case-body">
-            <span class="case-tag">Social Media / PR</span>
-            <h3 class="case-title">AHC Skincare: SEA expansion</h3>
-            <div class="case-prr">
-              <div class="case-prr-row"><span class="case-prr-k">Problem</span><span class="case-prr-v">Translate Korea's #1 skincare brand into Southeast Asia ecommerce traction.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Role</span><span class="case-prr-v">Senior strategic lead and client principal.</span></div>
-              <div class="case-prr-row"><span class="case-prr-k">Result</span><span class="case-prr-v"><strong>Ecommerce share grew from 4% to 22% across 4 markets.</strong></span></div>
-            </div>
-            <span class="case-arrow">Read case study <span aria-hidden="true">&rarr;</span></span>
+        <a href="case-studies/uob-gallery.html" class="btile btile-band" data-cat="branding" aria-label="The UOB Gallery case study">
+          <img src="assets/img/uob-gallery.jpg" alt="The UOB Gallery exhibition space" loading="lazy">
+          <div class="btile-body">
+            <span class="btile-metric">90 yrs</span>
+            <span class="btile-label">of heritage, opened on time</span>
+            <span class="btile-title">The UOB Gallery</span>
+            <span class="btile-sector">Branding</span>
           </div>
         </a>
 
@@ -307,15 +278,15 @@
 <script src="assets/portfolio.js" defer></script>
 <script src="assets/cursor.js" defer></script>
 
-<!-- Case-grid sector filter — progressive enhancement: built in JS so no
-     dead controls appear without JS. Cards carry data-cat attributes that
+<!-- Sector filter, progressive enhancement: built in JS so no
+     dead controls appear without JS. Tiles carry data-cat attributes that
      map to the chip labels below. -->
 <script>
 (function () {
   'use strict';
-  var grid = document.querySelector('.case-grid');
+  var grid = document.querySelector('.bento');
   if (!grid) return;
-  var cards = Array.prototype.slice.call(grid.querySelectorAll('.case-card'));
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.btile'));
 
   var CATS = [
     { key: 'all',         label: 'All' },
@@ -363,6 +334,7 @@
 
   function apply(cat) {
     active = cat;
+    grid.classList.toggle('is-filtered', cat !== 'all');
     chips.forEach(function (ch) {
       var on = ch.dataset.cat === cat;
       ch.classList.toggle('active', on);
