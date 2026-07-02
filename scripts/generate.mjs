@@ -18,7 +18,7 @@
  */
 import { createClient } from '@sanity/client';
 import { toHTML } from '@portabletext/to-html';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -312,6 +312,66 @@ async function main() {
     console.log('Wrote skills.html (from skillsPage).');
   } else {
     console.log('No skillsPage found — skills.html left as-is.');
+  }
+
+  // 5) portfolio.html — featured pair + results index, from case studies.
+  // Two entries with featured=true become the large cards (in drag order);
+  // the rest fill the index (in drag order). Safe fallback: if fewer than two
+  // case studies exist, leave the hand-authored markup so a build never blanks
+  // the page.
+  const cases = await client.fetch(`*[_type=="caseStudy" && defined(metric) && defined(slug.current)]|order(orderRank asc){
+    title, "slug":slug.current, featured, containImage, metric, metricLabel, category, role,
+    "alt":cardImage.alt, "imgUrl":cardImage.asset->url
+  }`);
+  if (cases.length < 2) {
+    console.warn(`! Only ${cases.length} case study(ies) in Sanity; leaving portfolio.html static.`);
+  } else {
+    // Card image displayed on the card. Kept in original format (the Skywards
+    // coins are a transparent PNG), cached immutably like the hero images.
+    mkdirSync(resolve(SITE, 'assets/img/case-studies'), { recursive: true });
+    const extOf = (u) => (String(u).match(/\.(png|jpe?g|webp)/i) || [, 'jpg'])[1].toLowerCase().replace('jpeg', 'jpg');
+    for (const c of cases) {
+      if (!c.imgUrl) { console.warn(`  ! ${c.slug}: no card image`); continue; }
+      const e = extOf(c.imgUrl);
+      const buf = Buffer.from(await (await fetch(c.imgUrl)).arrayBuffer());
+      writeFileSync(resolve(SITE, 'assets/img/case-studies', c.slug + '.' + e), buf);
+      c._img = `assets/img/case-studies/${c.slug}.${e}`;
+    }
+    // Sector key -> the tag shown on the card.
+    const SECTOR = { loyalty: 'Loyalty', branding: 'Branding', integrated: 'Integrated Campaign', event: 'Event', 'social-pr': 'Social / PR', recruitment: 'Employer Brand' };
+    // Colour the operators (+ % arrow) in the result number; other glyphs stay ink.
+    const wrapOps = (m) => esc(m).replace(/(\+|%|→|&gt;|&rarr;)/g, '<span class="mop">$1</span>');
+    const sector = (c) => esc(SECTOR[c.category] || c.category || '');
+
+    const featured = cases.filter((c) => c.featured).slice(0, 2);
+    const featSlugs = new Set(featured.map((c) => c.slug));
+    const index = cases.filter((c) => !featSlugs.has(c.slug));
+
+    const featHtml = featured.map((c) => `        <a href="case-studies/${c.slug}.html" class="feat-card${c.containImage ? ' feat-card--contain' : ''}" data-cat="${escAttr(c.category)}" aria-label="${escAttr(c.title)} case study">
+          <div class="feat-img"><img src="${escAttr(c._img || '')}" alt="${escAttr(c.alt || c.title)}" loading="lazy"></div>
+          <div class="feat-body">
+            <span class="feat-metric">${wrapOps(c.metric)}</span>
+            <span class="feat-metric-label">${esc(c.metricLabel || '')}</span>
+            <h3 class="feat-title">${esc(c.title)}</h3>
+            <p class="feat-meta"><span class="feat-sector">${sector(c)}</span> &middot; ${esc(c.role || '')}</p>
+          </div>
+        </a>`).join('\n\n');
+
+    const idxHtml = index.map((c) => `        <a href="case-studies/${c.slug}.html" class="idx-row" data-cat="${escAttr(c.category)}" aria-label="${escAttr(c.title)} case study">
+          <span class="idx-metric">${wrapOps(c.metric)}</span>
+          <div class="idx-main"><h4 class="idx-title">${esc(c.title)}</h4><p class="idx-sub">${esc(c.metricLabel || '')} &middot; ${esc(c.role || '')}</p></div>
+          <span class="idx-right"><span class="idx-sector">${sector(c)}</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
+        </a>`).join('\n\n');
+
+    const workInner =
+      '\n\n        <div class="feat-row">\n\n' + featHtml + '\n\n        </div>\n\n' +
+      '        <p class="idx-head">The full index</p>\n\n' +
+      '        <div class="work-index">\n\n' + idxHtml + '\n\n        </div>';
+
+    let pf = readFileSync(resolve(SITE, 'portfolio.html'), 'utf8');
+    pf = replaceBetween(pf, '<div class="work">', '\n\n      </div>\n\n      <a href="index.html" class="pf-back"', workInner, 'portfolio work');
+    writeFileSync(resolve(SITE, 'portfolio.html'), pf);
+    console.log(`Wrote portfolio.html (${featured.length} featured, ${index.length} index).`);
   }
 
   console.log('\nDone. Sync to staging, verify, then push.\n');
