@@ -133,3 +133,8 @@ body.theme-bold {
 .theme-bold .bestfit-label,
 .theme-bold .tl-k,
 .theme-bold .cs-eyebrow { letter-spacing: 0.1em; }
+
+/* Residual discipline: skill-teaser index numbers + "see the full range" links
+   were pale/dark amber; make them black so yellow stays reserved. */
+.theme-bold .skill-teaser-num { color: var(--ink); }
+.theme-bold .skill-teaser-link { color: var(--ink); }
