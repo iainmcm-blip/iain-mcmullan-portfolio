@@ -379,18 +379,22 @@ body.menu-open::before {
   .reveal {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: blur(6px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .reveal.active { opacity: 1; transform: translateY(0); }
+  .reveal.active { opacity: 1; transform: translateY(0); filter: blur(0); }
 
   .reveal-left {
     opacity: 0;
     transform: translateX(-30px);
-    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    filter: blur(6px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .reveal-left.active { opacity: 1; transform: translateX(0); }
+  .reveal-left.active { opacity: 1; transform: translateX(0); filter: blur(0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-left { opacity: 1; transform: none; }
@@ -711,6 +715,27 @@ body.menu-open::before {
 /* hero 'Start a conversation' outline border tinted to the ink yellow */
 #hero-cta-outline { border-color: #F0B62E; }
 #hero-cta-outline:hover { border-color: #F0B62E; color: var(--gold-dark); }
+
+/* periodic gold sheen sweeping across the CTA */
+@media (prefers-reduced-motion: no-preference) {
+  #hero-cta-outline {
+    position: relative;
+    overflow: hidden;
+  }
+  #hero-cta-outline::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 -60%;
+    width: 40%;
+    background: linear-gradient(105deg, transparent, rgba(240, 182, 46, 0.25), transparent);
+    animation: cta-shimmer 3.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes cta-shimmer {
+    0%        { transform: skewX(-20deg) translateX(0); }
+    60%, 100% { transform: skewX(-20deg) translateX(450%); }
+  }
+}
 
 /* ── best-fit roles strip ── */
 .bestfit { background: var(--surface); border-top: 1px solid var(--divider); border-bottom: 1px solid var(--divider); padding: 1.05rem 0; }
