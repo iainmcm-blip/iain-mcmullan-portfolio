@@ -630,6 +630,16 @@ body.menu-open { overflow: hidden; }
   from { opacity: 0; transform: translateX(14%); }
   to   { opacity: 1; transform: translateX(0); }
 }
+/* Mobile: the ink layer is full-bleed, so the sideways slide would push it off
+   the right edge (horizontal scroll) and end too opaque over the text. Fade only,
+   settling at the intended 0.5 veil so the hero copy stays legible. */
+@media (prefers-reduced-motion: no-preference) and (max-width: 900px) {
+  .hero-ink { animation-name: heroInkFadeMobile; }
+}
+@keyframes heroInkFadeMobile {
+  from { opacity: 0; transform: none; }
+  to   { opacity: 0.5; transform: none; }
+}
 .hero-vignette {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background: radial-gradient(125% 95% at 36% 36%, transparent 56%, rgba(58,40,10,0.10) 100%);
