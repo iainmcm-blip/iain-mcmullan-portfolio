@@ -247,72 +247,14 @@ async function main() {
   writeFileSync(resolve(SITE, 'recommendations.html'), recPage);
   console.log(`Wrote recommendations.html (${recs.length} recommendations).`);
 
-  // 5) skills.html — the Capabilities page, from the skillsPage singleton
-  const sk = await client.fetch(`*[_id=="skillsPage"][0]{
-    eyebrow, heading, intro, introBold, hint, footerLine,
-    outcomes[]{ text, highlight },
-    categories[]{ title, skills[]{ name, proof, caseStudyUrl } }
-  }`);
-  if (sk && sk.categories && sk.categories.length) {
-    const boldFirst = (s, phrase) => {
-      const e = esc(s || '');
-      if (!phrase) return e;
-      const p = esc(phrase);
-      const i = e.indexOf(p);
-      return i === -1 ? e : e.slice(0, i) + '<strong>' + p + '</strong>' + e.slice(i + p.length);
-    };
-    const slug = (t) => String(t || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    const pad = (n) => String(n).padStart(2, '0');
-
-    const header =
-      '\n    <span class="section-label sk-fade">' + esc(sk.eyebrow || '') + '</span>' +
-      '\n    <h1 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">' + esc(sk.heading || '') + '</h1>' +
-      '\n    <p class="sk-intro sk-fade" style="animation-delay:0.1s">' + boldFirst(sk.intro, sk.introBold) + '</p>' +
-      '\n    <ul class="sk-outcomes sk-fade" style="animation-delay:0.15s" aria-label="What I do">' +
-      (sk.outcomes || []).map((o) => '\n      <li>' + boldFirst(o.text, o.highlight) + '</li>').join('') +
-      '\n    </ul>' +
-      '\n    <p class="sk-hint sk-fade" style="animation-delay:0.18s">' + esc(sk.hint || '') + '</p>' +
-      '\n    ';
-
-    const menu = '\n\n' + sk.categories.map((c, ci) => {
-      const head =
-        '        <div class="sk-group" id="' + slug(c.title) + '">' +
-        '\n          <p class="sk-group-label"><span class="n">' + pad(ci + 1) + '</span><span class="t">' + esc(c.title) + '</span></p>';
-      const rows = (c.skills || []).map((s) => {
-        const href = s.caseStudyUrl ? ' data-href="' + escAttr(s.caseStudyUrl) + '"' : '';
-        const link = s.caseStudyUrl ? '<a class="sk-item-link" href="' + escAttr(s.caseStudyUrl) + '">See the work &rarr;</a>' : '';
-        return '\n          <div class="sk-item" data-cat="' + escAttr(c.title) + '" data-name="' + escAttr(s.name) + '"' + href + '>' +
-          '\n            <button class="sk-item-btn" type="button" aria-expanded="false">' + esc(s.name) + '<span class="sk-chev" aria-hidden="true">+</span></button>' +
-          '\n            <div class="sk-item-panel"><div class="sk-item-panel-inner"><p class="sk-item-proof">' + esc(s.proof) + '</p>' + link + '</div></div>' +
-          '\n          </div>';
-      }).join('');
-      return head + rows + '\n        </div>';
-    }).join('\n\n') + '\n\n        ';
-
-    const c0 = sk.categories[0];
-    const s0 = (c0.skills || [])[0] || {};
-    const sLink = s0.caseStudyUrl
-      ? '<a class="sk-spot-link" href="' + escAttr(s0.caseStudyUrl) + '">See the work <span aria-hidden="true">&rarr;</span></a>'
-      : '<a class="sk-spot-link" href="#" hidden>See the work <span aria-hidden="true">&rarr;</span></a>';
-    const spot =
-      '\n          <span class="sk-spot-cat">' + esc(c0.title) + '</span>' +
-      '\n          <h2 class="sk-spot-name">' + esc(s0.name || '') + '</h2>' +
-      '\n          <p class="sk-spot-proof">' + esc(s0.proof || '') + '</p>' +
-      '\n          ' + sLink +
-      '\n          ';
-
-    const foot = '<p class="sk-foot-line">' + esc(sk.footerLine || '') + '</p>';
-
-    let skp = readFileSync(resolve(SITE, 'skills.html'), 'utf8');
-    skp = replaceBetween(skp, '<!--SKGEN:header:start-->', '<!--SKGEN:header:end-->', header, 'skills header');
-    skp = replaceBetween(skp, '<!--SKGEN:menu:start-->', '<!--SKGEN:menu:end-->', menu, 'skills menu');
-    skp = replaceBetween(skp, '<!--SKGEN:spot:start-->', '<!--SKGEN:spot:end-->', spot, 'skills spotlight');
-    skp = replaceBetween(skp, '<!--SKGEN:foot:start-->', '<!--SKGEN:foot:end-->', foot, 'skills foot');
-    writeFileSync(resolve(SITE, 'skills.html'), skp);
-    console.log('Wrote skills.html (from skillsPage).');
-  } else {
-    console.log('No skillsPage found — skills.html left as-is.');
-  }
+  // ponytail: skills.html generation from the Sanity `skillsPage` singleton was
+  // removed here (2026-07-03) — the page is now a hand-authored six-cluster
+  // rebuild sourced from Iain's resumes, not the old category/skill list this
+  // singleton described. Leaving the generator wired up would silently
+  // overwrite that rebuild with the old hover-menu markup on the next build.
+  // Full generator code: git log -p -- scripts/generate.mjs (before this commit).
+  // Re-enable only after updating both the Sanity schema and the templates below
+  // to match the new cluster structure.
 
   // 5) portfolio.html — featured pair + results index, from case studies.
   // Two entries with featured=true become the large cards (in drag order);
