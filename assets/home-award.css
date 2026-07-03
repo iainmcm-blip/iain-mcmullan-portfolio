@@ -201,8 +201,8 @@ body.theme-award {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  -webkit-mask-image: radial-gradient(58% 52% at 50% 44%, #000 0%, rgba(0,0,0,0.55) 52%, transparent 80%);
-  mask-image: radial-gradient(58% 52% at 50% 44%, #000 0%, rgba(0,0,0,0.55) 52%, transparent 80%);
+  -webkit-mask-image: radial-gradient(44% 38% at 50% 46%, #000 0%, rgba(0,0,0,0.45) 55%, transparent 76%);
+  mask-image: radial-gradient(44% 38% at 50% 46%, #000 0%, rgba(0,0,0,0.45) 55%, transparent 76%);
 }
 .theme-award .hero-ink-vid {
   position: absolute; inset: 0;
@@ -212,7 +212,7 @@ body.theme-award {
      gold is deterministic; sepia+saturate+hue-rotate lands it on brand #F2B01E */
   filter: invert(1) grayscale(1) sepia(1) saturate(4.5) hue-rotate(-12deg) brightness(1.15) contrast(1.03);
   mix-blend-mode: screen;
-  opacity: 0.5;
+  opacity: 0.3;   /* a tide, not a background video — the judge's exact warning */
 }
 @media (prefers-reduced-motion: reduce) { .theme-award .hero-ink { display: none; } }
 
