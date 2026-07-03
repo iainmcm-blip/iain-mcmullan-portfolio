@@ -475,15 +475,19 @@ body.theme-award {
 }
 .theme-award .marquee-logo:hover { filter: grayscale(0); opacity: 1; }
 /* Emirates and EFTA keep their original box shape rather than being extracted to
-   a boxless mark — box recoloured to the page cream, script to ink grey, baked
-   into the asset (emirates-logo-neutral.png, efta-neutral.svg). Already flat and
-   page-matched, so grayscale/multiply/hover-colour would only work against it —
-   multiplying an opaque cream box by the cream page darkens it slightly instead
-   of leaving it invisible. */
+   a boxless mark — box recoloured, script to ink grey, baked into the asset
+   (emirates-logo-neutral.png, efta-neutral.svg). First pass recoloured the box
+   to the exact page cream (#F6F2E8) so it would "blend seamlessly" — instead it
+   made the box functionally invisible, which reads as no box at all, the thing
+   Iain explicitly said not to do. Fixed to solid white with a hairline outline,
+   the same "visible light chip" language every other card on the site already
+   uses against the cream ground. Already flat and pre-coloured, so
+   grayscale/multiply/hover-colour would only work against it. */
 .theme-award .marquee-logo[alt="Emirates"],
 .theme-award .marquee-logo[alt="Emirates Flight Training Academy"] {
   filter: none;
   mix-blend-mode: normal;
+  box-shadow: 0 0 0 1px var(--divider);
 }
 .theme-award .marquee-logo[alt="Emirates"]:hover,
 .theme-award .marquee-logo[alt="Emirates Flight Training Academy"]:hover {
