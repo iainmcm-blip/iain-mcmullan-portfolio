@@ -1,0 +1,708 @@
+/* ═══ THE COVER — award homepage (body.theme-award) ═══════════════════════════
+   The homepage as the cover of a monograph: warm ink ground, cream Garamond
+   type, the site's gold carried over as the single accent. Inner pages stay
+   light — the contrast is the point. Paper "spreads" open mid-scroll wherever
+   the book metaphor (or a white-background logo) wants light.
+   Loaded only on index.html; every rule scoped to .theme-award.
+
+   Palette
+   --------------------------------------------
+   ink ground   #14110B   warm near-black, brown cast (cover cloth)
+   ink raised   #1C1810   card surfaces on dark
+   paper        #F6F2E8   cream for the open-book bands
+   cream        #EFE9DA   type on dark (soft, bookish — not white)
+   cream dim    #A79E8B   secondary text on dark
+   gold         #F2B01E   inherited brand accent
+   gold bright  #E9B949   gold as text on dark (legibility lift)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+body.theme-award {
+  --bg:         #14110B;
+  --ink:        #EFE9DA;
+  --ink-mid:    #A79E8B;
+  --surface:    #1C1810;
+  --divider:    rgba(240, 230, 210, 0.13);
+  --gold:       #F2B01E;
+  --gold-dark:  #E9B949;   /* on dark ground the "text gold" must brighten, not deepen */
+  --gold-mid:   rgba(242, 176, 30, 0.30);
+  --gold-warm:  #191510;   /* sections that used the light tint go raised-dark */
+  --gold-pale:  #17130D;
+  --paper:      #F6F2E8;
+  --shadow-card: 0 1px 0 rgba(240,230,210,0.05);
+  --shadow-hover: 0 10px 34px rgba(0,0,0,0.5);
+  --ff-display: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --ff-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-util:    'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ── Paper spreads — the book opens. Re-scoping the tokens lets every existing
+     component inherit the right ink with no per-component overrides. ───────── */
+.theme-award #position,
+.theme-award #profile,
+.theme-award #brands,
+.theme-award .rec-section,
+.theme-award #credentials,
+.theme-award #off-the-clock {
+  --bg:         #F6F2E8;
+  --ink:        #14110B;
+  --ink-mid:    #57503F;
+  --surface:    #FFFFFF;
+  --divider:    #E3DCC9;
+  --gold-dark:  #8A6300;
+  --gold-mid:   #EAD9A8;
+  --gold-warm:  #F0E9D6;
+  --gold-pale:  #F3EDDD;
+  --shadow-card: 0 1px 2px rgba(20,17,11,0.06), 0 8px 24px rgba(20,17,11,0.05);
+  --shadow-hover: 0 12px 32px rgba(20,17,11,0.10);
+  background: var(--bg);
+  color: var(--ink);
+}
+/* Adjacent paper sections read as one open spread — a single hairline seam */
+.theme-award #profile { border-top: 1px solid var(--divider); }
+.theme-award #off-the-clock { border-top: 1px solid var(--divider); }
+
+/* ═══ TYPE — Garamond carries the page ═══════════════════════════════════════ */
+.theme-award .display-heading,
+.theme-award .display-lg,
+.theme-award .display-md {
+  font-family: var(--ff-display);
+  font-weight: 550;
+  letter-spacing: -0.012em;
+  line-height: 1.06;
+  color: var(--ink);
+}
+.theme-award .display-lg { font-size: clamp(2.4rem, 5vw, 4.1rem); }
+.theme-award .display-md { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+
+/* Folio-style eyebrows: small caps with a gold en-rule */
+.theme-award .section-label {
+  font-family: var(--ff-util);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.theme-award .section-label::before {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: var(--gold);
+  flex: none;
+}
+.theme-award .section-intro { color: var(--ink-mid); }
+
+/* ═══ NAV ════════════════════════════════════════════════════════════════════ */
+.theme-award .nav {
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  box-shadow: none;
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+.theme-award .nav.scrolled {
+  background: rgba(20, 17, 11, 0.88);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom-color: var(--divider);
+}
+.theme-award .nav-brand {
+  font-family: var(--ff-util);
+  color: var(--ink);
+  font-weight: 700;
+}
+.theme-award .nav-links a { color: var(--ink-mid); }
+.theme-award .nav-links a:hover,
+.theme-award .nav-links a.active { color: var(--ink); }
+.theme-award .nav-links a::after { background: var(--gold); }
+.theme-award .nav-avail { color: var(--ink-mid); border-color: var(--divider); }
+.theme-award .nav-hamburger span { background: var(--ink); }
+
+.theme-award .mobile-menu { background: #14110B; }
+.theme-award .mobile-menu a { color: var(--ink); border-bottom-color: var(--divider); }
+
+.theme-award .skip-link { background: var(--gold); color: #14110B; }
+
+/* ═══ CURSOR — ring and dot, gold on ink ═════════════════════════════════════ */
+@media (hover: hover) and (pointer: fine) {
+  .theme-award, .theme-award a, .theme-award button,
+  .theme-award [role="button"], .theme-award .btn { cursor: none; }
+}
+/* Hidden until the mouse actually enters the page (cursor.js drives position) */
+.theme-award .cursor-dot {
+  position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--gold);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.theme-award .cursor-ring {
+  position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid rgba(242, 176, 30, 0.5);
+  opacity: 0;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, opacity 0.3s ease;
+}
+.theme-award:hover .cursor-dot { opacity: 1; }
+.theme-award:hover .cursor-ring { opacity: 1; }
+.theme-award .cursor-ring.is-hidden { opacity: 0; }
+.theme-award .cursor-ring.is-hover {
+  width: 58px; height: 58px;
+  border-color: rgba(242, 176, 30, 0.9);
+}
+@media (hover: none), (pointer: coarse) {
+  .theme-award .cursor-dot, .theme-award .cursor-ring { display: none; }
+}
+
+/* ═══ BUTTONS — squared, deliberate ══════════════════════════════════════════ */
+.theme-award .btn { border-radius: 2px; font-weight: 600; font-family: var(--ff-util); }
+.theme-award .btn-gold {
+  background: var(--gold); color: #14110B; border: 1.5px solid var(--gold);
+}
+.theme-award .btn-gold:hover {
+  background: transparent; color: var(--gold); border-color: var(--gold);
+}
+.theme-award .btn-outline {
+  border: 1.5px solid rgba(240, 230, 210, 0.4); color: var(--ink); background: transparent;
+}
+.theme-award .btn-outline:hover {
+  border-color: var(--gold); color: var(--gold); background: transparent;
+}
+.theme-award .btn-gold-dark {
+  background: var(--gold); color: #14110B; border: 1.5px solid var(--gold);
+  border-radius: 2px; font-family: var(--ff-util); font-weight: 600;
+}
+.theme-award .btn-gold-dark:hover { background: transparent; color: var(--gold); }
+
+/* ═══ HERO — the title page ══════════════════════════════════════════════════
+   Centred, framed by a single hairline plate-edge, type-led. The ink video of
+   the bold theme is retired; the ground is the design. */
+.theme-award .hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+.theme-award .hero-ink, .theme-award .hero-vignette { display: none; }
+
+/* A slow gold bloom behind the title — ink catching light, nothing literal */
+.theme-award .hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(52% 44% at 50% 12%, rgba(242, 176, 30, 0.10), transparent 68%),
+    radial-gradient(40% 34% at 82% 86%, rgba(242, 176, 30, 0.05), transparent 70%);
+  pointer-events: none;
+}
+/* The plate edge: one hairline frame inset from the viewport */
+.theme-award .hero::after {
+  content: "";
+  position: absolute; inset: clamp(14px, 2.2vw, 28px);
+  border: 1px solid rgba(240, 230, 210, 0.14);
+  pointer-events: none;
+}
+
+.theme-award .hero-grid { display: block; }
+.theme-award .hero-left {
+  max-width: 940px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 6rem 1rem 3.5rem;
+}
+
+/* Masthead: the name set like a spine stamp */
+.theme-award .hero-name {
+  font-family: var(--ff-util);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.theme-award .hero-name .hero-rule { display: none; }
+.theme-award .hero-name::before,
+.theme-award .hero-name::after {
+  content: "";
+  width: 2.4rem; height: 1px;
+  background: var(--gold);
+  opacity: 0.85;
+}
+
+.theme-award .hero-h1 {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  font-size: clamp(2.3rem, 4.6vw, 4.1rem);
+  line-height: 1.14;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin: 1.8rem auto 0;
+  max-width: 21ch;          /* forces both phrases to break into two balanced lines */
+}
+.theme-award .h1-line { display: block; text-wrap: balance; }
+.theme-award .h1-gold { color: var(--gold-dark); font-style: italic; }
+.theme-award .h1-gold .h1-word { padding-right: 0.04em; } /* italic overshoot room */
+
+/* Subtitle beneath the title, as a title page sets it */
+.theme-award .hero-class {
+  font-family: var(--ff-body);
+  font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+  line-height: 1.65;
+  color: var(--ink-mid);
+  max-width: 620px;
+  margin: 1.5rem auto 0;
+}
+.theme-award .hero-role {
+  font-family: var(--ff-util);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  margin-top: 1.6rem;
+}
+.theme-award .hero-ctas {
+  justify-content: center;
+  margin-top: 1.9rem;
+}
+.theme-award .hero-scroll-hint {
+  margin-top: 2.2rem;
+  color: var(--ink-mid);
+  font-family: var(--ff-util);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ═══ BEST-FIT — the subjects line inside the cover ══════════════════════════ */
+.theme-award .bestfit {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+  padding: 1.15rem 0;
+}
+.theme-award .bestfit-label {
+  font-family: var(--ff-util);
+  color: var(--ink-mid);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+.theme-award .bestfit-list li { color: var(--ink); }
+.theme-award .bestfit-list li::before { background: var(--gold); }
+
+/* ═══ THROUGHLINE — proof tabs on ink ════════════════════════════════════════ */
+.theme-award .tl-wrap { background: var(--bg); }
+.theme-award .tl-tab {
+  font-family: var(--ff-util);
+  background: transparent;
+  border: 1px solid var(--divider);
+  border-radius: 2px;
+  color: var(--ink-mid);
+}
+.theme-award .tl-tab:hover { color: var(--ink); border-color: rgba(240,230,210,0.35); }
+.theme-award .tl-tab[aria-selected="true"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #14110B;
+}
+.theme-award .tl-panel { border-color: var(--divider); }
+.theme-award .tl-panel-label { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .tl-k { color: var(--ink-mid); font-family: var(--ff-util); }
+.theme-award .tl-v { color: var(--ink); }
+.theme-award .tl-v strong { color: var(--gold-dark); font-weight: 600; }
+.theme-award .tl-link { color: var(--gold-dark); }
+.theme-award .tl-link:hover { color: var(--gold); }
+.theme-award .tl-proof { border-color: var(--divider); background: var(--surface); }
+.theme-award .tl-verdict-label { color: var(--ink-mid); font-family: var(--ff-util); }
+.theme-award .tl-fig {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  color: var(--gold-dark);
+}
+.theme-award .tl-fig-cap { color: var(--ink-mid); }
+
+/* ═══ POV — the first page you open ══════════════════════════════════════════
+   Full-height paper spread. The thesis, set like an epigraph. */
+.theme-award .pov-wrap {
+  min-height: 82vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0;
+}
+.theme-award .pov-inner { text-align: center; max-width: 880px; margin: 0 auto; }
+.theme-award .pov-headline {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2.7rem, 6vw, 5rem);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 1.4rem;
+}
+.theme-award .pov-body {
+  max-width: 560px;
+  margin: 2rem auto 0;
+  color: var(--ink-mid);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ═══ ABOUT — the portrait plate on paper ════════════════════════════════════ */
+.theme-award .about { background: var(--bg); }
+.theme-award .about-ink { display: none; }
+.theme-award .about-portrait-frame {
+  border-radius: 0;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--divider);
+  padding: 10px;               /* the mount around a plate */
+  background: var(--surface);
+}
+.theme-award .about-portrait-frame img { border-radius: 0; display: block; }
+.theme-award .about-h2 { color: var(--ink); }
+.theme-award .about-body { color: var(--ink-mid); }
+.theme-award .about-avail { color: var(--ink-mid); }
+
+/* ═══ SKILLS — three hairline columns on ink ═════════════════════════════════ */
+.theme-award .skills { background: var(--bg); }
+.theme-award .skill-teaser {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  padding-top: 1.6rem;
+  transition: border-color 0.3s ease;
+}
+.theme-award .skill-teaser:hover {
+  transform: none;
+  box-shadow: none;
+  border-top-color: var(--gold);
+}
+.theme-award .skill-teaser-num {
+  font-family: var(--ff-display);
+  font-style: italic;
+  color: var(--gold-dark);
+  font-size: 1rem;
+}
+.theme-award .skill-teaser-title { color: var(--ink); font-family: var(--ff-display); font-weight: 550; font-size: 1.45rem; }
+.theme-award .skill-teaser-desc { color: var(--ink-mid); }
+.theme-award .skill-teaser-link { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .skill-teaser:hover .skill-teaser-link { color: var(--gold); }
+
+/* ═══ BRANDS — logos on paper, held to one tone ══════════════════════════════ */
+.theme-award #brands { --surface: #F6F2E8; }   /* the inline bg reads var(--surface); keep it paper, not white */
+.theme-award .brands { padding: 3.4rem 0; }
+.theme-award .marquee-logo {
+  filter: grayscale(1);
+  opacity: 0.72;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+.theme-award .marquee-logo:hover { filter: grayscale(0); opacity: 1; }
+
+/* ═══ THE PLATES — signature: case studies as stacked plates ═════════════════
+   Each plate is position:sticky; the next slides over the last like plates
+   turned in a monograph. CSS-native — no JS required for the core effect. */
+.theme-award .plates { background: var(--bg); padding: 6rem 0 4rem; }
+.theme-award .plates-head { max-width: 720px; margin-bottom: 4rem; }
+
+.theme-award .plates-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+.theme-award .plate {
+  position: sticky;
+  top: clamp(78px, 10vh, 110px);
+}
+.theme-award .plate-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  min-height: min(66vh, 620px);
+  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.45);
+  transition: border-color 0.35s ease;
+}
+.theme-award .plate-inner:hover { border-color: var(--gold-mid); }
+
+.theme-award .plate-media { position: relative; overflow: hidden; }
+.theme-award .plate-media img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.theme-award .plate-inner:hover .plate-media img { transform: scale(1.035); }
+
+.theme-award .plate-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.8rem, 3.5vw, 3.4rem);
+  gap: 0.9rem;
+}
+.theme-award .plate-no {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gold-dark);
+}
+.theme-award .plate-tag {
+  font-family: var(--ff-util);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+}
+.theme-award .plate-title {
+  font-family: var(--ff-display);
+  font-weight: 550;
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0.1rem 0;
+}
+.theme-award .plate-fig {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 500;
+  color: var(--gold-dark);
+  line-height: 1;
+  margin-top: 0.4rem;
+}
+.theme-award .plate-note {
+  color: var(--ink-mid);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 34ch;
+}
+.theme-award .plate-cta {
+  font-family: var(--ff-util);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-dark);
+  margin-top: 0.8rem;
+  transition: color 0.3s ease;
+}
+.theme-award .plate-inner:hover .plate-cta { color: var(--gold); }
+
+.theme-award .case-viewall {
+  color: var(--gold-dark);
+  font-family: var(--ff-util);
+  display: inline-block;
+  margin-top: 4rem;
+}
+.theme-award .case-viewall:hover { color: var(--gold); }
+
+/* ═══ BY THE NUMBERS — Garamond numerals on ink ══════════════════════════════ */
+.theme-award .impact { background: var(--bg); border-top: 1px solid var(--divider); }
+.theme-award .stat-cell {
+  background: transparent;
+  border: none;
+  border-left: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  padding-left: 1.4rem;
+}
+.theme-award .impact-number {
+  font-family: var(--ff-display);
+  font-weight: 500;
+  color: var(--ink);
+}
+.theme-award .impact-number .suffix { color: var(--gold-dark); }
+.theme-award .impact-label { color: var(--ink-mid); }
+
+/* ═══ CAREER STRIP ═══════════════════════════════════════════════════════════ */
+.theme-award .career-row {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+  border-bottom: 1px solid var(--divider);
+}
+.theme-award .career-row-link { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .career-row-link:hover { color: var(--gold); }
+.theme-award .career-node-logo {
+  background: #FFFFFF;          /* the logos are printed things; give them paper chips */
+  border: 1px solid var(--divider);
+  border-radius: 2px;
+  box-shadow: none;
+}
+.theme-award .career-node-link:hover .career-node-logo,
+.theme-award .career-node-link:focus-visible .career-node-logo { border-color: var(--gold); }
+.theme-award .career-node-pop {
+  background: var(--surface);
+  border-color: var(--divider);
+  border-radius: 2px;
+  box-shadow: var(--shadow-hover);
+}
+.theme-award .career-node-role { color: var(--ink); }
+.theme-award .career-node-years { color: var(--ink-mid); }
+.theme-award .career-strip::before { background: var(--divider); }
+
+/* ═══ RECOMMENDATION — the pull-quote spread on paper ════════════════════════ */
+.theme-award .rec-section { padding: 6.5rem 0; }
+.theme-award .rec-mark {
+  color: var(--gold);
+  font-family: var(--ff-display);
+}
+.theme-award .rec-blockquote {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+  line-height: 1.3;
+  color: var(--ink);
+}
+.theme-award .rec-name { color: var(--ink); font-family: var(--ff-util); }
+.theme-award .rec-role, .theme-award .rec-note { color: var(--ink-mid); }
+.theme-award .rec-more { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .rec-more:hover { color: var(--gold); }
+
+/* ═══ PERSPECTIVES ═══════════════════════════════════════════════════════════ */
+.theme-award .perspectives { background: var(--bg); }
+.theme-award .persp-card {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color 0.35s ease, transform 0.35s ease;
+}
+.theme-award .persp-card:hover {
+  border-color: var(--gold-mid);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+.theme-award .persp-art { border-radius: 0; }
+.theme-award .persp-blob { display: none; }        /* the paper-theme blobs muddy on ink */
+.theme-award .persp-tag { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .persp-title { color: var(--ink); font-family: var(--ff-display); font-weight: 550; }
+.theme-award .persp-text { color: var(--ink-mid); }
+.theme-award .persp-readfull { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .persp-readfull:hover { color: var(--gold); }
+.theme-award .persp-readmore { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .persp-readmore:hover { color: var(--gold); }
+.theme-award .persp-pull blockquote {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--ink);
+}
+.theme-award .persp-pull .char { color: inherit; }
+
+/* ═══ LEADERSHIP — hairline grid, quiet ══════════════════════════════════════ */
+.theme-award .leadership { background: var(--bg); border-top: 1px solid var(--divider); }
+.theme-award .principle-card {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--divider);
+  border-radius: 0;
+  box-shadow: none;
+  padding-top: 1.6rem;
+  transition: border-color 0.3s ease;
+}
+.theme-award .principle-card:hover { transform: none; box-shadow: none; border-top-color: var(--gold); }
+.theme-award .principle-icon { color: var(--gold-dark); }
+.theme-award .principle-title { color: var(--ink); font-family: var(--ff-display); font-weight: 550; font-size: 1.3rem; }
+.theme-award .principle-desc { color: var(--ink-mid); }
+
+/* ═══ CREDENTIALS — paper spread ═════════════════════════════════════════════ */
+.theme-award .credentials { border-top: 1px solid rgba(240,230,210,0.13); }
+.theme-award .cred-card {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: 2px;
+  box-shadow: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.theme-award .cred-card:hover { border-color: var(--gold-mid); transform: translateY(-3px); }
+.theme-award .cred-qual { color: var(--gold-dark); font-family: var(--ff-display); font-style: italic; }
+.theme-award .cred-name { color: var(--ink); }
+.theme-award .cred-inst { color: var(--ink-mid); }
+.theme-award .courses-heading { color: var(--ink); font-family: var(--ff-display); font-weight: 550; }
+
+/* ═══ OFF THE CLOCK — paper, with a mounted photograph ═══════════════════════ */
+.theme-award .offclock { background: var(--bg); }
+.theme-award .offclock-media img {
+  border-radius: 0;
+  border: 1px solid var(--divider);
+  padding: 10px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.theme-award .offclock-lead, .theme-award .offclock-body { color: var(--ink-mid); }
+.theme-award .offclock-lead { color: var(--ink); }
+.theme-award .offclock-link { color: var(--gold-dark); font-family: var(--ff-util); }
+.theme-award .offclock-link:hover { color: var(--gold); }
+
+/* ═══ CONTACT — the back cover ═══════════════════════════════════════════════ */
+.theme-award .contact {
+  background: var(--bg);
+  border-top: 1px solid var(--divider);
+  position: relative;
+  overflow: hidden;
+}
+.theme-award .contact::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(46% 42% at 50% 100%, rgba(242, 176, 30, 0.09), transparent 70%);
+  pointer-events: none;
+}
+.theme-award .contact-inner { position: relative; }
+.theme-award .contact-heading {
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3rem, 7vw, 5.6rem);
+  color: var(--ink);
+}
+.theme-award .contact-sub { color: var(--ink-mid); }
+
+/* ═══ FOOTER ═════════════════════════════════════════════════════════════════ */
+.theme-award .footer { background: #0E0B07; border-top: 1px solid var(--divider); }
+.theme-award .footer-brand { color: var(--ink); font-family: var(--ff-display); font-weight: 550; }
+.theme-award .footer-links a { color: var(--ink-mid); }
+.theme-award .footer-links a:hover { color: var(--gold); }
+.theme-award .footer-copy, .theme-award .footer-privacy { color: var(--ink-mid); }
+
+/* ═══ AVAILABILITY DOT — gold pulse everywhere ═══════════════════════════════ */
+.theme-award .avail-dot span:first-child { background: var(--gold); }
+.theme-award .avail-dot span:last-child { background: var(--gold); }
+
+/* ═══ ACCESSIBILITY FLOOR ════════════════════════════════════════════════════ */
+.theme-award :focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-award .plate-media img,
+  .theme-award .persp-card,
+  .theme-award .cred-card { transition: none; }
+}
+
+/* ═══ RESPONSIVE ═════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .theme-award .plate-inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .theme-award .plate-media { aspect-ratio: 16 / 10; position: relative; }
+  .theme-award .plate { position: static; }   /* stacking off on small screens; plates read as cards */
+  .theme-award .plates-stack { gap: 2rem; }
+  .theme-award .hero-left { padding-top: 6rem; }
+  .theme-award .hero::after { inset: 10px; }
+  .theme-award .pov-wrap { min-height: 0; padding: 5rem 0; }
+}
