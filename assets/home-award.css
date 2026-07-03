@@ -30,7 +30,7 @@ body.theme-award {
   --paper:      #F6F2E8;
   --shadow-card: 0 1px 0 rgba(240,230,210,0.05);
   --shadow-hover: 0 10px 34px rgba(0,0,0,0.5);
-  --ff-display: 'EB Garamond', Georgia, 'Times New Roman', serif;
+  --ff-display: 'Zodiak', Georgia, 'Times New Roman', serif;
   --ff-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --ff-util:    'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
@@ -68,7 +68,7 @@ body.theme-award {
 .theme-award .display-lg,
 .theme-award .display-md {
   font-family: var(--ff-display);
-  font-weight: 550;
+  font-weight: 400;
   letter-spacing: -0.012em;
   line-height: 1.06;
   color: var(--ink);
@@ -239,7 +239,7 @@ body.theme-award {
 
 .theme-award .hero-h1 {
   font-family: var(--ff-display);
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(2.3rem, 4.6vw, 4.1rem);
   line-height: 1.14;
   letter-spacing: -0.012em;
@@ -248,8 +248,7 @@ body.theme-award {
   max-width: 21ch;          /* forces both phrases to break into two balanced lines */
 }
 .theme-award .h1-line { display: block; text-wrap: balance; }
-.theme-award .h1-gold { color: var(--gold-dark); font-style: italic; }
-.theme-award .h1-gold .h1-word { padding-right: 0.04em; } /* italic overshoot room */
+.theme-award .h1-gold { color: inherit; font-style: normal; }  /* one voice, one colour — the writing carries the emphasis */
 
 /* Subtitle beneath the title, as a title page sets it */
 .theme-award .hero-class {
@@ -326,7 +325,7 @@ body.theme-award {
 .theme-award .tl-verdict-label { color: var(--ink-mid); font-family: var(--ff-util); }
 .theme-award .tl-fig {
   font-family: var(--ff-display);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--gold-dark);
 }
 .theme-award .tl-fig-cap { color: var(--ink-mid); }
@@ -343,7 +342,7 @@ body.theme-award {
 .theme-award .pov-headline {
   font-family: var(--ff-display);
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(2.7rem, 6vw, 5rem);
   letter-spacing: -0.01em;
   color: var(--ink);
@@ -394,7 +393,7 @@ body.theme-award {
   color: var(--gold-dark);
   font-size: 1rem;
 }
-.theme-award .skill-teaser-title { color: var(--ink); font-family: var(--ff-display); font-weight: 550; font-size: 1.45rem; }
+.theme-award .skill-teaser-title { color: var(--ink); font-family: var(--ff-display); font-weight: 400; font-size: 1.45rem; }
 .theme-award .skill-teaser-desc { color: var(--ink-mid); }
 .theme-award .skill-teaser-link { color: var(--gold-dark); font-family: var(--ff-util); }
 .theme-award .skill-teaser:hover .skill-teaser-link { color: var(--gold); }
@@ -470,7 +469,7 @@ body.theme-award {
 }
 .theme-award .plate-title {
   font-family: var(--ff-display);
-  font-weight: 550;
+  font-weight: 400;
   font-size: clamp(1.7rem, 3vw, 2.6rem);
   line-height: 1.1;
   color: var(--ink);
@@ -479,7 +478,7 @@ body.theme-award {
 .theme-award .plate-fig {
   font-family: var(--ff-display);
   font-size: clamp(2rem, 3.4vw, 3rem);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--gold-dark);
   line-height: 1;
   margin-top: 0.4rem;
@@ -520,7 +519,7 @@ body.theme-award {
 }
 .theme-award .impact-number {
   font-family: var(--ff-display);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink);
 }
 .theme-award .impact-number .suffix { color: var(--gold-dark); }
@@ -561,7 +560,7 @@ body.theme-award {
 .theme-award .rec-blockquote {
   font-family: var(--ff-display);
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(1.6rem, 3.2vw, 2.6rem);
   line-height: 1.3;
   color: var(--ink);
@@ -588,7 +587,7 @@ body.theme-award {
 .theme-award .persp-art { border-radius: 0; }
 .theme-award .persp-blob { display: none; }        /* the paper-theme blobs muddy on ink */
 .theme-award .persp-tag { color: var(--gold-dark); font-family: var(--ff-util); }
-.theme-award .persp-title { color: var(--ink); font-family: var(--ff-display); font-weight: 550; }
+.theme-award .persp-title { color: var(--ink); font-family: var(--ff-display); font-weight: 400; }
 .theme-award .persp-text { color: var(--ink-mid); }
 .theme-award .persp-readfull { color: var(--gold-dark); font-family: var(--ff-util); }
 .theme-award .persp-readfull:hover { color: var(--gold); }
@@ -597,7 +596,7 @@ body.theme-award {
 .theme-award .persp-pull blockquote {
   font-family: var(--ff-display);
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--ink);
 }
 .theme-award .persp-pull .char { color: inherit; }
@@ -615,7 +614,7 @@ body.theme-award {
 }
 .theme-award .principle-card:hover { transform: none; box-shadow: none; border-top-color: var(--gold); }
 .theme-award .principle-icon { color: var(--gold-dark); }
-.theme-award .principle-title { color: var(--ink); font-family: var(--ff-display); font-weight: 550; font-size: 1.3rem; }
+.theme-award .principle-title { color: var(--ink); font-family: var(--ff-display); font-weight: 400; font-size: 1.3rem; }
 .theme-award .principle-desc { color: var(--ink-mid); }
 
 /* ═══ CREDENTIALS — paper spread ═════════════════════════════════════════════ */
@@ -631,7 +630,7 @@ body.theme-award {
 .theme-award .cred-qual { color: var(--gold-dark); font-family: var(--ff-display); font-style: italic; }
 .theme-award .cred-name { color: var(--ink); }
 .theme-award .cred-inst { color: var(--ink-mid); }
-.theme-award .courses-heading { color: var(--ink); font-family: var(--ff-display); font-weight: 550; }
+.theme-award .courses-heading { color: var(--ink); font-family: var(--ff-display); font-weight: 400; }
 
 /* ═══ OFF THE CLOCK — paper, with a mounted photograph ═══════════════════════ */
 .theme-award .offclock { background: var(--bg); }
@@ -663,8 +662,7 @@ body.theme-award {
 .theme-award .contact-inner { position: relative; }
 .theme-award .contact-heading {
   font-family: var(--ff-display);
-  font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(3rem, 7vw, 5.6rem);
   color: var(--ink);
 }
@@ -672,7 +670,7 @@ body.theme-award {
 
 /* ═══ FOOTER ═════════════════════════════════════════════════════════════════ */
 .theme-award .footer { background: #0E0B07; border-top: 1px solid var(--divider); }
-.theme-award .footer-brand { color: var(--ink); font-family: var(--ff-display); font-weight: 550; }
+.theme-award .footer-brand { color: var(--ink); font-family: var(--ff-display); font-weight: 400; }
 .theme-award .footer-links a { color: var(--ink-mid); }
 .theme-award .footer-links a:hover { color: var(--gold); }
 .theme-award .footer-copy, .theme-award .footer-privacy { color: var(--ink-mid); }
