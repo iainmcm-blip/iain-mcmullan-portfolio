@@ -4,9 +4,9 @@ Read this first, then check `~/.claude/projects/-Users-iain-Desktop-Motion-Senso
 
 ## Headline state
 
-Home, Skills, and Experience have been **completely redesigned and are on staging only**, branch `home-award`, HEAD at commit `e7e0515`. This is a full identity change from the site's previous look: warm-ink dark ground replacing cream/black/yellow, a licensed serif (Zodiak) replacing Archivo as the display face. **Not merged to `main`. Production is untouched.** `main` is a fast-forward ancestor of `home-award`, so merging is a clean `git merge` whenever Iain gives the go-ahead — no conflicts to resolve.
+Home, Skills, Experience, and Portfolio have been **completely redesigned and are on staging only**, branch `home-award`. This is a full identity change from the site's previous look: warm-ink dark ground replacing cream/black/yellow, a licensed serif (Zodiak) replacing Archivo as the display face. **Not merged to `main`. Production is untouched.** `main` is a fast-forward ancestor of `home-award`, so merging is a clean `git merge` whenever Iain gives the go-ahead — no conflicts to resolve.
 
-Six pages are **not** part of this redesign and still run the old `theme-bold` system: `portfolio.html`, `perspectives.html`, `lets-talk.html`, `recommendations.html`, `privacy.html`, `404.html`. Nobody has asked for those yet — don't assume it's wanted, ask first.
+Five pages are **not** part of this redesign and still run the old `theme-bold` system: `perspectives.html`, `lets-talk.html`, `recommendations.html`, `privacy.html`, `404.html`. Nobody has asked for those yet — don't assume it's wanted, ask first. (portfolio.html joined the redesign on 3 July 2026: rethemed as "The catalogue" — featured plate pair, metric-led index rows with a cursor-trailing image peek, recruiter-facing end-cap CTA. Its generate.mjs step was removed the same way skills.html's was — see below — so **portfolio.html is also hand-authored now, not Sanity-driven**.)
 
 ## The design journey this session (so you don't re-litigate)
 
@@ -50,7 +50,7 @@ A third lesson came from a two-pass logo fix, worth internalising for any future
 1. **Merge decision.** `home-award` is staged and fast-forward-safe against `main`. Merging is Iain's call, not a default next action.
 2. **Accordion behaviour on Experience** (flagged, not actioned): currently single-open, meaning comparing two roles means closing one to open the other. Worth considering expanded-by-default on desktop with a collapse affordance, kept as an accordion on mobile.
 3. **Scroll-hold JS on Experience** (flagged, not actioned): the open/close handler re-scrolls every animation frame to hold the clicked header in place during the height transition. Works, but a `scroll-margin-top` + one `scrollIntoView` call would do the same job in far less code.
-4. **Six inner pages still on the old theme** (`portfolio.html`, `perspectives.html`, `lets-talk.html`, `recommendations.html`, `privacy.html`, `404.html`) — not requested yet.
+4. **Five inner pages still on the old theme** (`perspectives.html`, `lets-talk.html`, `recommendations.html`, `privacy.html`, `404.html`) — not requested yet.
 
 ## Decisions that stay made (do NOT re-litigate)
 
