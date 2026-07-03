@@ -188,24 +188,74 @@ body.theme-award {
   background: var(--bg);
   overflow: hidden;
 }
-.theme-award .hero-ink, .theme-award .hero-vignette { display: none; }
+.theme-award .hero-vignette { display: none; }
+
+/* ── INK TIDE ── the brand's gold-ink asset, brought back but restrained:
+   the source is ink-on-white (the bold theme multiplied it onto paper), so on
+   this near-black ground we invert it to light, recolour to brand gold, screen
+   it onto the ground, and feather it to a whisper that pools behind the title
+   and vanishes before the plate frame. Not a background video — a tide. */
+.theme-award .hero-ink {
+  display: block;
+  position: absolute; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(58% 52% at 50% 44%, #000 0%, rgba(0,0,0,0.55) 52%, transparent 80%);
+  mask-image: radial-gradient(58% 52% at 50% 44%, #000 0%, rgba(0,0,0,0.55) 52%, transparent 80%);
+}
+.theme-award .hero-ink-vid {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* invert -> light ink on black; grayscale neutralises the source hue so the
+     gold is deterministic; sepia+saturate+hue-rotate lands it on brand #F2B01E */
+  filter: invert(1) grayscale(1) sepia(1) saturate(4.5) hue-rotate(-12deg) brightness(1.15) contrast(1.03);
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: reduce) { .theme-award .hero-ink { display: none; } }
 
 /* A slow gold bloom behind the title — ink catching light, nothing literal */
 .theme-award .hero::before {
   content: "";
   position: absolute; inset: 0;
+  z-index: 0;
   background:
     radial-gradient(52% 44% at 50% 12%, rgba(242, 176, 30, 0.10), transparent 68%),
     radial-gradient(40% 34% at 82% 86%, rgba(242, 176, 30, 0.05), transparent 70%);
   pointer-events: none;
 }
-/* The plate edge: one hairline frame inset from the viewport */
+/* The plate edge: one hairline frame inset from the viewport, with fine gold
+   registration ticks at the corners — the intaglio/colophon cue of a plate. */
 .theme-award .hero::after {
   content: "";
   position: absolute; inset: clamp(14px, 2.2vw, 28px);
+  z-index: 3;
   border: 1px solid rgba(240, 230, 210, 0.14);
   pointer-events: none;
 }
+.theme-award .hero-frame-ticks {
+  position: absolute; inset: clamp(14px, 2.2vw, 28px);
+  z-index: 3;
+  pointer-events: none;
+  --tick: 16px;
+  --tc: rgba(242, 176, 30, 0.55);
+  background:
+    linear-gradient(var(--tc),var(--tc)) left  top    / var(--tick) 1px no-repeat,
+    linear-gradient(var(--tc),var(--tc)) left  top    / 1px var(--tick) no-repeat,
+    linear-gradient(var(--tc),var(--tc)) right top    / var(--tick) 1px no-repeat,
+    linear-gradient(var(--tc),var(--tc)) right top    / 1px var(--tick) no-repeat,
+    linear-gradient(var(--tc),var(--tc)) left  bottom / var(--tick) 1px no-repeat,
+    linear-gradient(var(--tc),var(--tc)) left  bottom / 1px var(--tick) no-repeat,
+    linear-gradient(var(--tc),var(--tc)) right bottom / var(--tick) 1px no-repeat,
+    linear-gradient(var(--tc),var(--tc)) right bottom / 1px var(--tick) no-repeat;
+}
+/* Text sits above the ink, bloom and frame */
+.theme-award .hero-left { position: relative; z-index: 2; }
+/* Grain on the dark cover: multiply is invisible on near-black; soft-light gives
+   the ground the tooth of uncoated stock without greying the gold. */
+.theme-award .grain { mix-blend-mode: soft-light; opacity: 0.08; }
 
 .theme-award .hero-grid { display: block; }
 .theme-award .hero-left {
@@ -317,7 +367,16 @@ body.theme-award {
 .theme-award .tl-panel { border-color: var(--divider); }
 .theme-award .tl-panel-label { color: var(--gold-dark); font-family: var(--ff-util); }
 .theme-award .tl-k { color: var(--ink-mid); font-family: var(--ff-util); }
-.theme-award .tl-v { color: var(--ink); }
+/* Step body copy is prose, not display — pull it out of the Zodiak/34px/700
+   inheritance into the calm body sans so the section reads as an argument. */
+.theme-award .tl-v {
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 1.08rem;
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0;
+}
 .theme-award .tl-v strong { color: var(--gold-dark); font-weight: 600; }
 .theme-award .tl-link { color: var(--gold-dark); }
 .theme-award .tl-link:hover { color: var(--gold); }
@@ -401,9 +460,13 @@ body.theme-award {
 /* ═══ BRANDS — logos on paper, held to one tone ══════════════════════════════ */
 .theme-award #brands { --surface: #F6F2E8; }   /* the inline bg reads var(--surface); keep it paper, not white */
 .theme-award .brands { padding: 3.4rem 0; }
+/* Logos sit on the cream band. multiply drops each JPG's white box into the
+   paper (white × cream = cream) while dark ink stays — no per-file editing.
+   Safe here because every marquee mark is dark/coloured ink, none light. */
 .theme-award .marquee-logo {
   filter: grayscale(1);
-  opacity: 0.72;
+  opacity: 0.8;
+  mix-blend-mode: multiply;
   transition: filter 0.3s ease, opacity 0.3s ease;
 }
 .theme-award .marquee-logo:hover { filter: grayscale(0); opacity: 1; }
@@ -445,6 +508,9 @@ body.theme-award {
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .theme-award .plate-inner:hover .plate-media img { transform: scale(1.035); }
+/* Adventure Awaits: pilot sits left, Emirates blocks hug the right edge — bias
+   the cover-crop right so both logos survive; only left tarmac is sacrificed. */
+.theme-award .plate-media img[src*="adventure-awaits"] { object-position: right center; }
 
 .theme-award .plate-info {
   display: flex;
