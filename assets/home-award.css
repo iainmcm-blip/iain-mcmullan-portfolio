@@ -258,7 +258,7 @@ body.theme-award {
   line-height: 1.65;
   color: var(--ink-mid);
   max-width: 620px;
-  margin: 1.5rem auto 0;
+  margin: 2.3rem auto 0;   /* clear the italic descenders of the title's last line */
 }
 .theme-award .hero-role {
   font-family: var(--ff-util);
