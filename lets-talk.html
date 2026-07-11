@@ -29,7 +29,7 @@
 <link rel="stylesheet" href="assets/portfolio.css">
 <link rel="stylesheet" href="assets/home-bold.css">
 <!-- Calendly widget assets — loads the embed CSS and JS used by the
-     "Book a 20-min intro call" popup on this page. -->
+     "Book a 30-min intro call" popup on this page. -->
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>document.documentElement.classList.add('js');</script>
@@ -130,6 +130,7 @@
 
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mobile-menu-avail"><span class="avail-dot" aria-hidden="true"><span></span><span></span></span>Open to in-house roles</div>
   <a href="skills.html">Skills</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="experience.html">Experience</a>
@@ -199,7 +200,7 @@
         <!-- Calendly primary CTA — opens the booking widget in a popup. -->
         <button type="button" class="btn-gold-dark" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/iainmcm/30min'});return false;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Book a 20-min intro call
+          Book a 30-min intro call
         </button>
         <!-- EMAIL: keep this address in sync with the one above -->
         <a class="btn-outline-dark" href="mailto:hello@iainmcmullan.com?subject=Let's%20talk">

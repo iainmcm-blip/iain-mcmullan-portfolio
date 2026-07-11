@@ -310,6 +310,20 @@ body.menu-open { overflow: hidden; }
   transform: translateY(0);
   opacity: 1;
 }
+.mobile-menu-avail {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: rgba(196, 146, 42, 0.10);
+  border: 1px solid rgba(196, 146, 42, 0.30);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-pill, 999px);
+  width: fit-content;
+  margin-bottom: 1.1rem;
+}
 .mobile-menu a {
   padding: 0.875rem 0;
   font-size: 1.25rem;
