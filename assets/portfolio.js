@@ -268,8 +268,14 @@
     });
   }
 
-  const showHeroWords = () =>
-    document.querySelectorAll('.h1-word').forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
+  // Failsafe / no-motion state: full ink, no offset, gold slabs fully painted.
+  // `inherit` resolves to the settled colour on both plain and .h1-gold words.
+  const showHeroWords = () => {
+    document.querySelectorAll('.h1-word').forEach(w => {
+      w.style.opacity = '1'; w.style.transform = 'none'; w.style.color = 'inherit';
+    });
+    document.querySelectorAll('.h1-gold').forEach(g => { g.style.backgroundSize = '100% 100%'; });
+  };
   const showPullChars = () =>
     document.querySelectorAll('.persp-pull .char').forEach(c => { c.style.opacity = '1'; });
 
@@ -282,15 +288,82 @@
       const hasST = typeof window.ScrollTrigger !== 'undefined';
       if (hasST) gsap.registerPlugin(ScrollTrigger);
 
-      // 1) Hero headline — each word rises from below, 0.08s stagger, after 300ms.
-      // Smaller rise on mobile so the last line never overlaps the rotating specialism line.
-      const riseY = window.matchMedia('(max-width: 900px)').matches ? 14 : 40;
-      gsap.fromTo('.h1-word', { y: riseY }, {
-        y: 0, duration: 0.75, ease: 'power3.out', stagger: 0.08, delay: 0.3,
-        onComplete: () => document.querySelectorAll('.h1-word').forEach(w => { w.style.willChange = 'auto'; })
-      });
-      // Failsafe: never let the headline stay hidden if the ticker stalls
-      setTimeout(showHeroWords, 2500);
+      // 1) Hero headline — settles one VISUAL line at a time: each line arrives
+      // pale and darkens to full ink while the next line is already arriving.
+      // The markup only has two <span class="h1-line">, so the visual lines are
+      // measured from offsetTop at runtime and the cascade follows the real text
+      // wrap at any viewport width. Then (2) the gold slabs wipe left-to-right.
+      const H1_START = 0.7;        // first line lands
+      const H1_LINE_STEP = 0.16;   // gap between consecutive lines
+      const riseY = window.matchMedia('(max-width: 900px)').matches ? 6 : 8;
+      const settleFrom =
+        (getComputedStyle(document.documentElement).getPropertyValue('--h1-settle-from') || '#C6C3BA').trim();
+
+      // Everything lives on ONE timeline so the failsafe can force it to its end
+      // state and kill it. A blind timeout is not enough here: if the rAF ticker
+      // is throttled (background tab) setTimeout still fires, and GSAP would then
+      // wake up and write its `from` values back over the top — stranding the
+      // headline pale and unreadable.
+      let heroTL = null, heroDone = false;
+
+      const finishHeroHeadline = () => {
+        heroDone = true;
+        if (heroTL) { heroTL.progress(1); heroTL.kill(); heroTL = null; }
+        showHeroWords();
+        document.querySelectorAll('.h1-word').forEach(w => { w.style.willChange = 'auto'; });
+      };
+
+      const runHeroHeadline = () => {
+        if (heroDone) return;            // failsafe already settled it — don't re-stage
+        if (!heroTL) heroTL = gsap.timeline();
+        // Wrap can shift when the webfont swaps in, so positions are anchored to
+        // page load rather than to whenever measurement actually happened.
+        const elapsed = performance.now() / 1000;
+        const at = (t) => Math.max(0, t - elapsed);
+
+        const words = Array.prototype.slice.call(document.querySelectorAll('.h1-word'));
+        const lines = [];
+        let lineTop = null;
+        words.forEach(w => {
+          const top = Math.round(w.offsetTop);
+          if (lineTop === null || Math.abs(top - lineTop) > 4) { lines.push([]); lineTop = top; }
+          lines[lines.length - 1].push(w);
+        });
+
+        lines.forEach((lineWords, i) => {
+          const startAt = at(H1_START + i * H1_LINE_STEP);
+          lineWords.forEach(w => {
+            // Target colour comes from the parent, so .h1-gold words settle to
+            // their own colour rather than the headline's.
+            const settleTo = getComputedStyle(w.parentElement).color;
+            heroTL.fromTo(w, { y: riseY, color: settleFrom }, {
+              y: 0, color: settleTo, duration: 0.45, ease: 'power2.out',
+              onComplete: () => { w.style.willChange = 'auto'; }
+            }, startAt);
+          });
+        });
+
+        // 2) Gold highlighter slabs wipe in after the last line has settled.
+        const golds = document.querySelectorAll('.h1-gold');
+        if (golds.length) {
+          heroTL.fromTo(golds, { backgroundSize: '0% 100%' }, {
+            backgroundSize: '100% 100%', duration: 0.42, ease: 'power2.inOut', stagger: 0.18
+          }, at(H1_START + lines.length * H1_LINE_STEP + 0.12));
+        }
+      };
+
+      // Measure after the webfont settles so the line grouping matches what's drawn.
+      if (document.fonts && document.fonts.ready) {
+        Promise.race([
+          document.fonts.ready,
+          new Promise(r => setTimeout(r, 600))
+        ]).then(runHeroHeadline);
+      } else {
+        runHeroHeadline();
+      }
+
+      // Failsafe: never let the headline stay pale if the ticker stalls
+      setTimeout(finishHeroHeadline, 4000);
 
       if (hasST) {
         // 2) Case-study image parallax (moves at ~0.6x within an oversized frame)

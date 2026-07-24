@@ -13,6 +13,8 @@
   --bg:         #FAFAF8;
   --ink:        #0A0A0A;
   --ink-mid:    #6B6B6B;
+  /* pale start colour for the hero headline line-settle */
+  --h1-settle-from: #C6C3BA;
   --surface:    #FFFFFF;
   --divider:    #E8E4DC;
   --dark-bg:    #0A0A0A;
@@ -478,17 +480,27 @@ body.menu-open::before {
 }
 .hero-left { position: relative; max-width: 760px; }
 
-/* Staggered entrance */
+/* Staggered entrance.
+   Sequence matches the hero reference animation: elements arrive strictly in
+   reading order and fade almost in place (6px, not 20px) — the eyebrow and
+   class line lead, the headline settles line by line (JS, see portfolio.js),
+   then the role line, the two CTAs, and finally the scroll hint. */
 @media (prefers-reduced-motion: no-preference) {
-  .hero-el { opacity: 0; transform: translateY(20px); }
-  .hero-el-1 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s  forwards; }
-  .hero-el-2 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.25s forwards; }
-  .hero-el-3 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.4s  forwards; }
-  .hero-el-4 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.55s forwards; }
-  .hero-el-5 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.7s  forwards; }
-  .hero-el-6 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 0.85s forwards; }
-  .hero-el-7 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 1.0s  forwards; }
-  .hero-el-8 { animation: heroFadeUp 0.7s cubic-bezier(0.22,1,0.36,1) 1.15s forwards; }
+  .hero-el { opacity: 0; transform: translateY(6px); }
+  .hero-el-1 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.15s forwards; }
+  .hero-el-2 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 0.45s forwards; }
+  .hero-el-3 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 1.90s forwards; }
+  .hero-el-5 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 2.05s forwards; }
+  .hero-el-6 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 2.70s forwards; }
+  .hero-el-7 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 2.85s forwards; }
+  .hero-el-8 { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 3.00s forwards; }
+
+  /* CTAs arrive one after the other, not as a block — the container itself
+     stays put and each button carries its own delay. */
+  .hero-el-4 { opacity: 1; transform: none; animation: none; }
+  .hero-ctas .btn { opacity: 0; transform: translateY(6px); }
+  .hero-ctas .btn:nth-of-type(1) { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 2.20s forwards; }
+  .hero-ctas .btn:nth-of-type(2) { animation: heroFadeUp 0.6s cubic-bezier(0.22,1,0.36,1) 2.45s forwards; }
 
   .hero-svg-wrap {
     opacity: 0;
@@ -496,11 +508,11 @@ body.menu-open::before {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-el, .hero-svg-wrap { opacity: 1; transform: none; }
+  .hero-el, .hero-svg-wrap, .hero-ctas .btn { opacity: 1; transform: none; }
 }
 
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -1428,8 +1440,8 @@ body.menu-open::before {
   }
   .hero-h1, .hero-name, .hero-word-row, .hero-bio, .hero-scroll-hint { mix-blend-mode: normal; }
   .hero-h1  { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); margin-bottom: 1.5rem; }
-  /* Smaller word-rise on mobile so 'results.' never drops onto the rotating specialism line on load */
-  .js .hero-h1 .h1-word { transform: translateY(14px); }
+  /* Smaller rise on mobile so 'results.' never drops onto the rotating specialism line on load */
+  .js .hero-h1 .h1-word { transform: translateY(6px); }
   .hero-name { color: var(--gold-dark); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.65); }
   .hero-word-row { color: var(--gold-dark); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.65); }
   .hero-bio { color: var(--ink); text-shadow: 0 1px 3px rgba(250, 248, 244, 0.7); }
@@ -1501,12 +1513,15 @@ body.menu-open::before {
    MOTION UPGRADE — GSAP-driven + ambient effects
    ═══════════════════════════════════════════════════════════════ */
 
-/* Hero headline word-rise (GSAP animates; CSS only pre-hides for JS-capable, motion-OK browsers) */
+/* Hero headline line-settle (GSAP animates; CSS only pre-stages for JS-capable,
+   motion-OK browsers). Each visual line arrives pale and darkens to full ink
+   while the next line is already arriving — grouping is measured at runtime in
+   portfolio.js so it follows the real text wrap at any width. */
 .hero-h1 .h1-line { display: block; }
-.hero-h1 .h1-word { display: inline-block; will-change: transform; }
-/* word-rise uses transform only (no opacity) so the difference-blend never strands the headline */
+.hero-h1 .h1-word { display: inline-block; will-change: transform, color; }
+/* settle uses colour + a short rise (no opacity) so the difference-blend never strands the headline */
 @media (prefers-reduced-motion: no-preference) {
-  .js .hero-h1 .h1-word { transform: translateY(40px); }
+  .js .hero-h1 .h1-word { color: var(--h1-settle-from); transform: translateY(8px); }
 }
 
 /* Ambient film grain — felt, not seen */
