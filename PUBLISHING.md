@@ -84,7 +84,10 @@ Do this only once staging is working, so the live site is never in a half-built 
 - **Name:** `Deploy live on publish`.
 - **URL:** the `publish-live` hook URL from step 5.
 - **Dataset:** production. **Trigger on:** Create, Update, Delete.
-- **Filter:** `_type == "article" || _type == "category"`
+- **Filter:** `!(_id in path("drafts.**")) && (_type in ["article","category","caseStudy","recommendation"] || _id == "skillsPage")`
+  (the `!(_id in path("drafts.**"))` guard keeps it firing only on the *published* document,
+  not on every draft autosave; the type list covers every content type `scripts/generate.mjs`
+  builds from, so a Publish on any of them rebuilds live — not just articles and categories.)
 - **HTTP method:** POST. Save.
 
 Sanity webhooks fire on *published* documents by default, so this runs when you hit
