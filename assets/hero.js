@@ -34,12 +34,16 @@
   /* ── Caption + URL typing for whichever card is in front ── */
   var el = function (id) { return document.getElementById(id); };
   var typeTimer = null;
+  var lines = Array.prototype.slice.call(hero.querySelectorAll('.hx-line'));
   var show = function (c) {
     var i = cards.indexOf(c) + 1;
     el('hx-n').textContent = (i < 10 ? '0' : '') + i;
     el('hx-name').textContent = c.dataset.title;
     el('hx-role').textContent = c.dataset.role;
-    el('hx-live').href = c.dataset.live;
+    var live = el('hx-live');
+    if (c.dataset.live) { live.href = c.dataset.live; live.target = '_blank'; live.innerHTML = 'Live site <span aria-hidden="true">&#8599;</span>'; }
+    else { live.href = c.dataset.href; live.removeAttribute('target'); live.innerHTML = 'Case study <span aria-hidden="true">&rarr;</span>'; }
+    lines.forEach(function (l) { l.classList.toggle('is-on', l.dataset.verb === c.dataset.verb); });
     stage.href = c.dataset.href;
     stage.setAttribute('aria-label', 'Now showing ' + c.dataset.title + '. Open the case study.');
     var url = c.querySelector('.hx-url'), full = url.dataset.full || (url.dataset.full = url.textContent), n = 0;
@@ -52,32 +56,44 @@
   if (reduce) { show(front()); return wireBuilds(); }
 
   /* ── Cycling: front clip plays; on end it drops to the back ── */
-  var safety = null, running = false, busy = false;
+  var safety = null, running = false, busy = false, pageTimer = null;
+  // The book card has no clip: it turns three spreads, then advances on a timer.
+  var turnPages = function (c) {
+    var imgs = c.querySelectorAll('.hx-book img'), k = 0;
+    var on = function () { Array.prototype.forEach.call(imgs, function (im, j) { im.classList.toggle('is-on', j === k); }); };
+    on(); clearInterval(pageTimer);
+    pageTimer = setInterval(function () { k = (k + 1) % imgs.length; on(); }, 2500);
+  };
   var playFront = function () {
     var c = front(), v = c.querySelector('video');
-    load(v); v.currentTime = 0;
-    var p = v.play(); if (p && p.catch) p.catch(function () { arm(6000); });
     show(c);
-    arm(14000);                                   // ponytail: safety net if 'ended' never fires (stalled network)
+    if (v) {
+      load(v); v.currentTime = 0;
+      var p = v.play(); if (p && p.catch) p.catch(function () { arm(6000); });
+      arm(14000);                                 // ponytail: safety net if 'ended' never fires (stalled network)
+    } else { turnPages(c); arm(7500); }
     var next = cards.filter(function (x) { return posOf(x) === 1; })[0];
-    if (next) { var nv = next.querySelector('video'); nv.preload = 'auto'; load(nv); }
+    var nv = next && next.querySelector('video');
+    if (nv) { nv.preload = 'auto'; load(nv); }
   };
+  var stopFront = function () { var v = front().querySelector('video'); if (v) v.pause(); clearInterval(pageTimer); };
   var arm = function (ms) { clearTimeout(safety); safety = setTimeout(advance, ms); };
   var advance = function () {
     if (busy || !running) return; busy = true;
     clearTimeout(safety);
     var c = front(); c.classList.add('is-leaving');
     setTimeout(function () {
-      c.querySelector('video').pause();
+      var v = c.querySelector('video'); if (v) v.pause();
+      clearInterval(pageTimer);
       cards.forEach(function (x) { x.dataset.pos = (posOf(x) + cards.length - 1) % cards.length; });
       c.classList.remove('is-leaving');
       busy = false; playFront();
     }, 520);
   };
-  cards.forEach(function (c) { c.querySelector('video').addEventListener('ended', function () { if (c === front()) advance(); }); });
+  cards.forEach(function (c) { var v = c.querySelector('video'); if (v) v.addEventListener('ended', function () { if (c === front()) advance(); }); });
 
   var resume = function () { if (running) return; running = true; playFront(); };
-  var pause = function () { running = false; clearTimeout(safety); front().querySelector('video').pause(); };
+  var pause = function () { running = false; clearTimeout(safety); stopFront(); };
   var visible = true;
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (e) { visible = e[0].isIntersecting; visible && !document.hidden ? resume() : pause(); }, { threshold: 0.15 }).observe(stage);

@@ -70,6 +70,11 @@
   transform-origin: 50% 100%;
   transition: transform 0.95s var(--hx-ease), filter 0.7s var(--hx-ease), opacity 0.5s ease;
 }
+/* Spreads are 2:1, so they sit whole on a PDF-viewer grey rather than being cropped */
+.hx-book { position: relative; height: calc(100% - 30px); background: #2A2A27; overflow: hidden; }
+.hx-book img { position: absolute; inset: 6% 5%; width: 90%; height: 88%; object-fit: contain; filter: drop-shadow(0 18px 30px rgba(0,0,0,0.5)); opacity: 0; transition: opacity 0.4s ease, transform 3.2s ease-out; transform: scale(1.04); }
+.hx-book img.is-on { opacity: 1; transform: scale(1); }
+html:not(.js) .hx-book img:first-child, .hx-book img:first-child:not(:has(~ .is-on)) { opacity: 1; }
 .hx-card video { display: block; width: 100%; height: calc(100% - 30px); object-fit: cover; object-position: top; background: #1B1B19; }
 .hx-chrome {
   height: 30px; display: flex; align-items: center; gap: 12px; padding: 0 12px;
@@ -90,6 +95,7 @@
 .hx-card[data-pos="1"] { z-index: 3; transform: translate3d(7%, -13%, -40px) rotate(3deg) scale(0.93); filter: brightness(0.72); }
 .hx-card[data-pos="2"] { z-index: 2; transform: translate3d(-6%, -22%, -80px) rotate(-3.6deg) scale(0.87); filter: brightness(0.56); }
 .hx-card[data-pos="3"] { z-index: 1; transform: translate3d(3%, -30%, -120px) rotate(1.4deg) scale(0.81); filter: brightness(0.42); }
+.hx-card[data-pos="4"], .hx-card[data-pos="5"] { z-index: 0; transform: translate3d(3%, -30%, -160px) rotate(1.4deg) scale(0.78); filter: brightness(0.3); opacity: 0; }
 .hx-card.is-leaving { z-index: 5; transform: translate3d(-10%, 16%, 60px) rotate(-7deg) scale(1.02); opacity: 0; transition-duration: 0.5s; }
 /* Before the fan-out every card sits in the front position */
 .js .hx-stage:not(.is-fanned) .hx-card:not([data-pos="0"]) { transform: none; opacity: 0; }
@@ -115,7 +121,8 @@
 }
 .hx-line { display: block; overflow: hidden; padding: 0.02em 0 0.1em; margin-bottom: -0.1em; }
 .hx-line > span { display: inline-block; }
-.hx-line--hot { color: var(--gold); }
+.hx-line { transition: color 0.6s ease; }
+.hx-line.is-on { color: var(--gold); }
 
 /* ── Load choreography (JS adds .is-in). Hidden states only when JS runs, and a
    CSS failsafe releases them at 3s if the script never arrives. ── */
