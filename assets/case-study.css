@@ -12,7 +12,7 @@
   display: flex;
   align-items: flex-end;
   overflow: hidden;
-  padding-top: var(--nav-h);
+  padding-top: calc(var(--nav-h) + clamp(2rem, 5vh, 3.5rem));
 }
 .cs-hero-img {
   position: absolute; inset: 0; z-index: 0;
@@ -48,7 +48,7 @@
   font-style: italic; font-size: 0.95rem; line-height: 1.55;
   color: rgba(255,255,255,0.78); max-width: 60ch;
   margin: -0.6rem 0 1.6rem;
-  border-left: 2px solid var(--gold-mid, rgba(196,146,42,0.6));
+  border-left: 2px solid var(--gold-mid, rgba(242,176,30,0.6));
   padding-left: 1rem;
 }
 .cs-scope strong { color: #fff; font-style: normal; font-weight: 600; }
@@ -149,7 +149,7 @@
 .cs-video-link:hover::after { background: rgba(10, 10, 10, 0.05); }
 .cs-video-play {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2;
-  width: 70px; height: 50px; border-radius: 13px; background: rgba(196, 146, 42, 0.95);
+  width: 70px; height: 50px; border-radius: 13px; background: rgba(242, 176, 30, 0.95);
   display: grid; place-items: center; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   transition: transform 0.2s ease, background 0.2s ease;
 }
@@ -233,3 +233,32 @@
 .cs-textlink { font-weight: 600; color: var(--ink); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
 .cs-meta-pill a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 760px) { .cs-spreads, .cs-spreads.three { grid-template-columns: 1fr; } }
+
+.cs-hero-img { view-transition-name: cs-hero; }
+
+/* ── Reading progress + chapter index ── */
+.cs-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform-origin: left; transform: scaleX(0); z-index: 200; pointer-events: none; }
+.cs-index { display: none; }
+@media (min-width: 1560px) {
+  .cs-index {
+    display: flex; flex-direction: column; gap: 0.2rem; position: fixed; left: 1.5rem; top: 50%; transform: translate(-8px, -50%);
+    z-index: 50; opacity: 0; pointer-events: none; transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1);
+  }
+  .cs-index.is-shown { opacity: 1; pointer-events: auto; transform: translate(0, -50%); }
+  .cs-index a { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.35rem 0; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); opacity: 0.55; transition: opacity 0.25s, color 0.25s; max-width: 9.5rem; }
+  .cs-index a::before { content: attr(data-n); font-variant-numeric: tabular-nums; color: var(--ink-mid); }
+  .cs-index a:hover, .cs-index a.is-on { opacity: 1; color: var(--ink); }
+  .cs-index a.is-on::before { color: var(--gold-dark, var(--ink)); }
+}
+
+/* ── Next project: a full-height panel that hands you to the next story ── */
+.cs-next { position: relative; display: flex; align-items: flex-end; min-height: 72vh; overflow: hidden; color: #fff; background: #0E0E0C; }
+.cs-next img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; transform: scale(1.02); transition: opacity 0.6s ease, transform 1.2s cubic-bezier(0.22,1,0.36,1); }
+.cs-next:hover img, .cs-next:focus-visible img { opacity: 0.7; transform: scale(1.06); }
+.cs-next-inner { position: relative; width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 var(--gutter) clamp(3rem, 7vw, 5.5rem); display: grid; grid-template-columns: 1fr auto; align-items: end; column-gap: 2rem; }
+.cs-next-k { grid-column: 1 / -1; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+.cs-next-t { font-family: var(--ff-display); font-weight: 800; font-size: clamp(2.4rem, 7vw, 6.5rem); line-height: 0.95; letter-spacing: -0.04em; text-wrap: balance; }
+.cs-next-arrow { font-size: clamp(2rem, 5vw, 4rem); transition: transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+.cs-next:hover .cs-next-arrow { transform: translateX(10px); color: var(--gold); }
+.cs-pager { border-top: 0; }
+@media (prefers-reduced-motion: reduce) { .cs-next img, .cs-next-arrow, .cs-index { transition: none; } }

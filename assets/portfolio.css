@@ -1,31 +1,31 @@
 /* ============================================================
    IAIN McMULLAN PORTFOLIO — Design System v2
-   Cormorant Garamond + DM Sans | Warm Gold Editorial
+   Archivo + IBM Plex Sans | ink and yellow (single token source; home-bold.css repeats these for body.theme-bold)
    ============================================================ */
 
 /* ── CUSTOM PROPERTIES ─────────────────────────────────────── */
 :root {
-  --gold:       #C4922A;
-  --gold-pale:  #FDF8F0;
-  --gold-mid:   #F0E6D0;
-  --gold-warm:  #F5F0E8;
-  --gold-dark:  #A07820;
-  --bg:         #FAFAF8;
-  --ink:        #0A0A0A;
-  --ink-mid:    #6B6B6B;
+  --gold:       #F2B01E;
+  --gold-pale:  #FCF7EA;
+  --gold-mid:   #F0E2BC;
+  --gold-warm:  #FBF3DE;
+  --gold-dark:  #0E0E0C;
+  --bg:         #FBFAF7;
+  --ink:        #0E0E0C;
+  --ink-mid:    #47463F;
   /* pale start colour for the hero headline line-settle */
   --h1-settle-from: #C6C3BA;
   --surface:    #FFFFFF;
-  --divider:    #E8E4DC;
+  --divider:    #D6D3C8;
   --dark-bg:    #0A0A0A;
   --dark-text:  #FAFAF8;
 
-  --ff-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  --ff-body:    'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-display: 'Archivo', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-body:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   --shadow-card:  0 2px 20px rgba(0,0,0,0.06);
   --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
-  --shadow-float: 0 4px 24px rgba(196,146,42,0.25);
+  --shadow-float: 0 4px 24px rgba(242,176,30,0.25);
 
   --radius-sm:   8px;
   --radius-md:   16px;
@@ -239,8 +239,8 @@ body.menu-open { overflow: hidden; }
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--ink);
-  background: rgba(196, 146, 42, 0.10);
-  border: 1px solid rgba(196, 146, 42, 0.30);
+  background: rgba(242, 176, 30, 0.10);
+  border: 1px solid rgba(242, 176, 30, 0.30);
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-pill, 999px);
   white-space: nowrap;
@@ -319,8 +319,8 @@ body.menu-open { overflow: hidden; }
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--ink);
-  background: rgba(196, 146, 42, 0.10);
-  border: 1px solid rgba(196, 146, 42, 0.30);
+  background: rgba(242, 176, 30, 0.10);
+  border: 1px solid rgba(242, 176, 30, 0.30);
   padding: 0.4rem 0.85rem;
   border-radius: var(--radius-pill, 999px);
   width: fit-content;
@@ -988,7 +988,7 @@ body.menu-open::before {
 .case-img-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(196,146,42,0.55) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(242,176,30,0.55) 0%, transparent 60%);
   opacity: 0;
   transition: opacity 0.35s ease;
   display: flex;
@@ -1355,7 +1355,7 @@ body.menu-open::before {
 }
 .contact-link:hover .contact-link-icon {
   border-color: var(--gold);
-  background: rgba(196,146,42,0.1);
+  background: rgba(242,176,30,0.1);
 }
 .contact-link-label {
   font-size: 0.8125rem;
@@ -1735,7 +1735,7 @@ body.menu-open::before {
 .about-portrait-frame {
   position: relative; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden;
   background: linear-gradient(150deg, var(--gold-warm), var(--gold-mid));
-  box-shadow: var(--shadow-card), 0 0 0 1px rgba(196, 146, 42, 0.35);
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(242, 176, 30, 0.35);
 }
 .about-portrait-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
@@ -1744,7 +1744,7 @@ body.menu-open::before {
 }
 .about-portrait-frame::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(160deg, rgba(196, 146, 42, 0.16), rgba(10, 10, 10, 0.08));
+  background: linear-gradient(160deg, rgba(242, 176, 30, 0.16), rgba(10, 10, 10, 0.08));
   mix-blend-mode: soft-light;
 }
 .about-portrait-ph {
@@ -1839,7 +1839,7 @@ body.menu-open::before {
   flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%;
   object-fit: cover; object-position: center 18%;
   filter: contrast(1.03) saturate(1.03);   /* colour, matching the home portrait */
-  box-shadow: 0 0 0 1px rgba(196, 146, 42, 0.4);
+  box-shadow: 0 0 0 1px rgba(242, 176, 30, 0.4);
 }
 .article-author-name { font-family: var(--ff-display); font-weight: 700; font-size: 1.4rem; line-height: 1.1; color: var(--ink); margin-bottom: 0.35rem; }
 .article-author-bio { font-size: 0.95rem; line-height: 1.6; color: var(--ink-mid); margin-bottom: 1.1rem; }
@@ -1997,7 +1997,7 @@ html.js .tl-proof.tl-in { opacity: 1; transform: none; }
   font-family: var(--ff-display);
   font-size: clamp(72px, 9vw, 132px);
   line-height: 1;
-  color: var(--gold, #C4922A);
+  color: var(--gold, #F2B01E);
   margin-bottom: -0.25em;
   opacity: 0.85;
 }
@@ -2032,13 +2032,13 @@ html.js .tl-proof.tl-in { opacity: 1; transform: none; }
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--gold, #C4922A);
+  color: var(--gold, #F2B01E);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   padding-bottom: 0.15rem;
   transition: border-color 0.2s ease, opacity 0.2s ease;
 }
-.rec-more:hover { border-bottom-color: var(--gold, #C4922A); }
+.rec-more:hover { border-bottom-color: var(--gold, #F2B01E); }
 
 /* Standalone /recommendations.html — ungrouped editorial list */
 .rec-page { padding: clamp(2rem, 5vw, 4rem) 0 clamp(4rem, 7vw, 6rem); }
@@ -2089,7 +2089,7 @@ html.js .tl-proof.tl-in { opacity: 1; transform: none; }
   gap: 0.3rem;
   margin-top: 0.5rem;
   font-size: 0.8rem;
-  color: var(--gold, #C4922A);
+  color: var(--gold, #F2B01E);
   text-decoration: none;
 }
 .rec-meta-linkedin:hover { text-decoration: underline; }
@@ -2103,7 +2103,7 @@ html.js .tl-proof.tl-in { opacity: 1; transform: none; }
   color: var(--ink-mid, #55535C);
   text-decoration: none;
 }
-.rec-footer-link:hover { color: var(--gold, #C4922A); }
+.rec-footer-link:hover { color: var(--gold, #F2B01E); }
 
 
 /* ═══════════════════════════════════════════════════════
@@ -2183,4 +2183,14 @@ html.js .rec-item.active .rec-meta { transition-delay: 0.92s; }
   font-size: clamp(1.05rem, 1.45vw, 1.25rem);
   line-height: 1.65;
   color: var(--ink);
+}
+
+/* Cross-page transitions: pages crossfade, and the portfolio preview frame morphs into
+   the case-study hero (both carry view-transition-name: cs-hero). Browsers without
+   support simply navigate. */
+@view-transition { navigation: auto; }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.35s; }
+::view-transition-group(cs-hero) { animation-duration: 0.55s; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

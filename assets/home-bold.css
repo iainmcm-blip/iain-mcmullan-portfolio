@@ -186,14 +186,14 @@ body.theme-bold::after {
   font-size: 9px; font-weight: 800; line-height: 1;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #0E0E0C; text-align: center;
-  opacity: 0; transition: opacity 0.25s ease;
+  opacity: 0; transition: opacity 0.25s ease; white-space: nowrap;
   pointer-events: none; user-select: none;
 }
 .cursor-ring.is-morph {
   width: 60px !important; height: 60px !important;
   background: var(--gold) !important;
   border-color: var(--gold) !important;
-  box-shadow: 0 4px 16px rgba(196, 146, 42, 0.35);
+  box-shadow: 0 4px 16px rgba(242, 176, 30, 0.35);
 }
 .cursor-ring.is-morph .cursor-label { opacity: 1; }
 .cursor-dot.is-hidden { opacity: 0; }
@@ -245,3 +245,31 @@ body.theme-bold::after {
   .svc-row { grid-template-columns: 3rem minmax(0, 1fr); row-gap: 0.6rem; }
   .svc-desc, .svc-link { grid-column: 2; }
 }
+
+/* ═══ How I work (skills.html) ═══════════════════════════════════════════════ */
+.how { background: #0E0E0C; color: #F4F2EC; padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(4rem, 8vw, 6.5rem); }
+.how .section-label { color: #A9A69C; display: block; margin-bottom: 0.9rem; }
+.how .display-heading { color: #F4F2EC; max-width: 18ch; font-size: clamp(2.4rem, 5.4vw, 4.6rem); line-height: 1; }
+.how-intro { margin-top: 1.4rem; max-width: 38rem; font-size: 1.1rem; line-height: 1.6; color: #C9C6BD; }
+.how-steps { list-style: none; margin: clamp(3rem, 6vw, 4.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.75rem; }
+.how-step { position: relative; padding-top: 1.6rem; border-top: 1px solid rgba(244,242,236,0.16); }
+.how-step::before { content: ""; position: absolute; top: -1px; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.9s cubic-bezier(0.22,1,0.36,1) 0.2s; }
+.how-step.active::before, html:not(.js) .how-step::before { transform: scaleX(1); }
+.how-n { font: 800 0.95rem/1 var(--ff-display); color: var(--gold); font-variant-numeric: tabular-nums; }
+.how-t { font-family: var(--ff-display); font-weight: 700; font-size: 1.35rem; letter-spacing: -0.02em; color: #F4F2EC; margin: 0.9rem 0 0.6rem; }
+.how-step p { color: #C9C6BD; line-height: 1.6; font-size: 0.95rem; }
+.how-cta { display: flex; align-items: center; gap: 1.5rem; margin-top: 3rem; flex-wrap: wrap; }
+.how-link { color: #F4F2EC; font-weight: 600; }
+.how-link:hover { color: var(--gold); }
+.how + .sk-header { padding-top: clamp(3.5rem, 7vw, 5.5rem); }
+@media (max-width: 1023px) { .how-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .how-steps { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .how-step::before { transform: scaleX(1); transition: none; } }
+
+/* ═══ Footer sign-off: every inner page ends on the one action that matters ═══ */
+.footer-cta { padding-top: clamp(4rem, 9vw, 7rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid rgba(244,242,236,0.12); margin-bottom: 2rem; }
+.footer-cta-k { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #A9A69C; margin-bottom: 1rem; }
+.footer-cta-big { display: inline-block; font-family: var(--ff-display); font-weight: 800; font-size: clamp(3.4rem, 12vw, 10rem); line-height: 0.9; letter-spacing: -0.05em; color: #F4F2EC; transition: color 0.3s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1); }
+.footer-cta-big span { color: var(--gold); }
+.footer-cta-big:hover, .footer-cta-big:focus-visible { color: var(--gold); transform: translateX(8px); }
+@media (prefers-reduced-motion: reduce) { .footer-cta-big { transition: color 0.3s ease; } .footer-cta-big:hover { transform: none; } }

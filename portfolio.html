@@ -18,7 +18,7 @@
 <meta property="og:title" content="Portfolio | Iain McMullan">
 <meta property="og:description" content="Selected work across aviation, finance and hospitality: Emirates, Malaysia Airlines, UOB, Hilton.">
 <meta property="og:url" content="https://www.iainmcmullan.com/portfolio.html">
-<meta property="og:image" content="https://www.iainmcmullan.com/assets/img/og-card.png">
+<meta property="og:image" content="https://www.iainmcmullan.com/assets/img/og-card-2026.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FBFAF7">
 <meta name="robots" content="index, follow">
@@ -28,71 +28,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/portfolio.css">
 <link rel="stylesheet" href="assets/home-bold.css">
-<link rel="stylesheet" href="assets/overrides.css">
 <script>document.documentElement.classList.add('js');</script>
 <style>
 .pf-page { padding-top: var(--nav-h); }
 .pf-header { padding-top: 4rem; padding-bottom: 1rem; }
 .pf-header .section-label { display: block; margin-bottom: 0.75rem; }
 .pf-intro { margin-top: 1rem; max-width: 640px; font-size: 1.0625rem; line-height: 1.7; color: var(--ink-mid); }
-.pf-page .case-studies { padding-top: 2.5rem; }
+.pf-page .case-studies { padding-top: 2rem; }
 .pf-back { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0 0 4rem; font-size: 0.9rem; color: var(--ink-mid); transition: color 0.2s; }
 .pf-back:hover { color: var(--gold); }
 @media (max-width: 768px) { .pf-header { padding-top: 2.5rem; } }
 
-/* ── Case-grid sector filter (JS-injected) ────────────────── */
-.cat-filter { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 0 0 2.5rem; }
-.cat-chip {
-  font-family: var(--ff-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.01em;
-  padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); cursor: pointer;
-  border: 1px solid var(--divider); background: var(--surface); color: var(--ink-mid);
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+/* ── Verb filter (JS-injected, so no dead controls without JS) ── */
+.st-filter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 2rem; }
+.st-chip {
+  font: 600 0.9rem/1 var(--ff-body); padding: 0.7rem 1.2rem; border-radius: 2px; cursor: pointer;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+  transition: background 0.2s ease, color 0.2s ease;
 }
-.cat-chip:hover { background: var(--ink); border-color: var(--gold); color: var(--gold); }
-.cat-chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); font-weight: 600; }
-.cat-chip-count { display: inline-block; margin-left: 0.4rem; font-size: 0.72rem; opacity: 0.7; }
-.case-card.case-hide { display: none; }
-.cat-empty { text-align: center; color: var(--ink-mid); font-size: 0.95rem; margin: 1rem 0 2rem; display: none; }
+.st-chip small { font-weight: 500; margin-left: 0.45rem; opacity: 0.6; }
+.st-chip:hover { background: var(--ink); color: var(--gold); }
+.st-chip[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.st-chip:active { transform: scale(0.97); }
 
-/* ── Work: featured pair + editorial results index ─────────── */
-.feat-row { display:flex; flex-wrap:wrap; gap:1.75rem; margin-bottom:3.25rem; }
-.feat-card { flex:1 1 320px; min-width:0; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--divider); overflow:hidden; transition:border-color .25s ease, transform .25s ease; }
-.feat-card:hover { border-color:var(--ink); transform:translateY(-3px); }
-.feat-img { aspect-ratio:16/10; overflow:hidden; background:var(--bg); }
-.feat-img img { width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.22,1,.36,1); }
-.feat-card:hover .feat-img img { transform:scale(1.04); }
-/* Transparent wide artwork (e.g. the four Skywards coins): show all of it
-   rather than cropping to fill. Coins sit on the card surface. */
-.feat-card--contain .feat-img { background:var(--surface); }
-.feat-card--contain .feat-img img { object-fit:contain; padding:0.75rem; }
-.feat-body { padding:1.6rem 1.6rem 1.4rem; }
-/* Featured result: black on a yellow highlighter slab (the hero device),
-   so the number is bold yellow-brand yet clears WCAG AA (9.8:1). */
-.feat-metric { display:inline-block; font-family:var(--ff-display); font-weight:800; font-size:clamp(36px,4vw,54px); line-height:1.0; color:var(--ink); background:var(--gold); padding:0.02em 0.24em; }
-.feat-metric .mop { color:inherit; }
-.feat-metric-label { display:block; font-size:0.85rem; color:var(--ink-mid); margin:0.55rem 0 1rem; }
-.feat-title { font-family:var(--ff-display); font-weight:700; font-size:clamp(20px,1.8vw,26px); line-height:1.1; color:var(--ink); margin-bottom:0.55rem; }
-.feat-meta { font-size:0.82rem; color:var(--ink-mid); }
-.feat-sector { font-weight:600; color:var(--ink); }
-.idx-head { font-family:var(--ff-body); text-transform:uppercase; letter-spacing:0.15em; font-size:11px; color:var(--ink-mid); padding-bottom:0.9rem; border-bottom:1px solid var(--ink); }
-.idx-row { display:grid; grid-template-columns:minmax(128px,168px) 1fr auto; align-items:center; gap:1.5rem; padding:1.5rem 0; border-bottom:1px solid var(--divider); transition:padding-left .25s ease; }
-.idx-row:hover { padding-left:0.75rem; }
-/* Index result: black number, yellow operators (the By-the-numbers device). */
-.idx-metric { font-family:var(--ff-display); font-weight:800; font-size:clamp(26px,2.5vw,34px); line-height:0.95; color:var(--ink); }
-.idx-metric .mop { color:var(--gold); }
-.idx-title { font-family:var(--ff-display); font-weight:700; font-size:clamp(19px,1.6vw,23px); line-height:1.12; color:var(--ink); }
-.idx-sub { font-size:0.85rem; color:var(--ink-mid); margin-top:0.25rem; }
-.idx-right { display:flex; align-items:center; gap:1.1rem; }
-.idx-sector { font-size:0.76rem; letter-spacing:0.02em; color:var(--ink-mid); border:1px solid var(--divider); padding:0.3rem 0.7rem; border-radius:var(--radius-pill); white-space:nowrap; }
-.idx-arrow { font-size:1.2rem; color:var(--ink); transition:transform .25s ease; }
-.idx-row:hover .idx-arrow { transform:translateX(4px); color:var(--gold); }
-.feat-card.case-hide, .idx-row.case-hide { display:none; }
-@media (max-width:760px){
-  .feat-row { gap:1.25rem; margin-bottom:2.5rem; }
-  .feat-card { flex:1 1 100%; }
-  .idx-row { grid-template-columns:1fr; gap:0.4rem; padding:1.25rem 0; }
-  .idx-metric { font-size:30px; }
-  .idx-right { justify-content:flex-start; gap:0.9rem; margin-top:0.3rem; }
+/* ── Stage: list left, sticky preview right ── */
+.st { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 4vw, 4rem); align-items: start; }
+.st-list { border-top: 1.5px solid var(--ink); }
+.st-row {
+  position: relative; display: grid; grid-template-columns: 2.5rem minmax(0, 1fr) auto; column-gap: 1.25rem; row-gap: 0.5rem;
+  align-items: baseline; padding: 1.35rem 0.5rem 1.35rem 0; border-bottom: 1px solid var(--divider);
+  transition: padding-left 0.35s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease;
+}
+.st-row::before { content: ""; position: absolute; left: 0; top: -1px; bottom: -1px; width: 3px; background: var(--gold); transform: scaleY(0); transform-origin: top; transition: transform 0.35s cubic-bezier(0.22,1,0.36,1); }
+.st-row.is-active, .st-row:hover, .st-row:focus-visible { padding-left: 1rem; }
+.st-row.is-active::before, .st-row:hover::before, .st-row:focus-visible::before { transform: scaleY(1); }
+.st-num { font: 600 0.8rem/1 var(--ff-body); color: var(--ink-mid); font-variant-numeric: tabular-nums; }
+.st-main { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
+.st-title { font-family: var(--ff-display); font-weight: 800; font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.08; letter-spacing: -0.02em; color: var(--ink); }
+.st-sub { font-size: 0.85rem; color: var(--ink-mid); }
+.st-metric { grid-column: 3; grid-row: 1 / 3; text-align: right; font-family: var(--ff-display); font-weight: 800; font-size: clamp(1.2rem, 1.8vw, 1.6rem); line-height: 1; color: var(--ink); white-space: nowrap; }
+.st-metric .mop { color: var(--gold); }
+.st-metric small { display: block; margin-top: 0.3rem; font: 500 0.72rem/1.3 var(--ff-body); color: var(--ink-mid); white-space: normal; max-width: 12rem; margin-left: auto; }
+.st-verbs { grid-column: 2; display: flex; gap: 0.4rem; }
+.st-verbs i { font: 600 0.68rem/1 var(--ff-body); font-style: normal; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.5rem; border: 1px solid var(--divider); color: var(--ink-mid); }
+.st-thumb { display: none; }
+.st-row.is-hidden { display: none; }
+
+.st-frame { position: sticky; top: calc(var(--nav-h) + 2rem); }
+.st-window { border-radius: 10px; overflow: hidden; background: #1B1B19; border: 1px solid #2A2A27; box-shadow: 0 40px 80px -40px rgba(14,14,12,0.55); view-transition-name: cs-hero; }
+.st-chrome { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #222220; }
+.st-chrome i { width: 9px; height: 9px; border-radius: 50%; background: #45443F; }
+.st-chrome i:first-child { background: var(--gold); }
+.st-chrome em { font: 500 11.5px/1 var(--ff-body); font-style: normal; color: #BDBAB0; margin-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.st-media { position: relative; aspect-ratio: 16 / 10; background: #1B1B19; }
+.st-media img, .st-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.35s ease; }
+.st-media.is-contain img { object-fit: contain; background: #fff; padding: 6%; }
+.st-media video { opacity: 0; }
+.st-media.has-clip video { opacity: 1; }
+.st-media.is-swapping img, .st-media.is-swapping video { opacity: 0; }
+.st-cap { margin-top: 0.9rem; font-size: 0.8rem; color: var(--ink-mid); font-variant-numeric: tabular-nums; }
+.st-cap span { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 1023px) {
+  .st { grid-template-columns: 1fr; }
+  .st-frame { display: none; }
+  .st-row { grid-template-columns: 2rem minmax(0, 1fr); }
+  .st-metric { grid-column: 2; grid-row: auto; text-align: left; }
+  .st-metric small { margin-left: 0; }
+  .st-thumb { display: block; grid-column: 2; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 6px; margin-top: 0.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .st-row, .st-row::before, .st-media img, .st-media video { transition: none; }
 }
 </style>
 </head>
@@ -110,7 +116,7 @@
     <a href="index.html" class="nav-brand" aria-label="Home">Iain McMullan</a>
 
     <ul class="nav-links" role="list">
-      <li><a href="skills.html">Skills</a></li>
+      <li><a href="skills.html">How I work</a></li>
       <li><a href="portfolio.html" class="active">Portfolio</a></li>
       <li><a href="experience.html">Experience</a></li>
       <li><a href="perspectives.html">Perspectives</a></li>
@@ -131,7 +137,7 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <div class="mobile-menu-avail"><span class="avail-dot" aria-hidden="true"><span></span><span></span></span>Taking on projects</div>
-  <a href="skills.html">Skills</a>
+  <a href="skills.html">How I work</a>
   <a href="portfolio.html">Portfolio</a>
   <a href="experience.html">Experience</a>
   <a href="perspectives.html">Perspectives</a>
@@ -141,9 +147,9 @@
 <main id="main" class="pf-page">
 
   <header class="pf-header container">
-    <span class="section-label">Selected work</span>
-    <h1 class="display-heading display-lg">Selected Work</h1>
-    <p class="pf-intro">Recent builds first: sites I designed, wrote and built, and an anniversary book I wrote. Behind them, 20+ years of campaigns, launches and large-scale events across Asia and the Middle East, each with the result it delivered.</p>
+    <span class="section-label">Portfolio</span>
+    <h1 class="display-heading display-lg">The work, sorted by what I did.</h1>
+    <p class="pf-intro">Recent builds first, then 20+ years of campaigns, launches and large-scale events across Asia and the Middle East. Filter by the part I played: the plan, the words or the build.</p>
   </header>
 
   <section class="case-studies">
@@ -151,94 +157,113 @@
 
       <div class="work">
 
-        <div class="feat-row">
+        <div class="st">
+          <div class="st-list">
 
-        <a href="case-studies/la-scenting.html" class="feat-card" data-cat="web-build" aria-label="LA Scenting case study">
-          <div class="feat-img"><img src="assets/video/work/la-hero.jpg" alt="The LA Scenting home page" loading="lazy"></div>
-          <div class="feat-body">
-            <span class="feat-metric">Live</span>
-            <span class="feat-metric-label">lascenting.com</span>
-            <h3 class="feat-title">LA Scenting</h3>
-            <p class="feat-meta"><span class="feat-sector">Web Build</span> &middot; Design, build and content</p>
+        <a href="case-studies/la-scenting.html" class="st-row" data-verbs="write build" data-poster="assets/video/work/la-scroll.jpg" data-clip="assets/video/work/la-scroll.mp4" data-cursor="View" aria-label="LA Scenting case study">
+          <span class="st-num">01</span>
+          <span class="st-main"><span class="st-title">LA Scenting</span><span class="st-sub">Design, build and content</span></span>
+          <span class="st-metric">Live<small>lascenting.com</small></span>
+          <span class="st-verbs"><i>Write</i><i>Build</i></span>
+          <img class="st-thumb" src="assets/video/work/la-scroll.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/gsg25.html" class="st-row" data-verbs="write build" data-poster="assets/video/work/gsg-timeline.jpg" data-clip="assets/video/work/gsg-timeline.mp4" data-cursor="View" aria-label="GSG25: anniversary book and site case study">
+          <span class="st-num">02</span>
+          <span class="st-main"><span class="st-title">GSG25: anniversary book and site</span><span class="st-sub">Writer, designer and developer</span></span>
+          <span class="st-metric">Book <span class="mop">+</span> site<small>globalschools.com/gsg25</small></span>
+          <span class="st-verbs"><i>Write</i><i>Build</i></span>
+          <img class="st-thumb" src="assets/video/work/gsg-timeline.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/emirates-skywards-tier-advancement.html" class="st-row" data-verbs="plan" data-poster="assets/img/case-studies/emirates-skywards-tier-advancement.png" data-contain data-cursor="View" aria-label="Emirates Skywards Tier Advancement case study">
+          <span class="st-num">03</span>
+          <span class="st-main"><span class="st-title">Emirates Skywards Tier Advancement</span><span class="st-sub">Loyalty and CRM lead</span></span>
+          <span class="st-metric">USD 2M<span class="mop">+</span><small>incremental revenue</small></span>
+          <span class="st-verbs"><i>Plan</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/emirates-skywards-tier-advancement.png" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/hilton-asia-conference.html" class="st-row" data-verbs="plan write" data-poster="assets/video/work/hilton-film.jpg" data-clip="assets/video/work/hilton-film.mp4" data-cursor="View" aria-label="Hilton APAC GM and Commercial Conference case study">
+          <span class="st-num">04</span>
+          <span class="st-main"><span class="st-title">Hilton APAC GM and Commercial Conference</span><span class="st-sub">Strategy and comms lead</span></span>
+          <span class="st-metric">92<span class="mop">%</span><small>delegate engagement, a record</small></span>
+          <span class="st-verbs"><i>Plan</i><i>Write</i></span>
+          <img class="st-thumb" src="assets/video/work/hilton-film.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/ahc-skincare.html" class="st-row" data-verbs="plan" data-poster="assets/img/case-studies/ahc-skincare.jpg" data-cursor="View" aria-label="AHC Skincare: SEA expansion case study">
+          <span class="st-num">05</span>
+          <span class="st-main"><span class="st-title">AHC Skincare: SEA expansion</span><span class="st-sub">Senior strategic lead</span></span>
+          <span class="st-metric">4<span class="mop">%</span> <span class="mop">→</span> 22<span class="mop">%</span><small>ecommerce share, four markets</small></span>
+          <span class="st-verbs"><i>Plan</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/ahc-skincare.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/ntuc-my-first-skool.html" class="st-row" data-verbs="write build" data-poster="assets/video/work/ntuc-film.jpg" data-clip="assets/video/work/ntuc-film.mp4" data-cursor="View" aria-label="NTUC My First Skool: site and campaign case study">
+          <span class="st-num">06</span>
+          <span class="st-main"><span class="st-title">NTUC My First Skool: site and campaign</span><span class="st-sub">Project owner and copywriter</span></span>
+          <span class="st-metric"><span class="mop">+</span>39<span class="mop">%</span><small>child registrations in four months</small></span>
+          <span class="st-verbs"><i>Write</i><i>Build</i></span>
+          <img class="st-thumb" src="assets/video/work/ntuc-film.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/casillero-del-diablo.html" class="st-row" data-verbs="plan" data-poster="assets/img/case-studies/casillero-del-diablo.jpg" data-cursor="View" aria-label="Casillero del Diablo: Legendary Pairings case study">
+          <span class="st-num">07</span>
+          <span class="st-main"><span class="st-title">Casillero del Diablo: Legendary Pairings</span><span class="st-sub">Localisation strategy lead</span></span>
+          <span class="st-metric"><span class="mop">+</span>23<span class="mop">%</span><small>online sales</small></span>
+          <span class="st-verbs"><i>Plan</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/casillero-del-diablo.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/emirates-flight-training-academy.html" class="st-row" data-verbs="plan" data-poster="assets/img/case-studies/emirates-flight-training-academy.jpg" data-cursor="View" aria-label="Emirates Flight Training Academy case study">
+          <span class="st-num">08</span>
+          <span class="st-main"><span class="st-title">Emirates Flight Training Academy</span><span class="st-sub">Client-side brand lead</span></span>
+          <span class="st-metric">100<span class="mop">%</span><small>first cohort filled in under two months</small></span>
+          <span class="st-verbs"><i>Plan</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/emirates-flight-training-academy.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/malaysia-airlines.html" class="st-row" data-verbs="plan" data-poster="assets/img/case-studies/malaysia-airlines.jpg" data-cursor="View" aria-label="Malaysia Airlines: This is Malaysian hospitality case study">
+          <span class="st-num">09</span>
+          <span class="st-main"><span class="st-title">Malaysia Airlines: This is Malaysian hospitality</span><span class="st-sub">Project director and strategist</span></span>
+          <span class="st-metric">Bronze<small>Kancil Awards 2023</small></span>
+          <span class="st-verbs"><i>Plan</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/malaysia-airlines.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/emirates-pilot-recruitment.html" class="st-row" data-verbs="plan" data-poster="assets/img/case-studies/emirates-pilot-recruitment.jpg" data-cursor="View" aria-label="Emirates Pilot Recruitment case study">
+          <span class="st-num">10</span>
+          <span class="st-main"><span class="st-title">Emirates Pilot Recruitment</span><span class="st-sub">Campaign and production lead</span></span>
+          <span class="st-metric">1,200<span class="mop">+</span><small>applications</small></span>
+          <span class="st-verbs"><i>Plan</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/emirates-pilot-recruitment.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/emirates-skywards-my-family.html" class="st-row" data-verbs="plan build" data-poster="assets/img/case-studies/emirates-skywards-my-family.jpg" data-cursor="View" aria-label="Emirates Skywards: My Family case study">
+          <span class="st-num">11</span>
+          <span class="st-main"><span class="st-title">Emirates Skywards: My Family</span><span class="st-sub">Project and digital lead</span></span>
+          <span class="st-metric">Live<small>shipped end to end, still live</small></span>
+          <span class="st-verbs"><i>Plan</i><i>Build</i></span>
+          <img class="st-thumb" src="assets/img/case-studies/emirates-skywards-my-family.jpg" alt="" loading="lazy">
+        </a>
+
+        <a href="case-studies/uob-gallery.html" class="st-row" data-verbs="plan write" data-poster="assets/video/work/uob-film.jpg" data-clip="assets/video/work/uob-film.mp4" data-cursor="View" aria-label="The UOB Gallery case study">
+          <span class="st-num">12</span>
+          <span class="st-main"><span class="st-title">The UOB Gallery</span><span class="st-sub">Strategy and comms lead</span></span>
+          <span class="st-metric">90 yrs<small>of heritage, opened on time</small></span>
+          <span class="st-verbs"><i>Plan</i><i>Write</i></span>
+          <img class="st-thumb" src="assets/video/work/uob-film.jpg" alt="" loading="lazy">
+        </a>
+
           </div>
-        </a>
-
-        <a href="case-studies/gsg25.html" class="feat-card" data-cat="web-build" aria-label="GSG25: anniversary book and site case study">
-          <div class="feat-img"><img src="assets/video/work/gsg-timeline.jpg" alt="The GSG25 anniversary site timeline" loading="lazy"></div>
-          <div class="feat-body">
-            <span class="feat-metric">109pp <span class="mop">+</span> site</span>
-            <span class="feat-metric-label">globalschools.com/gsg25</span>
-            <h3 class="feat-title">GSG25: anniversary book and site</h3>
-            <p class="feat-meta"><span class="feat-sector">Web Build</span> &middot; Writer, designer and developer</p>
+          <div class="st-frame" aria-hidden="true">
+            <div class="st-window">
+              <div class="st-chrome"><i></i><i></i><i></i><em id="st-label">LA Scenting</em></div>
+              <div class="st-media"><img id="st-img" src="assets/video/work/la-scroll.jpg" alt=""><video id="st-vid" muted loop playsinline preload="none"></video></div>
+            </div>
+            <p class="st-cap"><span id="st-count">01</span> / 12</p>
           </div>
-        </a>
-
-        </div>
-
-        <p class="idx-head">The full index</p>
-
-        <div class="work-index">
-
-        <a href="case-studies/emirates-skywards-tier-advancement.html" class="idx-row" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
-          <span class="idx-metric">USD 2M<span class="mop">+</span></span>
-          <div class="idx-main"><h4 class="idx-title">Emirates Skywards Tier Advancement</h4><p class="idx-sub">incremental revenue &middot; Loyalty and CRM lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Loyalty</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/hilton-asia-conference.html" class="idx-row" data-cat="event" aria-label="Hilton APAC GM and Commercial Conference case study">
-          <span class="idx-metric">92<span class="mop">%</span></span>
-          <div class="idx-main"><h4 class="idx-title">Hilton APAC GM and Commercial Conference</h4><p class="idx-sub">delegate engagement, a record &middot; Strategy and comms lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Event</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/ahc-skincare.html" class="idx-row" data-cat="social-pr" aria-label="AHC Skincare: SEA expansion case study">
-          <span class="idx-metric">4<span class="mop">%</span> <span class="mop">→</span> 22<span class="mop">%</span></span>
-          <div class="idx-main"><h4 class="idx-title">AHC Skincare: SEA expansion</h4><p class="idx-sub">ecommerce share, four markets &middot; Senior strategic lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Social / PR</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/ntuc-my-first-skool.html" class="idx-row" data-cat="integrated" aria-label="NTUC My First Skool: site and campaign case study">
-          <span class="idx-metric"><span class="mop">+</span>39<span class="mop">%</span></span>
-          <div class="idx-main"><h4 class="idx-title">NTUC My First Skool: site and campaign</h4><p class="idx-sub">child registrations in four months &middot; Project owner and copywriter</p></div>
-          <span class="idx-right"><span class="idx-sector">Integrated Campaign</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/casillero-del-diablo.html" class="idx-row" data-cat="social-pr" aria-label="Casillero del Diablo: Legendary Pairings case study">
-          <span class="idx-metric"><span class="mop">+</span>23<span class="mop">%</span></span>
-          <div class="idx-main"><h4 class="idx-title">Casillero del Diablo: Legendary Pairings</h4><p class="idx-sub">online sales &middot; Localisation strategy lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Social / PR</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/emirates-flight-training-academy.html" class="idx-row" data-cat="branding" aria-label="Emirates Flight Training Academy case study">
-          <span class="idx-metric">100<span class="mop">%</span></span>
-          <div class="idx-main"><h4 class="idx-title">Emirates Flight Training Academy</h4><p class="idx-sub">first cohort filled in under two months &middot; Client-side brand lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Branding</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/malaysia-airlines.html" class="idx-row" data-cat="branding" aria-label="Malaysia Airlines: This is Malaysian hospitality case study">
-          <span class="idx-metric">Bronze</span>
-          <div class="idx-main"><h4 class="idx-title">Malaysia Airlines: This is Malaysian hospitality</h4><p class="idx-sub">Kancil Awards 2023 &middot; Project director and strategist</p></div>
-          <span class="idx-right"><span class="idx-sector">Branding</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/emirates-pilot-recruitment.html" class="idx-row" data-cat="recruitment" aria-label="Emirates Pilot Recruitment case study">
-          <span class="idx-metric">1,200<span class="mop">+</span></span>
-          <div class="idx-main"><h4 class="idx-title">Emirates Pilot Recruitment</h4><p class="idx-sub">applications &middot; Campaign and production lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Employer Brand</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/emirates-skywards-my-family.html" class="idx-row" data-cat="loyalty" aria-label="Emirates Skywards: My Family case study">
-          <span class="idx-metric">Live</span>
-          <div class="idx-main"><h4 class="idx-title">Emirates Skywards: My Family</h4><p class="idx-sub">shipped end to end, still live &middot; Project and digital lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Loyalty</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
-        <a href="case-studies/uob-gallery.html" class="idx-row" data-cat="branding" aria-label="The UOB Gallery case study">
-          <span class="idx-metric">90 yrs</span>
-          <div class="idx-main"><h4 class="idx-title">The UOB Gallery</h4><p class="idx-sub">of heritage, opened on time &middot; Strategy and comms lead</p></div>
-          <span class="idx-right"><span class="idx-sector">Branding</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>
-
         </div>
 
       </div>
@@ -252,6 +277,10 @@
 
 <!-- ── FOOTER ──────────────────────────────────────────────── -->
 <footer class="footer">
+  <div class="container footer-cta">
+    <p class="footer-cta-k">Got a brief, a deck or an event?</p>
+    <a class="footer-cta-big" href="lets-talk.html">Let's talk<span aria-hidden="true">.</span></a>
+  </div>
   <div class="container footer-inner">
     <div class="footer-brand-col">
     <span class="footer-brand">Iain McMullan</span>
@@ -270,116 +299,65 @@
 <script src="assets/portfolio.js" defer></script>
 <script src="assets/cursor.js" defer></script>
 
-<!-- Sector filter, progressive enhancement: built in JS so no
-     dead controls appear without JS. Tiles carry data-cat attributes that
-     map to the chip labels below. -->
+<!-- Work stage: verb filter (built in JS so there are no dead controls without it) and
+     the sticky preview frame that follows the hovered or focused row. -->
 <script>
 (function () {
   'use strict';
-  var work = document.querySelector('.work');
-  if (!work) return;
-  var items = Array.prototype.slice.call(work.querySelectorAll('.feat-card, .idx-row'));
-  var idxHead = work.querySelector('.idx-head');
-  var featWrap = document.querySelector('.feat-section-wrap');
-  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var st = document.querySelector('.st');
+  if (!st) return;
+  var rows = Array.prototype.slice.call(st.querySelectorAll('.st-row'));
+  var media = st.querySelector('.st-media'), img = document.getElementById('st-img'), vid = document.getElementById('st-vid');
+  var label = document.getElementById('st-label'), count = document.getElementById('st-count');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wide = window.matchMedia('(min-width: 1024px)');
 
-  var CATS = [
-    { key: 'all',         label: 'All' },
-    { key: 'web-build',   label: 'Web Design & Build' },
-    { key: 'loyalty',     label: 'Loyalty' },
-    { key: 'branding',    label: 'Branding' },
-    { key: 'integrated',  label: 'Integrated Campaign' },
-    { key: 'event',       label: 'Event' },
-    { key: 'social-pr',   label: 'Social Media / PR' },
-    { key: 'recruitment', label: 'Recruitment / Employer Brand' }
-  ];
-  function count(key) {
-    return key === 'all' ? items.length : items.filter(function (i) { return i.dataset.cat === key; }).length;
-  }
-
+  /* Filter chips: All / Plan / Write / Build */
+  var VERBS = [['all', 'All'], ['plan', 'Plan'], ['write', 'Write'], ['build', 'Build']];
+  var has = function (r, v) { return v === 'all' || r.dataset.verbs.split(' ').indexOf(v) > -1; };
   var bar = document.createElement('div');
-  bar.className = 'cat-filter';
-  bar.setAttribute('role', 'group');
-  bar.setAttribute('aria-label', 'Filter case studies by sector');
-
-  var chips = [];
-  var active = 'all';
-  CATS.forEach(function (d) {
+  bar.className = 'st-filter'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Filter the work by what I did');
+  VERBS.forEach(function (d) {
     var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'cat-chip' + (d.key === 'all' ? ' active' : '');
-    b.dataset.cat = d.key;
-    b.setAttribute('aria-pressed', String(d.key === 'all'));
-    b.innerHTML = d.label + ' <span class="cat-chip-count">' + count(d.key) + '</span>';
+    b.type = 'button'; b.className = 'st-chip'; b.setAttribute('aria-pressed', String(d[0] === 'all'));
+    b.innerHTML = d[1] + '<small>' + rows.filter(function (r) { return has(r, d[0]); }).length + '</small>';
     b.addEventListener('click', function () {
-      // Re-clicking the active chip resets to All.
-      apply(d.key === active && d.key !== 'all' ? 'all' : d.key);
+      Array.prototype.forEach.call(bar.children, function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      rows.forEach(function (r) { r.classList.toggle('is-hidden', !has(r, d[0])); });
+      var firstShown = rows.filter(function (r) { return !r.classList.contains('is-hidden'); })[0];
+      if (firstShown) preview(firstShown);
     });
     bar.appendChild(b);
-    chips.push(b);
   });
-  work.parentNode.insertBefore(bar, work);
+  st.parentNode.insertBefore(bar, st);
 
-  var empty = document.createElement('p');
-  empty.className = 'cat-empty';
-  empty.textContent = 'No case studies in this sector yet.';
-  work.appendChild(empty);
-
-  function setChrome(cat, matchCount) {
-    chips.forEach(function (ch) {
-      var on = ch.dataset.cat === cat;
-      ch.classList.toggle('active', on);
-      ch.setAttribute('aria-pressed', String(on));
-    });
-    // The featured / index split is an overview device; when a filter is
-    // active, drop the "full index" label so the matches read as one list.
-    if (idxHead) idxHead.style.display = (cat === 'all') ? '' : 'none';
-    empty.style.display = matchCount ? 'none' : 'block';
+  /* Preview frame */
+  var current = null, swapTimer = null;
+  function preview(r) {
+    if (r === current || !wide.matches) return;
+    current = r;
+    rows.forEach(function (x) { x.classList.toggle('is-active', x === r); });
+    label.textContent = r.querySelector('.st-title').textContent;
+    count.textContent = r.querySelector('.st-num').textContent;
+    clearTimeout(swapTimer);
+    media.classList.add('is-swapping');
+    swapTimer = setTimeout(function () {
+      img.src = r.dataset.poster;
+      media.classList.toggle('is-contain', r.hasAttribute('data-contain'));
+      vid.pause();
+      if (r.dataset.clip && !reduce) {
+        vid.src = r.dataset.clip;
+        var p = vid.play(); if (p && p.catch) p.catch(function () {});
+        media.classList.add('has-clip');
+      } else { vid.removeAttribute('src'); media.classList.remove('has-clip'); }
+      media.classList.remove('is-swapping');
+    }, reduce ? 0 : 180);
   }
-
-  // Collapse or restore the featured pair. The animation is pure CSS
-  // (grid-template-rows 1fr <-> 0fr in overrides.css); all the script does is
-  // toggle the class.
-  function collapseFeatured(hasFeatured) {
-    if (featWrap) featWrap.classList.toggle('collapsed', !hasFeatured);
-  }
-
-  function apply(cat) {
-    active = cat;
-
-    // Reduced motion: switch instantly, no fades or height animation.
-    if (reduceMQ.matches) {
-      var mc = 0, hf = false;
-      items.forEach(function (it) {
-        var match = (cat === 'all' || it.dataset.cat === cat);
-        it.classList.toggle('case-hide', !match);
-        if (match) { mc++; if (it.classList.contains('feat-card')) hf = true; }
-      });
-      setChrome(cat, mc);
-      collapseFeatured(hf);
-      return;
-    }
-
-    var visible = items.filter(function (it) { return !it.classList.contains('case-hide'); });
-    visible.forEach(function (it) { it.classList.add('fade-out'); it.classList.remove('fade-in-active'); });
-
-    window.setTimeout(function () {
-      var matchCount = 0, hasFeatured = false;
-      items.forEach(function (it) {
-        var match = (cat === 'all' || it.dataset.cat === cat);
-        it.classList.toggle('case-hide', !match);
-        it.classList.remove('fade-out');
-        if (match) {
-          matchCount++;
-          if (it.classList.contains('feat-card')) hasFeatured = true;
-          void it.offsetHeight;        // restart the fade-in animation
-          it.classList.add('fade-in-active');
-        }
-      });
-      setChrome(cat, matchCount);
-      collapseFeatured(hasFeatured);
-    }, 280);
-  }
+  rows.forEach(function (r) {
+    r.addEventListener('mouseenter', function () { preview(r); });
+    r.addEventListener('focus', function () { preview(r); });
+  });
+  if (rows[0]) preview(rows[0]);
 })();
 </script>
 

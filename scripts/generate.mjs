@@ -48,9 +48,9 @@ const objPos = (h) => (h && typeof h.x === 'number' ? `${Math.round(h.x * 100)}%
 
 // Decorative blobs behind the (lazy) card image — one consistent set is fine; the image covers them.
 const BLOBS = [
-  '<span class="persp-blob" style="width:62%;aspect-ratio:1/1;left:-8%;top:-12%;background:#C4922A;opacity:0.18"></span>',
-  '<span class="persp-blob" style="width:52%;aspect-ratio:1/1;right:-10%;bottom:-12%;background:#F0E6D0;opacity:0.62"></span>',
-  '<span class="persp-blob" style="width:36%;aspect-ratio:1/1;left:40%;top:40%;background:#E8D5A0;opacity:0.42"></span>',
+  '<span class="persp-blob" style="width:62%;aspect-ratio:1/1;left:-8%;top:-12%;background:#F2B01E;opacity:0.18"></span>',
+  '<span class="persp-blob" style="width:52%;aspect-ratio:1/1;right:-10%;bottom:-12%;background:#F0E2BC;opacity:0.62"></span>',
+  '<span class="persp-blob" style="width:36%;aspect-ratio:1/1;left:40%;top:40%;background:#F7DC94;opacity:0.42"></span>',
 ].join('\n            ');
 
 // The expanded card repeats the teaser unless we drop the opening block when it
@@ -266,7 +266,7 @@ async function main() {
 
     const header =
       '\n    <span class="section-label sk-fade">' + esc(sk.eyebrow || '') + '</span>' +
-      '\n    <h1 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">' + esc(sk.heading || '') + '</h1>' +
+      '\n    <h2 class="display-heading display-lg sk-fade" style="animation-delay:0.05s">' + esc(sk.heading || '') + '</h2>' +
       '\n    <p class="sk-intro sk-fade" style="animation-delay:0.1s">' + boldFirst(sk.intro, sk.introBold) + '</p>' +
       '\n    <ul class="sk-outcomes sk-fade" style="animation-delay:0.15s" aria-label="What I do">' +
       (sk.outcomes || []).map((o) => '\n      <li>' + boldFirst(o.text, o.highlight) + '</li>').join('') +
@@ -355,35 +355,58 @@ async function main() {
     const wrapOps = (m) => esc(m).replace(/(\+|%|→|&gt;|&rarr;)/g, '<span class="mop">$1</span>');
     const sector = (c) => esc(SECTOR[c.category] || c.category || '');
 
-    const featured = cases.filter((c) => c.featured).slice(0, 2);
-    const featSlugs = new Set(featured.map((c) => c.slug));
-    const index = cases.filter((c) => !featSlugs.has(c.slug));
+    // Work stage: one numbered list on the left, a sticky preview frame on the right
+    // that shows the hovered project's clip or image. Filters are Plan / Write / Build,
+    // the same three verbs as the home headline, so the whole site sorts the work one way.
+    const VERBS = {
+      'la-scenting': ['write', 'build'], 'gsg25': ['write', 'build'],
+      'emirates-skywards-tier-advancement': ['plan'], 'hilton-asia-conference': ['plan', 'write'],
+      'ahc-skincare': ['plan'], 'ntuc-my-first-skool': ['write', 'build'], 'casillero-del-diablo': ['plan'],
+      'emirates-flight-training-academy': ['plan'], 'malaysia-airlines': ['plan'],
+      'emirates-pilot-recruitment': ['plan'], 'emirates-skywards-my-family': ['plan', 'build'],
+      'uob-gallery': ['plan', 'write'],
+    };
+    const CLIPS = {
+      'la-scenting': 'la-scroll', 'gsg25': 'gsg-timeline', 'hilton-asia-conference': 'hilton-film',
+      'uob-gallery': 'uob-film', 'ntuc-my-first-skool': 'ntuc-film',
+    };
+    const LABEL = { plan: 'Plan', write: 'Write', build: 'Build' };
+    const pad = (n) => String(n).padStart(2, '0');
+    const rows = cases.map((c, i) => {
+      const verbs = VERBS[c.slug] || ['plan'];
+      const clip = CLIPS[c.slug];
+      const poster = clip ? `assets/video/work/${clip}.jpg` : (c._img || '');
+      return `        <a href="case-studies/${c.slug}.html" class="st-row" data-verbs="${verbs.join(' ')}" data-poster="${escAttr(poster)}"${clip ? ` data-clip="assets/video/work/${clip}.mp4"` : ''}${c.containImage ? ' data-contain' : ''} data-cursor="View" aria-label="${escAttr(c.title)} case study">
+          <span class="st-num">${pad(i + 1)}</span>
+          <span class="st-main"><span class="st-title">${esc(c.title)}</span><span class="st-sub">${esc(c.role || '')}</span></span>
+          <span class="st-metric">${wrapOps(c.metric)}<small>${esc(c.metricLabel || '')}</small></span>
+          <span class="st-verbs">${verbs.map((v) => `<i>${LABEL[v]}</i>`).join('')}</span>
+          <img class="st-thumb" src="${escAttr(poster)}" alt="" loading="lazy">
+        </a>`;
+    }).join('\n\n');
+    const first = cases[0];
+    const firstPoster = CLIPS[first.slug] ? `assets/video/work/${CLIPS[first.slug]}.jpg` : first._img;
+    const workInner = `
 
-    const featHtml = featured.map((c) => `        <a href="case-studies/${c.slug}.html" class="feat-card${c.containImage ? ' feat-card--contain' : ''}" data-cat="${escAttr(c.category)}" aria-label="${escAttr(c.title)} case study">
-          <div class="feat-img"><img src="${escAttr(c._img || '')}" alt="${escAttr(c.alt || c.title)}" loading="lazy"></div>
-          <div class="feat-body">
-            <span class="feat-metric">${wrapOps(c.metric)}</span>
-            <span class="feat-metric-label">${esc(c.metricLabel || '')}</span>
-            <h3 class="feat-title">${esc(c.title)}</h3>
-            <p class="feat-meta"><span class="feat-sector">${sector(c)}</span> &middot; ${esc(c.role || '')}</p>
+        <div class="st">
+          <div class="st-list">
+
+${rows}
+
           </div>
-        </a>`).join('\n\n');
-
-    const idxHtml = index.map((c) => `        <a href="case-studies/${c.slug}.html" class="idx-row" data-cat="${escAttr(c.category)}" aria-label="${escAttr(c.title)} case study">
-          <span class="idx-metric">${wrapOps(c.metric)}</span>
-          <div class="idx-main"><h4 class="idx-title">${esc(c.title)}</h4><p class="idx-sub">${esc(c.metricLabel || '')} &middot; ${esc(c.role || '')}</p></div>
-          <span class="idx-right"><span class="idx-sector">${sector(c)}</span><span class="idx-arrow" aria-hidden="true">&rarr;</span></span>
-        </a>`).join('\n\n');
-
-    const workInner =
-      '\n\n        <div class="feat-row">\n\n' + featHtml + '\n\n        </div>\n\n' +
-      '        <p class="idx-head">The full index</p>\n\n' +
-      '        <div class="work-index">\n\n' + idxHtml + '\n\n        </div>';
+          <div class="st-frame" aria-hidden="true">
+            <div class="st-window">
+              <div class="st-chrome"><i></i><i></i><i></i><em id="st-label">${esc(first.title)}</em></div>
+              <div class="st-media"><img id="st-img" src="${escAttr(firstPoster)}" alt=""><video id="st-vid" muted loop playsinline preload="none"></video></div>
+            </div>
+            <p class="st-cap"><span id="st-count">01</span> / ${pad(cases.length)}</p>
+          </div>
+        </div>`;
 
     let pf = readFileSync(resolve(SITE, 'portfolio.html'), 'utf8');
     pf = replaceBetween(pf, '<div class="work">', '\n\n      </div>\n\n      <a href="index.html" class="pf-back"', workInner, 'portfolio work');
     writeFileSync(resolve(SITE, 'portfolio.html'), pf);
-    console.log(`Wrote portfolio.html (${featured.length} featured, ${index.length} index).`);
+    console.log(`Wrote portfolio.html (${cases.length} projects on the stage).`);
   }
 
   console.log('\nDone. Sync to staging, verify, then push.\n');
