@@ -28,6 +28,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;1,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/portfolio.css">
 <link rel="stylesheet" href="assets/home-bold.css">
+<link rel="stylesheet" href="assets/overrides.css">
 <script>document.documentElement.classList.add('js');</script>
 <style>
 .pf-page { padding-top: var(--nav-h); }
@@ -150,6 +151,7 @@
 
       <div class="work">
 
+        <div class="feat-section-wrap">
         <div class="feat-row">
 
         <a href="case-studies/emirates-skywards-tier-advancement.html" class="feat-card feat-card--contain" data-cat="loyalty" aria-label="Emirates Skywards Tier Advancement case study">
@@ -172,6 +174,7 @@
           </div>
         </a>
 
+        </div>
         </div>
 
         <p class="idx-head">The full index</p>
@@ -267,6 +270,8 @@
   if (!work) return;
   var items = Array.prototype.slice.call(work.querySelectorAll('.feat-card, .idx-row'));
   var idxHead = work.querySelector('.idx-head');
+  var featWrap = document.querySelector('.feat-section-wrap');
+  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   var CATS = [
     { key: 'all',         label: 'All' },
@@ -296,6 +301,7 @@
     b.setAttribute('aria-pressed', String(d.key === 'all'));
     b.innerHTML = d.label + ' <span class="cat-chip-count">' + count(d.key) + '</span>';
     b.addEventListener('click', function () {
+      // Re-clicking the active chip resets to All.
       apply(d.key === active && d.key !== 'all' ? 'all' : d.key);
     });
     bar.appendChild(b);
@@ -308,33 +314,60 @@
   empty.textContent = 'No case studies in this sector yet.';
   work.appendChild(empty);
 
-  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  function apply(cat) {
-    active = cat;
+  function setChrome(cat, matchCount) {
     chips.forEach(function (ch) {
       var on = ch.dataset.cat === cat;
       ch.classList.toggle('active', on);
       ch.setAttribute('aria-pressed', String(on));
     });
-    var shown = [];
-    items.forEach(function (it) {
-      var match = (cat === 'all' || it.dataset.cat === cat);
-      it.classList.toggle('case-hide', !match);
-      if (match) shown.push(it);
-    });
     // The featured / index split is an overview device; when a filter is
     // active, drop the "full index" label so the matches read as one list.
     if (idxHead) idxHead.style.display = (cat === 'all') ? '' : 'none';
-    empty.style.display = shown.length ? 'none' : 'block';
-    if (!reduceMQ.matches && shown[0] && shown[0].animate) {
-      shown.forEach(function (el, i) {
-        el.animate(
-          [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
-          { duration: 380, delay: Math.min(i, 6) * 45, easing: 'cubic-bezier(0.22,1,0.36,1)' }
-        );
+    empty.style.display = matchCount ? 'none' : 'block';
+  }
+
+  // Collapse or restore the featured pair. The animation is pure CSS
+  // (grid-template-rows 1fr <-> 0fr in overrides.css); all the script does is
+  // toggle the class.
+  function collapseFeatured(hasFeatured) {
+    if (featWrap) featWrap.classList.toggle('collapsed', !hasFeatured);
+  }
+
+  function apply(cat) {
+    active = cat;
+
+    // Reduced motion: switch instantly, no fades or height animation.
+    if (reduceMQ.matches) {
+      var mc = 0, hf = false;
+      items.forEach(function (it) {
+        var match = (cat === 'all' || it.dataset.cat === cat);
+        it.classList.toggle('case-hide', !match);
+        if (match) { mc++; if (it.classList.contains('feat-card')) hf = true; }
       });
+      setChrome(cat, mc);
+      collapseFeatured(hf);
+      return;
     }
+
+    var visible = items.filter(function (it) { return !it.classList.contains('case-hide'); });
+    visible.forEach(function (it) { it.classList.add('fade-out'); it.classList.remove('fade-in-active'); });
+
+    window.setTimeout(function () {
+      var matchCount = 0, hasFeatured = false;
+      items.forEach(function (it) {
+        var match = (cat === 'all' || it.dataset.cat === cat);
+        it.classList.toggle('case-hide', !match);
+        it.classList.remove('fade-out');
+        if (match) {
+          matchCount++;
+          if (it.classList.contains('feat-card')) hasFeatured = true;
+          void it.offsetHeight;        // restart the fade-in animation
+          it.classList.add('fade-in-active');
+        }
+      });
+      setChrome(cat, matchCount);
+      collapseFeatured(hasFeatured);
+    }, 280);
   }
 })();
 </script>

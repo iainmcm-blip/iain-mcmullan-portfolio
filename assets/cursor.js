@@ -14,11 +14,27 @@
   document.addEventListener('mouseleave', function () { ring.classList.add('is-hidden'); });
   (function loop() {
     rx += (mx - rx) * 0.10; ry += (my - ry) * 0.10;
-    ring.style.transform = 'translate(' + (rx - 20) + 'px, ' + (ry - 20) + 'px)';
+    var off = ring.classList.contains('is-morph') ? 30 : 20;   // centre the 60px morph vs the 40px ring
+    ring.style.transform = 'translate(' + (rx - off) + 'px, ' + (ry - off) + 'px)';
     requestAnimationFrame(loop);
   })();
   document.querySelectorAll('a, button, [role="button"], .btn').forEach(function (el) {
     el.addEventListener('mouseenter', function () { ring.classList.add('is-hover'); });
     el.addEventListener('mouseleave', function () { ring.classList.remove('is-hover'); });
   });
+
+  /* Case-study cards morph the ring into a gold "VIEW" disc (portfolio page). */
+  var morphTargets = document.querySelectorAll('.feat-card, .idx-row');
+  if (morphTargets.length) {
+    if (!ring.querySelector('.cursor-label')) {
+      var label = document.createElement('span');
+      label.className = 'cursor-label';
+      label.textContent = 'VIEW';
+      ring.appendChild(label);
+    }
+    morphTargets.forEach(function (el) {
+      el.addEventListener('mouseenter', function () { ring.classList.add('is-morph'); });
+      el.addEventListener('mouseleave', function () { ring.classList.remove('is-morph'); });
+    });
+  }
 })();
