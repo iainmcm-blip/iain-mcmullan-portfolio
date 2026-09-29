@@ -50,23 +50,3 @@
 @media (prefers-reduced-motion: reduce) {
   .feat-section-wrap { transition: none; }
 }
-
-/* 3 — Custom cursor morph: a gold "VIEW" disc over case-study cards.
-   Cursor styles on this theme are unscoped (see home-bold.css); the base
-   .cursor-ring transition already covers width/height/border/background. */
-.cursor-ring { display: flex; align-items: center; justify-content: center; }
-.cursor-label {
-  font-family: var(--ff-display);
-  font-size: 9px; font-weight: 800; line-height: 1;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: #0E0E0C; text-align: center;
-  opacity: 0; transition: opacity 0.25s ease;
-  pointer-events: none; user-select: none;
-}
-.cursor-ring.is-morph {
-  width: 60px !important; height: 60px !important;
-  background: var(--gold) !important;
-  border-color: var(--gold) !important;
-  box-shadow: 0 4px 16px rgba(196, 146, 42, 0.35);
-}
-.cursor-ring.is-morph .cursor-label { opacity: 1; }

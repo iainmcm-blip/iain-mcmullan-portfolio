@@ -323,6 +323,17 @@ async function main() {
     title, "slug":slug.current, featured, containImage, metric, metricLabel, category, role,
     "alt":cardImage.alt, "imgUrl":cardImage.asset->url
   }`);
+  // Recent freelance builds live here, not in Sanity (yet), so they lead the page as the
+  // featured pair and the Sanity case studies fall into the index behind them.
+  // ponytail: move these into Sanity as caseStudy docs when a third build lands.
+  const LOCAL_BUILDS = [
+    { title: 'LA Scenting', slug: 'la-scenting', featured: true, metric: 'Live', metricLabel: 'lascenting.com',
+      category: 'web-build', role: 'Design, build and content', alt: 'The LA Scenting home page', _img: 'assets/video/work/la-hero.jpg' },
+    { title: 'GSG25: anniversary book and site', slug: 'gsg25', featured: true, metric: 'Book + site', metricLabel: 'globalschools.com/gsg25',
+      category: 'web-build', role: 'Writer, designer and developer', alt: 'The GSG25 anniversary site timeline', _img: 'assets/video/work/gsg-timeline.jpg' },
+  ];
+  cases.forEach((c) => { c.featured = false; });
+  cases.unshift(...LOCAL_BUILDS);
   if (cases.length < 2) {
     console.warn(`! Only ${cases.length} case study(ies) in Sanity; leaving portfolio.html static.`);
   } else {
@@ -331,6 +342,7 @@ async function main() {
     mkdirSync(resolve(SITE, 'assets/img/case-studies'), { recursive: true });
     const extOf = (u) => (String(u).match(/\.(png|jpe?g|webp)/i) || [, 'jpg'])[1].toLowerCase().replace('jpeg', 'jpg');
     for (const c of cases) {
+      if (c._img) continue;   // local build, image already in the repo
       if (!c.imgUrl) { console.warn(`  ! ${c.slug}: no card image`); continue; }
       const e = extOf(c.imgUrl);
       const buf = Buffer.from(await (await fetch(c.imgUrl)).arrayBuffer());
@@ -338,7 +350,7 @@ async function main() {
       c._img = `assets/img/case-studies/${c.slug}.${e}`;
     }
     // Sector key -> the tag shown on the card.
-    const SECTOR = { loyalty: 'Loyalty', branding: 'Branding', integrated: 'Integrated Campaign', event: 'Event', 'social-pr': 'Social / PR', recruitment: 'Employer Brand' };
+    const SECTOR = { 'web-build': 'Web Build', loyalty: 'Loyalty', branding: 'Branding', integrated: 'Integrated Campaign', event: 'Event', 'social-pr': 'Social / PR', recruitment: 'Employer Brand' };
     // Colour the operators (+ % arrow) in the result number; other glyphs stay ink.
     const wrapOps = (m) => esc(m).replace(/(\+|%|→|&gt;|&rarr;)/g, '<span class="mop">$1</span>');
     const sector = (c) => esc(SECTOR[c.category] || c.category || '');

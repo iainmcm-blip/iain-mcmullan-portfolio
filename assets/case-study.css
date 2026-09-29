@@ -219,3 +219,17 @@
 /* HTML5 video wrapper, 16:9 */
 .cs-video-native { position: relative; padding-top: 56.25%; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); background: #000; }
 .cs-video-native video { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+/* ── Builds: browser-framed video, screenshot rows, pull quote ── */
+.cs-browser video { cursor: auto; }
+.cs-spreads { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.75rem); margin-top: 2.5rem; }
+.cs-spreads.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cs-shot { margin: 0; border-radius: 6px; overflow: hidden; border: 1px solid var(--divider); background: var(--surface); box-shadow: 0 24px 50px -30px rgba(14,14,12,0.4); }
+.cs-shot img { display: block; width: 100%; height: auto; transition: transform 0.6s cubic-bezier(0.22,1,0.36,1); }
+.cs-shot:hover img { transform: scale(1.02); }
+.cs-pull { margin: clamp(3rem, 6vw, 5rem) 0 0; max-width: 900px; }
+.cs-pull p { font-family: var(--ff-display); font-weight: 800; font-size: clamp(1.8rem, 4vw, 3.4rem); line-height: 1.05; letter-spacing: -0.03em; color: var(--ink); text-wrap: balance; }
+.cs-pull cite { display: block; margin-top: 1rem; font-style: normal; font-size: 0.85rem; color: var(--ink-mid); }
+.cs-textlink { font-weight: 600; color: var(--ink); border-bottom: 2px solid var(--gold); padding-bottom: 2px; }
+.cs-meta-pill a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) { .cs-spreads, .cs-spreads.three { grid-template-columns: 1fr; } }

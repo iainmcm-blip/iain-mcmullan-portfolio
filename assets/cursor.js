@@ -3,13 +3,15 @@
 (function () {
   'use strict';
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var dot = document.querySelector('.cursor-dot'), ring = document.querySelector('.cursor-ring');
   if (!dot || !ring) return;
+  ring.classList.add('is-hidden'); dot.classList.add('is-hidden');   // nothing parked at 0,0 before the first move
   var mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', function (e) {
     mx = e.clientX; my = e.clientY;
     dot.style.transform = 'translate(' + (mx - 4) + 'px, ' + (my - 4) + 'px)';
-    ring.classList.remove('is-hidden');
+    ring.classList.remove('is-hidden'); dot.classList.remove('is-hidden');
   });
   document.addEventListener('mouseleave', function () { ring.classList.add('is-hidden'); });
   (function loop() {
@@ -24,7 +26,7 @@
   });
 
   /* Case-study cards morph the ring into a gold "VIEW" disc (portfolio page). */
-  var morphTargets = document.querySelectorAll('.feat-card, .idx-row');
+  var morphTargets = document.querySelectorAll('.feat-card, .idx-row, [data-cursor]');
   if (morphTargets.length) {
     if (!ring.querySelector('.cursor-label')) {
       var label = document.createElement('span');
@@ -33,7 +35,7 @@
       ring.appendChild(label);
     }
     morphTargets.forEach(function (el) {
-      el.addEventListener('mouseenter', function () { ring.classList.add('is-morph'); });
+      el.addEventListener('mouseenter', function () { ring.querySelector('.cursor-label').textContent = (el.dataset.cursor || 'View').toUpperCase(); ring.classList.add('is-morph'); });
       el.addEventListener('mouseleave', function () { ring.classList.remove('is-morph'); });
     });
   }
