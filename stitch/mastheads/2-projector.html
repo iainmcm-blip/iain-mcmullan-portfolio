@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masthead 2: Projector gate</title>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@300,301&f[]=switzer@300,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--night)}
+.mast{background:radial-gradient(60% 50% at 50% 72%,#23201a 0,#0B0B0A 70%)}
+.head{top:15vh}
+.strip{position:absolute;left:0;right:0;bottom:9vh;height:32vh;min-height:190px;background:var(--film);overflow:hidden}
+.strip::before,.strip::after{content:"";position:absolute;left:0;right:0;height:9px;z-index:3;background:repeating-linear-gradient(90deg,transparent 0 12px,#3a3833 12px 21px);background-position-x:var(--sp,0)}
+.strip::before{top:7px}.strip::after{bottom:7px}
+.track{position:absolute;top:22px;bottom:22px;left:0;display:flex;gap:10px;will-change:transform}
+.fr{position:relative;height:100%;aspect-ratio:3/2;flex:none;overflow:hidden;background:#050504;cursor:pointer;display:block}
+.fr img,.fr video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.55) contrast(1.05);transition:filter .5s}
+.fr video{opacity:0;transition:opacity .4s,filter .5s}
+.fr.lit img,.fr.lit video{filter:none}
+.fr.lit video{opacity:1}
+.fr .n{position:absolute;right:6px;bottom:4px;z-index:2;color:var(--edge);font-size:9px}
+.gate{position:absolute;bottom:calc(9vh - 14px);height:calc(32vh + 28px);min-height:218px;left:50%;transform:translateX(-50%);border:1px solid rgba(237,233,224,.55);z-index:4;pointer-events:none;box-shadow:0 0 120px 30px rgba(242,176,30,.08)}
+.gate span{position:absolute;left:0;top:-22px;color:var(--on-night-mute)}
+.gcap{position:absolute;right:var(--g);top:calc(59vh - 32px - 42px);z-index:5;color:var(--on-night-mute);text-align:right}
+.gcap b{color:var(--edge);font-weight:400}.gcap a{color:var(--acc);text-decoration:none}
+@media (max-width:900px){.strip{height:24vh;bottom:11vh}.gate{height:calc(24vh + 28px);bottom:calc(11vh - 14px)}.gcap{left:var(--g);right:var(--g);text-align:left;top:auto;bottom:calc(35vh + 52px)}}
+</style>
+</head>
+<body class="dark">
+<section class="mast" id="mast" aria-label="Selected work">
+  <div class="head">
+    <p class="kicker mono">Twelve of 56 pieces &middot; 2005 to 2026</p>
+    <h1>Twenty years of work. <em>Still running.</em></h1>
+    <p>Strategy, words and websites for brands in the Gulf and Asia.</p>
+  </div>
+  <p class="gcap mono" id="gcap"></p>
+  <div class="strip" id="strip"><div class="track" id="track"></div></div>
+  <div class="gate" id="gate"><span class="mono">In the gate</span></div>
+</section>
+<section class="rest"><p>The strip runs on its own, speeds up as you scroll and stops when you hover. The frame in the gate plays in colour.</p></section>
+<script src="shell.js"></script>
+<script src="pieces.js"></script>
+<script>
+(() => {
+  const track = document.getElementById('track'), strip = document.getElementById('strip'), gate = document.getElementById('gate'), gcap = document.getElementById('gcap');
+  const list = [...PIECES, ...PIECES]; // two passes so the loop is seamless
+  track.innerHTML = list.map((p, i) => `<a class="fr" href="${CS + p.cs}" aria-label="${p.title}"><img src="${A + p.img}" alt="">${p.vid ? `<video muted loop playsinline preload="none" data-src="${A + p.vid}"></video>` : ''}<span class="n mono">${String(i % PIECES.length + 1).padStart(2, '0')}</span></a>`).join('');
+  const frs = [...track.children];
+  let x = 0, speed = 38, target = 38, hover = false, lastY = scrollY, lit = -1;
+  strip.addEventListener('mouseenter', () => hover = true);
+  strip.addEventListener('mouseleave', () => hover = false);
+  addEventListener('scroll', () => { target = 38 + Math.min(900, Math.abs(scrollY - lastY) * 14); lastY = scrollY; }, { passive: true });
+  function size() { const f = frs[0].getBoundingClientRect(); gate.style.width = f.width + 16 + 'px'; }
+  size(); addEventListener('resize', size);
+  let t0 = performance.now();
+  function tick(now) {
+    const dt = Math.min(.05, (now - t0) / 1000); t0 = now;
+    target += (38 - target) * .04;
+    speed += ((hover ? 0 : target) - speed) * .08;
+    if (!reduceMotion) x -= speed * dt;
+    const half = track.scrollWidth / 2;
+    if (-x >= half) x += half;
+    track.style.transform = `translate3d(${x}px,0,0)`;
+    strip.style.setProperty('--sp', x + 'px');
+    // The frame whose centre is in the gate lights up.
+    const gc = innerWidth / 2;
+    let best = -1, bd = 1e9;
+    frs.forEach((f, i) => { const r = f.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - gc); if (d < bd) { bd = d; best = i; } });
+    if (best !== lit) {
+      if (lit >= 0) { frs[lit].classList.remove('lit'); frs[lit].querySelector('video')?.pause(); }
+      lit = best; const f = frs[lit], v = f.querySelector('video'), p = list[lit];
+      f.classList.add('lit');
+      if (v) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); }
+      gcap.innerHTML = `<b>${String(lit % PIECES.length + 1).padStart(2, '0')} / 12</b> &nbsp; ${p.title} &nbsp;&middot;&nbsp; ${p.year} &nbsp; <a href="${CS + p.cs}">Case study &#8599;</a>`;
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

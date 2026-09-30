@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masthead 5: Rotating develop</title>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@300,301&f[]=switzer@300,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+body{background:var(--night)}
+.stage{position:absolute;inset:0;background:#F4EFE3}
+.stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.stage video.on{opacity:1;z-index:2}
+.stage::after{content:"";position:absolute;inset:0;z-index:3;background:linear-gradient(90deg,rgba(11,11,10,.86),rgba(11,11,10,.15) 62%),linear-gradient(0deg,rgba(11,11,10,.85),transparent 34%)}
+.cap{position:absolute;right:var(--g);bottom:84px;z-index:5;color:var(--on-night-mute);text-align:right}
+.cap b{color:var(--edge);font-weight:400}.cap a{color:var(--acc);text-decoration:none}
+.ticks{position:absolute;left:var(--g);right:var(--g);bottom:52px;z-index:5;display:flex;gap:6px}
+.ticks i{flex:1;height:2px;background:rgba(237,233,224,.2);overflow:hidden}
+.ticks i b{display:block;height:100%;width:0;background:var(--acc)}
+</style>
+</head>
+<body class="dark">
+<section class="mast" id="mast" aria-label="Selected work">
+  <div class="stage" id="stage"></div>
+  <div class="head">
+    <p class="kicker mono">Five films &middot; 2016 to 2025</p>
+    <h1>Twenty years of work. <em>One print at a time.</em></h1>
+    <p>Strategy, words and websites for brands in the Gulf and Asia.</p>
+  </div>
+  <p class="cap mono" id="cap"></p>
+  <div class="ticks" id="ticks"></div>
+</section>
+<section class="rest"><p>Each film develops over the last and holds for four seconds. The bar shows where you are in the five.</p></section>
+<script src="shell.js"></script>
+<script src="pieces.js"></script>
+<script>
+(() => {
+  const films = PIECES.filter(p => p.vid && p.id !== 'gsg-site' && p.id !== 'la');
+  const stage = document.getElementById('stage'), cap = document.getElementById('cap'), ticks = document.getElementById('ticks');
+  stage.innerHTML = films.map(p => `<video muted loop playsinline preload="auto" src="${A + p.vid}" poster="${A + p.img}"></video>`).join('');
+  ticks.innerHTML = films.map(() => '<i><b></b></i>').join('');
+  const vids = [...stage.children], bars = [...ticks.querySelectorAll('b')], HOLD = 4200;
+  let k = -1;
+  function next() {
+    const prev = vids[k]; k = (k + 1) % vids.length;
+    const v = vids[k];
+    vids.forEach(x => x.style.zIndex = '');
+    if (prev) prev.style.zIndex = 1;
+    v.classList.add('on'); v.currentTime = 0; v.play().catch(() => {});
+    developEl(v, 2200);
+    setTimeout(() => { if (prev) { prev.classList.remove('on'); prev.pause(); } }, 2300);
+    const p = films[k];
+    cap.innerHTML = `<b>${String(k + 1).padStart(2, '0')} / ${films.length}</b> &nbsp; ${p.title} &nbsp;&middot;&nbsp; ${p.year} &nbsp; <a href="${CS + p.cs}">Case study &#8599;</a>`;
+    bars.forEach((b, j) => { b.getAnimations().forEach(a => a.cancel()); b.style.width = j < k ? '100%' : '0'; });
+    if (!reduceMotion) bars[k].animate([{ width: '0' }, { width: '100%' }], { duration: HOLD, fill: 'forwards' });
+  }
+  next();
+  if (!reduceMotion) setInterval(next, HOLD);
+})();
+</script>
+</body>
+</html>

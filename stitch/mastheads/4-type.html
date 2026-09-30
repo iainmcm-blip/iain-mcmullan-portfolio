@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Masthead 4: Type window</title>
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@300,301,400&f[]=switzer@300,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="base.css">
+<style>
+.mast{background:var(--paper)}
+.films{position:absolute;inset:0}
+.films video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.films video.on{opacity:1}
+/* Paper sits over the film; lighten blending lets the film show only where the type is black. */
+.knock{position:absolute;inset:0;background:var(--paper);mix-blend-mode:lighten;display:flex;flex-direction:column;justify-content:center;padding:0 var(--g)}
+.knock h1{color:#000;font:400 clamp(4rem,15.5vw,17rem)/.82 'Zodiak',Georgia,serif;letter-spacing:-.045em}
+.knock h1 span{display:block}
+.knock h1 .i{font-style:italic;font-weight:300;padding-left:.6em}
+.under{position:absolute;left:var(--g);right:var(--g);bottom:44px;z-index:5;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.under p{max-width:28rem;font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.4;color:#4a463f}
+.under .mono{color:var(--mute);text-align:right}
+.under .mono b{color:var(--pencil);font-weight:400}
+@media (max-width:900px){.knock h1{font-size:23vw}.under{flex-direction:column;align-items:flex-start}.under .mono{text-align:left}}
+</style>
+</head>
+<body>
+<section class="mast" id="mast" aria-label="Twenty years of work">
+  <div class="films" id="films"></div>
+  <div class="knock" aria-hidden="true"><h1><span>Twenty</span><span>years</span><span class="i">of work.</span></h1></div>
+  <div class="under"><p>Strategy, words and websites for brands in the Gulf and Asia.</p><p class="mono" id="now"></p></div>
+  <h1 style="position:absolute;left:-9999px">Twenty years of work</h1>
+</section>
+<section class="rest"><p>The films play through the letterforms, one after another. Below the headline, a line names what is showing.</p></section>
+<script src="shell.js"></script>
+<script src="pieces.js"></script>
+<script>
+(() => {
+  const films = PIECES.filter(p => p.vid && p.id !== 'gsg-site' && p.id !== 'la');
+  const box = document.getElementById('films'), now = document.getElementById('now');
+  box.innerHTML = films.map(p => `<video muted loop playsinline preload="auto" src="${A + p.vid}" poster="${A + p.img}"></video>`).join('');
+  const vids = [...box.children];
+  let k = 0;
+  function show(i) {
+    vids.forEach((v, j) => { v.classList.toggle('on', j === i); if (j === i) v.play().catch(() => {}); else setTimeout(() => v.pause(), 1300); });
+    now.innerHTML = `Showing <b>${String(i + 1).padStart(2, '0')}</b> / ${films.length} &nbsp; ${films[i].title} &middot; ${films[i].year}`;
+  }
+  show(0);
+  if (!reduceMotion) setInterval(() => show(k = (k + 1) % vids.length), 4200);
+})();
+</script>
+</body>
+</html>
