@@ -99,8 +99,82 @@
   });
 
   // 1. Develop: the print comes up from the white, darks first, uneven, warm, then true colour.
+  // WebGL version: the image rises out of the paper tone, darks first, in uneven patches, warm mono then colour.
+  // Needs the image to be same-origin, so it falls back to the CSS filter version when opened from disk.
+  const FS = `precision mediump float;
+    uniform sampler2D u; uniform float t; uniform vec2 sc, of; varying vec2 v;
+    float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
+    float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+1.),f.x),f.y);}
+    void main(){
+      vec2 uv=v*sc+of;
+      uv+=vec2(n(v*3.+t*2.)-.5,n(v*3.-t*2.)-.5)*.004*(1.-t);
+      vec3 c=texture2D(u,uv).rgb;
+      float l=dot(c,vec3(.299,.587,.114));
+      float patch=n(v*vec2(5.,3.))*.6+n(v*17.)*.4;
+      float dev=smoothstep(0.,1.,clamp(t*1.7-l*.95-patch*.4+.15,0.,1.));
+      vec3 paper=vec3(.957,.937,.89);
+      vec3 mono=vec3(l)*vec3(1.06,.97,.84);
+      vec3 col=mix(paper,mono,dev);
+      col=mix(col,c,smoothstep(.55,1.,t));
+      col+=(h(v*900.+t)-.5)*.035*(1.-t);
+      gl_FragColor=vec4(col,1.);
+    }`;
+  const VS = 'attribute vec2 p; varying vec2 v; void main(){ v=p*.5+.5; gl_Position=vec4(p,0.,1.); }';
+  let gl = null, glCanvas = null, glProg = null;
+  function glSetup() {
+    if (gl !== null) return gl;
+    glCanvas = document.createElement('canvas');
+    glCanvas.className = 'dev';
+    gl = glCanvas.getContext('webgl', { premultipliedAlpha: false }) || false;
+    if (!gl) return gl;
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+    glProg = gl.createProgram();
+    gl.attachShader(glProg, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(glProg, sh(gl.FRAGMENT_SHADER, FS));
+    gl.linkProgram(glProg);
+    if (!gl.getProgramParameter(glProg, gl.LINK_STATUS)) { gl = false; return gl; }
+    gl.useProgram(glProg);
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(glProg, 'p');
+    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
+    [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    hero.insertBefore(glCanvas, heroImg.nextSibling);
+    return gl;
+  }
+  let devRun = 0;
+  function developGL(img) {
+    if (!glSetup()) return false;
+    try {
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+      if (gl.getError() !== gl.NO_ERROR) return false;
+    } catch (e) { gl = false; glCanvas.remove(); return false; } // tainted (file://): use the CSS version
+    const dpr = Math.min(devicePixelRatio || 1, 1.5), W = hero.clientWidth, H = hero.clientHeight;
+    glCanvas.width = W * dpr; glCanvas.height = H * dpr; gl.viewport(0, 0, glCanvas.width, glCanvas.height);
+    const s = Math.max(W / img.naturalWidth, H / img.naturalHeight), sx = W / (img.naturalWidth * s), sy = H / (img.naturalHeight * s);
+    gl.uniform2f(gl.getUniformLocation(glProg, 'sc'), sx, sy);
+    gl.uniform2f(gl.getUniformLocation(glProg, 'of'), (1 - sx) / 2, (1 - sy) / 2);
+    const ut = gl.getUniformLocation(glProg, 't'), run = ++devRun, t0 = performance.now(), D = 3200;
+    glCanvas.style.transition = 'none'; glCanvas.style.opacity = 1;
+    const frame = now => {
+      if (run !== devRun) return;
+      const p = Math.min(1, (now - t0) / D);
+      gl.uniform1f(ut, 1 - Math.pow(1 - p, 2.2));
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (p < 1) requestAnimationFrame(frame);
+      else { glCanvas.style.transition = 'opacity .5s'; glCanvas.style.opacity = 0; }
+    };
+    requestAnimationFrame(frame);
+    return true;
+  }
   function develop(el) {
     if (reduce) return;
+    const go = () => { if (!developGL(el)) developCSS(el); };
+    if (el.complete && el.naturalWidth) go(); else el.addEventListener('load', go, { once: true });
+  }
+  function developCSS(el) {
     el.animate([
       { filter: 'grayscale(1) sepia(.35) brightness(2.4) contrast(.28) blur(1.5px)', opacity: .15 },
       { filter: 'grayscale(1) sepia(.45) brightness(1.7) contrast(.55) blur(.6px)', opacity: .85, offset: .3 },

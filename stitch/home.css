@@ -222,3 +222,4 @@ h2 em,h1 em{font-style:italic;color:var(--acc)}
   *{scroll-behavior:auto!important}
   .media video,.media img{filter:none}
 }
+.hero .dev{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0}
