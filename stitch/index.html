@@ -27,21 +27,15 @@
 </header>
 
 <main>
-<!-- 1 & 2. Contact sheet masthead: loader, loupe, grease pencil, develop -->
-<section class="mast" id="mast" aria-label="Twenty years of work">
-  <div class="sheet" id="sheet" aria-hidden="true"></div>
-  <div class="count mono"><span>Contact sheet <b id="n">0000</b> / <span id="tot">0056</span></span><span id="yr">2005</span></div>
-  <div class="hero" id="hero"><div class="hero-media"><img id="heroImg" alt=""><video id="heroVid" muted loop playsinline preload="auto" hidden></video></div></div>
-  <div class="copy">
-    <p class="kicker mono"><span id="proof">Frame 00 of 56</span> &nbsp;Selected at random, every visit</p>
-    <h1>Twenty years of work. <em>One worth circling.</em></h1>
+<!-- 1. The living grid: twelve equal tiles developing in sequence -->
+<section class="mast" id="mast" aria-labelledby="mast-h">
+  <div class="mg-copy">
+    <p class="kicker mono">Twelve of 56 pieces &nbsp;&middot;&nbsp; 2005 to 2026</p>
+    <h1 id="mast-h">Twenty years of work. <em>Developed.</em></h1>
     <p class="lede">Strategy, words and websites for brands in the Gulf and Asia.</p>
-    <div class="cta"><a class="btn btn-light mono" href="#work">See the work &darr;</a><button class="btn btn-ghost mono" id="toSheet" type="button">Open the contact sheet</button></div>
+    <div class="cta"><a class="btn btn-dark mono" href="#work">See the work &darr;</a><a class="btn btn-ghost-dark mono" href="archive.html">All 56 pieces</a></div>
   </div>
-  <p class="cap mono" id="cap"></p>
-  <div class="reel" id="reel" role="list" aria-label="All 56 pieces"></div>
-  <button class="skip mono" id="skip" type="button">Skip</button>
-  <div class="loupe" id="loupe" aria-hidden="true"><div class="loupe-in" id="loupeIn"></div><span class="loupe-t mono" id="loupeT"></span></div>
+  <div class="mg-grid" id="grid" aria-label="Selected work"></div>
 </section>
 
 <!-- 3 & 4. Selected work: the reel lifts into this strip; rows are marked up as they arrive -->

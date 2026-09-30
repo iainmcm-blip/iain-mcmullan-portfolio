@@ -1,16 +1,12 @@
 (() => {
-  const { A, CS, IMG, VIDEO, LIVE, caseFor, loopPath, linePath } = window.SITE;
+  const { A, CS, IMG, loopPath, linePath } = window.SITE;
   const $ = s => document.querySelector(s);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const NS = 'http://www.w3.org/2000/svg';
-  const body = document.body, mast = $('#mast'), sheet = $('#sheet'), hero = $('#hero'), heroImg = $('#heroImg'), heroVid = $('#heroVid');
-  const cap = $('#cap'), reel = $('#reel'), tip = $('#tip'), loupe = $('#loupe'), loupeIn = $('#loupeIn'), loupeT = $('#loupeT');
+  const body = document.body, mast = $('#mast'), grid = $('#grid');
 
   const work = [...window.WORK].sort((a, b) => a.year - b.year);
-  // The masthead opens on a film (screen recordings stay in the reel); a ?pick= link can name any pictured piece.
-  const films = ['hilton-apac-conference', 'uob-gallery', 'emirates-adventure-awaits', 'malaysia-airlines-hospitality', 'ntuc-mfs-campaign'];
-  let heroId = new URLSearchParams(location.search).get('pick') || films[Math.floor(Math.random() * films.length)];
 
   // Draws a pencil stroke along a path; instant under reduced motion.
   function draw(path, ms = 700, delay = 0) {
@@ -33,257 +29,54 @@
     parent.appendChild(svg);
     return path;
   }
-  const hover = (el, text) => {
-    el.addEventListener('mouseenter', () => { tip.textContent = text; tip.style.opacity = 1; });
-    el.addEventListener('mousemove', e => { tip.style.left = e.clientX + 14 + 'px'; tip.style.top = e.clientY + 16 + 'px'; });
-    el.addEventListener('mouseleave', () => { tip.style.opacity = 0; });
+
+
+  /* ---------- 1. The living grid ---------- */
+  // Twelve equal tiles, so no single project carries the masthead. They arrive in reading order, then develop one
+  // after another in the same order: each rises from a pale print to full colour with its film running, and the next
+  // is already coming up as the last one fades, so the sequence flows without a break. Hovering takes over.
+  const TILES = [
+    ['Hilton APAC GM Conference', 2024, 'video/work/hilton-hd.jpg', 'video/work/hilton-hd.mp4', 'hilton-asia-conference.html'],
+    ['GSG25 anniversary microsite', 2026, 'video/work/gsg-timeline.jpg', 'video/work/gsg-timeline.mp4', 'gsg25.html'],
+    ['Emirates: Adventure Awaits', 2016, 'video/work/pilots-ben.jpg', 'video/work/pilots-ben.mp4', 'emirates-pilot-recruitment.html'],
+    ['The UOB Gallery: Right By You', 2025, 'video/work/uob-gallery-hd.jpg', 'video/work/uob-gallery-hd.mp4', 'uob-gallery.html'],
+    ['LA Scenting website', 2026, 'img/work/la-hero-film.jpg', 'video/work/la-scroll.mp4', 'la-scenting.html'],
+    ['Emirates Flight Training Academy', 2017, 'img/efta-hero.webp', null, 'emirates-flight-training-academy.html'],
+    ['GSG25 anniversary exhibition', 2026, 'img/work/gsg-exhibit-2.jpg', null, 'gsg25.html'],
+    ['Malaysia Airlines: This is Malaysian Hospitality', 2022, 'video/work/mas-hospitality.jpg', 'video/work/mas-hospitality.mp4', 'malaysia-airlines.html'],
+    ['NTUC My First Skool', 2019, 'video/work/ntuc-film.jpg', 'video/work/ntuc-film.mp4', 'ntuc-my-first-skool.html'],
+    ['Casillero del Diablo: Legendary Pairings', 2020, 'img/casillero-del-diablo-hero.jpg', null, 'casillero-del-diablo.html'],
+    ['Emirates Skywards Tier Advancement', 2016, 'img/skywards-tiers-group.avif', null, 'emirates-skywards-tier-advancement.html'],
+    ['Emirates Skywards: My Family', 2018, 'img/skywards-my-family-photo.jpg', null, 'emirates-skywards-my-family.html']
+  ];
+  grid.innerHTML = TILES.map(([t, y, img, vid, cs], i) => `<a class="tile" href="${CS + cs}" style="--i:${i}"><img src="${A + img}" alt="${t}">${vid ? `<video muted loop playsinline preload="none" data-src="${A + vid}"></video>` : ''}<span class="tile-cap mono">${y} &middot; ${t}</span></a>`).join('');
+  const tiles = [...grid.children];
+  const dev = (t, on) => {
+    t.classList.toggle('dev', on);
+    const v = t.querySelector('video');
+    if (!v) return;
+    if (on) { if (!v.src) v.src = v.dataset.src; v.currentTime = 0; v.play().catch(() => {}); }
+    else setTimeout(() => { if (!t.classList.contains('dev')) v.pause(); }, 1700);
   };
-
-  /* ---------- 1 & 2. Contact sheet ---------- */
-  const rows = [];
-  for (let i = 0; i < work.length; i += 10) rows.push(work.slice(i, i + 10));
-  const strips = [], frames = [];
-  rows.forEach((row, si) => {
-    const s = document.createElement('div');
-    s.className = 'strip';
-    const y0 = row[0].year, y1 = row[row.length - 1].year;
-    const clients = [...new Set(row.map(p => p.client))].join(' · ');
-    s.innerHTML = `<div class="edge"><span class="typed">${y0 === y1 ? y0 : y0 + '–' + y1} &nbsp; ${clients}</span><span>${String(si + 1).padStart(2, '0')}</span></div><div class="frames"></div>`;
-    const g = s.querySelector('.frames');
-    row.forEach(p => {
-      const i = frames.length;
-      const f = document.createElement('div');
-      f.className = 'fr';
-      f.innerHTML = (IMG[p.id] ? `<img src="${A + IMG[p.id]}" alt="">` : `<div class="t"><small>${p.year}</small></div>`) + `<span class="n">${i + 1}</span>`;
-      if (!IMG[p.id]) f.classList.add('typed');
-      f.addEventListener('click', () => { if (!IMG[p.id]) return; finish(); show(i, true); });
-      g.appendChild(f);
-      frames.push({ el: f, p });
-    });
-    sheet.appendChild(s);
-    strips.push(s);
-  });
-
-  // 2. Loupe: magnifies the frame under the cursor while the sheet is showing.
-  if (fine) {
-    const Z = 2.6;
-    let cur = null;
-    sheet.addEventListener('mousemove', e => {
-      const fr = e.target.closest('.fr');
-      loupe.style.transform = '';
-      loupe.style.left = e.clientX + 'px'; loupe.style.top = e.clientY + 'px';
-      if (!fr || !fr.classList.contains('on')) { loupe.classList.remove('on'); cur = null; return; }
-      const k = [...sheet.querySelectorAll('.fr')].indexOf(fr), { p } = frames[k];
-      const r = fr.getBoundingClientRect();
-      if (cur !== fr) {
-        cur = fr;
-        loupeIn.className = 'loupe-in' + (IMG[p.id] ? '' : ' txt');
-        loupeIn.style.backgroundImage = IMG[p.id] ? `url("${A + IMG[p.id]}")` : '';
-        loupeIn.textContent = IMG[p.id] ? '' : p.title;
-        loupeIn.style.width = r.width * Z + 'px'; loupeIn.style.height = r.height * Z + 'px';
-        loupeT.textContent = `${k + 1} · ${p.year} · ${p.title}`;
+  const visible = () => tiles.filter(t => t.offsetParent);
+  setTimeout(() => mast.classList.add('in'), 80); // after first paint, so the reveal transitions run
+  if (!reduce) {
+    const HOLD = 3400, OVERLAP = 1100;
+    let k = -1, cur = null, hovering = false;
+    const step = () => {
+      if (!hovering) {
+        const list = visible();
+        const prev = cur;
+        k = (k + 1) % list.length; cur = list[k];
+        dev(cur, true);
+        if (prev) setTimeout(() => { if (prev !== cur && !prev.matches(':hover')) dev(prev, false); }, OVERLAP);
       }
-      loupeIn.style.transform = `translate(${90 - (e.clientX - r.left) * Z}px, ${90 - (e.clientY - r.top) * Z}px)`;
-      loupe.classList.add('on');
-    });
-    sheet.addEventListener('mouseleave', () => loupe.classList.remove('on'));
-  }
-
-  work.forEach((p, i) => {
-    if (!IMG[p.id]) return; // no gaps: the reel only carries pieces that can be shown
-    const b = document.createElement('button');
-    b.setAttribute('role', 'listitem');
-    b.setAttribute('aria-label', `${p.year}: ${p.title}`);
-    b.dataset.id = p.id; b.dataset.i = i;
-    b.innerHTML = `<img src="${A + IMG[p.id]}" alt="">` + (VIDEO[p.id] ? '<i class="film" aria-hidden="true"></i>' : '');
-    hover(b, `${p.year} · ${p.title}`);
-    b.addEventListener('click', () => show(i, true));
-    reel.appendChild(b);
-  });
-
-  // 1. Develop, in WebGL: the print rises out of the paper, darks first, in uneven patches spreading from where the
-  // pencil circled it, warm black and white, then colour. The cursor is the developer: wherever it passes, the print
-  // comes up early, with a ragged edge. Works on stills and on film (the film runs while it develops).
-  // Needs same-origin media, so it falls back to a CSS filter version when the page is opened from disk.
-  const FS = `precision mediump float;
-    uniform sampler2D u, m; uniform float t; uniform vec2 sc, of, o, asp; varying vec2 v;
-    float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
-    float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+1.),f.x),f.y);}
-    void main(){
-      vec2 uv=v*sc+of;
-      uv+=vec2(n(v*3.+t*2.)-.5,n(v*3.-t*2.)-.5)*.004*(1.-t);
-      vec3 c=texture2D(u,uv).rgb;
-      float l=dot(c,vec3(.299,.587,.114));
-      float patch=n(v*vec2(5.,3.))*.6+n(v*17.)*.4;
-      float d=length((v-o)*asp);
-      float brush=smoothstep(.3,.62,texture2D(m,vec2(v.x,1.-v.y)).r+(patch-.5)*.45);
-      float dev=clamp(t*2.1-l*.95-patch*.4+.15-d*.55,0.,1.);
-      dev=smoothstep(0.,1.,max(dev,brush*(1.05-l*.35)));
-      vec3 paper=vec3(.957,.937,.89);
-      vec3 mono=vec3(l)*vec3(1.06,.97,.84);
-      vec3 col=mix(paper,mono,dev);
-      col=mix(col,c,max(smoothstep(.55,1.,t),brush*smoothstep(.15,.6,t)*.85));
-      col+=(h(v*900.+t)-.5)*.035*(1.-t);
-      gl_FragColor=vec4(col,1.);
-    }`;
-  const VS = 'attribute vec2 p; varying vec2 v; void main(){ v=p*.5+.5; gl_Position=vec4(p,0.,1.); }';
-  let gl = null, glCanvas = null, glProg = null, texU = null, texM = null;
-  const maskC = document.createElement('canvas'), mctx = maskC.getContext('2d');
-  maskC.width = 512; maskC.height = 320;
-  function glSetup() {
-    if (gl !== null) return gl;
-    glCanvas = document.createElement('canvas');
-    glCanvas.className = 'dev';
-    gl = glCanvas.getContext('webgl', { premultipliedAlpha: false }) || false;
-    if (!gl) return gl;
-    const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); return x; };
-    glProg = gl.createProgram();
-    gl.attachShader(glProg, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(glProg, sh(gl.FRAGMENT_SHADER, FS));
-    gl.linkProgram(glProg);
-    if (!gl.getProgramParameter(glProg, gl.LINK_STATUS)) { gl = false; return gl; }
-    gl.useProgram(glProg);
-    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(glProg, 'p');
-    gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const mk = unit => { const tx = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, tx);
-      [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); return tx; };
-    texU = mk(0); texM = mk(1);
-    gl.uniform1i(gl.getUniformLocation(glProg, 'u'), 0); gl.uniform1i(gl.getUniformLocation(glProg, 'm'), 1);
-    hero.insertBefore(glCanvas, hero.querySelector('.hero-media').nextSibling);
-    return gl;
-  }
-  let devRun = 0, devLive = false;
-  // The developer brush: soft, uneven dabs into a small mask; developed areas stay developed, like the real thing.
-  function dab(x, y) {
-    const r = 26 + Math.random() * 20;
-    const g = mctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, 'rgba(255,255,255,.55)'); g.addColorStop(1, 'rgba(255,255,255,0)');
-    mctx.fillStyle = g; mctx.beginPath(); mctx.arc(x, y, r, 0, 7); mctx.fill();
-  }
-  if (fine) mast.addEventListener('pointermove', e => {
-    if (!devLive) return;
-    const r = hero.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width * maskC.width, y = (e.clientY - r.top) / r.height * maskC.height;
-    dab(x, y); dab(x + (Math.random() - .5) * 24, y + (Math.random() - .5) * 24);
-  });
-  function developGL(el, isVid, origin) {
-    if (!glSetup()) return false;
-    const iw = isVid ? el.videoWidth : el.naturalWidth, ih = isVid ? el.videoHeight : el.naturalHeight;
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texU);
-    try {
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, el);
-      if (gl.getError() !== gl.NO_ERROR) return false;
-    } catch (e) { gl = false; glCanvas.remove(); return false; } // tainted (file://): use the CSS version
-    mctx.clearRect(0, 0, maskC.width, maskC.height);
-    const dpr = Math.min(devicePixelRatio || 1, 1.5), W = hero.clientWidth, H = hero.clientHeight;
-    glCanvas.width = W * dpr; glCanvas.height = H * dpr; gl.viewport(0, 0, glCanvas.width, glCanvas.height);
-    const s = Math.max(W / iw, H / ih), sx = W / (iw * s), sy = H / (ih * s);
-    const U = k => gl.getUniformLocation(glProg, k);
-    gl.uniform2f(U('sc'), sx, sy); gl.uniform2f(U('of'), (1 - sx) / 2, (1 - sy) / 2);
-    gl.uniform2f(U('o'), origin[0], origin[1]); gl.uniform2f(U('asp'), W / H, 1);
-    const ut = U('t'), run = ++devRun, t0 = performance.now(), D = 4600;
-    glCanvas.style.transition = 'none'; glCanvas.style.opacity = 1; devLive = true;
-    const frame = now => {
-      if (run !== devRun) return;
-      const p = Math.min(1, (now - t0) / D);
-      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texU);
-      if (isVid && el.readyState >= 2) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, el);
-      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texM);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, maskC);
-      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-      gl.uniform1f(ut, 1 - Math.pow(1 - p, 1.8));
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      if (p < 1) requestAnimationFrame(frame);
-      else { devLive = false; glCanvas.style.transition = 'opacity .6s'; glCanvas.style.opacity = 0; }
+      setTimeout(step, HOLD);
     };
-    requestAnimationFrame(frame);
-    return true;
-  }
-  function develop(el, isVid, origin = [.5, .5]) {
-    if (reduce) return;
-    const ready = isVid ? el.readyState >= 2 : el.complete && el.naturalWidth;
-    const go = () => { if (!developGL(el, isVid, origin)) developCSS(el); };
-    if (ready) go(); else el.addEventListener(isVid ? 'loadeddata' : 'load', go, { once: true });
-  }
-  function developCSS(el) {
-    el.animate([
-      { filter: 'grayscale(1) sepia(.35) brightness(2.4) contrast(.28) blur(1.5px)', opacity: .15 },
-      { filter: 'grayscale(1) sepia(.45) brightness(1.7) contrast(.55) blur(.6px)', opacity: .85, offset: .3 },
-      { filter: 'grayscale(.7) sepia(.35) brightness(1.2) contrast(.85) blur(0)', opacity: 1, offset: .62 },
-      { filter: 'grayscale(0) sepia(0) brightness(1) contrast(1) blur(0)', opacity: 1 }
-    ], { duration: 2600, easing: 'cubic-bezier(.3,.1,.2,1)' });
-  }
-
-  function show(i, animate, origin) {
-    const { p } = frames[i];
-    heroId = p.id;
-    hero.classList.remove('live'); void hero.offsetWidth;
-    const vid = VIDEO[p.id] && films.includes(p.id);
-    heroImg.hidden = !!vid; heroVid.hidden = !vid;
-    if (vid) {
-      heroVid.poster = A + IMG[p.id];
-      if (!heroVid.src.endsWith(VIDEO[p.id])) heroVid.src = A + VIDEO[p.id];
-      heroVid.currentTime = 0;
-      if (!reduce) heroVid.play().catch(() => {});
-      if (animate) develop(heroVid, true, origin);
-    } else {
-      heroVid.pause();
-      heroImg.src = A + IMG[p.id]; heroImg.alt = p.title;
-      if (animate) develop(heroImg, false, origin);
-    }
-    hero.classList.add('live');
-    const cs = caseFor(p);
-    const links = [cs && `<a href="${CS + cs}">Case study &#8599;</a>`, LIVE[p.id] && `<a href="${LIVE[p.id]}" target="_blank" rel="noopener noreferrer">Live site &#8599;</a>`].filter(Boolean).join(' &nbsp; ');
-    cap.innerHTML = `<b>${String(i + 1).padStart(2, '0')} / ${work.length}</b> &nbsp; ${p.client} &nbsp;·&nbsp; ${p.title} &nbsp;·&nbsp; ${p.year}${links ? ' &nbsp; ' + links : ''}`;
-    $('#proof').textContent = `Frame ${String(i + 1).padStart(2, '0')} of ${work.length}`;
-    [...reel.children].forEach(b => b.classList.toggle('on', +b.dataset.i === i));
-  }
-
-  const heroIdx = () => frames.findIndex(f => f.p.id === heroId);
-  const timers = [];
-  let ended = false;
-  const at = (ms, fn) => timers.push(setTimeout(fn, ms));
-  const setDark = on => body.classList.toggle('on-dark', on);
-
-  function finish() {
-    if (ended) return;
-    ended = true;
-    timers.forEach(clearTimeout);
-    mast.querySelectorAll('.pencil').forEach(n => n.remove());
-    strips.forEach(s => s.classList.add('in'));
-    frames.forEach(f => f.el.classList.add('on'));
-    loupe.classList.remove('on');
-    show(heroIdx(), false);
-    hero.style.visibility = 'visible';
-    mast.classList.add('done');
-    setDark(true);
-  }
-  $('#skip').addEventListener('click', finish);
-  addEventListener('keydown', e => { if (e.key === 'Escape') finish(); });
-  // "Open the contact sheet" returns to the full sheet; any frame develops into the masthead.
-  $('#toSheet').addEventListener('click', () => { mast.classList.remove('done'); setDark(false); hero.style.visibility = 'hidden'; ended = false; });
-
-  if (reduce) finish();
-  else {
-    strips.forEach((s, i) => at(120 + i * 90, () => s.classList.add('in')));
-    const T0 = 550, STEP = 40, n = $('#n'), yr = $('#yr');
-    frames.forEach((f, i) => at(T0 + i * STEP, () => { f.el.classList.add('on'); n.textContent = String(i + 1).padStart(4, '0'); yr.textContent = f.p.year; }));
-    const T1 = T0 + frames.length * STEP + 450;
-    at(T1, () => draw(svgOver(frames[heroIdx()].el, 14, loopPath, mast), 700));
-    at(T1 + 1150, () => {
-      const r = frames[heroIdx()].el.getBoundingClientRect(), m = mast.getBoundingClientRect();
-      show(heroIdx(), true, [(r.left + r.width / 2 - m.left) / m.width, 1 - (r.top + r.height / 2 - m.top) / m.height]);
-      hero.style.visibility = 'visible';
-      hero.animate([
-        { clipPath: `inset(${r.top - m.top}px ${m.right - r.right}px ${m.bottom - r.bottom}px ${r.left - m.left}px)` },
-        { clipPath: 'inset(0px 0px 0px 0px)' }
-      ], { duration: 1100, easing: 'cubic-bezier(.7,0,.2,1)' });
-      mast.querySelector('.pencil')?.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 350, fill: 'forwards' });
-      at(550, () => { ended = true; mast.classList.add('done'); setDark(true); loupe.classList.remove('on'); });
+    setTimeout(step, 400 + tiles.length * 110 + 500);
+    tiles.forEach(t => {
+      t.addEventListener('mouseenter', () => { hovering = true; if (cur && cur !== t) dev(cur, false); dev(t, true); });
+      t.addEventListener('mouseleave', () => { hovering = false; dev(t, false); cur = t; k = visible().indexOf(t); });
     });
   }
 
@@ -359,46 +152,8 @@
   }), { threshold: [0, .45] });
   document.querySelectorAll('.row').forEach(r => rowIO.observe(r));
 
-  // 3. On the first scroll, the reel lifts: the five featured thumbnails fly into the index strip.
-  const strip = $('#indexStrip');
-  const flyers = FEATURED.map(f => {
-    const el = document.createElement('div');
-    el.className = 'flyer';
-    el.innerHTML = `<img src="${A + (IMG[f.id] || f.img)}" alt="">`;
-    el.style.display = 'none';
-    document.body.appendChild(el);
-    return { el, id: f.id };
-  });
-  const docRect = el => { const r = el.getBoundingClientRect(); return { x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: r.height }; };
-  let fromRects = null;
-  function measure() {
-    if (!mast.classList.contains('done')) { fromRects = null; return; }
-    const sy = scrollY;
-    fromRects = flyers.map(f => { const b = reel.querySelector(`[data-id="${f.id}"]`); const r = b.getBoundingClientRect(); return { x: r.left + scrollX, y: r.top + sy, w: r.width, h: r.height }; });
-  }
-  function onScroll() {
-    body.classList.toggle('scrolled', scrollY > 40);
-    if (reduce || !mast.classList.contains('done')) return;
-    if (!fromRects && scrollY < 40) measure();
-    if (!fromRects) return;
-    const tos = [...strip.children].map(docRect);
-    const end = Math.max(1, tos[0].y - innerHeight * .35);
-    const p = Math.min(1, Math.max(0, scrollY / end));
-    const e = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
-    const flying = p > 0 && p < 1;
-    strip.classList.toggle('hold', p < 1);
-    flyers.forEach((f, k) => {
-      const a = fromRects[k], b = tos[k];
-      f.el.style.display = flying ? 'block' : 'none';
-      if (!flying) return;
-      const x = a.x + (b.x - a.x) * e, y = a.y + (b.y - a.y) * e, w = a.w + (b.w - a.w) * e, h = a.h + (b.h - a.h) * e;
-      Object.assign(f.el.style, { left: x + 'px', top: y + 'px', width: w + 'px', height: h + 'px' });
-      f.el.querySelector('img').style.filter = `grayscale(${e})`;
-    });
-    reel.style.opacity = p > 0 ? String(1 - Math.min(1, p * 3)) : '';
-  }
+  const onScroll = () => body.classList.toggle('scrolled', scrollY > 40);
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', () => { fromRects = null; onScroll(); });
 
   /* ---------- 5. How I work: the route is drawn with scroll ---------- */
   const route = $('#route'), rline = $('#routeLine'), rpath = rline.querySelector('path'), steps = [...route.querySelectorAll('.steps li')];
@@ -478,8 +233,8 @@
     const vh = innerHeight / 2;
     par.forEach(el => { const r = el.getBoundingClientRect(); el.style.transform = `translate3d(0,${((r.top + r.height / 2 - vh) * +el.dataset.speed).toFixed(1)}px,0)`; });
     if (y < mast.offsetHeight) {
-      heroImg.style.translate = heroVid.style.translate = `0 ${(y * .35).toFixed(1)}px`;
-      $('.copy').style.translate = `0 ${(-y * .12).toFixed(1)}px`;
+      grid.style.translate = `0 ${(y * .14).toFixed(1)}px`;
+      $('.mg-copy').style.translate = `0 ${(-y * .1).toFixed(1)}px`;
     }
   }
   addEventListener('scroll', onThread, { passive: true });
