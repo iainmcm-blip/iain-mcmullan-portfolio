@@ -329,8 +329,8 @@ async function main() {
   const LOCAL_BUILDS = [
     { title: 'LA Scenting', slug: 'la-scenting', featured: true, metric: 'Live', metricLabel: 'lascenting.com',
       category: 'web-build', role: 'Design, build and content', alt: 'The LA Scenting home page', _img: 'assets/video/work/la-hero.jpg' },
-    { title: 'GSG25: anniversary book and site', slug: 'gsg25', featured: true, metric: 'Book + site', metricLabel: 'globalschools.com/gsg25',
-      category: 'web-build', role: 'Writer, designer and developer', alt: 'The GSG25 anniversary site timeline', _img: 'assets/video/work/gsg-timeline.jpg' },
+    { title: 'GSG25: book, exhibition and site', slug: 'gsg25', featured: true, metric: 'Book + site', metricLabel: 'globalschools.com/gsg25',
+      category: 'web-build', role: 'Writer, designer, developer and project manager', alt: 'The GSG25 anniversary site timeline', _img: 'assets/video/work/gsg-timeline.jpg' },
   ];
   cases.forEach((c) => { c.featured = false; });
   cases.unshift(...LOCAL_BUILDS);
@@ -359,7 +359,7 @@ async function main() {
     // that shows the hovered project's clip or image. Filters are Plan / Write / Build,
     // the same three verbs as the home headline, so the whole site sorts the work one way.
     const VERBS = {
-      'la-scenting': ['write', 'build'], 'gsg25': ['write', 'build'],
+      'la-scenting': ['write', 'build'], 'gsg25': ['plan', 'write', 'build'],
       'emirates-skywards-tier-advancement': ['plan'], 'hilton-asia-conference': ['plan', 'write'],
       'ahc-skincare': ['plan'], 'ntuc-my-first-skool': ['write', 'build'], 'casillero-del-diablo': ['plan'],
       'emirates-flight-training-academy': ['plan'], 'malaysia-airlines': ['plan'],
