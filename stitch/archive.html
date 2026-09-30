@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archive: all 56 pieces | Iain McMullan</title>
+<meta name="description" content="Every piece of work from 2005 to 2026, laid out as a contact sheet and filterable by Plan, Write and Build.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="home.css">
+<style>
+.scrolled .nav,.nav{background:rgba(246,242,234,.9);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+.arc{padding:140px 0 110px;background:var(--paper);min-height:100vh}
+.arc h1{font-weight:400;font-size:clamp(2.6rem,5.4vw,5rem);line-height:.98;letter-spacing:-.02em;max-width:900px}
+.arc h1 em{font-style:italic;color:#8a5a14}
+.arc .intro{margin-top:24px;max-width:40rem;color:#3b3832}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin:48px 0 34px;padding:14px 16px;background:var(--surface);border:1px solid var(--line)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.chips>span{color:var(--mute);margin-right:6px}
+.chip{border:1px solid var(--line);background:none;padding:6px 11px;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.slider{display:flex;align-items:center;gap:12px;color:var(--mute)}
+.slider input{accent-color:var(--pencil);width:200px}
+.slider b{color:var(--ink);font-weight:500;min-width:3.5em}
+.a-sheet{display:flex;flex-direction:column;gap:30px}
+.a-sheet .strip{opacity:1;transform:none}
+.a-sheet .strip .edge .typed{clip-path:none}
+.a-sheet .fr{opacity:1;transition:opacity .35s}
+.a-sheet .fr.off{opacity:.1;pointer-events:none}
+.a-sheet .fr.has-cs{cursor:pointer}
+.a-sheet .fr.has-cs::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 2px transparent;transition:box-shadow .2s}
+.a-sheet .fr.has-cs:hover::after{box-shadow:inset 0 0 0 2px var(--acc)}
+.legend{margin-top:26px;color:var(--mute);display:flex;gap:26px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <a class="nav-name" href="index.html">Iain McMullan</a>
+  <nav class="nav-links mono" aria-label="Primary">
+    <a href="../skills.html">How I work</a>
+    <a href="portfolio.html">Portfolio</a>
+    <a href="archive.html" aria-current="page" style="opacity:1">Archive</a>
+    <a href="../perspectives.html">Perspectives</a>
+    <a href="lets-talk.html">Let's talk</a>
+  </nav>
+  <span class="nav-avail mono"><i></i>Taking on projects</span>
+</header>
+<main class="arc">
+  <div class="wrap">
+    <p class="label mono">Archive <span>2005 to 2026</span></p>
+    <h1>Twenty years, <em>every piece on the sheet.</em></h1>
+    <p class="intro">All 56 pieces of work, oldest first. Frames with a picture show the work itself. The typed frames are work I can describe but can no longer show. Frames outlined on hover open a case study.</p>
+    <div class="tools">
+      <div class="chips mono" role="group" aria-label="Filter by discipline"><span>Discipline</span></div>
+      <label class="slider mono">Up to <input type="range" id="upto" min="2005" max="2026" value="2026" step="1"><b id="uptoV">2026</b></label>
+    </div>
+    <div class="a-sheet" id="aSheet"></div>
+    <p class="legend mono"><span id="shown">56 shown</span><span>Hover a frame to look closer</span></p>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div><p class="foot-name">Iain McMullan</p><p class="mono">Plan. Write. Build.</p></div>
+    <div class="mono foot-r"><a href="mailto:hello@iainmcmullan.com">hello@iainmcmullan.com</a><a href="https://www.linkedin.com/in/iainmcmullan/" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a></div>
+  </div>
+</footer>
+<div class="loupe" id="loupe" aria-hidden="true"><div class="loupe-in" id="loupeIn"></div><span class="loupe-t mono" id="loupeT"></span></div>
+<script src="work-data.js"></script>
+<script src="site-data.js"></script>
+<script>
+(() => {
+  const { A, CS, IMG, caseFor } = window.SITE;
+  const work = [...window.WORK].sort((a, b) => a.year - b.year);
+  const $ = s => document.querySelector(s);
+  const sheet = $('#aSheet'), loupe = $('#loupe'), loupeIn = $('#loupeIn'), loupeT = $('#loupeT');
+  const frames = [];
+  for (let i = 0; i < work.length; i += 10) {
+    const row = work.slice(i, i + 10), s = document.createElement('div');
+    s.className = 'strip';
+    const y0 = row[0].year, y1 = row[row.length - 1].year;
+    s.innerHTML = `<div class="edge"><span class="typed">${y0 === y1 ? y0 : y0 + '–' + y1} &nbsp; ${[...new Set(row.map(p => p.client))].join(' · ')}</span><span>${String(i / 10 + 1).padStart(2, '0')}</span></div><div class="frames"></div>`;
+    row.forEach((p, k) => {
+      const cs = caseFor(p), el = document.createElement(cs ? 'a' : 'div');
+      el.className = 'fr on' + (cs ? ' has-cs' : '');
+      if (cs) { el.href = CS + cs; el.setAttribute('aria-label', `${p.year}: ${p.title}, case study`); }
+      el.innerHTML = (IMG[p.id] ? `<img src="${A + IMG[p.id]}" alt="${cs ? '' : p.title}">` : `<div class="t"><small>${p.year}</small>${p.title}</div>`) + `<span class="n">${i + k + 1}</span>`;
+      s.querySelector('.frames').appendChild(el);
+      frames.push({ el, p, n: i + k + 1 });
+    });
+    sheet.appendChild(s);
+  }
+  // Filters: discipline chips and a year slider.
+  const count = v => work.filter(p => v === 'all' || p.verbs.includes(v)).length;
+  let verb = 'all';
+  const chips = $('.chips');
+  [['all', 'All'], ['plan', 'Plan'], ['write', 'Write'], ['build', 'Build']].forEach(([v, l]) => {
+    const b = document.createElement('button');
+    b.className = 'chip mono'; b.type = 'button'; b.textContent = `${l} (${count(v)})`;
+    b.setAttribute('aria-pressed', v === verb);
+    b.addEventListener('click', () => { verb = v; chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b)); apply(); });
+    chips.appendChild(b);
+  });
+  const upto = $('#upto');
+  upto.addEventListener('input', apply);
+  function apply() {
+    const y = +upto.value; $('#uptoV').textContent = y;
+    let n = 0;
+    frames.forEach(({ el, p }) => { const on = (verb === 'all' || p.verbs.includes(verb)) && p.year <= y; el.classList.toggle('off', !on); n += on; });
+    $('#shown').textContent = `${n} shown`;
+  }
+  // Loupe
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const Z = 2.6; let cur = null;
+    sheet.addEventListener('mousemove', e => {
+      const fr = e.target.closest('.fr');
+      loupe.style.left = e.clientX + 'px'; loupe.style.top = e.clientY + 'px';
+      if (!fr || fr.classList.contains('off')) { loupe.classList.remove('on'); cur = null; return; }
+      const f = frames.find(x => x.el === fr), r = fr.getBoundingClientRect();
+      if (cur !== fr) {
+        cur = fr;
+        loupeIn.className = 'loupe-in' + (IMG[f.p.id] ? '' : ' txt');
+        loupeIn.style.backgroundImage = IMG[f.p.id] ? `url("${A + IMG[f.p.id]}")` : '';
+        loupeIn.textContent = IMG[f.p.id] ? '' : f.p.title;
+        loupeIn.style.width = r.width * Z + 'px'; loupeIn.style.height = r.height * Z + 'px';
+        loupeT.textContent = `${f.n} · ${f.p.year} · ${f.p.client}`;
+      }
+      loupeIn.style.transform = `translate(${90 - (e.clientX - r.left) * Z}px, ${90 - (e.clientY - r.top) * Z}px)`;
+      loupe.classList.add('on');
+    });
+    sheet.addEventListener('mouseleave', () => loupe.classList.remove('on'));
+  }
+})();
+</script>
+</body>
+</html>
