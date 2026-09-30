@@ -216,7 +216,7 @@ h2 em,h1 em{font-style:italic;color:var(--acc)}
   .steps li{padding-top:18px}
   .nums-grid{grid-template-columns:1fr 1fr;gap:40px 20px}
   .p-list a{grid-template-columns:1fr 24px}.p-list a span.mono{grid-column:1/-1}
-  .close-grid{grid-template-columns:1fr;gap:48px}
+  .close-grid{grid-template-columns:minmax(0,1fr);gap:48px}.close-copy h2{font-size:clamp(2.2rem,11vw,3rem)}
   .foot-r{align-items:flex-start}
   .work,.how,.persp,.close{padding:80px 0}
 }
