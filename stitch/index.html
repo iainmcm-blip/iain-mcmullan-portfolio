@@ -7,7 +7,8 @@
 <meta name="description" content="Strategy, words and websites for brands in the Gulf and Asia. Twenty years of work, from Emirates to the GSG 25th anniversary.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=zodiak@300,301,400,401&f[]=switzer@300,400,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="home.css">
 </head>
 <body>
@@ -30,7 +31,7 @@
 <section class="mast" id="mast" aria-label="Twenty years of work">
   <div class="sheet" id="sheet" aria-hidden="true"></div>
   <div class="count mono"><span>Contact sheet <b id="n">0000</b> / <span id="tot">0056</span></span><span id="yr">2005</span></div>
-  <div class="hero" id="hero"><img id="heroImg" alt=""></div>
+  <div class="hero" id="hero"><div class="hero-media"><img id="heroImg" alt=""><video id="heroVid" muted loop playsinline preload="auto" hidden></video></div></div>
   <div class="copy">
     <p class="kicker mono"><span id="proof">Frame 00 of 56</span> &nbsp;Selected at random, every visit</p>
     <h1>Twenty years of work. <em>One worth circling.</em></h1>
@@ -47,7 +48,7 @@
 <section class="work" id="work" aria-labelledby="work-h">
   <div class="wrap">
     <div class="sec-head">
-      <div><p class="label mono">Selected work <span>5 of 56</span></p><h2 id="work-h">The ones clients still ask about.</h2></div>
+      <div><p class="label mono">Selected work <span>6 of 56</span></p><h2 id="work-h">The ones clients still ask about.</h2></div>
       <p class="sec-note">One person on the strategy, the words and the build, so nothing gets lost between them.</p>
     </div>
     <div class="index-strip" id="indexStrip"></div>
@@ -121,7 +122,7 @@
 <!-- 7. Frame 57 -->
 <section class="close" id="close" aria-labelledby="close-h">
   <div class="wrap close-grid">
-    <div class="strip57" aria-hidden="true">
+    <div class="strip57" aria-hidden="true" data-speed="-0.04">
       <div class="f57 used"><span class="mono">55</span></div><div class="f57 used"><span class="mono">56</span></div>
       <div class="f57 blank" id="f57"><span class="mono">57</span><em>Unexposed</em></div>
       <div class="f57 dim"><span class="mono">58</span></div>
@@ -144,6 +145,7 @@
 </footer>
 
 <div class="tip mono" id="tip" aria-hidden="true"></div>
+<div class="thread" id="thread" aria-hidden="true"><span class="mono">Frame <b id="threadN">01</b> / 57</span></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="1.6"/></filter></defs></svg>
 <script src="work-data.js"></script>
 <script src="site-data.js"></script>

@@ -1,15 +1,16 @@
 (() => {
-  const { A, CS, IMG, LIVE, caseFor, loopPath, linePath } = window.SITE;
+  const { A, CS, IMG, VIDEO, LIVE, caseFor, loopPath, linePath } = window.SITE;
   const $ = s => document.querySelector(s);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const NS = 'http://www.w3.org/2000/svg';
-  const body = document.body, mast = $('#mast'), sheet = $('#sheet'), hero = $('#hero'), heroImg = $('#heroImg');
+  const body = document.body, mast = $('#mast'), sheet = $('#sheet'), hero = $('#hero'), heroImg = $('#heroImg'), heroVid = $('#heroVid');
   const cap = $('#cap'), reel = $('#reel'), tip = $('#tip'), loupe = $('#loupe'), loupeIn = $('#loupeIn'), loupeT = $('#loupeT');
 
   const work = [...window.WORK].sort((a, b) => a.year - b.year);
-  const pictured = work.filter(p => IMG[p.id]).map(p => p.id);
-  let heroId = new URLSearchParams(location.search).get('pick') || pictured[Math.floor(Math.random() * pictured.length)];
+  // The masthead opens on a film (screen recordings stay in the reel); a ?pick= link can name any pictured piece.
+  const films = ['hilton-apac-conference', 'uob-gallery', 'emirates-adventure-awaits', 'malaysia-airlines-hospitality', 'ntuc-mfs-campaign'];
+  let heroId = new URLSearchParams(location.search).get('pick') || films[Math.floor(Math.random() * films.length)];
 
   // Draws a pencil stroke along a path; instant under reduced motion.
   function draw(path, ms = 700, delay = 0) {
@@ -53,8 +54,9 @@
       const i = frames.length;
       const f = document.createElement('div');
       f.className = 'fr';
-      f.innerHTML = (IMG[p.id] ? `<img src="${A + IMG[p.id]}" alt="">` : `<div class="t"><small>${p.year}</small>${p.title}</div>`) + `<span class="n">${i + 1}</span>`;
-      f.addEventListener('click', () => { finish(); show(i, true); });
+      f.innerHTML = (IMG[p.id] ? `<img src="${A + IMG[p.id]}" alt="">` : `<div class="t"><small>${p.year}</small></div>`) + `<span class="n">${i + 1}</span>`;
+      if (!IMG[p.id]) f.classList.add('typed');
+      f.addEventListener('click', () => { if (!IMG[p.id]) return; finish(); show(i, true); });
       g.appendChild(f);
       frames.push({ el: f, p });
     });
@@ -88,21 +90,23 @@
   }
 
   work.forEach((p, i) => {
+    if (!IMG[p.id]) return; // no gaps: the reel only carries pieces that can be shown
     const b = document.createElement('button');
     b.setAttribute('role', 'listitem');
     b.setAttribute('aria-label', `${p.year}: ${p.title}`);
-    b.dataset.id = p.id;
-    b.innerHTML = IMG[p.id] ? `<img src="${A + IMG[p.id]}" alt="">` : '';
+    b.dataset.id = p.id; b.dataset.i = i;
+    b.innerHTML = `<img src="${A + IMG[p.id]}" alt="">` + (VIDEO[p.id] ? '<i class="film" aria-hidden="true"></i>' : '');
     hover(b, `${p.year} · ${p.title}`);
     b.addEventListener('click', () => show(i, true));
     reel.appendChild(b);
   });
 
-  // 1. Develop: the print comes up from the white, darks first, uneven, warm, then true colour.
-  // WebGL version: the image rises out of the paper tone, darks first, in uneven patches, warm mono then colour.
-  // Needs the image to be same-origin, so it falls back to the CSS filter version when opened from disk.
+  // 1. Develop, in WebGL: the print rises out of the paper, darks first, in uneven patches spreading from where the
+  // pencil circled it, warm black and white, then colour. The cursor is the developer: wherever it passes, the print
+  // comes up early, with a ragged edge. Works on stills and on film (the film runs while it develops).
+  // Needs same-origin media, so it falls back to a CSS filter version when the page is opened from disk.
   const FS = `precision mediump float;
-    uniform sampler2D u; uniform float t; uniform vec2 sc, of; varying vec2 v;
+    uniform sampler2D u, m; uniform float t; uniform vec2 sc, of, o, asp; varying vec2 v;
     float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
     float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+1.),f.x),f.y);}
     void main(){
@@ -111,23 +115,28 @@
       vec3 c=texture2D(u,uv).rgb;
       float l=dot(c,vec3(.299,.587,.114));
       float patch=n(v*vec2(5.,3.))*.6+n(v*17.)*.4;
-      float dev=smoothstep(0.,1.,clamp(t*1.7-l*.95-patch*.4+.15,0.,1.));
+      float d=length((v-o)*asp);
+      float brush=smoothstep(.3,.62,texture2D(m,vec2(v.x,1.-v.y)).r+(patch-.5)*.45);
+      float dev=clamp(t*2.1-l*.95-patch*.4+.15-d*.55,0.,1.);
+      dev=smoothstep(0.,1.,max(dev,brush*(1.05-l*.35)));
       vec3 paper=vec3(.957,.937,.89);
       vec3 mono=vec3(l)*vec3(1.06,.97,.84);
       vec3 col=mix(paper,mono,dev);
-      col=mix(col,c,smoothstep(.55,1.,t));
+      col=mix(col,c,max(smoothstep(.55,1.,t),brush*smoothstep(.15,.6,t)*.85));
       col+=(h(v*900.+t)-.5)*.035*(1.-t);
       gl_FragColor=vec4(col,1.);
     }`;
   const VS = 'attribute vec2 p; varying vec2 v; void main(){ v=p*.5+.5; gl_Position=vec4(p,0.,1.); }';
-  let gl = null, glCanvas = null, glProg = null;
+  let gl = null, glCanvas = null, glProg = null, texU = null, texM = null;
+  const maskC = document.createElement('canvas'), mctx = maskC.getContext('2d');
+  maskC.width = 512; maskC.height = 320;
   function glSetup() {
     if (gl !== null) return gl;
     glCanvas = document.createElement('canvas');
     glCanvas.className = 'dev';
     gl = glCanvas.getContext('webgl', { premultipliedAlpha: false }) || false;
     if (!gl) return gl;
-    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+    const sh = (type, src) => { const x = gl.createShader(type); gl.shaderSource(x, src); gl.compileShader(x); return x; };
     glProg = gl.createProgram();
     gl.attachShader(glProg, sh(gl.VERTEX_SHADER, VS)); gl.attachShader(glProg, sh(gl.FRAGMENT_SHADER, FS));
     gl.linkProgram(glProg);
@@ -137,42 +146,68 @@
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(glProg, 'p');
     gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    gl.bindTexture(gl.TEXTURE_2D, gl.createTexture());
-    [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    hero.insertBefore(glCanvas, heroImg.nextSibling);
+    const mk = unit => { const tx = gl.createTexture(); gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, tx);
+      [gl.TEXTURE_WRAP_S, gl.TEXTURE_WRAP_T].forEach(k => gl.texParameteri(gl.TEXTURE_2D, k, gl.CLAMP_TO_EDGE));
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); return tx; };
+    texU = mk(0); texM = mk(1);
+    gl.uniform1i(gl.getUniformLocation(glProg, 'u'), 0); gl.uniform1i(gl.getUniformLocation(glProg, 'm'), 1);
+    hero.insertBefore(glCanvas, hero.querySelector('.hero-media').nextSibling);
     return gl;
   }
-  let devRun = 0;
-  function developGL(img) {
+  let devRun = 0, devLive = false;
+  // The developer brush: soft, uneven dabs into a small mask; developed areas stay developed, like the real thing.
+  function dab(x, y) {
+    const r = 26 + Math.random() * 20;
+    const g = mctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, 'rgba(255,255,255,.55)'); g.addColorStop(1, 'rgba(255,255,255,0)');
+    mctx.fillStyle = g; mctx.beginPath(); mctx.arc(x, y, r, 0, 7); mctx.fill();
+  }
+  if (fine) mast.addEventListener('pointermove', e => {
+    if (!devLive) return;
+    const r = hero.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width * maskC.width, y = (e.clientY - r.top) / r.height * maskC.height;
+    dab(x, y); dab(x + (Math.random() - .5) * 24, y + (Math.random() - .5) * 24);
+  });
+  function developGL(el, isVid, origin) {
     if (!glSetup()) return false;
+    const iw = isVid ? el.videoWidth : el.naturalWidth, ih = isVid ? el.videoHeight : el.naturalHeight;
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texU);
     try {
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, el);
       if (gl.getError() !== gl.NO_ERROR) return false;
     } catch (e) { gl = false; glCanvas.remove(); return false; } // tainted (file://): use the CSS version
+    mctx.clearRect(0, 0, maskC.width, maskC.height);
     const dpr = Math.min(devicePixelRatio || 1, 1.5), W = hero.clientWidth, H = hero.clientHeight;
     glCanvas.width = W * dpr; glCanvas.height = H * dpr; gl.viewport(0, 0, glCanvas.width, glCanvas.height);
-    const s = Math.max(W / img.naturalWidth, H / img.naturalHeight), sx = W / (img.naturalWidth * s), sy = H / (img.naturalHeight * s);
-    gl.uniform2f(gl.getUniformLocation(glProg, 'sc'), sx, sy);
-    gl.uniform2f(gl.getUniformLocation(glProg, 'of'), (1 - sx) / 2, (1 - sy) / 2);
-    const ut = gl.getUniformLocation(glProg, 't'), run = ++devRun, t0 = performance.now(), D = 3200;
-    glCanvas.style.transition = 'none'; glCanvas.style.opacity = 1;
+    const s = Math.max(W / iw, H / ih), sx = W / (iw * s), sy = H / (ih * s);
+    const U = k => gl.getUniformLocation(glProg, k);
+    gl.uniform2f(U('sc'), sx, sy); gl.uniform2f(U('of'), (1 - sx) / 2, (1 - sy) / 2);
+    gl.uniform2f(U('o'), origin[0], origin[1]); gl.uniform2f(U('asp'), W / H, 1);
+    const ut = U('t'), run = ++devRun, t0 = performance.now(), D = 4600;
+    glCanvas.style.transition = 'none'; glCanvas.style.opacity = 1; devLive = true;
     const frame = now => {
       if (run !== devRun) return;
       const p = Math.min(1, (now - t0) / D);
-      gl.uniform1f(ut, 1 - Math.pow(1 - p, 2.2));
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, texU);
+      if (isVid && el.readyState >= 2) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, el);
+      gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, texM);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, maskC);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.uniform1f(ut, 1 - Math.pow(1 - p, 1.8));
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       if (p < 1) requestAnimationFrame(frame);
-      else { glCanvas.style.transition = 'opacity .5s'; glCanvas.style.opacity = 0; }
+      else { devLive = false; glCanvas.style.transition = 'opacity .6s'; glCanvas.style.opacity = 0; }
     };
     requestAnimationFrame(frame);
     return true;
   }
-  function develop(el) {
+  function develop(el, isVid, origin = [.5, .5]) {
     if (reduce) return;
-    const go = () => { if (!developGL(el)) developCSS(el); };
-    if (el.complete && el.naturalWidth) go(); else el.addEventListener('load', go, { once: true });
+    const ready = isVid ? el.readyState >= 2 : el.complete && el.naturalWidth;
+    const go = () => { if (!developGL(el, isVid, origin)) developCSS(el); };
+    if (ready) go(); else el.addEventListener(isVid ? 'loadeddata' : 'load', go, { once: true });
   }
   function developCSS(el) {
     el.animate([
@@ -183,19 +218,29 @@
     ], { duration: 2600, easing: 'cubic-bezier(.3,.1,.2,1)' });
   }
 
-  function show(i, animate) {
+  function show(i, animate, origin) {
     const { p } = frames[i];
     heroId = p.id;
     hero.classList.remove('live'); void hero.offsetWidth;
-    hero.querySelector('.t')?.remove();
-    if (IMG[p.id]) { heroImg.hidden = false; heroImg.src = A + IMG[p.id]; heroImg.alt = p.title; if (animate) develop(heroImg); }
-    else { heroImg.hidden = true; hero.insertAdjacentHTML('beforeend', `<div class="t">${p.title}</div>`); }
+    const vid = VIDEO[p.id] && films.includes(p.id);
+    heroImg.hidden = !!vid; heroVid.hidden = !vid;
+    if (vid) {
+      heroVid.poster = A + IMG[p.id];
+      if (!heroVid.src.endsWith(VIDEO[p.id])) heroVid.src = A + VIDEO[p.id];
+      heroVid.currentTime = 0;
+      if (!reduce) heroVid.play().catch(() => {});
+      if (animate) develop(heroVid, true, origin);
+    } else {
+      heroVid.pause();
+      heroImg.src = A + IMG[p.id]; heroImg.alt = p.title;
+      if (animate) develop(heroImg, false, origin);
+    }
     hero.classList.add('live');
     const cs = caseFor(p);
     const links = [cs && `<a href="${CS + cs}">Case study &#8599;</a>`, LIVE[p.id] && `<a href="${LIVE[p.id]}" target="_blank" rel="noopener noreferrer">Live site &#8599;</a>`].filter(Boolean).join(' &nbsp; ');
     cap.innerHTML = `<b>${String(i + 1).padStart(2, '0')} / ${work.length}</b> &nbsp; ${p.client} &nbsp;·&nbsp; ${p.title} &nbsp;·&nbsp; ${p.year}${links ? ' &nbsp; ' + links : ''}`;
     $('#proof').textContent = `Frame ${String(i + 1).padStart(2, '0')} of ${work.length}`;
-    [...reel.children].forEach((b, k) => b.classList.toggle('on', k === i));
+    [...reel.children].forEach(b => b.classList.toggle('on', +b.dataset.i === i));
   }
 
   const heroIdx = () => frames.findIndex(f => f.p.id === heroId);
@@ -231,7 +276,7 @@
     at(T1, () => draw(svgOver(frames[heroIdx()].el, 14, loopPath, mast), 700));
     at(T1 + 1150, () => {
       const r = frames[heroIdx()].el.getBoundingClientRect(), m = mast.getBoundingClientRect();
-      show(heroIdx(), true);
+      show(heroIdx(), true, [(r.left + r.width / 2 - m.left) / m.width, 1 - (r.top + r.height / 2 - m.top) / m.height]);
       hero.style.visibility = 'visible';
       hero.animate([
         { clipPath: `inset(${r.top - m.top}px ${m.right - r.right}px ${m.bottom - r.bottom}px ${r.left - m.left}px)` },
@@ -252,20 +297,23 @@
       title: 'LA Scenting: quiet luxury, designed, built and written.', cs: 'la-scenting.html', live: 'https://lascenting.com', bar: 'lascenting.com',
       desc: 'Design, build and content for a scent design studio selling to airports, hotels and offices, with <span class="mk" data-mk="line">a research-led journal written in the founder\'s voice</span>.',
       credit: 'Photography and client list are LA Scenting\'s own.' },
-    { id: 'hilton-apac-conference', img: 'video/work/hilton-film.jpg', video: 'video/work/hilton-film.mp4', verbs: ['Plan', 'Write'], meta: '2024 · Asia Pacific',
+    { id: 'hilton-apac-conference', img: 'video/work/hilton-hd.jpg', video: 'video/work/hilton-hd.mp4', verbs: ['Plan', 'Write'], meta: '2024 · Asia Pacific',
       title: 'Hilton APAC GM and Commercial Conference.', cs: 'hilton-asia-conference.html', bar: 'Conference film',
       desc: 'The strategic narrative and all content for <span class="mk" data-mk="loop">1,400</span> hotel leaders: the theme, the email programme and the companion app. <span class="mk" data-mk="line">A record 92% engagement</span>, and a global CEO who called it the best-organised global event.' },
-    { id: 'uob-gallery', img: 'video/work/uob-film.jpg', video: 'video/work/uob-film.mp4', verbs: ['Plan', 'Write'], meta: '2025 · Singapore',
+    { id: 'uob-gallery', img: 'video/work/uob-gallery-hd.jpg', video: 'video/work/uob-gallery-hd.mp4', verbs: ['Plan', 'Write'], meta: '2025 · Singapore',
       title: 'The UOB Gallery: Right By You.', cs: 'uob-gallery.html', bar: 'Gallery film',
       desc: 'A commemorative brand gallery taking <span class="mk" data-mk="loop">nine decades</span> of UOB heritage from a blank brief to <span class="mk" data-mk="line">an on-time public launch in March 2025</span>. Project lead, theming, archival research and every panel\'s copy.' },
     { id: 'efta-launch', img: 'img/efta-hero.webp', verbs: ['Plan', 'Write'], meta: '2017 · Dubai',
       title: 'Emirates Flight Training Academy.', cs: 'emirates-flight-training-academy.html', bar: 'Brand and launch',
-      desc: 'The brand and go-to-market for Emirates\' own flight school, owned client-side from agency selection to rollout. <span class="mk" data-mk="loop">100%</span> of the first cadet cohort <span class="mk" data-mk="line">filled within two months of launch</span>.' }
+      desc: 'The brand and go-to-market for Emirates\' own flight school, owned client-side from agency selection to rollout. <span class="mk" data-mk="loop">100%</span> of the first cadet cohort <span class="mk" data-mk="line">filled within two months of launch</span>.' },
+    { id: 'emirates-adventure-awaits', img: 'video/work/pilots-ben.jpg', video: 'video/work/pilots-ben.mp4', verbs: ['Plan', 'Write'], meta: '2016 · Dubai',
+      title: 'Emirates: Adventure Awaits.', cs: 'emirates-pilot-recruitment.html', bar: 'Pilot recruitment films',
+      desc: 'A global pilot recruitment campaign that told the pilot\'s story rather than the job spec: films that each follow a real Emirates pilot, produced under my lead. <span class="mk" data-mk="loop">1,200</span> applications <span class="mk" data-mk="line">within two months</span>.' }
   ];
   const tick = 'M2 9 L7 14 L16 2';
   $('#rows').innerHTML = FEATURED.map((f, k) => `
     <article class="row${k % 2 ? ' flip' : ''}">
-      <a class="media" href="${CS + f.cs}" aria-label="${f.title.replace(/\.$/, '')} case study">
+      <a class="media" data-speed="-0.05" href="${CS + f.cs}" aria-label="${f.title.replace(/\.$/, '')} case study">
         <div class="bar mono"><span>${f.bar}</span><b>${String(work.findIndex(p => p.id === f.id) + 1).padStart(2, '0')} / 56</b></div>
         ${f.video ? `<video muted loop playsinline preload="none" poster="${A + f.img}" data-src="${A + f.video}"></video>` : `<img src="${A + f.img}" alt="" loading="lazy">`}
       </a>
@@ -285,9 +333,8 @@
     ['ntuc-my-first-skool.html', 'NTUC My First Skool', '+39% registrations · 2019'],
     ['casillero-del-diablo.html', 'Casillero del Diablo: Legendary Pairings', '+23% online sales · 2020'],
     ['ahc-skincare.html', 'AHC: Southeast Asia expansion', '4% to 22% online · 2019'],
-    ['emirates-pilot-recruitment.html', 'Emirates: Adventure Awaits', 'Pilot recruitment · 2016'],
     ['emirates-skywards-my-family.html', 'Emirates Skywards: My Family', 'Loyalty · 2018'],
-    ['malaysia-airlines.html', 'Malaysia Airlines: This is Malaysian Hospitality', 'Brand · 2022']
+    ['malaysia-airlines.html', 'Malaysia Airlines: This is Malaysian Hospitality', 'Kancil Bronze · 2022']
   ];
   $('#moreList').innerHTML = MORE.map(([f, t, m]) => `<li><a href="${CS + f}"><strong>${t}</strong><span class="mono">${m}</span></a></li>`).join('');
 
@@ -418,6 +465,26 @@
   }), { threshold: .6 });
   closeIO.observe(f57);
 
-  addEventListener('load', () => { layoutRoute(); onScroll(); });
+  /* ---------- One strip, top to bottom (the page reads as one reel) and depth ---------- */
+  const thread = $('#thread'), tn = $('#threadN');
+  const par = [...document.querySelectorAll('[data-speed]')];
+  function onThread() {
+    const max = document.documentElement.scrollHeight - innerHeight, y = scrollY;
+    const k = Math.max(0, Math.min(1, (y - mast.offsetHeight * .6) / (max - mast.offsetHeight * .6)));
+    thread.classList.toggle('on', y > mast.offsetHeight * .6);
+    thread.style.backgroundPositionY = -y * .6 + 'px';
+    tn.textContent = String(Math.max(1, Math.round(k * 57))).padStart(2, '0');
+    if (reduce) return;
+    const vh = innerHeight / 2;
+    par.forEach(el => { const r = el.getBoundingClientRect(); el.style.transform = `translate3d(0,${((r.top + r.height / 2 - vh) * +el.dataset.speed).toFixed(1)}px,0)`; });
+    if (y < mast.offsetHeight) {
+      heroImg.style.translate = heroVid.style.translate = `0 ${(y * .35).toFixed(1)}px`;
+      $('.copy').style.translate = `0 ${(-y * .12).toFixed(1)}px`;
+    }
+  }
+  addEventListener('scroll', onThread, { passive: true });
+  addEventListener('resize', onThread);
+
+  addEventListener('load', () => { layoutRoute(); onScroll(); onThread(); });
   layoutRoute();
 })();
