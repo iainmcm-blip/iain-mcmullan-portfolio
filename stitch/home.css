@@ -173,7 +173,7 @@ h2 em,h1 em{font-style:italic;color:var(--acc)}
 
 .close{padding:130px 0;background:var(--surface)}
 .close-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.strip57{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--film);padding:22px 12px;position:relative}
+.strip57{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;background:var(--film);padding:22px 12px;position:relative}
 .strip57::before,.strip57::after{content:"";position:absolute;left:12px;right:12px;height:6px;background:repeating-linear-gradient(90deg,transparent 0 10px,#3a3833 10px 17px)}
 .strip57::before{top:6px}.strip57::after{bottom:6px}
 .f57{position:relative;aspect-ratio:2/3;background:#050504}
