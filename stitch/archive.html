@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Archive: all 56 pieces | Iain McMullan</title>
-<meta name="description" content="Every piece of work from 2005 to 2026, laid out as a contact sheet and filterable by Plan, Write and Build.">
+<meta name="description" content="Every piece of work, laid out as a contact sheet and filterable by Plan, Write and Build.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=zodiak@300,301,400,401&f[]=switzer@300,400,500&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Fragment+Mono&display=swap" rel="stylesheet">
@@ -31,6 +31,30 @@
 .a-sheet .fr.has-cs{cursor:pointer}
 .a-sheet .fr.has-cs::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 2px transparent;transition:box-shadow .2s}
 .a-sheet .fr.has-cs:hover::after{box-shadow:inset 0 0 0 2px var(--acc)}
+/* film strip and loupe (moved here from the old home masthead) */
+.strip{background:var(--film);padding:14px 10px;position:relative;opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .7s var(--ease)}
+.strip.in{opacity:1;transform:none}
+.strip::before,.strip::after{content:"";position:absolute;left:10px;right:10px;height:5px;background:repeating-linear-gradient(90deg,transparent 0 9px,#3a3833 9px 15px)}
+.strip::before{top:4px}.strip::after{bottom:4px}
+.edge{position:absolute;left:12px;right:12px;top:0;display:flex;justify-content:space-between;gap:16px;font:500 9px 'Fragment Mono';letter-spacing:.14em;text-transform:uppercase;color:#8a5a14;transform:translateY(-100%);padding-bottom:3px;white-space:nowrap}
+.edge .typed{overflow:hidden;text-overflow:ellipsis;clip-path:inset(0 100% 0 0);transition:clip-path 1.2s steps(40,end) .2s}
+.strip.in .edge .typed{clip-path:inset(0 0 0 0)}
+.frames{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.fr{position:relative;aspect-ratio:3/2;background:#050504;overflow:hidden;opacity:0;cursor:zoom-in}
+.fr.on{opacity:1;transition:opacity .25s}
+.fr img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(.92)}
+.fr .t{position:absolute;inset:0;padding:7px 8px;display:flex;flex-direction:column;justify-content:space-between;font-size:11.5px;line-height:1.15;color:#CFCAC0}
+.fr .t small{font:500 8px 'Fragment Mono';letter-spacing:.12em;color:#77736A}
+.fr .n{position:absolute;right:4px;bottom:2px;font:500 8px 'Fragment Mono';color:var(--edge)}
+.loupe{position:fixed;left:0;top:0;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;overflow:hidden;pointer-events:none;z-index:40;border:1px solid rgba(27,26,23,.5);box-shadow:0 18px 40px -12px rgba(0,0,0,.5),inset 0 0 0 5px rgba(255,255,255,.35);background:#050504;opacity:0;transform:scale(.6);transition:opacity .2s,transform .25s var(--ease)}
+.loupe.on{opacity:1;transform:none}
+.loupe-in{position:absolute;left:0;top:0;background-size:cover;background-position:center;filter:grayscale(1) contrast(1.08)}
+.loupe-in.txt{background:#050504;color:#CFCAC0;display:flex;align-items:center;justify-content:center;text-align:center;padding:8%;font-size:22px;line-height:1.1}
+.loupe-t{position:absolute;left:10px;right:10px;bottom:22px;text-align:center;color:var(--on-night);text-shadow:0 1px 3px #000;font-size:9px}
+.strip57{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:var(--film);padding:22px 12px;position:relative}
+.strip57::before,.strip57::after{content:"";position:absolute;left:12px;right:12px;height:6px;background:repeating-linear-gradient(90deg,transparent 0 10px,#3a3833 10px 17px)}
+.strip57::before{top:6px}.strip57::after{bottom:6px}
+@media (max-width:900px){.strip{padding:10px 6px}.frames{grid-template-columns:repeat(5,1fr);gap:3px}.fr{aspect-ratio:16/10}.fr .t{font-size:8.5px;padding:3px 4px}.fr .t small,.fr .n{display:none}.edge{font-size:7.5px}.loupe{display:none}}
 .legend{margin-top:26px;color:var(--mute);display:flex;gap:26px;flex-wrap:wrap}
 </style>
 </head>
@@ -48,12 +72,11 @@
 </header>
 <main class="arc">
   <div class="wrap">
-    <p class="label mono">Archive <span>2005 to 2026</span></p>
-    <h1>Twenty years, <em>every piece on the sheet.</em></h1>
+    <p class="label mono">Archive <span>All 56 pieces</span></p>
+    <h1>Every piece, <em>on one sheet.</em></h1>
     <p class="intro">All 56 pieces of work, oldest first. Frames with a picture show the work itself. The typed frames are work I can describe but can no longer show. Frames outlined on hover open a case study.</p>
     <div class="tools">
       <div class="chips mono" role="group" aria-label="Filter by discipline"><span>Discipline</span></div>
-      <label class="slider mono">Up to <input type="range" id="upto" min="2005" max="2026" value="2026" step="1"><b id="uptoV">2026</b></label>
     </div>
     <div class="a-sheet" id="aSheet"></div>
     <p class="legend mono"><span id="shown">56 shown</span><span>Hover a frame to look closer</span></p>
@@ -78,8 +101,7 @@
   for (let i = 0; i < work.length; i += 10) {
     const row = work.slice(i, i + 10), s = document.createElement('div');
     s.className = 'strip';
-    const y0 = row[0].year, y1 = row[row.length - 1].year;
-    s.innerHTML = `<div class="edge"><span class="typed">${y0 === y1 ? y0 : y0 + '–' + y1} &nbsp; ${[...new Set(row.map(p => p.client))].join(' · ')}</span><span>${String(i / 10 + 1).padStart(2, '0')}</span></div><div class="frames"></div>`;
+    s.innerHTML = `<div class="edge"><span class="typed">${[...new Set(row.map(p => p.client))].join(' · ')}</span><span>${String(i / 10 + 1).padStart(2, '0')}</span></div><div class="frames"></div>`;
     row.forEach((p, k) => {
       const cs = caseFor(p), el = document.createElement(cs ? 'a' : 'div');
       el.className = 'fr on' + (cs ? ' has-cs' : '');
@@ -101,12 +123,9 @@
     b.addEventListener('click', () => { verb = v; chips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b)); apply(); });
     chips.appendChild(b);
   });
-  const upto = $('#upto');
-  upto.addEventListener('input', apply);
   function apply() {
-    const y = +upto.value; $('#uptoV').textContent = y;
     let n = 0;
-    frames.forEach(({ el, p }) => { const on = (verb === 'all' || p.verbs.includes(verb)) && p.year <= y; el.classList.toggle('off', !on); n += on; });
+    frames.forEach(({ el, p }) => { const on = verb === 'all' || p.verbs.includes(verb); el.classList.toggle('off', !on); n += on; });
     $('#shown').textContent = `${n} shown`;
   }
   // Loupe

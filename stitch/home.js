@@ -44,7 +44,7 @@
     ['Emirates Flight Training Academy', 2017, 'img/efta-hero.webp', null, 'emirates-flight-training-academy.html'],
     ['GSG25 anniversary exhibition', 2026, 'img/work/gsg-exhibit-2.jpg', null, 'gsg25.html'],
     ['Malaysia Airlines: This is Malaysian Hospitality', 2022, 'video/work/mas-hospitality.jpg', 'video/work/mas-hospitality.mp4', 'malaysia-airlines.html'],
-    ['NTUC My First Skool', 2019, 'video/work/ntuc-film.jpg', 'video/work/ntuc-film.mp4', 'ntuc-my-first-skool.html'],
+    ['NTUC My First Skool', 2019, 'video/work/mfs-clean.jpg', 'video/work/mfs-clean.mp4', 'ntuc-my-first-skool.html'],
     ['Casillero del Diablo: Legendary Pairings', 2020, 'img/casillero-del-diablo-hero.jpg', null, 'casillero-del-diablo.html'],
     ['Emirates Skywards Tier Advancement', 2016, 'img/skywards-tiers-group.avif', null, 'emirates-skywards-tier-advancement.html'],
     ['Emirates Skywards: My Family', 2018, 'img/skywards-my-family-photo.jpg', null, 'emirates-skywards-my-family.html']
