@@ -5,7 +5,7 @@ with Iain's real figures or converted to qualitative statements. Current state:
 
 | Page | Metrics shown | Source |
 |------|---------------|--------|
-| **Hilton Asia GM & Commercial Conference** | 1,300 senior leaders · 98% app engagement · on time & on budget · 8 plenary sessions · 15+ breakout sessions · 99% satisfaction · 0 production incidents | Real (Iain) |
+| **Hilton Asia GM & Commercial Conference** | 1,400 senior leaders · 98% app engagement · on time & on budget · 8 plenary sessions · 15+ breakout sessions · 99% satisfaction · 0 production incidents | Real (Iain) |
 | **Emirates Flight Training Academy** | 12:1 applicants per confirmed place · 100% cohort filled in under 2 months | Real (Iain) |
 | **Emirates Pilot Recruitment — "Adventure Awaits"** | 1,200+ applications · qualitative descriptors (Global reach / Cinematic / Emotion-led) | Real number + qualitative |
 | **Malaysia Airlines** | Qualitative only (no numbers) | Qualitative |
